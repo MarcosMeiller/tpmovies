@@ -3,6 +3,7 @@
 namespace models;
 
 class Movie{
+    private $id;
     private $name;
     private $genre;
     private $duration;
@@ -10,12 +11,17 @@ class Movie{
     private $description;
     
 
-    function __construct($name,$genre,$duration,$direct,$description){
+    function __construct($name,$genre,$duration,$direct,$description,$id){
+        $this->id = $id;
         $this->name = $name;
         $this->genre = $genre;
         $this->duration = $duration;
         $this->direct = $direct;
         $this->description = $description;    
+    }
+
+    public function getId($id){
+        return $this->id;
     }
 
     public function getName() {
@@ -54,6 +60,9 @@ class Movie{
         $this->description = $description;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
 }
 
 ?>

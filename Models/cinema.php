@@ -2,20 +2,27 @@
 
 namespace models; 
 
-class cinema{
+class Cinema{
 
+    private $id;
     private $capacity;
     private $name;
     private $location;
-    private $room;
+    //private $room;
 
-    public function __construct( $capacity,$name,$location){
-        $room = array();
+    ///constructor.
+    public function __construct($capacity,$name,$location,$id){
+       // $room = array();
+        $this->id = $id;
         $this->capacity = $capacity;
         $this->name = $name;
         $this->location = $location;
     }
     
+    public function getId($id){
+        return $this->id;
+    }
+
     public function getLocation(){
         return $this->location;
     }
@@ -40,6 +47,9 @@ class cinema{
         $this->capacity = $capacity;
     }
 
+    public function setId($id){
+        $this->id = $id;
+    }
 }
 
 
