@@ -1,0 +1,16 @@
+[
+    {
+        "name": "ambasador",
+        "capacity": "3000",
+        "address": "cordoba 2222",
+        "id": "1",
+        "priceUnit": "500"
+    },
+    {
+        "name": "ambasador2",
+        "capacity": "123",
+        "address": "cordoba 2224",
+        "id": "2",
+        "priceUnit": "456"
+    }
+]

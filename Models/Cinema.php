@@ -1,6 +1,6 @@
 <?php 
 
-namespace models; 
+namespace Models; 
 
 class Cinema{
 
@@ -12,16 +12,16 @@ class Cinema{
     //private $room;
 
     ///constructor.
-    public function __construct($id,$name,$capacity,$address,$princeUnit){
+    public function __construct($id,$name,$capacity,$address,$priceUnit){
        // $room = array();
         $this->id = $id;
         $this->capacity = $capacity;
         $this->name = $name;
         $this->address = $address;
-        $this->princeUnit = $princeUnit;
+        $this->priceUnit = $priceUnit;
     }
     
-    public function getId($id){
+    public function getId(){
         return $this->id;
     }
 
@@ -37,8 +37,8 @@ class Cinema{
         return $this->capacity;
     }
     
-    public function getPrinceUnit(){
-        return $this->princeUnit;
+    public function getPriceUnit(){
+        return $this->priceUnit;
     }
 
     public function setAddress($address){
@@ -57,8 +57,8 @@ class Cinema{
         $this->id = $id;
     }
 
-    public function setPrinceUnit($princeUnit){
-        $this->princeUnit = $princeUnit;
+    public function setpriceUnit($priceUnit){
+        $this->priceUnit = $priceUnit;
     }
 }
 

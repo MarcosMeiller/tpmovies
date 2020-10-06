@@ -1,0 +1,148 @@
+<?php namespace admin;
+    require 'Views/head.php'; 
+    
+    require 'Views/footer.php';
+
+?> 
+<div class='flex'>
+<?php require 'aside.php'; ?>
+    <div class="relative w-full flex flex-col h-screen overflow-y-hidden">
+    <?php require 'header.php'; ?>
+    
+        <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
+            <main class="w-full flex-grow p-6 pt-2">
+                <h1 class="text-3xl text-black pb-6">ABM Cines</h1>
+
+                <div class="w-full">
+                    <div class='flex justify-between items-center mb-5'>
+                    <p class="text-xl flex items-center">
+                        <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Cines
+                    </p> 
+                        <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
+                            <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Cine</p><p class='flex lg:hidden'>Cine</p>
+                        </button>                    
+                    </div>
+
+<div id="formCine"class='hidden items-center justify-center
+'>
+    <?php   require 'forms/formCreateCine.php' ?>
+</div>
+
+                    <div class="bg-white overflow-auto">
+                        <table class="min-w-full bg-white">
+                            <thead class="bg-gray-800 text-white">
+                                <tr>
+                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
+                                    <th class="text-left py-3 px-4 uppercase font-semibold text-sm">Capacidad total</th>
+                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Dirección</th>
+                                    <th class="w-1/5 text-right py-3 px-4 uppercase font-semibold text-sm">Valor entrada</td>
+                                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Editar</td>
+                                    <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Eliminar</td>
+                                </tr>
+                            </thead>
+                            <tbody class="text-gray-700">
+                              <?php foreach($cinemasList as $cinema){
+                                ?>
+                                <tr>
+                                    <td class="w-1/5 text-left py-3 px-4"><?php echo $cinema->getName(); ?></td>
+                                    <td class="text-left py-3 px-4"><?php echo $cinema->getCapacity(); ?></td>
+
+                                    <td class="w-1/5 text-left py-3 px-4"><a class="hover:text-blue-500" href="">
+                                    <?php echo $cinema->getAddress(); ?></a></td>
+
+                                    <td class="w-1/5 text-right py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com"><?php echo $cinema->getPriceUnit(); ?></a></td>
+
+                                    <td class="text-center py-3 px-4"><a data-name='char' onclick='passingData(1,"char",123456,"casa",1.2)' class="modal-open hover:text-blue-500" href=""> <i class="fas fa-edit"></i></a></td>
+                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href=""> <i class="fas fa-trash-alt"></i></a></td>
+                                </tr>
+
+                              <?php } ?>
+                            </tbody>
+                        </table>
+                    </div>
+                    <p class="pt-3 text-gray-600">
+                      <a class="underline" href="">ERROR:<?php echo $message ?></a>
+                    </p>
+                </div>
+
+            </main>
+    
+        </div>
+        
+    </div>
+
+<!--Modal-->
+<div id='modalUdpCine' class="modal opacity-0 pointer-events-none fixed w-full h-full top-0 left-0 flex items-center justify-center">
+    <div class="modal-overlay absolute w-full h-full bg-gray-900 opacity-50"></div>
+    
+    <div class="modal-container bg-white w-6/12 md:max-w-/12 mx-auto rounded shadow-lg z-50 overflow-y-auto">
+      
+      <!-- Add margin if you want to see some of the overlay behind the modal-->
+      <div class="modal-content py-4 text-left px-6">
+        <!--Title-->
+        <div class="flex justify-between items-center pb-3">
+          <p class="text-2xl font-bold">Actualizar Datos Cine</p>
+          <div class="modal-close cursor-pointer z-50">
+            <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
+              <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
+            </svg>
+          </div>
+        </div>
+
+        <!--Body-->
+        <div class='modal-body'>
+        <?php   require 'forms/formUpdateCine.php' ?>
+        </div>
+
+        <!--Footer-->
+        <div class="flex justify-end mx-3">
+          <button class="modal-close w-full bg-white text-blue-700 font-semibold py-3 px-3 mb-5 border-2 border-blue-500 rounded-lg shadow-lg      hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+        <p class="">Cancelar</p>
+    </button>
+        </div>
+        
+      </div>
+    </div>
+  </div>
+  </div>
+  <script>
+
+    var openmodal = document.querySelectorAll('.modal-open')
+    for (var i = 0; i < openmodal.length; i++) {
+      openmodal[i].addEventListener('click', function(event){
+    	event.preventDefault()
+    	toggleModal()
+      })
+    }
+    
+    const overlay = document.querySelector('.modal-overlay')
+    overlay.addEventListener('click', toggleModal)
+    
+    var closemodal = document.querySelectorAll('.modal-close')
+    for (var i = 0; i < closemodal.length; i++) {
+      closemodal[i].addEventListener('click', toggleModal)
+    }
+    
+    function toggleModal () {
+      const body = document.querySelector('body')
+      const modal = document.querySelector('.modal')
+      modal.classList.toggle('opacity-0')
+      modal.classList.toggle('pointer-events-none')
+      body.classList.toggle('modal-active')
+    }
+
+    function passingData(id,name,capacity,address,price){
+        $('#upd_id').val(id);
+        $('#upd_name').val(name);
+        $('#upd_capacity').val(capacity)
+        $('#upd_address').val(address);
+        $('#upd_price').val(price);
+    }
+    
+    function viewForm(){
+        console.log("viewForm");
+        var form = document.getElementById('formCine');
+        form.classList.toggle('flex');
+        form.classList.toggle('hidden');
+    };     
+  </script>

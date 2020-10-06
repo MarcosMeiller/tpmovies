@@ -2,13 +2,13 @@
 namespace Dao;
 
 use Dao\ICinema as ICinema ;
-use models\Cinema as Cinema;
+use Models\Cinema as Cinema;
 
 class cinemaDAO implements ICinema{
     private $cinemaList = array();
 
 	
-    public function add(cinema $newCinema){
+    public function add(Cinema $newCinema){
 		$this->retrieveData();
 		array_push($this->cinemaList, $newCinema);
 		$this->saveData();
@@ -41,7 +41,7 @@ class cinemaDAO implements ICinema{
 			$valueArray['capacity'] = $cinema->getCapacity();
 			$valueArray['address'] = $cinema->getAddress();
 			$valueArray['id'] = $cinema->getId();
-			$valueArray['princeUnit'] = $cinema->getPrinceUnit();
+			$valueArray['priceUnit'] = $cinema->getpriceUnit();
 
 			array_push($arrayToEncode, $valueArray);
 
@@ -60,7 +60,7 @@ class cinemaDAO implements ICinema{
 		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 		foreach ($arrayToDecode as $valueArray) {
-			$cinema = new Cinema($valueArray['id'],$valueArray['name'],$valueArray['capacity'],$valueArray['address'],$valueArray['princeUnit']);
+			$cinema = new Cinema($valueArray['id'],$valueArray['name'],$valueArray['capacity'],$valueArray['address'],$valueArray['priceUnit']);
 			
 			array_push($this->cinemaList, $cinema);
 		}

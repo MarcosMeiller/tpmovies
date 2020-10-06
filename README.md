@@ -1,4 +1,4 @@
 MoviePass Project
-usuario user
-contraseña 1234
-agregue controller de usuario.(todavia no le agregue json).
+
+modificar desde los daos los objetos (edit)
+agregar id incrementar automatico en el dao

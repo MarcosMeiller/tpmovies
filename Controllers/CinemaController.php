@@ -12,27 +12,29 @@ class CinemaController
     }
   
 
-    public function addCinema($capacity,$name,$location,$id){
+    public function addCinema($id,$name,$capacity,$address,$priceUnit){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
             if($cinema !== null){
-                $this->ViewRegister("El id ya existe.");
+                $this->ViewCinemas("El Cine ya existe.");
             }
             
             try{
-                $newCinema = new cinema($capacity,$name,$location,$id);
+                $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
                 $this->dao->add($newCinema);
-                header("Location: /tpmovies/");
+                //header("Location: /tpmovies/");
+                $this->ViewCinemas("Agregado con exito");
             }catch(Exception $e){
-                $this->ViewRegister("Error al Registrar cine.");
+                $this->ViewCinemas("Error al Registrar cine.");
             }
         }
     }
 
 
-    public function ViewRegister($message = "")
+    public function ViewCinemas($message = "")
     {
-        require_once(VIEWS_PATH."Cinema.php");
+        $cinemasList = $this->dao->getAll();
+        require_once(VIEWS_PATH_ADMIN."/cinemaslamb.php");
     }        
 }
 
