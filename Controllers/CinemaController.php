@@ -3,7 +3,7 @@
 Use Models\Cinema as Cinema;
 Use Dao\CinemaDAO as cinemaDAO;
 
-class RegisterController
+class CinemaController
 {
     private $dao;
 
@@ -12,7 +12,7 @@ class RegisterController
     }
   
 
-    public function RegisterUser($capacity,$name,$location,$id){
+    public function addCinema($capacity,$name,$location,$id){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
             if($cinema !== null){

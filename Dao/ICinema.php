@@ -1,7 +1,7 @@
 <?php 
 namespace Dao;
 
-use model\cinema as cinema;
+use models\cinema as cinema;
 
 interface ICinema{ 
 	function add(cinema $newCinema);

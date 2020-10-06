@@ -2,9 +2,9 @@
 namespace Dao;
 
 use Dao\ICinema as ICinema ;
-use model\Cinema as Cinema;
+use models\Cinema as Cinema;
 
-class movieDAO implements IMovie{
+class cinemaDAO implements ICinema{
     private $cinemaList = array();
 
 	
@@ -39,8 +39,9 @@ class movieDAO implements IMovie{
 		foreach ($this->cinemaList as $cinema) {
 			$valueArray['name'] = $cinema->getName();
 			$valueArray['capacity'] = $cinema->getCapacity();
-			$valueArray['location'] = $cinema->getLocation();
-            $valueArray['id'] = $cinema->getId();
+			$valueArray['address'] = $cinema->getAddress();
+			$valueArray['id'] = $cinema->getId();
+			$valueArray['princeUnit'] = $cinema->getPrinceUnit();
 
 			array_push($arrayToEncode, $valueArray);
 
@@ -59,7 +60,7 @@ class movieDAO implements IMovie{
 		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 		foreach ($arrayToDecode as $valueArray) {
-			$cinema = new Cinema($valueArray['capacity'],$valueArray['name'],$valueArray['location'],$valueArray['id']);
+			$cinema = new Cinema($valueArray['id'],$valueArray['name'],$valueArray['capacity'],$valueArray['address'],$valueArray['princeUnit']);
 			
 			array_push($this->cinemaList, $cinema);
 		}

@@ -7,24 +7,26 @@ class Cinema{
     private $id;
     private $capacity;
     private $name;
-    private $location;
+    private $address;
+    private $priceUnit;
     //private $room;
 
     ///constructor.
-    public function __construct($capacity,$name,$location,$id){
+    public function __construct($id,$name,$capacity,$address,$princeUnit){
        // $room = array();
         $this->id = $id;
         $this->capacity = $capacity;
         $this->name = $name;
-        $this->location = $location;
+        $this->address = $address;
+        $this->princeUnit = $princeUnit;
     }
     
     public function getId($id){
         return $this->id;
     }
 
-    public function getLocation(){
-        return $this->location;
+    public function getAddress(){
+        return $this->address;
     }
 
     public function getName(){
@@ -35,8 +37,12 @@ class Cinema{
         return $this->capacity;
     }
     
-    public function setLocation($location){
-        $this->location = $location;
+    public function getPrinceUnit(){
+        return $this->princeUnit;
+    }
+
+    public function setAddress($address){
+        $this->address = $address;
     }
     
     public function setName($name){
@@ -49,6 +55,10 @@ class Cinema{
 
     public function setId($id){
         $this->id = $id;
+    }
+
+    public function setPrinceUnit($princeUnit){
+        $this->princeUnit = $princeUnit;
     }
 }
 

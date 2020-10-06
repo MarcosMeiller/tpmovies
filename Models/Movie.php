@@ -11,7 +11,7 @@ class Movie{
     private $description;
     
 
-    function __construct($name,$genre,$duration,$direct,$description,$id){
+    function __construct($id,$name,$genre,$duration,$direct,$description){
         $this->id = $id;
         $this->name = $name;
         $this->genre = $genre;

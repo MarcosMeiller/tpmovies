@@ -76,7 +76,7 @@ class movieDAO implements IMovie{
 		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 		foreach ($arrayToDecode as $valueArray) {
-			$movie = new Movie($valueArray['name'],$valueArray['direct'],$valueArray['duration'],$valueArray['genre'],$valueArray['description'],$valueArray['id']);
+			$movie = new Movie($valueArray['id'],$valueArray['name'],$valueArray['direct'],$valueArray['duration'],$valueArray['genre'],$valueArray['description']);
 			
 			array_push($this->movieList, $movie);
 		}
