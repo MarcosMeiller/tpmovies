@@ -14,11 +14,13 @@
          
             $urlArray = array_filter($urlArray);
 
+            // si no llega ningun controlador desde la url llama a MainController
             if(empty($urlArray))
                 $this->controller = "Main";            
             else
                 $this->controller = ucwords(array_shift($urlArray));
 
+            // si no llega ningun metodo llama a la funcion Welcome
             if(empty($urlArray))
                 $this->method = "Welcome";
             else
