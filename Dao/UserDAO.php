@@ -20,6 +20,24 @@ class UserDAO implements IUser{
 	}
 
 
+	public function update(User $code){
+		$this->retrieveData();
+		$newList = array();
+		foreach ($this->userList as $user) {
+			if($user->getEmail() != $code->getEmail()){
+				array_push($newList, $user);
+			}
+			else{
+				array_push($newList,$code);
+			}
+		}
+		
+
+		$this->userList = $newList;
+		$this->saveData();
+	}
+
+
 	public function saveData(){
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();

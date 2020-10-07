@@ -53,7 +53,7 @@
                                     <td class="w-1/5 text-right py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com"><?php echo $cinema->getPriceUnit(); ?></a></td>
 
                                     <td class="text-center py-3 px-4"><a data-name='char' onclick='passingData(1,"char",123456,"casa",1.2)' class="modal-open hover:text-blue-500" href=""> <i class="fas fa-edit"></i></a></td>
-                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href=""> <i class="fas fa-trash-alt"></i></a></td>
+                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Cinema/deleteCinema?=<?php echo $cinema->getId()?>" name='id' type='submit' ><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
                               <?php } ?>

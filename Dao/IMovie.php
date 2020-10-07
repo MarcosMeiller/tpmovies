@@ -1,12 +1,13 @@
 <?php 
 namespace Dao;
 
-use model\movie as movie;
+use model\Movie as Movie;
 
 interface IMovie{ 
-	function add(movie $newMovie);
+	function add(Movie $newMovie);
 	function getAll();
 	function search($id);
-    function delete($code);
+	function delete($code);
+	function update(Movie $code)
 }
 ?>

@@ -1,4 +1,5 @@
 MoviePass Project
 
-modificar desde los daos los objetos (edit)
-agregar id incrementar automatico en el dao
+comprobar como mandar el parametro en el cinenmaslamb.
+crear usermb.
+fijarse rutas de los controllers.

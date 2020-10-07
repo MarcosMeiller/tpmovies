@@ -35,12 +35,13 @@ class cinemaDAO implements ICinema{
 	public function saveData(){
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();
-
+		$count = 0;
 		foreach ($this->cinemaList as $cinema) {
 			$valueArray['name'] = $cinema->getName();
 			$valueArray['capacity'] = $cinema->getCapacity();
 			$valueArray['address'] = $cinema->getAddress();
-			$valueArray['id'] = $cinema->getId();
+			$count = $count + 1;
+			$valueArray['id'] = $count;
 			$valueArray['priceUnit'] = $cinema->getpriceUnit();
 
 			array_push($arrayToEncode, $valueArray);
@@ -74,11 +75,29 @@ class cinemaDAO implements ICinema{
 				array_push($newList, $cinema);
 			}
 		}
+
+		$this->cinemaList = $newList;
+		$this->saveData();
+	}
+
+	public function update(Cinema $code){
+		$this->retrieveData();
+		$newList = array();
+		foreach ($this->cinemaList as $cinema) {
+			if($cinema->getId() != $code->getId()){
+				array_push($newList, $cinema);
+			}
+			else{
+				array_push($newList,$code);
+			}
+		}
 		
 
 		$this->cinemaList = $newList;
 		$this->saveData();
 	}
+
+
 
     function GetJsonFilePath(){
 

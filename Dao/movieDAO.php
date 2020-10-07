@@ -19,18 +19,36 @@ class movieDAO implements IMovie{
 		return $this->movieList;
 	}
 
+	public function update(Movie $code){
+		$this->retrieveData();
+		$newList = array();
+		foreach ($this->movieList as $movie) {
+			if($movie->getId() != $code->getId()){
+				array_push($newList, $movie);
+			}
+			else{
+				array_push($newList,$code);
+			}
+		}
+		
+
+		$this->movieList = $newList;
+		$this->saveData();
+	}
+
 
 	public function saveData(){
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();
-
+		$count = 0;
 		foreach ($this->movieList as $movie) {
 			$valueArray['name'] = $movie->getName();
 			$valueArray['direct'] = $movie->getDirect();
 			$valueArray['duration'] = $movie->getDuration();
             $valueArray['genre'] = $movie->getGenre();
 			$valueArray['description'] = $movie->getDescription();
-			$valueArray['id'] = $movie->getId();
+			$count = $count + 1;
+			$valueArray['id'] = $count;
 
 			array_push($arrayToEncode, $valueArray);
 

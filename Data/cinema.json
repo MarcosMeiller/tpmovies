@@ -3,14 +3,28 @@
         "name": "ambasador",
         "capacity": "3000",
         "address": "cordoba 2222",
-        "id": "1",
+        "id": 1,
         "priceUnit": "500"
     },
     {
         "name": "ambasador2",
         "capacity": "123",
         "address": "cordoba 2224",
-        "id": "2",
+        "id": 2,
         "priceUnit": "456"
+    },
+    {
+        "name": "a",
+        "capacity": "2",
+        "address": "2",
+        "id": 3,
+        "priceUnit": "2"
+    },
+    {
+        "name": "a",
+        "capacity": "2",
+        "address": "2",
+        "id": 4,
+        "priceUnit": "2"
     }
 ]

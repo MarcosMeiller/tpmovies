@@ -30,6 +30,38 @@ class CinemaController
         }
     }
 
+    public function updateCinema($id,$name,$capacity,$address,$priceUnit){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $cinema = $this->dao->search($id);
+            if($cinema == null){
+                $this->ViewCinemas("El Cine no existe.");
+            }
+            
+            try{
+                $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
+                $this->dao->update($newCinema);
+                $this->ViewCinemas("Modificado con exito");
+            }catch(Exception $e){
+                $this->ViewCinemas("Error al modificar cine.");
+            }
+        }
+    }
+
+    public function deleteCinema($id){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $cinema = $this->dao->search($id);
+            if($cinema == null){
+                $this->ViewCinemas("El Cine no existe.");
+            }
+            
+            try{
+                $this->dao->delete($id);
+                $this->ViewCinemas("eliminado con exito");
+            }catch(Exception $e){
+                $this->ViewCinemas("Error al eliminar cine.");
+            }
+        }
+    }
 
     public function ViewCinemas($message = "")
     {

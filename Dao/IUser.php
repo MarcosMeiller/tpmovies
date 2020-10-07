@@ -8,6 +8,7 @@ interface IUser{
 	function getAll();
 	function search($email);
 	function delete($code);
+	function update(User $code);
  
 }
 ?>
