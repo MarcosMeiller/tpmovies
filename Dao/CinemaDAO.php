@@ -24,7 +24,8 @@ class cinemaDAO implements ICinema{
 		$newCinema = null;
 		$this->retrieveData();
 		foreach ($this->cinemaList as $cinema) {
-			if($cinema->getId() === $id){
+			$ID = $cinema->getId();
+			if($ID === $id){
 				 $newCinema = $cinema; 
 			}
 		}

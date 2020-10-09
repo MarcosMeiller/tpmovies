@@ -6,21 +6,21 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="id">
         ID
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="id" type="number" name='id' placeholder="Ingrese nombre del cine">
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="id" type="number" name='id' placeholder="Ingrese nombre del cine" >
       
     </div>
     <div class="w-full md:w-3/5 px-3 mb-2 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
         Nombre
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine">
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
       
     </div>
     <div class="w-full md:w-2/5 px-3">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="capacity">
         Capacidad Total
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='capacity' id="capacity" type="number" placeholder="">
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='capacity' id="capacity" type="number" placeholder="" required>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="priceUnit">
         Valor entrada
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="priceUnit" name='priceUnit' type="number" placeholder="$">
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="priceUnit" name='priceUnit' type="number" placeholder="$" required>
     </div>
 
   </div>

@@ -9,10 +9,16 @@
     <title>MoviePass</title>
     <meta name="author" content="NUÑEZ - GELLER">
     <meta name="description" content="TP MoviePass UTN 2020">
-    <!--<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet">
-    <link rel="stylesheet" href="https://pro.fontawesome.com/releases/v5.10.0/css/all.css" 
-    integrity="sha384-AYmEC3Yw5cVb3ZcuHtOA93w35dYTsvhLPVnYs9eStHfGJvOvKxVfELGroGkvsg+p" crossorigin="anonymous"/>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,500&display=swap" rel="stylesheet">-->
+
+    <!--<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" type="text/css" />-->
+
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,500&display=swap" rel="stylesheet"/>    
+
+<!-- toastr -->
+    <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
+<link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+
     <style>
         html,body{
             height: 100vh !important;
@@ -47,16 +53,16 @@
             background-attachment: fixed !important;   
         }
         .font-family-montSerrat { font-family: 'Montserrat', sans-serif; }
-        .modal {
-        transition: opacity 0.25s ease;
+
+        /*.modal {
+            transition: opacity 0.25s ease !important;
         }
-        body.modal-active {
-        overflow-x: hidden;
-        overflow-y: visible !important;
-        }
+        .modal-active {
+            overflow-x: hidden !important;
+            overflow-y: visible !important;
+        }*/
 
 
     </style>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 <body class='w-screen h-screen font-family-montSerrat'>

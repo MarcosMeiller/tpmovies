@@ -16,16 +16,15 @@ class CinemaController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
             if($cinema !== null){
-                $this->ViewCinemas("El Cine ya existe.");
+                $this->ViewCinemas("El Cine ya existe.","alert");
             }
             
             try{
                 $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
                 $this->dao->add($newCinema);
-                //header("Location: /tpmovies/");
-                $this->ViewCinemas("Agregado con exito");
+                $this->ViewCinemas("Agregado con exito","success");
             }catch(Exception $e){
-                $this->ViewCinemas("Error al Registrar cine.");
+                $this->ViewCinemas("Error al Registrar cine.","danger");
             }
         }
     }
@@ -40,7 +39,8 @@ class CinemaController
             try{
                 $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
                 $this->dao->update($newCinema);
-                $this->ViewCinemas("Modificado con exito");
+                $this->ViewCinemas("Modificado con exito","success");
+
             }catch(Exception $e){
                 $this->ViewCinemas("Error al modificar cine.");
             }
@@ -48,25 +48,36 @@ class CinemaController
     }
 
     public function deleteCinema($id){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        //if ($_SERVER["REQUEST_METHOD"] == "POST") {
+           
             $cinema = $this->dao->search($id);
-            if($cinema == null){
-                $this->ViewCinemas("El Cine no existe.");
+            if($cinema === null){
+                $this->ViewCinemas("El Cine no existe.","alert");
             }
             
             try{
+             
                 $this->dao->delete($id);
-                $this->ViewCinemas("eliminado con exito");
+                $this->ViewCinemas("Eliminado con exito","success");
             }catch(Exception $e){
-                $this->ViewCinemas("Error al eliminar cine.");
+           
+                $this->ViewCinemas("Error al eliminar cine.","danger");
             }
-        }
+        //}
     }
 
-    public function ViewCinemas($message = "")
+    public function ViewCinemas($message = "",$type= "")
     {
         $cinemasList = $this->dao->getAll();
-        require_once(VIEWS_PATH_ADMIN."/cinemaslamb.php");
+        if($message === '' && $type === ''){
+            //unset($_SESSION['msjCinemas']);
+            //unset($_SESSION["bgMsgCinemas"]);
+            require_once(VIEWS_PATH_ADMIN."/cinemaslamb.php");
+        }else{
+            $_SESSION['msjCinemas'] = $message;
+            $_SESSION["bgMsgCinemas"] = $type;
+            header("Location: /tpmovies/Cinema/ViewCinemas/");
+        }
     }        
 }
 

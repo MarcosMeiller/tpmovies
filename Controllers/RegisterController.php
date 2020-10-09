@@ -25,8 +25,12 @@ class RegisterController
             try{
                 $newUser = new User($userName,$name,$lastname,$email,$password);
                 $this->dao->add($newUser);
-                $_SESSION['loggedUser'] = $newUser;
-                header("Location: /tpmovies/");
+                $user = $this->dao->search($email);
+                if($user !== null){
+                    $_SESSION['loggedUser'] = $newUser;
+                    header("Location: /tpmovies/");
+                }
+                $this->ViewRegister("Error al intentar registrar cuenta.");
             }catch(Exception $e){
                 $this->ViewRegister("Error al intentar crear cuenta.");
             }

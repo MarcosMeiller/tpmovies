@@ -33,7 +33,7 @@ class MovieController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
             if($cinema == null){
-                $this->ViewCinemas("La pelicula no existe.");
+                $this->ViewMovies("La pelicula no existe.");
             }
             
             try{

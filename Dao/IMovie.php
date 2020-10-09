@@ -8,6 +8,6 @@ interface IMovie{
 	function getAll();
 	function search($id);
 	function delete($code);
-	function update(Movie $code)
+	function update(Movie $code);
 }
 ?>

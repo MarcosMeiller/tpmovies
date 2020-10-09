@@ -19,5 +19,12 @@
         "email": "pepe@gmail.com",
         "username": "jose",
         "password": "123456"
+    },
+    {
+        "name": "elba",
+        "lastname": "gallo",
+        "email": "el@ba.com",
+        "username": "el",
+        "password": "123456"
     }
 ]

@@ -8,6 +8,7 @@ interface ICinema{
     function getAll();
     function search($id);
     function delete($code);
-    function update(Cinema $code)
+    function update(Cinema $code);
+    
 }
 ?>
