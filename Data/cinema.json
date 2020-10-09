@@ -1,16 +1,9 @@
 [
     {
-        "name": "ambasador centro",
-        "capacity": "3000",
-        "address": "cordoba 2223",
-        "id": 1,
-        "priceUnit": "450"
-    },
-    {
         "name": "ambasador 3",
-        "capacity": "4566",
+        "capacity": "4567",
         "address": "independencia 1400",
-        "id": 2,
+        "id": 1,
         "priceUnit": "300"
     }
 ]
