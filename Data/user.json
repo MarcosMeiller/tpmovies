@@ -26,5 +26,12 @@
         "email": "el@ba.com",
         "username": "el",
         "password": "123456"
+    },
+    {
+        "name": "diana laura",
+        "lastname": "amaro",
+        "email": "amarodiana41@gmail.com",
+        "username": "rusa",
+        "password": "jacaranda19"
     }
 ]

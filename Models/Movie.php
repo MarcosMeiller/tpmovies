@@ -2,7 +2,9 @@
 
 namespace models;
 
-class Movie{
+use Models\Genre as Genre;
+
+class Movie extends Genre{
     private $id;
     private $name;
     private $genre;
@@ -57,6 +59,7 @@ class Movie{
     public function setGenre($genre){
         $this->genre = $genre;
     }
+    
     public function setDni($dni){
         $this->dni = $dni;
     }

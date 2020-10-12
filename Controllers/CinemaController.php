@@ -12,6 +12,7 @@ class CinemaController
     }
   
 
+    
     public function addCinema($id,$name,$capacity,$address,$priceUnit){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);

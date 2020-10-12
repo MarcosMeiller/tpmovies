@@ -110,7 +110,24 @@ class movieDAO implements IMovie{
         }
 
         return $jsonFilePath;
-    }
+	}
+	
+	public function getForGenre($arrayGenre){
+		$this->retrieveData();
+		$aux = $movieList;
+		$searched = array();
+		$aux2;
+		fore ach($arrayGenre as $genre){
+			foreach($this->aux as $movie){
+				$aux2 = search($genre,$movie->getGenre());
+					if($aux2 !== null && array_search($movie,$searched)){
+						$searched[] = $movie;
+					}
+				}
+			}
+		
+		return $searched;
+	}
 }
 
 
