@@ -102,7 +102,7 @@ class movieDAO implements IMovie{
 
     function GetJsonFilePath(){
 
-        $initialPath = "Data/movie.json";
+        $initialPath = "Data/movies.json";
         if(file_exists($initialPath)){
             $jsonFilePath = $initialPath;
         }else{
@@ -112,12 +112,12 @@ class movieDAO implements IMovie{
         return $jsonFilePath;
 	}
 	
-	public function getForGenre($arrayGenre){
+	/*public function getForGenre($arrayGenre){
 		$this->retrieveData();
 		$aux = $movieList;
 		$searched = array();
 		$aux2;
-		fore ach($arrayGenre as $genre){
+		foreach($arrayGenre as $genre){
 			foreach($this->aux as $movie){
 				$aux2 = search($genre,$movie->getGenre());
 					if($aux2 !== null && array_search($movie,$searched)){
@@ -127,7 +127,7 @@ class movieDAO implements IMovie{
 			}
 		
 		return $searched;
-	}
+	}*/
 }
 
 

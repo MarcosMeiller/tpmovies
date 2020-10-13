@@ -103,7 +103,7 @@ class UserDAO implements IUser{
 	
     function GetJsonFilePath(){
 
-        $initialPath = ROOT."/Data/user.json";
+        $initialPath = ROOT."/Data/users.json";
         if(file_exists($initialPath)){
             $jsonFilePath = $initialPath;
         }else{

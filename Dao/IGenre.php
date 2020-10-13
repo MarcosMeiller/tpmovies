@@ -1,15 +1,13 @@
 <?php 
 namespace Dao;
 
-use Models\User as User;
+use Models\Genre as Genre;
 
-interface IUser{ 
-	function add(Genre $newUser);
+interface IGenre{ 
+	function add(Genre $newGenre);
 	function getAll();
-	function search($email);
+	function search($id);
 	function delete($code);
-    function update(Genre $code);
-    function getByName($name);
  
 }
 ?>

@@ -73,15 +73,15 @@ class MovieController
         }
     }
     
-    public function loadMovie(){
-        ///llamar api
-        /*$arrayMovies = array();
+    /*public function loadMovie(){
+        llamar api
+        $arrayMovies = array();
         foreach($arrayMovies as $movie){
             $name = $movie.name;
         }
-        */
+       
 
-    }
+    }*/
 
     public function ViewPeliculas($message = "")
     {

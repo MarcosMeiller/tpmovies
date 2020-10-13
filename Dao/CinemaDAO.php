@@ -102,7 +102,7 @@ class cinemaDAO implements ICinema{
 
     function GetJsonFilePath(){
 
-        $initialPath = "Data/cinema.json";
+        $initialPath = "Data/cinemas.json";
         if(file_exists($initialPath)){
             $jsonFilePath = $initialPath;
         }else{

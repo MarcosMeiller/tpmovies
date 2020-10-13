@@ -2,7 +2,7 @@
 namespace Dao;
 
 use Dao\IGenre as IGenre;
-use model\Genre as Genre;
+use Models\Genre as Genre;
 
 class GenreDao implements IGenre{
     private $genreList = array();
@@ -80,7 +80,7 @@ class GenreDao implements IGenre{
 
     function GetJsonFilePath(){
 
-        $initialPath = "Data/genre.json";
+        $initialPath = "Data/genres.json";
         if(file_exists($initialPath)){
             $jsonFilePath = $initialPath;
         }else{
@@ -90,7 +90,7 @@ class GenreDao implements IGenre{
         return $jsonFilePath;
 	}
 	
-	public function getForGenre($arrayMovie,$Arraygenre){
+	/*public function getForGenre($arrayMovie,$Arraygenre){
 		$this->retrieveData();
 		$aux = $arrayMovie;
 		$searched = array();
@@ -105,7 +105,7 @@ class GenreDao implements IGenre{
 			}
 		
 		return $searched;
-	}
+	}*/
 }
 
 

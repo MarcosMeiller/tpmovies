@@ -57,7 +57,7 @@ class GenreControler
         
 
     }
-
+}
 
     public function ViewGenre($message = "")
     {
@@ -74,8 +74,6 @@ class GenreControler
     }        
     
 }
-
-
 
 
 
