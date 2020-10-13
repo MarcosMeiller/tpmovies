@@ -22,17 +22,6 @@ class MovieController
             }
         
     }
-    
-    public function arrayGenre($genreString){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $array =  explode(',',$genreString);
-            $this->dao->getForGenre($array);
-            if($movie == null){
-                $this->ViewMovies("Error al agregar la lista");
-            }
-      
-
-    }
 
     public function addMovie($id,$name,$genre,$duration,$direct,$description){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {

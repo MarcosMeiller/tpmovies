@@ -57,6 +57,7 @@ class Cinema{
         $this->id = $id;
     }
 
+    
     public function setpriceUnit($priceUnit){
         $this->priceUnit = $priceUnit;
     }

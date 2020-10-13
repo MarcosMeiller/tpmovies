@@ -2,33 +2,31 @@
 
     namespace models;
     class Genre{
-        private $genreList;
+        private $id;
+        private $genre;
 
-        public function __construct(){
-            $this->genreList = array();
+        public function __construct($id,$genre){
+            $this->id = $id;
+            $this->genre = $genre;
         }
 
         public function getGenre(){
-            return $this->genreList;
-            }
+            return $this->genre;
+        }
 
+        public function getId(){
+            return $this->id;
+        }
+            
+        public function setId($id){
+            $this->id = $id;
+        }
+          
         public function setGenre($genreList){
-            $this->genreList = $genreList;
-        }
-       
-        public function addGenre($newGenre){
-            $this->genreList[] = $newGenre;
+            $this->genre = $genre;
         }
 
-        public function searchGenre($newGenre){
-            $exist = null;
-            foreach($this->genreList as $genre){
-                if($newGenre == $genre){
-                    $exist = $newGenre;
-                }
-            }
-            return $exist;
-        }
+  
     }
 
 
