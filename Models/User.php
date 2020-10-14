@@ -11,11 +11,13 @@
 
 
         function __construct($userName,$name,$lastname,$email,$password){
+            // poner id
             $this->userName = $userName;
             $this->password = $password;
             $this->lastname = $lastname;
             $this->name = $name;
             $this->email = $email;
+            // IDtipo = 0
         }
         
         public function getUserName(){

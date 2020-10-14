@@ -2,6 +2,7 @@
 
 Use Models\Movie as Movie;
 Use Dao\movieDAO as movieDAO;
+Use Dao\GenreDAO as genreDAO;
 
 class MovieController
 {
@@ -9,6 +10,7 @@ class MovieController
 
     function __construct(){
         $this->dao = new movieDAO(); 
+        $this->gDao = new genreDAO();
     }
   
 
@@ -20,7 +22,7 @@ class MovieController
             if($movie == null){
                 $this->ViewMovies("error al buscar el genero.");
             }
-        
+        }
     }
 
     public function addMovie($id,$name,$genre,$duration,$direct,$description){
@@ -83,7 +85,14 @@ class MovieController
 
     }*/
 
-    public function ViewPeliculas($message = "")
+    
+    public function VievMoviewsNowPlaying(){
+        $genresList = $this->gDao->getAll();
+        require_once(VIEWS_PATH."moviesnowp.php");
+    }
+
+
+    public function ViewMoviewsAdmin($message = "")
     {
         $cinemasList = $this->dao->getAll();
         require_once(VIEWS_PATH_ADMIN."/movieslamb.php");

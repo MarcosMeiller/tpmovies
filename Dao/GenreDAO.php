@@ -15,7 +15,14 @@ class GenreDao implements IGenre{
 	}
 
 	public function getAll(){
-		$this->retrieveData();
+		$genres = $this->retrieveData();
+		$size = 0;
+		if($genres !== null){
+			$size = sizeOf($genres);
+		}
+		if($size === 0 ){
+            $this->retrieveDataFromAPI();
+        }
 		return $this->genreList;
 	}
 
@@ -26,7 +33,7 @@ class GenreDao implements IGenre{
 		$count = 0;
 		foreach ($this->genreList as $genre) {
             $valueArray['id'] = $genre->getId();
-			$valueArray['genre'] = $genre->getGenre();
+			$valueArray['name'] = $genre->getName();
 
 			array_push($arrayToEncode, $valueArray);
 
@@ -72,11 +79,23 @@ class GenreDao implements IGenre{
 		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 		foreach ($arrayToDecode as $valueArray) {
-			$genre = new Genre($valueArray['id'],$valueArray['genre']);
+			$genre = new Genre($valueArray['id'],$valueArray['name']);
 			
 			array_push($this->genreList, $genre);
 		}
 	}
+
+	public function retrieveDataFromAPI(){
+		$this->genreList = array();
+		$genresdb = file_get_contents(API_HOST.'/genre/movie/list?api_key='.API_KEY.'&language='.LANG);
+		$genres = json_decode($genresdb,true,)['genres'];
+		foreach($genres as $genre){
+			$id = $genre['id'];
+			$name = $genre['name'];
+			$g = new Genre($id,$name);
+			$this->add($g);
+		}
+	} 
 
     function GetJsonFilePath(){
 

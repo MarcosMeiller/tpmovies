@@ -9,6 +9,6 @@ interface IMovie{
 	function search($id);
 	function delete($code);
 	function update(Movie $code);
-	function getForGenre($arrayGenre);
+	//function getForGenre($arrayGenre);
 }
 ?>

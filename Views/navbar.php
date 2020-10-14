@@ -32,15 +32,13 @@
           <a href="<?php echo FRONT_ROOT?>Main/Init" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Inicio</span>
           </a>
-          <a href="#" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
+          <a href="<?php echo FRONT_ROOT?>Movie/VievMoviewsNowPlaying" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Peliculas Actuales</span>
           </a>
           <a href="#" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
-            <span>OTRAOPCION</span>
+            <span>Cartelara</span>
           </a>
-          <a href="#" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
-            <span>OTRAOPCION2</span>
-          </a>
+
         </div>
 
 <?php if($user === false) : ?>

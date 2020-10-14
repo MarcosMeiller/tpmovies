@@ -2,7 +2,10 @@
 
 class Rol{
 
-    private $isAdmin;
+    //private $isAdmin;
+    /*
+    id type
+    */
 
     function __construct($isAdmin){
         $this->isAdmin = $isAdmin;

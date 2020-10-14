@@ -24,6 +24,7 @@ class RegisterController
             
             try{
                 $newUser = new User($userName,$name,$lastname,$email,$password);
+                //$newUser->setType(0);
                 $this->dao->add($newUser);
                 $user = $this->dao->search($email);
                 if($user !== null){

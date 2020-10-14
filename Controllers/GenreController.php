@@ -11,7 +11,7 @@ class GenreControler
         $this->dao = new GenreDAO(); 
     }
 
-    public function addCinema($id,$genre){
+    public function addGenre($id,$genre){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $controller = $this->dao->search($id);
             if($controller !== null){
@@ -27,6 +27,13 @@ class GenreControler
             }
         }
     }
+
+    /*public function ControlListGenre(){
+        $genres = $this->dao->getAll();
+        if(count($genres) === 0){
+            $this->dao->retrieveDataFromAPI();
+        }
+    }*/
 
     public function deleteGenre($id){
         //if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -59,7 +66,7 @@ class GenreControler
     }
 }
 
-    public function ViewGenre($message = "")
+    /*public function ViewGenre($message = "")
     {
         $genreList = $this->dao->getAll();
         if($message === '' && $type === ''){
@@ -71,7 +78,7 @@ class GenreControler
             //$_SESSION["bgMsgCinemas"] = $type;
             //header("Location: /tpmovies/Cinema/ViewCinemas/"); ponele la ruta cuando la crees carlos
         }
-    }        
+    } */    
     
 }
 
