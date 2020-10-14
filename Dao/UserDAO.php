@@ -43,12 +43,14 @@ class UserDAO implements IUser{
 		$jsonPath = $this->GetJsonFilePath();
 
 		foreach ($this->userList as $user) {
+			$valueArray['id'] = $user->getId();
 			$valueArray['name'] = $user->getName();
 			$valueArray['lastname'] = $user->getLastName();
             $valueArray['email'] = $user->getEmail();
             $valueArray['username'] = $user->getUserName();
 			$valueArray['password'] = $user->getPassword();
-			array_push($arrayToEncode, $valueArray);
+			$valueArray['id_type'] = $user->getId_Type();
+ 			array_push($arrayToEncode, $valueArray);
 		}
 		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
 		file_put_contents($jsonPath, $jsonContent);
@@ -68,7 +70,7 @@ class UserDAO implements IUser{
 			$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 			foreach ($arrayToDecode as $valueArray) {
-				$user = new User($valueArray['username'],$valueArray['name'],$valueArray['lastname'],$valueArray['email'],$valueArray['password']);		
+				$user = new User($valueArray['id'],$valueArray['username'],$valueArray['name'],$valueArray['lastname'],$valueArray['email'],$valueArray['password']);		
 				array_push($this->userList, $user);
 			}
 		}

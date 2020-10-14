@@ -11,7 +11,7 @@ class UserController
         $this->dao = new userDAO(); 
     }
 
-    public function updateUser($userName,$name,$lastname,$email,$password){
+    public function updateUser($id,$userName,$name,$lastname,$email,$password){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $this->dao->search($email);
             if($user == null){
@@ -19,7 +19,7 @@ class UserController
             }
             
             try{
-                $newUser = new User($userName,$name,$lastname,$email,$password);
+                $newUser = new User($id,$userName,$name,$lastname,$email,$password);
                 $this->dao->update($newUser);
                 $this->ViewUser("Modificado con exito");
             }catch(Exception $e){

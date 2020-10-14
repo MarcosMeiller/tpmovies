@@ -12,7 +12,7 @@ class RegisterController
     }
   
 
-    public function RegisterUser($userName,$name,$lastname,$email,$password,$passwordRepeat){
+    public function RegisterUser($id,$userName,$name,$lastname,$email,$password,$passwordRepeat){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if($password !== $passwordRepeat){
                 $this->ViewRegister("Las contraseñas no son iguales.");
@@ -23,8 +23,7 @@ class RegisterController
             }
             
             try{
-                $newUser = new User($userName,$name,$lastname,$email,$password);
-                //$newUser->setType(0);
+                $newUser = new User($id,$userName,$name,$lastname,$email,$password);
                 $this->dao->add($newUser);
                 $user = $this->dao->search($email);
                 if($user !== null){

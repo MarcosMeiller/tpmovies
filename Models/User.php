@@ -3,21 +3,23 @@
 
     class User 
     {
+        private $id;
         private $userName;
         private $password;
         private $email;
         private $name;
         private $lastname;
+        private $id_type;
 
 
-        function __construct($userName,$name,$lastname,$email,$password){
-            // poner id
+        function __construct($id,$userName,$name,$lastname,$email,$password){
+            $this->id = $id;
             $this->userName = $userName;
             $this->password = $password;
             $this->lastname = $lastname;
             $this->name = $name;
             $this->email = $email;
-            // IDtipo = 0
+            $this->id_type = 0;
         }
         
         public function getUserName(){
@@ -37,6 +39,21 @@
         
         public function getLastName(){
             return $this->lastname;
+        }
+        public function getId(){
+            return $this->id;
+        }
+    
+        public function getId_Type(){
+            return $this->id;
+        }
+    
+        public function setId_Type($id_type){
+            $this->id_type = $id_type;
+        }
+
+        public function setId($id){
+            $this->id = $id;
         }
         
         public function setUserName($userName){

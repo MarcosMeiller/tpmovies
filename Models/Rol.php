@@ -2,21 +2,28 @@
 
 class Rol{
 
-    //private $isAdmin;
-    /*
-    id type
-    */
+    private $id;
+    private $type;
 
-    function __construct($isAdmin){
-        $this->isAdmin = $isAdmin;
+    function __construct($id,$type){
+        $this->id = $id;
+        $this->type = $type;
     }
 
-    public function getIsAdmin(){
-        $this->isAdmin;
+    public function getId(){
+        return $this->id;
     }
 
-    public function setIsAdmin($isAdmin){
-        $this->isAdmin = $isAdmin;
+    public function getType(){
+        return $this->type;
+    }
+
+    public function setId($id){
+        $this->id = $id;
+    }
+
+    public function setType($type){
+        $this->type = $type;
     }
 
 }
