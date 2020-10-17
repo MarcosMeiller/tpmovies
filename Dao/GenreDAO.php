@@ -18,7 +18,7 @@ class GenreDao implements IGenre{
 		$genres = $this->retrieveData();
 		$size = 0;
 		if($genres !== null){
-			$size = sizeOf($genres);
+			$size = count($genres);
 		}
 		if($size === 0 ){
             $this->retrieveDataFromAPI();

@@ -29,16 +29,14 @@ class RolController
     }
 
     public function searchRol($id){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $rol = $this->dao->search($id);
+        $rol = $this->dao->search($id);
             
+        if($rol != null){
+            return $rol->getType();
         }
-	if(rol != null){
-		return $rol->getType();
-	}
-	else{
-	return null; 	
-	}
+        else{
+            return null; 	
+        }
     }
 
 

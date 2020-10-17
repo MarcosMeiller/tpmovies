@@ -40,7 +40,7 @@ class GenreControler
            
             $genre = $this->dao->search($id);
             if($genre === null){
-                $this->ViewCinemas("El Genero no existe.","alert");
+                $this->Cinemas("El Genero no existe.","alert");
             }
             
             try{

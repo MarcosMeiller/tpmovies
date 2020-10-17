@@ -81,10 +81,10 @@ require 'Views/head.php';
                                     <td class="w-1/5 text-left py-3 px-4"><?php echo $cinema->getName(); ?></td>
                                     <td class="text-left py-3 px-4"><?php echo $cinema->getCapacity(); ?></td>
 
-                                    <td class="w-1/5 text-left py-3 px-4"><a class="hover:text-blue-500" href="">
-                                    <?php echo $cinema->getAddress(); ?></a></td>
+                                    <td class="w-1/5 text-left py-3 px-4">
+                                    <?php echo $cinema->getAddress(); ?></td>
 
-                                    <td class="w-1/5 text-right py-3 px-4"><a class="hover:text-blue-500" href="mailto:jonsmith@mail.com"><?php echo $cinema->getPriceUnit(); ?></a></td>
+                                    <td class="w-1/5 text-right py-3 px-4"><?php echo $cinema->getPriceUnit(); ?></td>
 
                                     <td class="text-center py-3 px-4">
                                     <a 

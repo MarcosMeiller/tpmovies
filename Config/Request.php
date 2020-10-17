@@ -22,7 +22,7 @@
 
             // si no llega ningun metodo llama a la funcion Welcome
             if(empty($urlArray))
-                $this->method = "Welcome";
+                $this->method = "Index";
             else
                 $this->method = array_shift($urlArray);
 

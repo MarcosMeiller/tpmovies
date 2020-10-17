@@ -1,8 +1,8 @@
 <?php namespace views;
 
 ?>
-<div class='bgMovie' style="background-image: url('Views/img/bg-cinema3.jpg')">
-    <div class='flex flex-col min-h-full'>
+
+    <div class='bgMovie flex flex-col min-h-full'style="background-image: url('Views/img/bg-cinema3.jpg')">
 
     <?php require 'navbar.php' ?>
 
@@ -18,4 +18,4 @@
     
         </div>
     </div>
-</div>
+

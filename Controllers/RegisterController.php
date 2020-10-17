@@ -15,30 +15,34 @@ class RegisterController
     public function RegisterUser($id,$userName,$name,$lastname,$email,$password,$passwordRepeat){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             if($password !== $passwordRepeat){
-                $this->ViewRegister("Las contraseñas no son iguales.");
-            }
-            $user = $this->dao->search($email);
-            if($user !== null){
-                $this->ViewRegister("El email ya se encuentra registrado.");
-            }
-            
-            try{
-                $newUser = new User($id,$userName,$name,$lastname,$email,$password);
-                $this->dao->add($newUser);
+                $this->Index("Las contraseñas no son iguales.",2);
+            }else{
                 $user = $this->dao->search($email);
                 if($user !== null){
-                    $_SESSION['loggedUser'] = $newUser;
-                    header("Location: /tpmovies/");
+                    $this->Index("El email ya se encuentra registrado.",2);
+                }else{
+                    try{
+                    $newUser = new User($id,$userName,$name,$lastname,$email,$password);
+                    $this->dao->add($newUser);
+                    $user = $this->dao->search($email);
+                    if($user !== null){
+                        $_SESSION['loggedUser'] = $newUser;
+                        header("Location: /tpmovies/");
+                    }
+                    $this->Index("Error al intentar registrar cuenta.",2);
+                    }catch(Exception $e){
+                        $this->Index("Error al intentar crear cuenta.",2);
+                    }
                 }
-                $this->ViewRegister("Error al intentar registrar cuenta.");
-            }catch(Exception $e){
-                $this->ViewRegister("Error al intentar crear cuenta.");
+                
+                
             }
+            
         }
     }
 
 
-    public function ViewRegister($message = "")
+    public function Index($message = "", $bg=1)
     {
         if(empty($_SESSION["loggedUser"])){
             require_once(VIEWS_PATH."register.php");

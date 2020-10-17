@@ -1,13 +1,21 @@
 <?php namespace views;
     require 'head.php';
+
+        
+    if($bg == 1){
+      $bgImg = "background-image: url('Views/img/bg-cinema3.jpg')";
+    }else{
+      $bgImg = "background-image: url('../Views/img/bg-cinema3.jpg')";
+    }
+
 ?>
 
-<div class='bgMovie' style="background-image: url('../Views/img/bg-cinema3.jpg')">
-  <div class='flex flex-col mx-auto min-h-full'>
+
+  <div class='bgMovie flex flex-col mx-auto min-h-full' style="<?php echo $bgImg ?>">
 
   <?php require 'nav-session.php'; ?>
 
-      <div class="flex flex-grow container mx-auto px-4 w-full h-full items-center justify-center border-2 border-purple-500">
+      <div class="flex flex-grow container mx-auto px-4 w-full h-full items-center justify-center border-purple-500">
         
           <div class="w-full md:w-1/2 justify-center items-center">
             <div class=" break-words w-full mb-5 shadow-lg rounded-lg bg-gray-300 border-0">
@@ -17,6 +25,20 @@
                   <small>Registrate</small>
                 </div>
                 <form action='<?php echo FRONT_ROOT ?>Register/RegisterUser' method='POST'>
+
+                  <div hidden class="relative w-full mb-3">
+                    <label
+                      class="block uppercase text-gray-700 text-xs font-bold"
+                      for="id"
+                      ></label
+                    ><input
+                      type="number"
+                      name='id'
+                      class="px-3 py-2 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
+                      value=""
+                    />
+                  </div>
+
                   <div class="relative w-full mb-3">
                     <label
                       class="block uppercase text-gray-700 text-xs font-bold"
@@ -85,6 +107,7 @@
                       value=""
                     />
                   </div>
+
                   <div class="relative w-full mb-3">
                     <label
                       class="block uppercase text-gray-700 text-xs font-bold"
@@ -128,6 +151,7 @@
                       REGISTRATE
                     </button>
                   </div>
+
                 </form>
                   <p class="text-red-600 italic text-center mt-2 text-bold"><?php echo $message ?></p>
               </div>
@@ -135,7 +159,7 @@
 
             <div class="flex flex-wrap mx-2 mb-5">
               <div class="w-full text-right">
-                <a href="<?php echo FRONT_ROOT ?>Login/ViewLogin" class="text-gray-300 font-bold"
+                <a href="<?php echo FRONT_ROOT ?>Login" class="text-gray-300 font-bold"
                   ><small>SINO INICIA SESION</small></a
                 >
               </div>
@@ -147,7 +171,7 @@
 
       <?php require 'footer-session.php';?>
 
-    </div>
+    
 </div>
   </body>
 

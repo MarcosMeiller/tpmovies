@@ -2,13 +2,16 @@
 
 Use Models\User as User;
 Use Dao\UserDAO as UserDAO;
+Use Dao\RolDAO as Rol;
 
 class LoginController
 {
     private $dao;
+    private $rol;
 
     function __construct(){
         $this->dao = new UserDAO(); 
+        $this->rol = new Rol();
     }
 
     public function LoginUser($email,$password){
@@ -18,18 +21,28 @@ class LoginController
             if($newUser->getPassword() == $password){   
 
                 $_SESSION['loggedUser'] = $newUser;
-                header("Location: /tpmovies/");
-
+                
+                $user = $_SESSION["loggedUser"];
+                $id = $user->getId_Type();
+                $Rol = $this->rol->search($id);
+                
+                if($Rol !== null){
+                    $type = $Rol->getType();
+                    if($type != null){
+                          $_SESSION["isAdmin"] = $type;
+                    }
                 }
+                header("Location: /tpmovies/");
+            }
             else{
-                $this->ViewLogin("Usuario o contraseña incorrecta."); 
+                $this->Index("Usuario o contraseña incorrecta.", 2); 
             }
         }else{
-            $this->ViewLogin("No existe un usuario con ese email.");
+            $this->Index("No existe un usuario con ese email.", 2);
         }
     }
 
-    public function ViewLogin($message = "")
+    public function Index($message = "", $bg=1)
     {
         if(empty($_SESSION["loggedUser"])){
             require_once(VIEWS_PATH."login.php");
@@ -40,6 +53,7 @@ class LoginController
     
     public function Logout(){
         unset($_SESSION['loggedUser']);
+        unset($_SESSION["isAdmin"]);
         session_destroy();
         header("Location: /tpmovies/");
     }

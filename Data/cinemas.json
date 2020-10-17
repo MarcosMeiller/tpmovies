@@ -1,1 +1,16 @@
-[]
+[
+    {
+        "name": "ambasador15",
+        "capacity": "132",
+        "address": "cordoba 22231",
+        "id": 1,
+        "priceUnit": "123"
+    },
+    {
+        "name": "ambasador",
+        "capacity": "1232",
+        "address": "123",
+        "id": 2,
+        "priceUnit": "465"
+    }
+]

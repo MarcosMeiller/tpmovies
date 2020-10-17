@@ -1,37 +1,20 @@
 [
     {
+        "id": "",
         "name": "Carlos",
         "lastname": "Nu\u00f1ez",
         "email": "2014thekan@gmail.com",
         "username": "Char",
-        "password": "123456"
+        "password": "123456",
+        "id_type": 0
     },
     {
-        "name": "pepe",
-        "lastname": "pepe",
-        "email": "pepe@gmail.com",
-        "username": "pepe",
-        "password": "123456"
-    },
-    {
-        "name": "jose",
-        "lastname": "jose",
-        "email": "pepe@gmail.com",
-        "username": "jose",
-        "password": "123456"
-    },
-    {
-        "name": "elba",
-        "lastname": "gallo",
-        "email": "el@ba.com",
-        "username": "el",
-        "password": "123456"
-    },
-    {
-        "name": "diana laura",
-        "lastname": "amaro",
-        "email": "amarodiana41@gmail.com",
-        "username": "rusa",
-        "password": "jacaranda19"
+        "id": "",
+        "name": "Carlos",
+        "lastname": "Nu\u00f1ez",
+        "email": "char@char.com",
+        "username": "Char",
+        "password": "123456",
+        "id_type": 0
     }
 ]

@@ -45,7 +45,7 @@
         }
     
         public function getId_Type(){
-            return $this->id;
+            return $this->id_type;
         }
     
         public function setId_Type($id_type){

@@ -1,10 +1,24 @@
 <?php namespace views;
+
+  $type = '';
    //isset
     if(empty($_SESSION["loggedUser"])){
       $user = false;
     }else{
       $user = $_SESSION["loggedUser"];
+      if(isset($_SESSION["isAdmin"])){
+        $type = $_SESSION["isAdmin"];
+      }
+
     }
+
+/*
+  if($isAdmin){
+    echo "si";
+  }else{
+    echo "no";
+  }
+ */   
 
 ?>
 
@@ -26,7 +40,7 @@
           </svg>
         </button>
       </div>
-    
+<?php if($user){ ?>   
       <nav :class="{'flex': open, 'hidden': !open}" class="text-center flex-col flex-grow hidden  lg:items-center lg:pb-0 lg:flex lg:flex-row">
         <div class='flex-col flex lg:flex-row lg:flex-grow'>
           <a href="<?php echo FRONT_ROOT?>Main/Init" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
@@ -35,20 +49,20 @@
           <a href="<?php echo FRONT_ROOT?>Movie/VievMoviewsNowPlaying" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Peliculas Actuales</span>
           </a>
-          <a href="#" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
+          <a href="<?php echo FRONT_ROOT?>Movie/VievMoviewsListing" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Cartelara</span>
           </a>
 
         </div>
-
+<?php } ?>
 <?php if($user === false) : ?>
 
         <div class='flex flex-col lg:justify-end lg:flex-row text-center items-center px-5 lg:px-0 border-0 border-t-2 lg:border-t-0 my-2 mx-8 lg:my-0 lg:mx-0 '>
         
-          <a href="<?php echo FRONT_ROOT ?>Register/ViewRegister" class="px-3 py-2 lg:py-0 text-gray-400 items-center justify-center hover:text-white lg:border-r-2 lg:mr-2">
+          <a href="<?php echo FRONT_ROOT ?>Register" class="px-3 py-2 lg:py-0 text-gray-400 items-center justify-center hover:text-white lg:border-r-2 lg:mr-2">
             <span>Registrarse</span>
           </a>
-          <a href="<?php echo FRONT_ROOT ?>Login/ViewLogin" class="px-8 lg:px-5 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-800 hover:bg-white my-2 lg:my-0"><span>Inicia Sesion</span></a>
+          <a href="<?php echo FRONT_ROOT ?>Login" class="px-8 lg:px-5 py-2 leading-none border rounded text-white border-white hover:border-transparent hover:text-blue-800 hover:bg-white my-2 lg:my-0"><span>Inicia Sesion</span></a>
         </div>
 
 <?php else: ?>
@@ -67,10 +81,12 @@
                     <p class="text-sm text-white hover:text-gray-400">Cerrar Session</p>
                     <i class="fas fa-sign-out-alt text-white hover:text-gray-400"></i>
                 </a>
-                <a href="<?php echo FRONT_ROOT ?>Admin/ViewAdmin" class="mt-2 flex flex row items-center rounded-lg bg-transparent hover:text-gray-900 justify-between" href="#">
+                <?php if($type == 'admin'){ ?>
+                <a href="<?php echo FRONT_ROOT ?>Admin" class="mt-2 flex flex row items-center rounded-lg bg-transparent hover:text-gray-900 justify-between" href="#">
                     <p class="text-sm text-white hover:text-gray-400">Panel Admin</p>
                     <i class="fas fa-user-tie text-white mr-1 hover:text-gray-400"></i>
                 </a>
+                <?php } ?>
             </div>
           </div>
         </div>    

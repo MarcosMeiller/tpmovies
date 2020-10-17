@@ -24,9 +24,11 @@ class RolDAO implements IRol{
 		$newRol = null;
 		$this->retrieveData();
 		foreach ($this->rolList as $rol) {
-			$ID = $rol->getId();
-			if($ID === $id){
+			$Idrol = $rol->getId();
+			if($Idrol == $id){
 				 $newRol = $rol; 
+			}else{
+				
 			}
 		}
 		return $newRol;

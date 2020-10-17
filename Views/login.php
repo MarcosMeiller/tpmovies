@@ -1,13 +1,18 @@
 <?php namespace views;
     require 'head.php';
     
+    if($bg == 1){
+      $bgImg = "background-image: url('Views/img/bg-cinema3.jpg')";
+    }else{
+      $bgImg = "background-image: url('../Views/img/bg-cinema3.jpg')";
+    }
 ?>
-<div class='bgMovie' style="background-image: url('../Views/img/bg-cinema3.jpg')">
-<div class=' flex flex-col mx-auto min-h-full'>
+
+<div class='bgMovie flex flex-col mx-auto min-h-full' style="<?php echo $bgImg ?>">
 
 <?php require 'nav-session.php'; ?>
 
-    <div class="flex flex-grow container mx-auto px-4 w-full h-full items-center justify-center border-2 border-purple-500">
+    <div class="flex flex-grow container mx-auto px-4 w-full h-full items-center justify-center border-purple-500">
       
         <div class="w-full md:w-1/2 justify-center items-center">
           <div class=" break-words w-full mb-5 shadow-lg rounded-lg bg-gray-300 border-0">
@@ -105,7 +110,7 @@
             </div>
             
             <div class="w-1/2 text-right">
-              <a href="<?php echo FRONT_ROOT ?>Register/ViewRegister" class="text-gray-300 font-bold cursor-pointer"
+              <a href="<?php echo FRONT_ROOT ?>Register" class="text-gray-300 font-bold cursor-pointer"
                 ><small>SINO REGISTRATE</small></a
               >
             </div>
@@ -117,7 +122,7 @@
 
     <?php require 'footer-session.php';?>
 
-  </div>
+  
 </div>
   </body>
 

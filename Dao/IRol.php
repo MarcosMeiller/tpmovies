@@ -1,7 +1,7 @@
 <?php 
 namespace Dao;
 
-use model\Rol as Rol;
+use Models\Rol as Rol;
 
 interface IRol{ 
 	function add(Rol $newRol);

@@ -10,7 +10,7 @@
     <meta name="author" content="NUÑEZ - GELLER">
     <meta name="description" content="TP MoviePass UTN 2020">
 
-    <!--<link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" type="text/css" />-->
+    <link href="https://unpkg.com/tailwindcss@^1.0/dist/tailwind.min.css" rel="stylesheet" type="text/css" />
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,500&display=swap" rel="stylesheet"/>    
 
@@ -43,9 +43,7 @@
             
 
             /* Full height */
-            height: 100% !important;
-            
-
+            /*height: 100% !important;*/
             /* Center and scale the image nicely */
             background-position: center center !important;
             background-repeat: no-repeat !important;

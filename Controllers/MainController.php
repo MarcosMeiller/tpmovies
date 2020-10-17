@@ -2,7 +2,8 @@
 
     class MainController
     {
-        public static function Welcome($message = "")
+
+        public static function Index($message = "")
         {
             require_once(VIEWS_PATH."welcome.php");
         } 
@@ -10,5 +11,6 @@
         public function Init($message=''){
             header("Location: /tpmovies/");
         }
+
     }
 ?>

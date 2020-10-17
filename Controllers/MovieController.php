@@ -91,6 +91,11 @@ class MovieController
         require_once(VIEWS_PATH."moviesnowp.php");
     }
 
+    public function VievMoviewsListing(){
+        
+        require_once(VIEWS_PATH."movieslistings.php");
+    }
+
 
     public function ViewMoviewsAdmin($message = "")
     {
