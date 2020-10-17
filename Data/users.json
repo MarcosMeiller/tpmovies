@@ -6,7 +6,7 @@
         "email": "2014thekan@gmail.com",
         "username": "Char",
         "password": "123456",
-        "id_type": 0
+        "id_type": 1
     },
     {
         "id": "",
@@ -15,6 +15,15 @@
         "email": "char@char.com",
         "username": "Char",
         "password": "123456",
-        "id_type": 0
+        "id_type": 1
+    },
+    {
+        "id": "",
+        "name": "pepe",
+        "lastname": "pepe",
+        "email": "pepe@gmail.com",
+        "username": "pepe",
+        "password": "123456",
+        "id_type": 1
     }
 ]

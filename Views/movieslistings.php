@@ -1,5 +1,5 @@
 <?php namespace views;
-
+/*
 $moviesdb = file_get_contents(API_HOST.'/movie/now_playing?api_key='.API_KEY.'&language='.LANG.'&page=1');
 $movies = json_decode($moviesdb,true)['results'];
 ?>
@@ -9,7 +9,8 @@ $movies = json_decode($moviesdb,true)['results'];
     exit;
 ?>
 </pre>
-
+*/
+?>
 
 <div class='bgMovie' style="background-image: url('Views/img/bg-cinema3.jpg')">
     <div class='flex flex-col min-h-full'>
@@ -23,7 +24,7 @@ $movies = json_decode($moviesdb,true)['results'];
        <div class="inline-block relative w-64">
           <p>CARTELERA</p>
         </div>
-
+            
     
         </div>
     </div>

@@ -15,10 +15,10 @@ class GenreDao implements IGenre{
 	}
 
 	public function getAll(){
-		$genres = $this->retrieveData();
+		$this->retrieveData();
 		$size = 0;
-		if($genres !== null){
-			$size = count($genres);
+		if($this->genreList !== []){
+			$size = 1;
 		}
 		if($size === 0 ){
             $this->retrieveDataFromAPI();

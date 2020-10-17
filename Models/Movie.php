@@ -2,80 +2,119 @@
 
 namespace models;
 
-use Models\Genre as Genre;
-
-class Movie extends Genre{
+class Movie{
     private $id;
-    private $name;
-    private $genre;
-    private $duration;
-    private $direct;
-    private $description;
-    private $imageUrl;
-    
+    private $id_Movie;
+    private $title;
+    private $genres_id;
+    private $overview;
+    private $poster_Path;
+    private $backdrop;
+    private $adult;
+    private $language;
+    private $original_language;
+    private $release_date;
 
-    function __construct($id,$name,$genre,$duration,$direct,$description,$imageUrl){
+    public function __construct($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date){
         $this->id = $id;
-        $this->name = $name;
-        $this->genre = $genre;
-        $this->duration = $duration;
-        $this->direct = $direct;
-        $this->description = $description;
-        $this->$imageUrl = $imageUrl;    
+        $this->id_Movie = $id_Movie;
+        $this->title = $title;
+        $this->genres_id = $genres_id;
+        $this->overview = $overview;
+        $this->poster_Path = $poster_Path;
+        $this->backdrop = $backdrop;
+        $this->adult = $adult;
+        $this->language = $language;
+        $this->original_language = $original_language;
+        $this->release_date = $release_date;
+  
     }
 
-    public function getId($id){
+    public function getId(){
         return $this->id;
     }
 
-    public function getName() {
-        return  $this->name;
+    public function getId_Movie(){
+        return $this->id_Movie;
+    }
+    public function getTitle() {
+        return  $this->title;
         }
-    public function getGenre() {
-        return $this->genre;
+    public function getGenre_Id() {
+        return $this->genres_id;
         
         }
-    public function getDuration() {
-        return $this->duration;
-          
-         }
-    public function getDirect() {
-        return $this->direct;
-         
-            }
-    public function getDescription() {
-        return $this->description;
+
+    public function getOverview() {
+        return $this->overview;
          
         }
-    public function getImageUrl() {
-        return $this->imageUrl;
-             
+ 
+    public function getPoster_Path(){
+        return $this->poster_Path;
     }
-    
 
-    public function setName($name){
-        $this->name = $name;
+    public function getBackdrop(){
+        return $this->backdrop;
     }
-    public function setGenre($genre){
-        $this->genre = $genre;
+
+    public function getAdult(){
+        return $this->adult;
     }
-    
-    public function setDni($dni){
-        $this->dni = $dni;
+
+    public function getLanguage(){
+        return $this->language;
     }
-    public function setDirect($direct){
-        $this->direct = $direct;
+
+    public function getOriginal_Language(){
+        return $this->original_language;
     }
-    public function setDescription($description){
-        $this->description = $description;
+
+    public function getRelease_date(){
+        return $this->release_date;
     }
 
     public function setId($id){
         $this->id = $id;
     }
 
-    public function setImage($imageUrl){
-        $this->imageUrl = $imageUrl;
+    public function setId_Movie($id_Movie){
+        $this->id_Movie = $id_Movie;
+    }
+
+    public function setTitle($title){
+        $this->title = $title;
+    }
+    public function setGenre_Id($genres_id){
+        $this->genres_id = $genres_id;
+    }
+
+    public function setOverview($overview){
+        $this->overview = $overview;
+    }
+
+    public function setPoster_Path($poster_Path){
+        $this->poster_Path = $poster_Path;
+    }
+
+    public function setBackdrop($backdrop){
+        $this->backdrop = $backdrop;
+    }
+
+    public function setAdult($adult){
+        $this->adult = $adult;
+    }
+
+    public function setLanguage($language){
+         $this->language = $language;
+    }
+
+    public function setOriginal_Language($original_language){
+        $this->original_language = $original_language;
+    }
+
+    public function setRelease_date($release_date){
+        $this->release_date = $release_date;
     }
 }
 

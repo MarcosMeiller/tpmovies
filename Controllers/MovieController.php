@@ -20,12 +20,12 @@ class MovieController
                 $this->dao->add($movie);
             }
             if($movie == null){
-                $this->ViewMovies("error al buscar el genero.");
+                $this->ViewMovies("error al buscar la pelicula.");
             }
         }
     }
 
-    public function addMovie($id,$name,$genre,$duration,$direct,$description){
+    /*public function addMovie($id,$id_Movie,$title,$genres_id,$duration,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $movie = $this->dao->search($id);
             if($movie !== null){
@@ -33,7 +33,7 @@ class MovieController
             }
             
             try{
-                $newMovie = new Movie($id,$name,$genre,$duration,$direct,$description);
+                $newMovie = new Movie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date);
                 $this->dao->add($newMovie);
                 $this->ViewMovies("Agregado con exito");
             }catch(Exception $e){
@@ -42,7 +42,7 @@ class MovieController
         }
     }
 
-    public function updateMovie($id,$name,$genre,$duration,$direct,$description){
+    public function updateMovie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
             if($cinema == null){
@@ -50,7 +50,7 @@ class MovieController
             }
             
             try{
-                $newMovie = new Movie($id,$name,$genre,$duration,$direct,$description);
+                $newMovie = new Movie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date);
                 $this->dao->update($newMovie);
                 $this->ViewMovies("Modificado con exito");
             }catch(Exception $e){
@@ -74,7 +74,7 @@ class MovieController
             }
         }
     }
-    
+    */
     /*public function loadMovie(){
         llamar api
         $arrayMovies = array();
@@ -85,6 +85,12 @@ class MovieController
 
     }*/
 
+    public function getForGenre($genre){
+            if ($_SERVER["REQUEST_METHOD"] == "POST") {
+                $genreList = $this->dao->getForGenre($genre);
+        }
+
+    }
     
     public function VievMoviewsNowPlaying(){
         $genresList = $this->gDao->getAll();
@@ -92,16 +98,17 @@ class MovieController
     }
 
     public function VievMoviewsListing(){
-        
+        $movieList = $this->dao->getAll();
         require_once(VIEWS_PATH."movieslistings.php");
     }
 
 
-    public function ViewMoviewsAdmin($message = "")
+   /* public function ViewMoviewsAdmin($message = "")
     {
-        $cinemasList = $this->dao->getAll();
+        $movieList = $this->dao->getAll();
         require_once(VIEWS_PATH_ADMIN."/movieslamb.php");
-    }        
+    }
+    */        
 }
 
 
