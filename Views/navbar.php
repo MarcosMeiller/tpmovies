@@ -12,13 +12,14 @@
 
     }
 
-/*
-  if($isAdmin){
-    echo "si";
-  }else{
-    echo "no";
-  }
- */   
+    echo "<script type='text/javascript'>
+
+    function soon() {
+        toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('Proximamente', '', {timeOut: 2000});
+    }
+
+    
+    </script>";
 
 ?>
 
@@ -46,10 +47,10 @@
           <a href="<?php echo FRONT_ROOT?>Main/Init" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Inicio</span>
           </a>
-          <a href="<?php echo FRONT_ROOT?>Movie/VievMoviewsNowPlaying" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
+          <a href="<?php echo FRONT_ROOT?>Movie/MoviesNowPlaying" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Peliculas Actuales</span>
           </a>
-          <a href="<?php echo FRONT_ROOT?>Movie/VievMoviewsListing" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
+          <a onclick="soon()" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
             <span>Cartelara</span>
           </a>
 

@@ -2,9 +2,9 @@
 namespace Dao;
 
 use Dao\IMovie as IMovie;
-use models\Movie as Movie;
+use Models\Movie as Movie;
 
-class movieDAO implements IMovie{
+class MovieDAO implements IMovie{
     private $movieList = array();
 
 	
@@ -14,15 +14,33 @@ class movieDAO implements IMovie{
 		$this->saveData();
 	}
 
-	public function getAll(){
+	public function getAll($id){
 		$this->retrieveData();
+	
 		$size = 0;
 		if($this->movieList !== []){
 			$size = 1;
 		}
 		if($size === 0 ){
             $this->retrieveDataFromAPI();
-        }
+		}
+		
+		if($id !== 0){
+
+			$moviesFilter = array();
+			$aux2;
+			
+			foreach($this->movieList as $movie){
+				$array_ids = $movie->getGenre_Id();
+				foreach($array_ids as $genId){
+					if($genId == $id){
+						$moviesFilter[] = $movie;
+					}
+					}
+				}
+				
+			$this->movieList = $moviesFilter;	
+		}
 		return $this->movieList;
 	}
 
@@ -159,6 +177,20 @@ class movieDAO implements IMovie{
 			}
 		
 		return $movielistForGenre;
+	}
+
+	public function getNamesGenres($genresList,$arrayIds){
+		
+		$namesGenres = array();
+
+		foreach($arrayIds as $id){
+			foreach($genresList as $genre){
+				if($id === $genre->getId()){
+					$namesGenres[] = $genre->getName();
+				}
+			}
+		}
+		return $namesGenres;
 	}
 }
 

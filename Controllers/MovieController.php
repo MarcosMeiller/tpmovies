@@ -1,7 +1,7 @@
 <?php namespace Controllers;
 
 Use Models\Movie as Movie;
-Use Dao\movieDAO as movieDAO;
+Use Dao\MovieDAO as movieDAO;
 Use Dao\GenreDAO as genreDAO;
 
 class MovieController
@@ -92,15 +92,20 @@ class MovieController
 
     }
     
-    public function VievMoviewsNowPlaying(){
+    public function MoviesNowPlaying($id = 0){
+        $_SESSION['id'] = $id;
         $genresList = $this->gDao->getAll();
+
+        $moviesList = $this->dao->getAll($id);
         require_once(VIEWS_PATH."moviesnowp.php");
     }
 
+
+    /*
     public function VievMoviewsListing(){
-        $movieList = $this->dao->getAll();
+        $moviesList = $this->dao->getAll();
         require_once(VIEWS_PATH."movieslistings.php");
-    }
+    }/*
 
 
    /* public function ViewMoviewsAdmin($message = "")

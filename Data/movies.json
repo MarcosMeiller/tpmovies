@@ -135,22 +135,6 @@
     },
     {
         "id": 9,
-        "id_movie": 613504,
-        "title": "After: en mil pedazos",
-        "genres_id": [
-            10749,
-            18
-        ],
-        "overview": "Ha pasado el tiempo, y Hardin todav\u00eda no se sabe si es realmente el chico profundo y reflexivo del que Tessa se enamor\u00f3, o ha sido un extra\u00f1o todo este tiempo. Ella quiere alejarse, pero no es tan f\u00e1cil. Tessa se ha centrado en sus estudios y comienza a trabajar como becaria en Vance Publishing. All\u00ed conoce a Trevor, un nuevo y atractivo compa\u00f1ero de trabajo que es exactamente el tipo de persona con la que deber\u00eda estar. Pero Hardin sabe que cometi\u00f3 un error, posiblemente el m\u00e1s grande de su vida y quiere corregir sus errores y vencer a sus demonios... Secuela de la pel\u00edcula 'After'.",
-        "poster_Path": "\/3k4TvOWxJZyeMJtbjHQELKIEhpb.jpg",
-        "backdrop": "\/r5srC0cqU36n38azFnCyReEksiR.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-02"
-    },
-    {
-        "id": 10,
         "id_movie": 446893,
         "title": "Trolls 2 Gira mundial",
         "genres_id": [
@@ -168,6 +152,22 @@
         "language": "es-ar",
         "original_language": "en",
         "release_date": "2020-03-12"
+    },
+    {
+        "id": 10,
+        "id_movie": 613504,
+        "title": "After: en mil pedazos",
+        "genres_id": [
+            10749,
+            18
+        ],
+        "overview": "Ha pasado el tiempo, y Hardin todav\u00eda no se sabe si es realmente el chico profundo y reflexivo del que Tessa se enamor\u00f3, o ha sido un extra\u00f1o todo este tiempo. Ella quiere alejarse, pero no es tan f\u00e1cil. Tessa se ha centrado en sus estudios y comienza a trabajar como becaria en Vance Publishing. All\u00ed conoce a Trevor, un nuevo y atractivo compa\u00f1ero de trabajo que es exactamente el tipo de persona con la que deber\u00eda estar. Pero Hardin sabe que cometi\u00f3 un error, posiblemente el m\u00e1s grande de su vida y quiere corregir sus errores y vencer a sus demonios... Secuela de la pel\u00edcula 'After'.",
+        "poster_Path": "\/3k4TvOWxJZyeMJtbjHQELKIEhpb.jpg",
+        "backdrop": "\/r5srC0cqU36n38azFnCyReEksiR.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-09-02"
     },
     {
         "id": 11,
@@ -224,23 +224,43 @@
     },
     {
         "id": 14,
-        "id_movie": 499932,
-        "title": "El diablo a todas horas",
+        "id_movie": 635302,
+        "title": "Kimetsu no Yaiba Movie: Mugen Ressha-hen",
         "genres_id": [
-            80,
-            18,
-            53
+            16,
+            28,
+            36,
+            12,
+            14,
+            18
         ],
-        "overview": "Ambientada en las zonas rurales del sur de Ohio y Virginia Occidental,  sigue a un elenco de personajes cautivadores y extra\u00f1os desde el final de la Segunda Guerra Mundial hasta la d\u00e9cada de 1960.",
-        "poster_Path": "\/rIw4e4ZRMznLj21mASBcXIUuOsN.jpg",
-        "backdrop": "\/rUeqBuNDR9zN6vZV9kpEFMtQm0E.jpg",
+        "overview": "Enmu, liberado recientemente de las c\u00e9lulas de Muzan, se propone atacar un misterioso tren en movimiento. En el curso del ataque, el demonio consume muchos pasajeros. Tanjiro Kamado viene al rescate, pero este tren en movimiento lleva m\u00e1s de un demonio desagradable para luchar.",
+        "poster_Path": "\/m9cn5mhW519QKr1YGpGxNWi98VJ.jpg",
+        "backdrop": "\/xoqr4dMbRJnzuhsWDF3XNHQwJ9x.jpg",
         "adult": false,
         "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-11"
+        "original_language": "ja",
+        "release_date": "2020-10-16"
     },
     {
         "id": 15,
+        "id_movie": 597398,
+        "title": "Away",
+        "genres_id": [
+            12,
+            16,
+            14
+        ],
+        "overview": "Despu\u00e9s de sufrir un accidente a\u00e9reo en una isla misteriosa, un muchacho emprende un viaje \u00e9pico a trav\u00e9s de bosques, desiertos y monta\u00f1as tratando de escapar de la sombra de un enorme esp\u00edritu oscuro.",
+        "poster_Path": "\/c59eplVELdwrUfGBUAZVin3HfaL.jpg",
+        "backdrop": "\/ccwPF5jN09S4Cz7u6qs3T2yKOpO.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2019-11-15"
+    },
+    {
+        "id": 16,
         "id_movie": 627290,
         "title": "Antebellum",
         "genres_id": [
@@ -255,60 +275,7 @@
         "release_date": "2020-09-02"
     },
     {
-        "id": 16,
-        "id_movie": 479259,
-        "title": "I Am Not a Bird",
-        "genres_id": [
-            18,
-            53
-        ],
-        "overview": "Margaret est\u00e1 haciendo todo lo que est\u00e1 a su alcance para olvidar su hogar, y la vida nocturna ex\u00f3tica de Tokio, repleta de bebidas, drogas y hoteles de amor de tres horas, le permite mantener sus demonios a raya. Trabajando como especialista inglesa en Air-Pro Stewardess Training Institute durante el d\u00eda y perdi\u00e9ndose en un olvido sexual y narcotizado por la noche, Margaret reprime recuerdos de su dolorosa infancia en Canad\u00e1 y el descenso de su hermano mayor Frank a la locura. -an\u00f3nimo",
-        "poster_Path": "\/vQgXwuJrlpzGDI8169tRQRy71Nv.jpg",
-        "backdrop": "\/wUP0KIAXcRevjjJpoSKT7LLhiaK.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-18"
-    },
-    {
         "id": 17,
-        "id_movie": 635302,
-        "title": "Kimetsu no Yaiba Movie: Mugen Ressha-hen",
-        "genres_id": [
-            28,
-            12,
-            16,
-            18,
-            14,
-            36
-        ],
-        "overview": "Enmu, liberado recientemente de las c\u00e9lulas de Muzan, se propone atacar un misterioso tren en movimiento. En el curso del ataque, el demonio consume muchos pasajeros. Tanjiro Kamado viene al rescate, pero este tren en movimiento lleva m\u00e1s de un demonio desagradable para luchar.",
-        "poster_Path": "\/m9cn5mhW519QKr1YGpGxNWi98VJ.jpg",
-        "backdrop": "\/xoqr4dMbRJnzuhsWDF3XNHQwJ9x.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "ja",
-        "release_date": "2020-10-16"
-    },
-    {
-        "id": 18,
-        "id_movie": 530723,
-        "title": "La estafa (Bad Education)",
-        "genres_id": [
-            35,
-            18,
-            10770
-        ],
-        "overview": "Frank Tassone, uno de los superintendentes m\u00e1s destacados del distrito escolar de Roslyn en Nueva York se desvive a diario para que la educaci\u00f3n de sus alumnos sea la mejor. Pero de forma paralela, este se lucra con dinero p\u00fablico para llevar una vida llena de lujos. As\u00ed, Tassone y su personal, amigos y familiares, se convierten en los principales sospechosos del mayor esc\u00e1ndalo de malversaci\u00f3n de fondos ocurrido en una escuela p\u00fablica de toda la historia de los Estados Unidos.",
-        "poster_Path": "\/57H8KjN5qHYJjaq5SaUPsuVypPh.jpg",
-        "backdrop": "\/kriOlxu4KVEjd0ZaY3dW7YYyP4z.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-23"
-    },
-    {
-        "id": 19,
         "id_movie": 659986,
         "title": "The Owners",
         "genres_id": [
@@ -325,7 +292,7 @@
         "release_date": "2020-08-27"
     },
     {
-        "id": 20,
+        "id": 18,
         "id_movie": 501979,
         "title": "Bill & Ted Face the Music",
         "genres_id": [
@@ -340,5 +307,38 @@
         "language": "es-ar",
         "original_language": "en",
         "release_date": "2020-08-27"
+    },
+    {
+        "id": 19,
+        "id_movie": 499932,
+        "title": "El diablo a todas horas",
+        "genres_id": [
+            80,
+            18,
+            53
+        ],
+        "overview": "Ambientada en las zonas rurales del sur de Ohio y Virginia Occidental,  sigue a un elenco de personajes cautivadores y extra\u00f1os desde el final de la Segunda Guerra Mundial hasta la d\u00e9cada de 1960.",
+        "poster_Path": "\/rIw4e4ZRMznLj21mASBcXIUuOsN.jpg",
+        "backdrop": "\/rUeqBuNDR9zN6vZV9kpEFMtQm0E.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-09-11"
+    },
+    {
+        "id": 20,
+        "id_movie": 479259,
+        "title": "I Am Not a Bird",
+        "genres_id": [
+            18,
+            53
+        ],
+        "overview": "Margaret est\u00e1 haciendo todo lo que est\u00e1 a su alcance para olvidar su hogar, y la vida nocturna ex\u00f3tica de Tokio, repleta de bebidas, drogas y hoteles de amor de tres horas, le permite mantener sus demonios a raya. Trabajando como especialista inglesa en Air-Pro Stewardess Training Institute durante el d\u00eda y perdi\u00e9ndose en un olvido sexual y narcotizado por la noche, Margaret reprime recuerdos de su dolorosa infancia en Canad\u00e1 y el descenso de su hermano mayor Frank a la locura. -an\u00f3nimo",
+        "poster_Path": "\/vQgXwuJrlpzGDI8169tRQRy71Nv.jpg",
+        "backdrop": "\/wUP0KIAXcRevjjJpoSKT7LLhiaK.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-09-18"
     }
 ]

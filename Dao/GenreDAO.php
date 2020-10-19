@@ -109,12 +109,12 @@ class GenreDao implements IGenre{
         return $jsonFilePath;
 	}
 	
-	/*public function getForGenre($arrayMovie,$Arraygenre){
+	public function getForGenre($arrayMovie,$Arraygenre){
 		$this->retrieveData();
 		$aux = $arrayMovie;
 		$searched = array();
 		$aux2;
-		fore ach($arrayGenre as $genre){
+		foreach($arrayGenre as $genre){
 			foreach($this->aux as $movie){
 				$aux2 = search($genre,$movie->getGenre());
 					if($aux2 !== null && array_search($movie,$searched)){
@@ -124,7 +124,7 @@ class GenreDao implements IGenre{
 			}
 		
 		return $searched;
-	}*/
+	}
 }
 
 
