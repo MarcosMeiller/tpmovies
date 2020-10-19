@@ -6,9 +6,7 @@
       $user = false;
     }else{
       $user = $_SESSION["loggedUser"];
-      echo "ID USER : ";
-      echo $user->getId_Type();
-      echo "   - ver si realmente ese  usario tiene este tipo de id en el user.json";
+  
       if(isset($_SESSION["isAdmin"])){
         $type = $_SESSION["isAdmin"];
       }

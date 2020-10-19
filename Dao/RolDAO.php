@@ -27,8 +27,6 @@ class RolDAO implements IRol{
 			$Idrol = $rol->getId();
 			if($Idrol == $id){
 				 $newRol = $rol; 
-			}else{
-				
 			}
 		}
 		return $newRol;

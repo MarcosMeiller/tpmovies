@@ -23,15 +23,16 @@ class LoginController
                 $_SESSION['loggedUser'] = $newUser;
                 
                 $user = $_SESSION["loggedUser"];
-                $id = $user->getId_Type();
-                $Rol = $this->rol->search($id);
+                $_SESSION["isAdmin"] = $user->getId_Type();
+                //$id = $user->getId_Type();
+                /*$Rol = $this->rol->search($id);
                 if($Rol !== null){
                     $_SESSION['rol'] = $Rol;
                     $type = $Rol->getType();
                     if($type != null){
                           $_SESSION["isAdmin"] = $type;
                     }
-                }
+                }*/
                 header("Location: /tpmovies/");
             }
             else{

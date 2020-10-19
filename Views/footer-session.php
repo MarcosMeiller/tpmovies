@@ -16,7 +16,7 @@
                 </a>
                 <span class='text-white items-center'> - </span>
                 <a href="#" class="text-white hover:text-gray-400 text-sm md:font-semibold block py-1 px-3">
-                Marcos Miller
+                Marcos Meiller
                 </a>
           </div>
         </div>

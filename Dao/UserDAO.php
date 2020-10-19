@@ -70,7 +70,8 @@ class UserDAO implements IUser{
 			$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 			foreach ($arrayToDecode as $valueArray) {
-				$user = new User($valueArray['id'],$valueArray['username'],$valueArray['name'],$valueArray['lastname'],$valueArray['email'],$valueArray['password']);		
+				$user = new User($valueArray['id'],$valueArray['username'],$valueArray['name'],$valueArray['lastname'],$valueArray['email'],$valueArray['password']);
+				$user->setId_Type($valueArray['id_type']);		
 				array_push($this->userList, $user);
 			}
 		}
