@@ -50,6 +50,23 @@
     },
     {
         "id": 4,
+        "id_movie": 581392,
+        "title": "Train To Busan 2: Peninsula",
+        "genres_id": [
+            28,
+            27,
+            53
+        ],
+        "overview": "Despu\u00e9s de que la infecci\u00f3n que se extendi\u00f3 hace 4 a\u00f1os, solo algunas partes de Corea del Sur permanecen resguardadas, aunque la Pen\u00ednsula de Busan es la \u00fanica parte en donde pueden buscar refugio los coreanos, muchos a\u00fan mantienen la esperanza de ser rescatados por ayuda internacional.",
+        "poster_Path": "\/ew1lAU8yV66JbivBU1Zh4Wj4pOB.jpg",
+        "backdrop": "\/gEjNlhZhyHeto6Fy5wWy5Uk3A9D.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "ko",
+        "release_date": "2020-07-15"
+    },
+    {
+        "id": 5,
         "id_movie": 539885,
         "title": "Ava",
         "genres_id": [
@@ -65,23 +82,6 @@
         "language": "es-ar",
         "original_language": "en",
         "release_date": "2020-07-02"
-    },
-    {
-        "id": 5,
-        "id_movie": 581392,
-        "title": "Train To Busan 2: Peninsula",
-        "genres_id": [
-            28,
-            27,
-            53
-        ],
-        "overview": "Despu\u00e9s de que la infecci\u00f3n que se extendi\u00f3 hace 4 a\u00f1os, solo algunas partes de Corea del Sur permanecen resguardadas, aunque la Pen\u00ednsula de Busan es la \u00fanica parte en donde pueden buscar refugio los coreanos, muchos a\u00fan mantienen la esperanza de ser rescatados por ayuda internacional.",
-        "poster_Path": "\/ew1lAU8yV66JbivBU1Zh4Wj4pOB.jpg",
-        "backdrop": "\/gEjNlhZhyHeto6Fy5wWy5Uk3A9D.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "ko",
-        "release_date": "2020-07-15"
     },
     {
         "id": 6,
@@ -188,42 +188,6 @@
     },
     {
         "id": 12,
-        "id_movie": 531876,
-        "title": "The Outpost",
-        "genres_id": [
-            28,
-            18,
-            36,
-            10752
-        ],
-        "overview": "Narra la historia real de una de las batallas m\u00e1s duras que tuvo lugar durante la guerra de Afganist\u00e1n. Un peque\u00f1o equipo de 53 soldados estadounidenses tuvo que enfrentarse contra m\u00e1s de 400 combatientes talibanes durante la operaci\u00f3n llamada \u201cLibertad duradera\u201d... Adaptaci\u00f3n del best seller escrito por el corresponsal de guerra Jake Tapper",
-        "poster_Path": "\/hPkqY2EMqWUnFEoedukilIUieVG.jpg",
-        "backdrop": "\/n1RohH2VoK1CdVI2fXvcP19dSlm.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-06-24"
-    },
-    {
-        "id": 13,
-        "id_movie": 413518,
-        "title": "Pinocho",
-        "genres_id": [
-            12,
-            18,
-            14,
-            10751
-        ],
-        "overview": "Adaptaci\u00f3n de la cl\u00e1sica historia del mu\u00f1eco de madera llamado Pinocho, que desea ser un ni\u00f1o de carne y hueso.",
-        "poster_Path": "\/7XvaQsCoDW1x8CxPiv7AzQ5OUzX.jpg",
-        "backdrop": "\/AdqOBPw4PdtzOcfEuQuZ8MNeTKb.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "it",
-        "release_date": "2019-12-19"
-    },
-    {
-        "id": 14,
         "id_movie": 635302,
         "title": "Kimetsu no Yaiba Movie: Mugen Ressha-hen",
         "genres_id": [
@@ -243,7 +207,7 @@
         "release_date": "2020-10-16"
     },
     {
-        "id": 15,
+        "id": 13,
         "id_movie": 597398,
         "title": "Away",
         "genres_id": [
@@ -260,22 +224,43 @@
         "release_date": "2019-11-15"
     },
     {
-        "id": 16,
-        "id_movie": 627290,
-        "title": "Antebellum",
+        "id": 14,
+        "id_movie": 531876,
+        "title": "The Outpost",
         "genres_id": [
-            27
+            28,
+            18,
+            36,
+            10752
         ],
-        "overview": "Ver\u00f3nica es una escritora de \u00e9xito que queda atrapada en una terror\u00edfica realidad cuyo misterio debe resolver antes de que sea demasiado tarde.",
-        "poster_Path": "\/kxekf7Ufxhubi00h02oWq6gbkWX.jpg",
-        "backdrop": "\/pGqBDYycGWsMYc57sYv5M9GAQoW.jpg",
+        "overview": "Narra la historia real de una de las batallas m\u00e1s duras que tuvo lugar durante la guerra de Afganist\u00e1n. Un peque\u00f1o equipo de 53 soldados estadounidenses tuvo que enfrentarse contra m\u00e1s de 400 combatientes talibanes durante la operaci\u00f3n llamada \u201cLibertad duradera\u201d... Adaptaci\u00f3n del best seller escrito por el corresponsal de guerra Jake Tapper",
+        "poster_Path": "\/hPkqY2EMqWUnFEoedukilIUieVG.jpg",
+        "backdrop": "\/n1RohH2VoK1CdVI2fXvcP19dSlm.jpg",
         "adult": false,
         "language": "es-ar",
         "original_language": "en",
-        "release_date": "2020-09-02"
+        "release_date": "2020-06-24"
     },
     {
-        "id": 17,
+        "id": 15,
+        "id_movie": 413518,
+        "title": "Pinocho",
+        "genres_id": [
+            12,
+            18,
+            14,
+            10751
+        ],
+        "overview": "Adaptaci\u00f3n de la cl\u00e1sica historia del mu\u00f1eco de madera llamado Pinocho, que desea ser un ni\u00f1o de carne y hueso.",
+        "poster_Path": "\/7XvaQsCoDW1x8CxPiv7AzQ5OUzX.jpg",
+        "backdrop": "\/AdqOBPw4PdtzOcfEuQuZ8MNeTKb.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "it",
+        "release_date": "2019-12-19"
+    },
+    {
+        "id": 16,
         "id_movie": 659986,
         "title": "The Owners",
         "genres_id": [
@@ -292,7 +277,40 @@
         "release_date": "2020-08-27"
     },
     {
+        "id": 17,
+        "id_movie": 590223,
+        "title": "Love and Monsters",
+        "genres_id": [
+            12,
+            878,
+            10749,
+            35
+        ],
+        "overview": "Un mundo post-apocal\u00edptico. Joel Dawson (Dylan O\u2019Brien) es un joven que deber\u00e1 luchar contra monstruos, con tal de reunirse con Aimee (Jessica Henwick), su amor de la escuela secundaria. En el camino, tendr\u00e1 que desafiar peligrosos animales mutantes y encontrar\u00e1 amistades inesperadas y tambi\u00e9n algunos enemigos.",
+        "poster_Path": "\/r4Lm1XKP0VsTgHX4LG4syAwYA2I.jpg",
+        "backdrop": "\/lA5fOBqTOQBQ1s9lEYYPmNXoYLi.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-10-16"
+    },
+    {
         "id": 18,
+        "id_movie": 627290,
+        "title": "Antebellum",
+        "genres_id": [
+            27
+        ],
+        "overview": "Ver\u00f3nica es una escritora de \u00e9xito que queda atrapada en una terror\u00edfica realidad cuyo misterio debe resolver antes de que sea demasiado tarde.",
+        "poster_Path": "\/kxekf7Ufxhubi00h02oWq6gbkWX.jpg",
+        "backdrop": "\/pGqBDYycGWsMYc57sYv5M9GAQoW.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-09-02"
+    },
+    {
+        "id": 19,
         "id_movie": 501979,
         "title": "Bill & Ted Face the Music",
         "genres_id": [
@@ -309,7 +327,7 @@
         "release_date": "2020-08-27"
     },
     {
-        "id": 19,
+        "id": 20,
         "id_movie": 499932,
         "title": "El diablo a todas horas",
         "genres_id": [
@@ -324,21 +342,5 @@
         "language": "es-ar",
         "original_language": "en",
         "release_date": "2020-09-11"
-    },
-    {
-        "id": 20,
-        "id_movie": 479259,
-        "title": "I Am Not a Bird",
-        "genres_id": [
-            18,
-            53
-        ],
-        "overview": "Margaret est\u00e1 haciendo todo lo que est\u00e1 a su alcance para olvidar su hogar, y la vida nocturna ex\u00f3tica de Tokio, repleta de bebidas, drogas y hoteles de amor de tres horas, le permite mantener sus demonios a raya. Trabajando como especialista inglesa en Air-Pro Stewardess Training Institute durante el d\u00eda y perdi\u00e9ndose en un olvido sexual y narcotizado por la noche, Margaret reprime recuerdos de su dolorosa infancia en Canad\u00e1 y el descenso de su hermano mayor Frank a la locura. -an\u00f3nimo",
-        "poster_Path": "\/vQgXwuJrlpzGDI8169tRQRy71Nv.jpg",
-        "backdrop": "\/wUP0KIAXcRevjjJpoSKT7LLhiaK.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-18"
     }
 ]

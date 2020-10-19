@@ -93,19 +93,19 @@ class MovieController
     }
     
     public function MoviesNowPlaying($id = 0){
+        if(isset($_SESSION['loggedUser'])){
+
         $_SESSION['id'] = $id;
         $genresList = $this->gDao->getAll();
-
         $moviesList = $this->dao->getAll($id);
         require_once(VIEWS_PATH."moviesnowp.php");
+        
+        
+        }else{
+            header("Location: /tpmovies/");
+        }
     }
 
-
-    /*
-    public function VievMoviewsListing(){
-        $moviesList = $this->dao->getAll();
-        require_once(VIEWS_PATH."movieslistings.php");
-    }/*
 
 
    /* public function ViewMoviewsAdmin($message = "")

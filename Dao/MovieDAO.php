@@ -21,19 +21,20 @@ class MovieDAO implements IMovie{
 		if($this->movieList !== []){
 			$size = 1;
 		}
-		if($size === 0 ){
+		if($size === 0){
             $this->retrieveDataFromAPI();
 		}
 		
-		if($id !== 0){
+		if($id !== 0 && $id !== "TODAS"){
 
 			$moviesFilter = array();
-			$aux2;
+			$array_ids = array();
 			
 			foreach($this->movieList as $movie){
 				$array_ids = $movie->getGenre_Id();
 				foreach($array_ids as $genId){
 					if($genId == $id){
+						
 						$moviesFilter[] = $movie;
 					}
 					}

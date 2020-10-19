@@ -9,6 +9,6 @@ define("VIEWS_PATH_ADMIN","Views/admin");
 define("API_HOST", 'https://api.themoviedb.org/3');
 define("API_KEY", '7897ed3551748666c2c1b414501d5ae4');
 define("LANG", 'es-AR');
-define("BASE_PATH_IMG", 'https://image.tmdb.org/t/p');
+define("BASE_PATH_IMG", 'https://image.tmdb.org/t/p/');
 
 ?>
