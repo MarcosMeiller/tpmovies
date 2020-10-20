@@ -14,31 +14,50 @@ class RegisterController
 
     public function RegisterUser($id,$userName,$name,$lastname,$email,$password,$passwordRepeat){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            if($password !== $passwordRepeat){
-                $this->Index("Las contraseñas no son iguales.",2);
-            }else{
-                $user = $this->dao->search($email);
-                if($user !== null){
-                    $this->Index("El email ya se encuentra registrado.",2);
+
+            $userName = $this->test_input($userName);
+            $name = $this->test_input($name);
+            $lastname = $this->test_input($lastname);
+            $email = $this->test_input($email);
+            $password = $this->test_input($password);
+            $passwordRepeat = $this->test_input($passwordRepeat);
+          
+            if($userName && $name && $email && $password && $passwordRepeat && $lastname){
+
+                if($password !== $passwordRepeat){
+                    $this->Index("Las contraseñas no son iguales.",2);
                 }else{
-                    try{
-                    $newUser = new User($id,$userName,$name,$lastname,$email,$password);
-                    $this->dao->add($newUser);
                     $user = $this->dao->search($email);
                     if($user !== null){
-                        $_SESSION['loggedUser'] = $newUser;
-                        header("Location: /tpmovies/");
-                    }
-                    $this->Index("Error al intentar registrar cuenta.",2);
-                    }catch(Exception $e){
-                        $this->Index("Error al intentar crear cuenta.",2);
+                        $this->Index("El email ya se encuentra registrado.",2);
+                    }else{
+                        try{
+                        $newUser = new User($id,$userName,$name,$lastname,$email,$password);
+                        $this->dao->add($newUser);
+                        $user = $this->dao->search($email);
+                        if($user !== null){
+                            $_SESSION['loggedUser'] = $newUser;
+                            header("Location: /tpmovies/");
+                        }
+                        $this->Index("Error al intentar registrar cuenta.",2);
+                        }catch(Exception $e){
+                            $this->Index("Error al intentar crear cuenta.",2);
+                        }
                     }
                 }
-                
-                
+            }else{
+                $this->Index("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo",2);
             }
-            
         }
+    
+    }          
+    
+    
+    public function test_input($data) {
+            $data = trim($data);
+            $data = stripslashes($data);
+            $data = htmlspecialchars($data);
+            return $data;
     }
 
 

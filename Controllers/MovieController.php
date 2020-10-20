@@ -75,15 +75,12 @@ class MovieController
         }
     }
     */
-    /*public function loadMovie(){
-        llamar api
-        $arrayMovies = array();
-        foreach($arrayMovies as $movie){
-            $name = $movie.name;
-        }
-       
 
-    }*/
+    public function DetailsMovie($id){
+        $genresList = $this->gDao->getAll();
+        $movie = $this->dao->searchMovieID($id);
+        require_once(VIEWS_PATH."detailsMovie.php");
+    }
 
     public function getForGenre($genre){
             if ($_SERVER["REQUEST_METHOD"] == "POST") {
@@ -94,7 +91,24 @@ class MovieController
     
     public function MoviesNowPlaying($id = 0){
         if(isset($_SESSION['loggedUser'])){
+           
+            /*if(isset($_SESSION['returnID'])){
+                $id = $_SESSION['returnID'];
+            }else{
+                if(isset($_SESSION['id'])){
+                $_SESSION['id'] = $id;
+                }else{
+                    $_SESSION['id'] = 0;
+                }
 
+
+                Hacer otra funcion que llame a las peliuculas filtras y esta funcion llama a todas
+            }*/
+
+            if($_SESSION['id'] != 0){
+                $id = $_SESSION['id'];
+            }
+           
         $_SESSION['id'] = $id;
         $genresList = $this->gDao->getAll();
         $moviesList = $this->dao->getAll($id);
@@ -105,15 +119,7 @@ class MovieController
             header("Location: /tpmovies/");
         }
     }
-
-
-
-   /* public function ViewMoviewsAdmin($message = "")
-    {
-        $movieList = $this->dao->getAll();
-        require_once(VIEWS_PATH_ADMIN."/movieslamb.php");
-    }
-    */        
+ 
 }
 
 

@@ -60,6 +60,10 @@
             overflow-y: visible !important;
         }*/
 
+        .text-description{
+            min-height: 6rem !important;
+            max-height: 9rem !important;
+        }
 
     </style>
 </head>

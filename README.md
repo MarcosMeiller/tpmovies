@@ -1,8 +1,17 @@
-tareas para mi: hacer controler de genero,
-agregar modelo genero y sumarlo dentor de movie,
-dao de genero(hacer cuando este la api).
+# TP MOVIESPASS
 
+> Este proyecto pertenecer a una trabajo practico de la UTN
 
-array(movie1,movie2).
-array(genero1,genero2).
-movie(generos:tipo array horror, accion)--------generos( tipo string todos los generos).
+---
+
+### **Primera Revisión:**
+
+- [x] Administrar Cines (A- Item b, con dao en memoria)
+- [x] Consulta de películas actuales (C- Item a - get de la api)
+
+---
+
+### **Integrantes:**
+
+- Marcos Miller
+- Carlos Nuñez

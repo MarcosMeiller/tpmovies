@@ -116,6 +116,19 @@ class MovieDAO implements IMovie{
 
 	}
 
+	public function searchMovieID($id){
+
+		$newMovie = null;
+		$this->retrieveData();
+		foreach ($this->movieList as $movie) {
+			if($movie->getId_Movie() == $id){
+				 $newMovie = $movie; 
+			}
+		}
+		return $newMovie;
+
+	}
+
 	public function retrieveData(){
 		$this->movieList = array();
 
@@ -142,7 +155,6 @@ class MovieDAO implements IMovie{
         }else{
             $jsonFilePath = "../".$initialPath;
         }
-
         return $jsonFilePath;
 	}
 	

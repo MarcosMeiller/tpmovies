@@ -11,8 +11,7 @@ class CinemaController
         $this->dao = new CinemaDAO(); 
     }
   
-
-    
+    // agrega cine verificando previamente si existe
     public function addCinema($id,$name,$capacity,$address,$priceUnit){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
@@ -30,6 +29,7 @@ class CinemaController
         }
     }
 
+    // actualiza cine verificando si existe previamente
     public function updateCinema($id,$name,$capacity,$address,$priceUnit){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $cinema = $this->dao->search($id);
@@ -48,27 +48,23 @@ class CinemaController
         }
     }
 
+    // elimina cine por id
     public function deleteCinema($id){
-        //if ($_SERVER["REQUEST_METHOD"] == "POST") {
-           
             $cinema = $this->dao->search($id);
             if($cinema === null){
                 $this->Cinemas("El Cine no existe.","alert");
-            }
-            
+            }  
             try{
-             
                 $this->dao->delete($id);
                 $this->Cinemas("Eliminado con exito","success");
             }catch(Exception $e){
            
                 $this->Cinemas("Error al eliminar cine.","danger");
             }
-        //}
     }
 
-    public function Cinemas($message = "",$type= "")
-    {
+    // retorna todos los cines y carga la pantalla de amb cines
+    public function Cinemas($message = "",$type= ""){
         $cinemasList = $this->dao->getAll();
         if($message === '' && $type === ''){
             //unset($_SESSION['msjCinemas']);
