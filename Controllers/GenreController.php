@@ -28,13 +28,6 @@ class GenreControler
         }
     }
 
-    /*public function ControlListGenre(){
-        $genres = $this->dao->getAll();
-        if(count($genres) === 0){
-            $this->dao->retrieveDataFromAPI();
-        }
-    }*/
-
     public function deleteGenre($id){
            
             $genre = $this->dao->search($id);
@@ -50,9 +43,7 @@ class GenreControler
            
                 $this->ViewGenre("Error al eliminar Genero.","danger");
             }
-
     }
-
 
     
 }

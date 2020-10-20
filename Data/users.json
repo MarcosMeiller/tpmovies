@@ -10,15 +10,6 @@
     },
     {
         "id": "",
-        "name": "Carlos",
-        "lastname": "Nu\u00f1ez",
-        "email": "char@char.com",
-        "username": "Char",
-        "password": "123456",
-        "id_type": 1
-    },
-    {
-        "id": "",
         "name": "pepe",
         "lastname": "pepe",
         "email": "pepe@gmail.com",

@@ -31,7 +31,7 @@ class CinemaController
             }
         }
         else{
-            $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo",2);
+            $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
         }  
     }
     }
@@ -53,11 +53,11 @@ class CinemaController
                 $this->Cinemas("Modificado con exito","success");
 
             }catch(Exception $e){
-                $this->Cinemas("Error al modificar cine.");
+                $this->Cinemas("Error al modificar cine.","danger");
             }
         }
         else{
-            $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo",2);
+            $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
         }
     }
 
