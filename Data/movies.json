@@ -4,6 +4,7 @@
         "id_movie": 528085,
         "title": "2067",
         "genres_id": [
+            18,
             878,
             53
         ],
@@ -50,23 +51,37 @@
     },
     {
         "id": 4,
-        "id_movie": 581392,
-        "title": "Train To Busan 2: Peninsula",
+        "id_movie": 592350,
+        "title": "My Hero Academia: el despertar de los h\u00e9roes",
         "genres_id": [
             28,
-            27,
-            53
+            16
         ],
-        "overview": "Despu\u00e9s de que la infecci\u00f3n que se extendi\u00f3 hace 4 a\u00f1os, solo algunas partes de Corea del Sur permanecen resguardadas, aunque la Pen\u00ednsula de Busan es la \u00fanica parte en donde pueden buscar refugio los coreanos, muchos a\u00fan mantienen la esperanza de ser rescatados por ayuda internacional.",
-        "poster_Path": "\/ew1lAU8yV66JbivBU1Zh4Wj4pOB.jpg",
-        "backdrop": "\/gEjNlhZhyHeto6Fy5wWy5Uk3A9D.jpg",
+        "overview": "Un nuevo villano, llamado Nine, est\u00e1 buscando a Tomura Shigaraki. Para ello, decide atacar la isla de Nabut\u014d. Segunda pel\u00edcula de la serie anime \"My Hero Academia\".",
+        "poster_Path": "\/2KavuY24PpXBMQ2efbOknKaeYS.jpg",
+        "backdrop": "\/9guoVF7zayiiUq5ulKQpt375VIy.jpg",
         "adult": false,
         "language": "es-ar",
-        "original_language": "ko",
-        "release_date": "2020-07-15"
+        "original_language": "ja",
+        "release_date": "2019-12-20"
     },
     {
         "id": 5,
+        "id_movie": 718444,
+        "title": "Rogue",
+        "genres_id": [
+            28
+        ],
+        "overview": "Rogue es la historia de una peque\u00f1a unidad mercenaria de soldados que han sido contratados por el gobernador de un pa\u00eds africano para rescatar a su hija que ha sido secuestrada por una organizaci\u00f3n terrorista.",
+        "poster_Path": "\/uOw5JD8IlD546feZ6oxbIjvN66P.jpg",
+        "backdrop": "\/x4UkhIQuHIJyeeOTdcbZ3t3gBSa.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-08-20"
+    },
+    {
+        "id": 6,
         "id_movie": 539885,
         "title": "Ava",
         "genres_id": [
@@ -84,7 +99,24 @@
         "release_date": "2020-07-02"
     },
     {
-        "id": 6,
+        "id": 7,
+        "id_movie": 581392,
+        "title": "Train To Busan 2: Peninsula",
+        "genres_id": [
+            28,
+            27,
+            53
+        ],
+        "overview": "Despu\u00e9s de que la infecci\u00f3n que se extendi\u00f3 hace 4 a\u00f1os, solo algunas partes de Corea del Sur permanecen resguardadas, aunque la Pen\u00ednsula de Busan es la \u00fanica parte en donde pueden buscar refugio los coreanos, muchos a\u00fan mantienen la esperanza de ser rescatados por ayuda internacional.",
+        "poster_Path": "\/ew1lAU8yV66JbivBU1Zh4Wj4pOB.jpg",
+        "backdrop": "\/2nFzxaAK7JIsk6l7qZ8rFBsa3yW.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "ko",
+        "release_date": "2020-07-15"
+    },
+    {
+        "id": 8,
         "id_movie": 726739,
         "title": "Como perros y gatos: La patrulla unida",
         "genres_id": [
@@ -100,7 +132,7 @@
         "release_date": "2020-10-02"
     },
     {
-        "id": 7,
+        "id": 9,
         "id_movie": 667141,
         "title": "12 Hour Shift",
         "genres_id": [
@@ -118,76 +150,7 @@
         "release_date": "2020-10-02"
     },
     {
-        "id": 8,
-        "id_movie": 592350,
-        "title": "My Hero Academia: el despertar de los h\u00e9roes",
-        "genres_id": [
-            28,
-            16
-        ],
-        "overview": "Un nuevo villano, llamado Nine, est\u00e1 buscando a Tomura Shigaraki. Para ello, decide atacar la isla de Nabut\u014d. Segunda pel\u00edcula de la serie anime \"My Hero Academia\".",
-        "poster_Path": "\/2KavuY24PpXBMQ2efbOknKaeYS.jpg",
-        "backdrop": "\/9guoVF7zayiiUq5ulKQpt375VIy.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "ja",
-        "release_date": "2019-12-20"
-    },
-    {
-        "id": 9,
-        "id_movie": 446893,
-        "title": "Trolls 2 Gira mundial",
-        "genres_id": [
-            12,
-            16,
-            35,
-            14,
-            10402,
-            10751
-        ],
-        "overview": "En una aventura que les llevar\u00e1 m\u00e1s all\u00e1 de todo lo que hab\u00edan conocido, Poppy y Branch descubren que su tribu de Trolls es solo una de las seis que existen, que el resto est\u00e1n repartidas en seis reinos y consagradas a seis tipos distintos de m\u00fasica: funk, country, tecno, cl\u00e1sica, pop y rock. La reina B\u00e1rbara, miembro de la realeza del hard rock, y su padre, el Rey Metal, quieren acabar con el resto de g\u00e9neros musicales e imponer el reinado del rock. Con el destino del mundo en juego, Poppy y Branch, junto con el resto de la pandilla \u2014 Grandull\u00f3n, Chanelle, Sat\u00e9n, Cooper y Guy Diamante\u2014, visitar\u00e1n los dem\u00e1s reinos para unir a los Trolls contra los planes de Barb de eclipsarlos a todos.",
-        "poster_Path": "\/lkiYPIuh314llJOHJokvjCPztRb.jpg",
-        "backdrop": "\/qsxhnirlp7y4Ae9bd11oYJSX59j.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-03-12"
-    },
-    {
         "id": 10,
-        "id_movie": 613504,
-        "title": "After: en mil pedazos",
-        "genres_id": [
-            10749,
-            18
-        ],
-        "overview": "Ha pasado el tiempo, y Hardin todav\u00eda no se sabe si es realmente el chico profundo y reflexivo del que Tessa se enamor\u00f3, o ha sido un extra\u00f1o todo este tiempo. Ella quiere alejarse, pero no es tan f\u00e1cil. Tessa se ha centrado en sus estudios y comienza a trabajar como becaria en Vance Publishing. All\u00ed conoce a Trevor, un nuevo y atractivo compa\u00f1ero de trabajo que es exactamente el tipo de persona con la que deber\u00eda estar. Pero Hardin sabe que cometi\u00f3 un error, posiblemente el m\u00e1s grande de su vida y quiere corregir sus errores y vencer a sus demonios... Secuela de la pel\u00edcula 'After'.",
-        "poster_Path": "\/3k4TvOWxJZyeMJtbjHQELKIEhpb.jpg",
-        "backdrop": "\/r5srC0cqU36n38azFnCyReEksiR.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-02"
-    },
-    {
-        "id": 11,
-        "id_movie": 425001,
-        "title": "The War with Grandpa",
-        "genres_id": [
-            35,
-            18,
-            10751
-        ],
-        "overview": "Molesto de que tenga que compartir la habitaci\u00f3n que ama con su abuelo, Peter decide declarar la guerra en un intento por recuperarla.",
-        "poster_Path": "\/ltyARDw2EFXZ2H2ERnlEctXPioP.jpg",
-        "backdrop": "\/4gKyQ1McHa8ZKDsYoyKQSevF01J.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-08-27"
-    },
-    {
-        "id": 12,
         "id_movie": 635302,
         "title": "Kimetsu no Yaiba Movie: Mugen Ressha-hen",
         "genres_id": [
@@ -207,77 +170,60 @@
         "release_date": "2020-10-16"
     },
     {
-        "id": 13,
-        "id_movie": 597398,
-        "title": "Away",
+        "id": 11,
+        "id_movie": 446893,
+        "title": "Trolls 2 Gira mundial",
         "genres_id": [
             12,
             16,
-            14
-        ],
-        "overview": "Despu\u00e9s de sufrir un accidente a\u00e9reo en una isla misteriosa, un muchacho emprende un viaje \u00e9pico a trav\u00e9s de bosques, desiertos y monta\u00f1as tratando de escapar de la sombra de un enorme esp\u00edritu oscuro.",
-        "poster_Path": "\/c59eplVELdwrUfGBUAZVin3HfaL.jpg",
-        "backdrop": "\/ccwPF5jN09S4Cz7u6qs3T2yKOpO.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2019-11-15"
-    },
-    {
-        "id": 14,
-        "id_movie": 531876,
-        "title": "The Outpost",
-        "genres_id": [
-            28,
-            18,
-            36,
-            10752
-        ],
-        "overview": "Narra la historia real de una de las batallas m\u00e1s duras que tuvo lugar durante la guerra de Afganist\u00e1n. Un peque\u00f1o equipo de 53 soldados estadounidenses tuvo que enfrentarse contra m\u00e1s de 400 combatientes talibanes durante la operaci\u00f3n llamada \u201cLibertad duradera\u201d... Adaptaci\u00f3n del best seller escrito por el corresponsal de guerra Jake Tapper",
-        "poster_Path": "\/hPkqY2EMqWUnFEoedukilIUieVG.jpg",
-        "backdrop": "\/n1RohH2VoK1CdVI2fXvcP19dSlm.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-06-24"
-    },
-    {
-        "id": 15,
-        "id_movie": 413518,
-        "title": "Pinocho",
-        "genres_id": [
-            12,
-            18,
+            35,
             14,
+            10402,
             10751
         ],
-        "overview": "Adaptaci\u00f3n de la cl\u00e1sica historia del mu\u00f1eco de madera llamado Pinocho, que desea ser un ni\u00f1o de carne y hueso.",
-        "poster_Path": "\/7XvaQsCoDW1x8CxPiv7AzQ5OUzX.jpg",
-        "backdrop": "\/AdqOBPw4PdtzOcfEuQuZ8MNeTKb.jpg",
+        "overview": "En una aventura que les llevar\u00e1 m\u00e1s all\u00e1 de todo lo que hab\u00edan conocido, Poppy y Branch descubren que su tribu de Trolls es solo una de las seis que existen, que el resto est\u00e1n repartidas en seis reinos y consagradas a seis tipos distintos de m\u00fasica: funk, country, tecno, cl\u00e1sica, pop y rock. La reina B\u00e1rbara, miembro de la realeza del hard rock, y su padre, el Rey Metal, quieren acabar con el resto de g\u00e9neros musicales e imponer el reinado del rock. Con el destino del mundo en juego, Poppy y Branch, junto con el resto de la pandilla \u2014 Grandull\u00f3n, Chanelle, Sat\u00e9n, Cooper y Guy Diamante\u2014, visitar\u00e1n los dem\u00e1s reinos para unir a los Trolls contra los planes de Barb de eclipsarlos a todos.",
+        "poster_Path": "\/lkiYPIuh314llJOHJokvjCPztRb.jpg",
+        "backdrop": "\/qsxhnirlp7y4Ae9bd11oYJSX59j.jpg",
         "adult": false,
         "language": "es-ar",
-        "original_language": "it",
-        "release_date": "2019-12-19"
+        "original_language": "en",
+        "release_date": "2020-03-12"
     },
     {
-        "id": 16,
-        "id_movie": 659986,
-        "title": "The Owners",
+        "id": 12,
+        "id_movie": 613504,
+        "title": "After: en mil pedazos",
         "genres_id": [
-            28,
-            27,
-            53
+            10749,
+            18
         ],
-        "overview": "Un grupo de amigos cree que encuentran un blanco f\u00e1cil en una casa vac\u00eda con una caja fuerte llena de dinero en efectivo. Pero cuando la pareja de ancianos que vive all\u00ed llega temprano a casa, las cosas cambian de repente. Mientras se produce un juego mortal del gato y el rat\u00f3n, los posibles ladrones deben luchar para salvarse de una pesadilla que nunca hubieran imaginado.",
-        "poster_Path": "\/gzFatNrw0lhKD5NxaU6zC7S2KjP.jpg",
-        "backdrop": "\/xUUtcxWC6H48UCrpRwwSPQz69XC.jpg",
+        "overview": "Ha pasado el tiempo, y Hardin todav\u00eda no se sabe si es realmente el chico profundo y reflexivo del que Tessa se enamor\u00f3, o ha sido un extra\u00f1o todo este tiempo. Ella quiere alejarse, pero no es tan f\u00e1cil. Tessa se ha centrado en sus estudios y comienza a trabajar como becaria en Vance Publishing. All\u00ed conoce a Trevor, un nuevo y atractivo compa\u00f1ero de trabajo que es exactamente el tipo de persona con la que deber\u00eda estar. Pero Hardin sabe que cometi\u00f3 un error, posiblemente el m\u00e1s grande de su vida y quiere corregir sus errores y vencer a sus demonios... Secuela de la pel\u00edcula 'After'.",
+        "poster_Path": "\/3k4TvOWxJZyeMJtbjHQELKIEhpb.jpg",
+        "backdrop": "\/r5srC0cqU36n38azFnCyReEksiR.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-09-02"
+    },
+    {
+        "id": 13,
+        "id_movie": 425001,
+        "title": "En guerra con mi abuelo",
+        "genres_id": [
+            35,
+            18,
+            10751
+        ],
+        "overview": "Molesto de que tenga que compartir la habitaci\u00f3n que ama con su abuelo, Peter decide declarar la guerra en un intento por recuperarla.",
+        "poster_Path": "\/4LvDXnDPvO5JpKKB7AXEVvPz9e7.jpg",
+        "backdrop": "\/4gKyQ1McHa8ZKDsYoyKQSevF01J.jpg",
         "adult": false,
         "language": "es-ar",
         "original_language": "en",
         "release_date": "2020-08-27"
     },
     {
-        "id": 17,
+        "id": 14,
         "id_movie": 590223,
         "title": "Love and Monsters",
         "genres_id": [
@@ -295,7 +241,78 @@
         "release_date": "2020-10-16"
     },
     {
+        "id": 15,
+        "id_movie": 604578,
+        "title": "Spontaneous",
+        "genres_id": [
+            35,
+            27,
+            878,
+            10749
+        ],
+        "overview": "Cuando los estudiantes de su escuela secundaria comienzan a explotar inexplicablemente (literalmente ...), Mara y Dylan luchan por sobrevivir en un mundo donde cada momento puede ser el \u00faltimo.",
+        "poster_Path": "\/22jwKxZf4rcrmh2NS07SZAQYYNY.jpg",
+        "backdrop": "\/324jDHMRHWZ8HLbjRJNwVPYJZT0.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-10-02"
+    },
+    {
+        "id": 16,
+        "id_movie": 531876,
+        "title": "The Outpost",
+        "genres_id": [
+            28,
+            18,
+            36,
+            10752
+        ],
+        "overview": "Narra la historia real de una de las batallas m\u00e1s duras que tuvo lugar durante la guerra de Afganist\u00e1n. Un peque\u00f1o equipo de 53 soldados estadounidenses tuvo que enfrentarse contra m\u00e1s de 400 combatientes talibanes durante la operaci\u00f3n llamada \u201cLibertad duradera\u201d... Adaptaci\u00f3n del best seller escrito por el corresponsal de guerra Jake Tapper",
+        "poster_Path": "\/hPkqY2EMqWUnFEoedukilIUieVG.jpg",
+        "backdrop": "\/n1RohH2VoK1CdVI2fXvcP19dSlm.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2020-06-24"
+    },
+    {
+        "id": 17,
+        "id_movie": 597398,
+        "title": "Away",
+        "genres_id": [
+            12,
+            16,
+            14
+        ],
+        "overview": "Despu\u00e9s de sufrir un accidente a\u00e9reo en una isla misteriosa, un muchacho emprende un viaje \u00e9pico a trav\u00e9s de bosques, desiertos y monta\u00f1as tratando de escapar de la sombra de un enorme esp\u00edritu oscuro.",
+        "poster_Path": "\/c59eplVELdwrUfGBUAZVin3HfaL.jpg",
+        "backdrop": "\/ccwPF5jN09S4Cz7u6qs3T2yKOpO.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "en",
+        "release_date": "2019-11-15"
+    },
+    {
         "id": 18,
+        "id_movie": 413518,
+        "title": "Pinocho",
+        "genres_id": [
+            12,
+            18,
+            14,
+            10751
+        ],
+        "overview": "Adaptaci\u00f3n de la cl\u00e1sica historia del mu\u00f1eco de madera llamado Pinocho, que desea ser un ni\u00f1o de carne y hueso.",
+        "poster_Path": "\/7XvaQsCoDW1x8CxPiv7AzQ5OUzX.jpg",
+        "backdrop": "\/AdqOBPw4PdtzOcfEuQuZ8MNeTKb.jpg",
+        "adult": false,
+        "language": "es-ar",
+        "original_language": "it",
+        "release_date": "2019-12-19"
+    },
+    {
+        "id": 19,
         "id_movie": 627290,
         "title": "Antebellum",
         "genres_id": [
@@ -310,37 +327,20 @@
         "release_date": "2020-09-02"
     },
     {
-        "id": 19,
-        "id_movie": 501979,
-        "title": "Bill & Ted Face the Music",
-        "genres_id": [
-            12,
-            35,
-            878
-        ],
-        "overview": "A dos aspirantes a rockeros de San Dimas, California, se les dijo una vez que salvar\u00edan el universo durante una aventura de viaje en el tiempo, pero se encuentran como padres de mediana edad que a\u00fan intentan poner en marcha una canci\u00f3n exitosa y cumplir su destino. Sin suerte e inspiraci\u00f3n, Bill y Ted emprendieron otra aventura de viaje en el tiempo para buscar la canci\u00f3n que establecer\u00e1 su mundo correcto y traer\u00e1 armon\u00eda al universo tal como lo conocemos.",
-        "poster_Path": "\/4V2nTPfeB59TcqJcUfQ9ziTi7VN.jpg",
-        "backdrop": "\/oazPqs1z78LcIOFslbKtJLGlueo.jpg",
-        "adult": false,
-        "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-08-27"
-    },
-    {
         "id": 20,
-        "id_movie": 499932,
-        "title": "El diablo a todas horas",
+        "id_movie": 554311,
+        "title": "Zombi Child",
         "genres_id": [
-            80,
             18,
-            53
+            14,
+            27
         ],
-        "overview": "Ambientada en las zonas rurales del sur de Ohio y Virginia Occidental,  sigue a un elenco de personajes cautivadores y extra\u00f1os desde el final de la Segunda Guerra Mundial hasta la d\u00e9cada de 1960.",
-        "poster_Path": "\/rIw4e4ZRMznLj21mASBcXIUuOsN.jpg",
-        "backdrop": "\/rUeqBuNDR9zN6vZV9kpEFMtQm0E.jpg",
+        "overview": "Hait\u00ed, 1962. Un hombre vuelve de entre los muertos para trabajar en las infernales plantaciones de az\u00facar. 55 a\u00f1os despu\u00e9s, una joven haitiana le dice a sus amigas su secreto familiar, sin saber que esto llevar\u00e1 a una de ellas a cometer una atrocidad.",
+        "poster_Path": "\/bGV5SVdUnJ280ahVlVrYldG33Gw.jpg",
+        "backdrop": "\/yroX00jccBkKwIZ2oXRDcx0NIal.jpg",
         "adult": false,
         "language": "es-ar",
-        "original_language": "en",
-        "release_date": "2020-09-11"
+        "original_language": "fr",
+        "release_date": "2019-06-12"
     }
 ]

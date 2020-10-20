@@ -75,6 +75,9 @@ require 'Views/head.php';
                                 </tr>
                             </thead>
                             <tbody class="text-gray-700">
+
+                            <?php if($cinemasList){ ?>
+
                               <?php foreach($cinemasList as $cinema){
                                 ?>
                                 <tr>
@@ -101,6 +104,11 @@ require 'Views/head.php';
                                     <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Cinema/deleteCinema/<?php echo $cinema->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
+                              <?php } ?>
+                              <?php }else{ ?>
+                                  <div class='flex flex-col justify-center mt-2 items-center'>
+                                    <p class='text-xs'>Todavia no hay cines cargados.</p>
+                                  </div>
                               <?php } ?>
                             </tbody>
                         </table>
