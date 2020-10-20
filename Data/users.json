@@ -16,5 +16,14 @@
         "username": "pepe",
         "password": "123456",
         "id_type": 1
+    },
+    {
+        "id": "",
+        "name": "cris",
+        "lastname": "cris",
+        "email": "cris@cris.com",
+        "username": "cris",
+        "password": "123456",
+        "id_type": 0
     }
 ]

@@ -1,1 +1,9 @@
-[]
+[
+    {
+        "name": "cine",
+        "capacity": "100",
+        "address": "cualquiera",
+        "id": 1,
+        "priceUnit": "150"
+    }
+]

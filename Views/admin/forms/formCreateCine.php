@@ -20,7 +20,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="capacity">
         Capacidad Total
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='capacity' id="capacity" type="number" placeholder="" required>
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='capacity' min="0" id="capacity" type="number" placeholder="" required>
     </div>
   </div>
 
@@ -37,7 +37,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="priceUnit">
         Valor entrada
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="priceUnit" name='priceUnit' type="number" placeholder="$" required>
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="priceUnit" min='0' name='priceUnit' type="number" placeholder="$" required>
     </div>
 
   </div>
