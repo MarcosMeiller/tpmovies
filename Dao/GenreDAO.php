@@ -8,13 +8,13 @@ class GenreDao implements IGenre{
     private $genreList = array();
 
 	
-    public function add(Genre $newGenre){
+    public function add(Genre $newGenre){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
 		$this->retrieveData();
 		array_push($this->genreList, $newGenre);
 		$this->saveData();
 	}
 
-	public function getAll(){
+	public function getAll(){ ///obtiene todos los datos y en caso de que la lista este vacia la llena con la api
 		$this->retrieveData();
 		$size = 0;
 		if($this->genreList !== []){
@@ -27,7 +27,7 @@ class GenreDao implements IGenre{
 	}
 
 
-	public function saveData(){
+	public function saveData(){///guarda la lista en el json
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();
 		$count = 0;
@@ -42,7 +42,7 @@ class GenreDao implements IGenre{
 		file_put_contents($jsonPath, $jsonContent);
 	}
 
-	public function delete($code){
+	public function delete($code){///elimina un dato dentro de la lista
 		$this->retrieveData();
 		$newList = array();
 		foreach ($this->genreList as $genre) {
@@ -69,7 +69,7 @@ class GenreDao implements IGenre{
 
 	}
 
-	public function retrieveData(){
+	public function retrieveData(){///llena la lista con los datos dentro del json
 		$this->genreList = array();
 
 		$jsonPath = $this->GetJsonFilePath();
@@ -85,7 +85,7 @@ class GenreDao implements IGenre{
 		}
 	}
 
-	public function retrieveDataFromAPI(){
+	public function retrieveDataFromAPI(){//llena el json con los datos de la api
 		$this->genreList = array();
 		$genresdb = file_get_contents(API_HOST.'/genre/movie/list?api_key='.API_KEY.'&language='.LANG);
 		$genres = json_decode($genresdb,true,)['genres'];
@@ -97,7 +97,7 @@ class GenreDao implements IGenre{
 		}
 	} 
 
-    function GetJsonFilePath(){
+    function GetJsonFilePath(){///ruta del json
 
         $initialPath = "Data/genres.json";
         if(file_exists($initialPath)){
@@ -109,7 +109,7 @@ class GenreDao implements IGenre{
         return $jsonFilePath;
 	}
 	
-	public function getForGenre($arrayMovie,$Arraygenre){
+	public function getForGenre($arrayMovie,$Arraygenre){//recibe 2 arrays y filtra una lista de peliculas x generos.
 		$this->retrieveData();
 		$aux = $arrayMovie;
 		$searched = array();

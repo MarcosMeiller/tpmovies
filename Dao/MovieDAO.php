@@ -8,13 +8,13 @@ class MovieDAO implements IMovie{
     private $movieList = array();
 
 	
-    public function add(Movie $newMovie){
+    public function add(Movie $newMovie){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
 		$this->retrieveData();
 		array_push($this->movieList, $newMovie);
 		$this->saveData();
 	}
 
-	public function getAll($id){
+	public function getAll($id){ ///obtiene todos los datos y en caso de que este vacio los rellena con los datos de la api, ademas si recibe un id retorna la lista solo con los generos de ese id.
 		$this->retrieveData();
 	
 		$size = 0;
@@ -45,7 +45,7 @@ class MovieDAO implements IMovie{
 		return $this->movieList;
 	}
 
-	public function update(Movie $code){
+	public function update(Movie $code){///reemplaza un objeto dentro de la lista
 		$this->retrieveData();
 		$newList = array();
 		foreach ($this->movieList as $movie) {
@@ -63,7 +63,7 @@ class MovieDAO implements IMovie{
 	}
 
 
-	public function saveData(){
+	public function saveData(){///guarda la lista en el json
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();
 		$count = 0;
@@ -89,7 +89,7 @@ class MovieDAO implements IMovie{
 		file_put_contents($jsonPath, $jsonContent);
 	}
 
-	public function delete($code){
+	public function delete($code){///elimina un dato dentro de la lista
 		$this->retrieveData();
 		$newList = array();
 		foreach ($this->movieList as $movie) {
@@ -129,7 +129,7 @@ class MovieDAO implements IMovie{
 
 	}
 
-	public function retrieveData(){
+	public function retrieveData(){///llena la lista con los datos dentro del json
 		$this->movieList = array();
 
 		$jsonPath = $this->GetJsonFilePath();

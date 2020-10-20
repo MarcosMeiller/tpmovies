@@ -2,7 +2,7 @@
 <form class="w-full max-w-6/12 mb-5 mt-5" action='<?php echo FRONT_ROOT ?>Cinema/updateCinema' method='post'>
     <!-- nombre y capacidad -->
   <div class="flex flex-wrap ">
-  <div class="w-full md:w-full px-3 mb-2 md:mb-0">
+  <div hidden class="w-full md:w-full px-3 mb-2 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="id">
         ID
       </label>
