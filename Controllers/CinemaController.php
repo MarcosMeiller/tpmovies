@@ -65,15 +65,19 @@ class CinemaController
 
     // retorna todos los cines y carga la pantalla de amb cines
     public function Cinemas($message = "",$type= ""){
-        $cinemasList = $this->dao->getAll();
-        if($message === '' && $type === ''){
-            //unset($_SESSION['msjCinemas']);
-            //unset($_SESSION["bgMsgCinemas"]);
-            require_once(VIEWS_PATH_ADMIN."/cinemaslamb.php");
+        if(isset($_SESSION['loggedUser'])){
+            $cinemasList = $this->dao->getAll();
+            if($message === '' && $type === ''){
+                //unset($_SESSION['msjCinemas']);
+                //unset($_SESSION["bgMsgCinemas"]);
+                require_once(VIEWS_PATH_ADMIN."/cinemaslamb.php");
+            }else{
+                $_SESSION['msjCinemas'] = $message;
+                $_SESSION["bgMsgCinemas"] = $type;
+                header("Location: /tpmovies/Cinema/Cinemas/");
+            }
         }else{
-            $_SESSION['msjCinemas'] = $message;
-            $_SESSION["bgMsgCinemas"] = $type;
-            header("Location: /tpmovies/Cinema/Cinemas/");
+            header("Location: /tpmovies/");
         }
     }        
 }

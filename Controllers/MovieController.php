@@ -90,35 +90,28 @@ class MovieController
     }
     
     public function MoviesNowPlaying($id = 0){
-        if(isset($_SESSION['loggedUser'])){
-           
-            /*if(isset($_SESSION['returnID'])){
-                $id = $_SESSION['returnID'];
-            }else{
-                if(isset($_SESSION['id'])){
-                $_SESSION['id'] = $id;
-                }else{
-                    $_SESSION['id'] = 0;
-                }
-
-
-                Hacer otra funcion que llame a las peliuculas filtras y esta funcion llama a todas
-            }*/
-
-            if($_SESSION['id'] != 0){
-                $id = $_SESSION['id'];
-            }
-           
-        $_SESSION['id'] = $id;
-        $genresList = $this->gDao->getAll();
-        $moviesList = $this->dao->getAll($id);
-        require_once(VIEWS_PATH."moviesnowp.php");
-        
-        
+        if(isset($_SESSION['loggedUser'])){          
+            unset($_SESSION['id']);
+            $genresList = $this->gDao->getAll();
+            $moviesList = $this->dao->getAll($id);
+            require_once(VIEWS_PATH."moviesnowp.php");             
         }else{
             header("Location: /tpmovies/");
         }
     }
+
+    public function MoviesNowPByGenre($id){
+        if(isset($_SESSION['loggedUser'])){  
+            $_SESSION['id'] = $id;
+            $genresList = $this->gDao->getAll();
+            $moviesList = $this->dao->getAll($id);
+            require_once(VIEWS_PATH."moviesnowp.php");
+        }else{
+            header("Location: /tpmovies/");
+        }
+    }
+
+
  
 }
 

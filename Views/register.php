@@ -1,6 +1,5 @@
 <?php namespace views;
     require 'head.php';
-
         
     if($bg == 1){
       $bgImg = "background-image: url('Views/img/bg-cinema3.jpg')";

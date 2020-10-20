@@ -1,8 +1,5 @@
 <?php namespace views;
 
-$id = $_SESSION['id'];
-echo $id;
-
 ?>
 
 

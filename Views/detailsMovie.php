@@ -2,10 +2,12 @@
 
     require 'head.php';
 
-	$id = $_SESSION['id'];
-echo "DETALLE DE PELI :";
-echo $id;
+	if(isset($_SESSION['id'])){
 
+		$href = "/MoviesNowPByGenre\/".$_SESSION['id'];
+	}else{
+		$href = "/MoviesNowPlaying";
+	}
 
 ?>
 
@@ -13,7 +15,7 @@ echo $id;
 
   <div class="max-w-3xl flex items-center h-auto lg:h-screen flex-wrap mx-auto mt-24 mb-16 lg:my-0">
        <div class='absolute top-0 flex text-blue-900'>
-    <a class="ml-5 mt-2" href="<?php echo FRONT_ROOT ?>Movie/MoviesNowPlaying">
+    <a class="ml-5 mt-2" href="<?php echo FRONT_ROOT ?>Movie<?php echo $href ?>">
 	<i class="fas fa-arrow-left text-sm"></i>
         Volver
     </a>

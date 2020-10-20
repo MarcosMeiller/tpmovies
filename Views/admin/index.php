@@ -1,6 +1,12 @@
 <?php namespace admin;
     require 'Views/head.php';  
     require 'Views/footer.php';
+
+    ini_set('display_errors', 1);
+	ini_set('display_startup_errors', 1);
+	error_reporting(E_ALL);
+
+    $user = $_SESSION['loggedUser']
 ?>
 <div class='flex'>
     <?php require 'aside.php'; ?>
@@ -98,6 +104,12 @@
                 </div>
             </main>-->
     
+            <div class='flex flex-col justify-center mt-8 items-center'>
+            <p>Bienvenido <?php echo $user->getUserName()?></p>
+            <p class='text-xs my-5'>Desde aqui podrás administrar gran parte del contenido de la pagina:</p>
+            <p> - Administrar Cines</p>
+            </div>
+
         </div>
     </div>
 </div>
