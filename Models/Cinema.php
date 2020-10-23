@@ -12,7 +12,7 @@ class Cinema{
     ///constructor.
     public function __construct($name,$address){
         //$this->rooms = $rooms
-        $this->id = $id;
+        $this->id = null;
         $this->name = $name;
         $this->address = $address;
 
