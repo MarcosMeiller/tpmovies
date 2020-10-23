@@ -1,47 +1,49 @@
 <?php 
 namespace Dao;
 
-use Dao\ICinema as ICinema ;
-use Models\Cinema as Cinema;
+use Dao\IRoom as IRoom ;
+use Models\Room as Room;
 
-class cinemaDAO implements ICinema{
-    private $cinemaList = array();
+class roomDAO implements IRoom{
+    private $roomList = array();
 
 	
-    public function add(Cinema $newCinema){ ///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
+    public function add(Room $newRoom){ ///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
 		$this->retrieveData();
-		array_push($this->cinemaList, $newCinema);
+		array_push($this->roomList, $newRoom);
 		$this->saveData();
 	}
 
 	public function getAll(){ ///obtiene todos los datos
 		$this->retrieveData();
-		return $this->cinemaList;
+		return $this->roomList;
 	}
     
 	public function search($id){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
 
-		$newCinema = null;
+		$newRoom = null;
 		$this->retrieveData();
-		foreach ($this->cinemaList as $cinema) {
-			$ID = $cinema->getId();
+		foreach ($this->roomList as $room) {
+			$ID = $room->getId();
 			if($ID === $id){
-				 $newCinema = $cinema; 
+				 $newRoom = $room; 
 			}
 		}
-		return $newCinema;
+		return $newRoom;
 
-	}
+    }
 
 	public function saveData(){ ///guarda la lista en el json
 		$arrayToEncode = array();
 		$jsonPath = $this->GetJsonFilePath();
 		$count = 0;
-		foreach ($this->cinemaList as $cinema) {
-			$valueArray['name'] = $cinema->getName();
-			$valueArray['address'] = $cinema->getAddress();
+		foreach ($this->roomList as $room) {
+			$valueArray['name'] = $room->getName();
+			$valueArray['capacity'] = $room->getCapacity();
 			$count = $count + 1;
 			$valueArray['id'] = $count;
+            $valueArray['price'] = $room->getPrice();
+            $valueArray['id_Cinema'] = $room->getId_Cinema();
 
 			array_push($arrayToEncode, $valueArray);
 
@@ -51,7 +53,7 @@ class cinemaDAO implements ICinema{
 	}
 
 	public function retrieveData(){ ///llena la lista con los datos dentro del json
-		$this->cinemaList = array();
+		$this->roomList = array();
 
 		$jsonPath = $this->GetJsonFilePath();
 
@@ -60,32 +62,31 @@ class cinemaDAO implements ICinema{
 		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
 
 		foreach ($arrayToDecode as $valueArray) {
-			$cinema = new Cinema($valueArray['name'],$valueArray['address']);
-			$cinema->setId($valueArray['id']);
+			$room = new Room($valueArray['capacity'],$valueArray['id_Cinema'],$valueArray['name'],$valueArray['price']);
 			
-			array_push($this->cinemaList, $cinema);
+			array_push($this->roomList, $room);
 		}
     }
     
     public function delete($code){///elimina un dato dentro de la lista
 		$this->retrieveData();
 		$newList = array();
-		foreach ($this->cinemaList as $cinema) {
-			if($cinema->getId() != $code){
-				array_push($newList, $cinema);
+		foreach ($this->roomList as $room) {
+			if($room->getId() != $code){
+				array_push($newList, $room);
 			}
 		}
 
-		$this->cinemaList = $newList;
+		$this->roomList = $newList;
 		$this->saveData();
 	}
 
-	public function update(Cinema $code){ ///reemplaza un objeto dentro de la lista
+	public function update(Room $code){ ///reemplaza un objeto dentro de la lista
 		$this->retrieveData();
 		$newList = array();
-		foreach ($this->cinemaList as $cinema) {
-			if($cinema->getId() != $code->getId()){
-				array_push($newList, $cinema);
+		foreach ($this->roomList as $room) {
+			if($room->getId() != $code->getId()){
+				array_push($newList, $room);
 			}
 			else{
 				array_push($newList,$code);
@@ -93,7 +94,7 @@ class cinemaDAO implements ICinema{
 		}
 		
 
-		$this->cinemaList = $newList;
+		$this->roomList = $newList;
 		$this->saveData();
 	}
 
@@ -101,7 +102,7 @@ class cinemaDAO implements ICinema{
 
     function GetJsonFilePath(){ ///ruta del json
 
-        $initialPath = "Data/cinemas.json";
+        $initialPath = "Data/room.json";
         if(file_exists($initialPath)){
             $jsonFilePath = $initialPath;
         }else{

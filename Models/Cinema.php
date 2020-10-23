@@ -5,20 +5,17 @@ namespace Models;
 class Cinema{
 
     private $id;
-    private $capacity;
     private $name;
     private $address;
-    private $priceUnit;
-    //private $room;
+    //private $rooms; ///Si en el futuro se tiene que cambiar a id, se encarga carlos.
 
     ///constructor.
-    public function __construct($id,$name,$capacity,$address,$priceUnit){
-       // $room = array();
+    public function __construct($name,$address){
+        //$this->rooms = $rooms
         $this->id = $id;
-        $this->capacity = $capacity;
         $this->name = $name;
         $this->address = $address;
-        $this->priceUnit = $priceUnit;
+
     }
     
     public function getId(){
@@ -33,13 +30,16 @@ class Cinema{
         return $this->name;
     }
     
-    public function getCapacity(){
-        return $this->capacity;
-    }
+ 
     
-    public function getPriceUnit(){
-        return $this->priceUnit;
+
+    /*public function getRooms(){
+        return $this->rooms;
     }
+
+    public function setRooms($rooms){
+        $this->rooms = $rooms;
+    }*/
 
     public function setAddress($address){
         $this->address = $address;
@@ -49,18 +49,13 @@ class Cinema{
         $this->name = $name;
     }
     
-    public function setCapacity($capacity){
-        $this->capacity = $capacity;
-    }
-
+  
     public function setId($id){
         $this->id = $id;
     }
 
     
-    public function setpriceUnit($priceUnit){
-        $this->priceUnit = $priceUnit;
-    }
+  
 }
 
 

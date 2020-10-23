@@ -12,7 +12,7 @@ class CinemaController
     }
   
     // agrega cine verificando previamente si existe
-    public function addCinema($id,$name,$capacity,$address,$priceUnit){
+    public function addCinema($name,$address){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
             $address = $this->test_input($address);
@@ -23,7 +23,7 @@ class CinemaController
             }
             
             try{
-                $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
+                $newCinema = new cinema($name,$address);
                 $this->dao->add($newCinema);
                 $this->Cinemas("Agregado con exito","success");
             }catch(Exception $e){
@@ -37,7 +37,7 @@ class CinemaController
     }
 
     // actualiza cine verificando si existe previamente
-    public function updateCinema($id,$name,$capacity,$address,$priceUnit){
+    public function updateCinema($id,$name,$address){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
             $address = $this->test_input($address);
@@ -48,7 +48,7 @@ class CinemaController
             }
             
             try{
-                $newCinema = new cinema($id,$name,$capacity,$address,$priceUnit);
+                $newCinema = new cinema($name,$address);
                 $this->dao->update($newCinema);
                 $this->Cinemas("Modificado con exito","success");
 
