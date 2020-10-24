@@ -3,15 +3,32 @@ namespace Dao;
 
 use Dao\ICinema as ICinema ;
 use Models\Cinema as Cinema;
+use Dao\Connection as Connection;
 
 class cinemaDAO implements ICinema{
-    private $cinemaList = array();
+	private $cinemaList = array();
+	private $connection;
+	private $tableCinema = "cinemas";
 
 	
-    public function add(Cinema $newCinema){ ///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		$this->retrieveData();
+	///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
+    public function add(Cinema $newCinema){ 
+		/*$this->retrieveData();
 		array_push($this->cinemaList, $newCinema);
-		$this->saveData();
+		$this->saveData();*/
+		$sql = "INSERT INTO ".$this->tableCinema." (name,address) VALUES (:name,:address)";
+
+		$parameters['name'] = $newCinema->getName();
+		$parameters['address'] = $newCinema->getAddress();
+
+		try{
+			$this->connection = Connection::getInstance();
+
+			return $this->connection->ExecuteNonQuery($sql,$parameters);
+
+		}catch(Exception $ex){
+			throw $ex;
+		}
 	}
 
 	public function getAll(){ ///obtiene todos los datos

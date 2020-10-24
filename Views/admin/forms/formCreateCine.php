@@ -1,53 +1,30 @@
 <?php namespace forms ?>
-<form class="w-full max-w-lg mb-5" action='<?php echo FRONT_ROOT ?>Cinema/addCinema' method='post'>
-    <!-- nombre y capacidad -->
-  <div class="flex flex-wrap ">
-  <div hidden class="w-full md:w-full px-3 mb-2 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="id">
-        ID
-      </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="id" type="number" name='id' placeholder="Ingrese nombre del cine" >
-      
-    </div>
-    <div class="w-full md:w-3/5 px-3 mb-2 md:mb-0">
+<form class="w-full mb-5 " action='<?php echo FRONT_ROOT ?>Cinema/addCinema' method='POST'>
+
+  <div class="flex flex-wrap mt-2">
+  
+  <!-- name -->
+  <div class="w-full md:w-2/6 px-3 mb-2 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
         Nombre
       </label>
       <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
       
     </div>
-    <div class="w-full md:w-2/5 px-3">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="capacity">
-        Capacidad Total
-      </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" name='capacity' min="0" id="capacity" type="number" placeholder="" required>
-    </div>
-  </div>
-
-  <div class="flex flex-wrap mt-2">
-
-    <div class="w-full px-3 md:w-3/4">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="location">
+  <!-- address -->
+    <div class="w-full px-3 md:w-3/6">
+      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="address">
         Direccion
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="location" name='location' type="text" placeholder="Ingrese la dirrecion del cine">
+      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="address" name='address' type="text" placeholder="Ingrese la dirrecion del cine">
     </div>
 
-    <div class="w-full md:w-1/4 px-2 mb-6 md:mb-0">
-      <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2 text-right" for="priceUnit">
-        Valor entrada
-      </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="priceUnit" min='0' name='priceUnit' type="number" placeholder="$" required>
-    </div>
+  <div class="w-full px-3 md:w-1/6 mb-6 md:mb-0 md:mt-6">
 
-  </div>
-
-  <div class="flex flex-wrap ">
-  <div class="w-full px-3 mb-6 md:mb-0">
-    <button class="w-full bg-white text-blue-700 font-semibold py-3 px-3 mt-5 border-2 border-blue-500 rounded-lg shadow-lg      hover:shadow-xl hover:bg-gray-300 flex items-center justify-center" type="submit">
-        <p class="">Agregar</p>
+    <button class="w-full text-blue-700 font-semibold pb-2 px-3 border bg-blue-700  rounded-lg flex items-center justify-center" type="submit">
+        <p class="mt-2 text-sm text-white ">Agregar</p>
     </button>
     </div>
-  </div>
 
+  </div>
 </form>

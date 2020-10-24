@@ -12,7 +12,7 @@ class RegisterController
     }
   
 
-    public function RegisterUser($id,$userName,$name,$lastname,$email,$password,$passwordRepeat){
+    public function RegisterUser($userName,$name,$lastname,$email,$password,$passwordRepeat){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
             $userName = $this->test_input($userName);
@@ -27,14 +27,16 @@ class RegisterController
                 if($password !== $passwordRepeat){
                     $this->Index("Las contraseñas no son iguales.",2);
                 }else{
-                    $user = $this->dao->search($email);
+                    //$user = $this->dao->search($email); VEEEER
+                    $user = NULL;
                     if($user !== null){
                         $this->Index("El email ya se encuentra registrado.",2);
                     }else{
                         try{
-                        $newUser = new User($id,$userName,$name,$lastname,$email,$password);
-                        $this->dao->add($newUser);
-                        $user = $this->dao->search($email);
+                        $newUser = new User($userName,$name,$lastname,$email,$password);
+                        $user = null;
+                        $user = $this->dao->add($newUser);
+                        //$user = $this->dao->search($email); VEEER
                         if($user !== null){
                             $_SESSION['loggedUser'] = $newUser;
                             header("Location: /tpmovies/");

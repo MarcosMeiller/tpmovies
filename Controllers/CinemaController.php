@@ -14,26 +14,29 @@ class CinemaController
     // agrega cine verificando previamente si existe
     public function addCinema($name,$address){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
             $name = $this->test_input($name);
             $address = $this->test_input($address);
-            if($name && $address){ 
-            $cinema = $this->dao->search($id);
-            if($cinema !== null){
-                $this->Cinemas("El Cine ya existe.","alert");
-            }
             
-            try{
-                $newCinema = new cinema($name,$address);
-                $this->dao->add($newCinema);
-                $this->Cinemas("Agregado con exito","success");
-            }catch(Exception $e){
-                $this->Cinemas("Error al Registrar cine.","danger");
+            if($name && $address){
+                $cinema = NULL;
+                //$cinema = $this->dao->search($id); // VEEEER
+                if($cinema !== null){
+                    $this->Cinemas("El Cine ya existe.","alert");
+                }
+                
+                try{
+                    $newCinema = new cinema($name,$address);
+                    $this->dao->add($newCinema);
+                    $this->Cinemas("Agregado con exito","success");
+                }catch(Exception $e){
+                    $this->Cinemas("Error al Registrar cine.","danger");
+                }
             }
+            else{
+                $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
+            }   
         }
-        else{
-            $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
-        }  
-    }
     }
 
     // actualiza cine verificando si existe previamente
@@ -91,7 +94,8 @@ class CinemaController
     // retorna todos los cines y carga la pantalla de amb cines
     public function Cinemas($message = "",$type= ""){
         if(isset($_SESSION['loggedUser'])){
-            $cinemasList = $this->dao->getAll();
+            //$cinemasList = $this->dao->getAll(); /// VER
+            $cinamasList = array();
             if($message === '' && $type === ''){
                 //unset($_SESSION['msjCinemas']);
                 //unset($_SESSION["bgMsgCinemas"]);

@@ -11,19 +11,25 @@ class UserDAO implements IUser{
 
 	
     public function add(User $newUser) {
-        $query = "INSERT INTO ".$this->tableName." (id, username, name, lastname,email,password,id_type) VALUES (:id, :username, :name, :lastname, :email, :password,:id_type)";
+        $query = "INSERT INTO ".$this->tableName." (username, name, lastname,email,password,id_type) VALUES (:username, :name, :lastname, :email, :password,:id_type)";
 
-        $valueArray['id'] = $user->getId();
-        $valueArray['name'] = $user->getName();
-        $valueArray['lastname'] = $user->getLastName();
-        $valueArray['email'] = $user->getEmail();
-        $valueArray['username'] = $user->getUserName();
-        $valueArray['password'] = $user->getPassword();
-        $valueArray['id_type'] = $user->getId_Type();     
+        $parameters['name'] = $newUser->getName();
+        $parameters['lastname'] = $newUser->getLastName();
+        $parameters['email'] = $newUser->getEmail();
+        $parameters['username'] = $newUser->getUserName();
+        $parameters['password'] = $newUser->getPassword();
+        $parameters['id_type'] = $newUser->getId_Type();     
 
-        $this->connection = Connection::GetInstance();
+        try{
+            
+            $this->connection = Connection::GetInstance();
 
-        $this->connection->ExecuteNonQuery($query, $parameters);
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+        
     }
 
 	public function getAll(){
@@ -37,14 +43,7 @@ class UserDAO implements IUser{
 
             foreach($result as $row)
             {
-                $user = new User();
-                $user->setId($row["id"]);
-                $user->setUserName($row["username"]);
-                $user->setName($row["name"]);
-                $user->setPassword($row["password"]);
-                $user->setId_Type($row["id_type"]);
-                $user->setEmail($row["email"]);
-                $user->setLastName($row["lastname"]);
+                $user = new User($row["id"],$row["username"],$row["name"],$row["lastname"],$row["email"],$row["password"]);
                 array_push($userList, $user);
             }
 
@@ -52,12 +51,24 @@ class UserDAO implements IUser{
 	}
 
 
+	
+	public function search($email){
+        $query = "SELECT *  FROM ".$this->tableName." WHERE (email = :email)";
+
+        $parameters["email"] =  $email;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
+
+		
+	}
 
 
 	public function delete($code){
         $query = "DELETE FROM ".$this->tableName." WHERE (id = :id)";
 
-        $parameters["id"] =  $id;
+        $parameters["id"] =  $code;
 
         $this->connection = Connection::GetInstance();
 

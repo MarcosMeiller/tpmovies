@@ -12,8 +12,7 @@
         private $id_type;
 
 
-        function __construct($id,$userName,$name,$lastname,$email,$password){
-            $this->id = null;
+        function __construct($userName,$name,$lastname,$email,$password){
             $this->userName = $userName;
             $this->password = $password;
             $this->lastname = $lastname;

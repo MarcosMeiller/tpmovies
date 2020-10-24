@@ -21,7 +21,8 @@ class LoginController
         $password = $this->test_input($password);
 
         if($email && $password){
-            $newUser = $this->dao->search($email);
+            ///$newUser = $this->dao->search($email);
+            $newUser = NULL;
 
             if($newUser !== null ){
                 if($newUser->getPassword() == $password){   

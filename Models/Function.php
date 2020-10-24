@@ -2,7 +2,7 @@
 
     namespace models;
     
-    class Function{
+    class FunctionCinema{
         private $id;
         private $id_Room;
         private $id_Movie;

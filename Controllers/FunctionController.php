@@ -2,7 +2,7 @@
 
 namespace Controllers;
 
-Use Models\Function as Function;
+Use Models\FunctionCinema as FunctionCinema;
 Use Dao\FunctionDAO as FunctionDAO;
 
 class FunctionController{
@@ -19,7 +19,7 @@ class FunctionController{
             if($date && $hour){
                 $actualDate = date("Y-m-d");
                 if($date > $actualDate){ 
-                    $function = new Function($id_Room,$id_movie,$date,$hour);
+                    $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
                     $this->dao->add($function);
                 }
                 else{

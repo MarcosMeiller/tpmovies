@@ -24,16 +24,12 @@
             return $this->id;
         }
 
-        public getId_Cinema(){
+        public function getId_Cinema(){
             return $this->id_Cinema;
         }
 
         public function getName(){
             return $this->name;
-        }
-        
-        public function getCapacity(){
-            return $this->capacity;
         }
         
         public function getPrice(){

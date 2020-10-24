@@ -25,19 +25,6 @@
                 </div>
                 <form action='<?php echo FRONT_ROOT ?>Register/RegisterUser' method='POST'>
 
-                  <div hidden class="relative w-full mb-3">
-                    <label
-                      class="block uppercase text-gray-700 text-xs font-bold"
-                      for="id"
-                      ></label
-                    ><input
-                      type="number"
-                      name='id'
-                      class="px-3 py-2 placeholder-gray-400 text-gray-700 bg-white rounded text-sm shadow focus:outline-none focus:shadow-outline w-full"
-                      value=""
-                    />
-                  </div>
-
                   <div class="relative w-full mb-3">
                     <label
                       class="block uppercase text-gray-700 text-xs font-bold"

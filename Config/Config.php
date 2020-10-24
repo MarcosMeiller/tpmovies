@@ -6,7 +6,9 @@ define("VIEWS_PATH","Views/");
 define("VIEWS_PATH_ADMIN","Views/admin");
 // Coneccion a configuracion base de datos.
 
-define("DB_HOST","localhost");
+define("DB_HOST","127.0.0.1");
+//define("DB_HOST","locahost");
+
 define("DB_NAME","tpmovies");
 define("DB_USER","root");
 define("DB_PASS","");

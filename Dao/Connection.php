@@ -15,7 +15,7 @@
         {
             try
             {
-                $this->pdo = new PDO("mysql:host=".DB_HOST."; dbname=".DB_NAME, DB_USER, DB_PASS);
+                $this->pdo = new PDO("mysql:host=".DB_HOST.";dbname=".DB_NAME, DB_USER, DB_PASS);
                 $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
             }
             catch(Exception $ex)
@@ -24,7 +24,7 @@
             }
         }
 
-        public static function GetInstance()
+        public static function getInstance()
         {
             if(self::$instance == null)
                 self::$instance = new Connection();
@@ -32,15 +32,20 @@
             return self::$instance;
         }
 
-        public function Execute($query, $parameters = array(), $queryType = QueryType::Query)
+        public function Execute($query, $parameters = array())
 	    {
             try
             {
-                $this->Prepare($query);
+                 // crea una sentencia llamad a prepare. devuevle obj statement
+                 $this->pdoStatement = $this->pdo->prepare($query);
                 
-                $this->BindParameters($parameters, $queryType);
-                
-                $this->pdoStatement->execute();
+                 foreach($parameters as $parameterName => $value){                
+                     $this->pdoStatement->bindParam(":$parameterName", $parameters[$parameterName]);                
+                 }
+ 
+ 
+                 $this->pdoStatement->execute();
+ 
 
                 return $this->pdoStatement->fetchAll();
             }
@@ -50,13 +55,20 @@
             }
         }
         
-        public function ExecuteNonQuery($query, $parameters = array(), $queryType = QueryType::Query)
+        public function ExecuteNonQuery($query, $parameters = array())
 	    {            
             try
             {
-                $this->Prepare($query);
+                // crea una sentencia llamad a prepare. devuevle obj statement
+                $this->pdoStatement = $this->pdo->prepare($query);
                 
-                $this->BindParameters($parameters, $queryType);
+                //$this->BindParameters($parameters, $queryType);
+
+                // reemplazo los marcadores de parametros por valores reales
+                foreach($parameters as $parameterName => $value){                
+                    $this->pdoStatement->bindParam(":$parameterName", $parameters[$parameterName]);                
+                }
+
 
                 $this->pdoStatement->execute();
 
@@ -68,7 +80,7 @@
             }        	    	
         }
         
-        private function Prepare($query)
+        /*private function Prepare($query)
         {
             try
             {
@@ -78,9 +90,9 @@
             {
                 throw $ex;
             }
-        }
+        }*/
         
-        private function BindParameters($parameters = array(), $queryType = QueryType::Query)
+        /*private function BindParameters($parameters = array(), $queryType = QueryType::Query)
         {
             $i = 0;
 
@@ -93,6 +105,6 @@
                 else
                     $this->pdoStatement->bindParam($i, $parameters[$parameterName]);
             }
-        }
+        }*/
     }
 ?>
