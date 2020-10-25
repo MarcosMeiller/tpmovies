@@ -27,17 +27,16 @@ class RegisterController
                 if($password !== $passwordRepeat){
                     $this->Index("Las contraseñas no son iguales.",2);
                 }else{
-                    //$user = $this->dao->search($email); VEEEER
-                    $user = NULL;
-                    if($user !== null){
+                    $User = $this->dao->search($email); 
+                    //$user = NULL;
+                    if($User !== null){
                         $this->Index("El email ya se encuentra registrado.",2);
                     }else{
                         try{
                         $newUser = new User($userName,$name,$lastname,$email,$password);
                         $user = null;
                         $user = $this->dao->add($newUser);
-                        //$user = $this->dao->search($email); VEEER
-                        if($user !== null){
+                        if($user == 1){
                             $_SESSION['loggedUser'] = $newUser;
                             header("Location: /tpmovies/");
                         }

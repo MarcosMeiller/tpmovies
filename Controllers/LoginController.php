@@ -21,10 +21,9 @@ class LoginController
         $password = $this->test_input($password);
 
         if($email && $password){
-            ///$newUser = $this->dao->search($email);
-            $newUser = NULL;
+            $newUser = $this->dao->search($email);
 
-            if($newUser !== null ){
+            if($newUser !== null){
                 if($newUser->getPassword() == $password){   
 
                     $_SESSION['loggedUser'] = $newUser;
@@ -46,7 +45,7 @@ class LoginController
                     $this->Index("Usuario o contraseña incorrecta.", 2); 
                 }
             }else{
-                $this->Index("No existe un usuario con ese email.", 2);
+                $this->Index("Error al intentar iniciar sesion", 2);
             }
         }else{
             $this->Index("No se permiten campos vacios.", 2);

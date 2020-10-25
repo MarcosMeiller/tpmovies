@@ -54,12 +54,17 @@ class UserDAO implements IUser{
 	
 	public function search($email){
         $query = "SELECT *  FROM ".$this->tableName." WHERE (email = :email)";
-
+        $newUser = null;
         $parameters["email"] =  $email;
 
         $this->connection = Connection::GetInstance();
-
-        $this->connection->ExecuteNonQuery($query, $parameters);
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+            $newUser = new User($newArray['username'],$newArray['name'],$newArray['lastname'],$newArray['email'],$newArray['password']);
+            }
+        }
+        return $newUser;
 
 		
 	}

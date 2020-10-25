@@ -11,7 +11,7 @@ class UserController
         $this->dao = new userDAO(); 
     }
 
-    public function updateUser($id,$userName,$name,$lastname,$email,$password){
+   /* public function updateUser($id,$userName,$name,$lastname,$email,$password){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $this->dao->search($email);
             if($user == null){
@@ -27,7 +27,7 @@ class UserController
             }
         }
     }
-
+    */
     public function deleteUsers($email){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $this->dao->search($email);
