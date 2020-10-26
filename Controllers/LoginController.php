@@ -29,10 +29,10 @@ class LoginController
                     $_SESSION['loggedUser'] = $newUser;
                     
                     $user = $_SESSION["loggedUser"];
-                    //$_SESSION["isAdmin"] = $user->getId_Type();
-                    $id = $user->getId_Type();
-                    $Rol = $this->rol->search($id);
-                    if($Rol !== null){
+                    $_SESSION["isAdmin"] = $user->getId_Type();
+                    $id_type = $user->getId_Type();
+                    $Rol = $this->rol->search($id_type);
+                   if($Rol !== null){
                         $_SESSION['rol'] = $Rol;
                         $type = $Rol->getType();
                         if($type != null){

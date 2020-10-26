@@ -33,7 +33,6 @@ class UserDAO implements IUser{
     }
 
 	public function getAll(){
-		$cellPhoneList = array();
 
             $query = "SELECT id, username, name, lastname,email,password,id_type FROM ".$this->tableName;
 
@@ -44,6 +43,7 @@ class UserDAO implements IUser{
             foreach($result as $row)
             {
                 $user = new User($row["id"],$row["username"],$row["name"],$row["lastname"],$row["email"],$row["password"]);
+                $user->setId_Type($row['id_type']);
                 array_push($userList, $user);
             }
 
@@ -62,6 +62,7 @@ class UserDAO implements IUser{
         foreach($array as $newArray){
             if($newArray !== null){ 
             $newUser = new User($newArray['username'],$newArray['name'],$newArray['lastname'],$newArray['email'],$newArray['password']);
+            $newUser->setId_Type($newArray['id_type']);
             }
         }
         return $newUser;

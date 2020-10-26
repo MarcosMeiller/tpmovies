@@ -5,80 +5,65 @@ use Dao\IRol as IRol ;
 use Models\Rol as Rol;
 
 class RolDAO implements IRol{
-    private $rolList = array();
+	private $connection;
+    private $tableName = "roles";
+
 
 	
     public function add(Rol $newRol){
-		$this->retrieveData();
-		array_push($this->rolList, $newRol);
-		$this->saveData();
+		$query = "INSERT INTO ".$this->tableName." (id_type, type) VALUES (:id_type,:type)";
+
+        $parameters['id_type'] = $newRol->getId();
+        $parameters['type'] = $newRol->getType();
+          
+
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
 	}
 
 	public function getAll(){
-		$this->retrieveData();
-		return $this->rolList;
-	}
-    
-	public function search($id){
+	
+		$query = "SELECT id_type, name  FROM ".$this->tableName;
 
+		$this->connection = Connection::GetInstance();
+
+		$result = $this->connection->Execute($query);
+
+		foreach($result as $row)
+		{
+			$rol = new Rol($row["id"],$row["type"]);
+			array_push($rolList, $rol);
+		}
+
+		return $rolList;
+	}
+	
+    
+	public function search($id_type){
+
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (id_type = :id_type)";	
 		$newRol = null;
-		$this->retrieveData();
-		foreach ($this->rolList as $rol) {
-			$Idrol = $rol->getId();
-			if($Idrol == $id){
-				 $newRol = $rol; 
+		$parameters['id_type'] = $id_type;
+
+		$this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		foreach($array as $newArray){
+			if($newArray !== null){ 
+				$newRol = new Rol($newArray['id_type'],$array['type']);
 			}
+			
+		}
+		if($newRol->getType() == null){
+			$newRol->setType("null");
 		}
 		return $newRol;
-
-	}
-
-	public function saveData(){
-		$arrayToEncode = array();
-		$jsonPath = $this->GetJsonFilePath();
-		$count = 0;
-		foreach ($this->rolList as $rol) {
-			$valueArray['type'] = $rol->getType();
-			$count = $count + 1;
-			$valueArray['id'] = $count;
-			
-
-			array_push($arrayToEncode, $valueArray);
-
-		}
-		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-		file_put_contents($jsonPath, $jsonContent);
-	}
-
-	public function retrieveData(){
-		$this->rolList = array();
-
-		$jsonPath = $this->GetJsonFilePath();
-
-		$jsonContent = file_get_contents($jsonPath);
-		
-		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-		foreach ($arrayToDecode as $valueArray) {
-			$rol = new Rol($valueArray['id'],$valueArray['type']);
-			
-			array_push($this->rolList, $rol);
-		}
-    }
-
-
-
-
-    function GetJsonFilePath(){
-
-        $initialPath = "Data/roles.json";
-        if(file_exists($initialPath)){
-            $jsonFilePath = $initialPath;
-        }else{
-            $jsonFilePath = "../".$initialPath;
-        }
-
-        return $jsonFilePath;
-    }
+}
 }
 ?>

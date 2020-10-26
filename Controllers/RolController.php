@@ -19,7 +19,7 @@ class RolController
             }
             
             try{
-                $newRol = new newRol($id,$Type);
+                $newRol = new Rol($id,$Type);
                 $this->dao->add($newRol);
                 $this->ViewRol("Agregado con exito");
             }catch(Exception $e){

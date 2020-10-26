@@ -5,20 +5,53 @@ use Dao\IMovie as IMovie;
 use Models\Movie as Movie;
 
 class MovieDAO implements IMovie{
-    private $movieList = array();
+	private $connection;
+    private $tableName = "movies";
 
 	
     public function add(Movie $newMovie){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		$this->retrieveData();
-		array_push($this->movieList, $newMovie);
-		$this->saveData();
+		$query = "INSERT INTO ".$this->tableName." (id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration) VALUES (:username, :name, :lastname, :email, :password,:id_type)";
+
+        $parameters['id_movie'] = $newMovie->getId_Movie();
+        $parameters['title'] = $newMovie->getTitle();
+        $parameters['genres_id'] = $newMovie->getGenre_Id();
+        $parameters['overview'] = $newMovie->getOverview();
+        $parameters['poster_path'] = $newMovie->getPoster_Path();
+		$parameters['backdrop'] = $newMovie->getBackdrop();  
+		$parameters['adult'] = $newMovie->getAdult();    
+		$parameters['language'] = $newMovie->getLanguage();    
+		$parameters['original_language'] = $newMovie->getOriginal_Language();
+		$parmaters['duration'] = $newMovie->getDuration();    
+		   
+
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+		
 	}
 
 	public function getAll($id){ ///obtiene todos los datos y en caso de que este vacio los rellena con los datos de la api, ademas si recibe un id retorna la lista solo con los generos de ese id.
-		$this->retrieveData();
-	
+		//$movielist = 
+		$query = "SELECT id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration FROM ".$this->tableName;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query);
+
+            foreach($result as $row)
+            {
+                $movie = new Movie($row["id_movie"],$row["title"],,$row["genres_id"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
+				$movie->setId($row['idMovies']);
+                array_push($movieList, $movie);
+            }
 		$size = 0;
-		if($this->movieList !== []){
+		if($movieList !== []){
 			$size = 1;
 		}
 		if($size === 0){
@@ -46,8 +79,7 @@ class MovieDAO implements IMovie{
 	}
 
 	public function update(Movie $code){///reemplaza un objeto dentro de la lista
-		$this->retrieveData();
-		$newList = array();
+		$newList = array(); //sin actualizar.
 		foreach ($this->movieList as $movie) {
 			if($movie->getId() != $code->getId()){
 				array_push($newList, $movie);
@@ -59,38 +91,12 @@ class MovieDAO implements IMovie{
 		
 
 		$this->movieList = $newList;
-		$this->saveData();
+	
 	}
 
 
-	public function saveData(){///guarda la lista en el json
-		$arrayToEncode = array();
-		$jsonPath = $this->GetJsonFilePath();
-		$count = 0;
-		foreach ($this->movieList as $movie) {
-			$count = $count + 1;
-			$valueArray['id'] = $count;
-			$valueArray['id_movie'] = $movie->getId_Movie();
-			$valueArray['title'] = $movie->getTitle();
-            $valueArray['genres_id'] = $movie->getGenre_Id();
-			$valueArray['overview'] = $movie->getOverview();
-			$valueArray['poster_Path'] = $movie->getPoster_Path();
-			$valueArray['backdrop'] = $movie->getBackdrop();
-			$valueArray['adult'] = $movie->getAdult();
-			$valueArray['language'] = $movie->getLanguage();
-			$valueArray['original_language'] = $movie->getOriginal_Language();
-			$valueArray['release_date'] = $movie->getRelease_date();
-			
-		 
-			array_push($arrayToEncode, $valueArray);
-
-		}
-		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-		file_put_contents($jsonPath, $jsonContent);
-	}
-
+	
 	public function delete($code){///elimina un dato dentro de la lista
-		$this->retrieveData();
 		$newList = array();
 		foreach ($this->movieList as $movie) {
 			if($movie->getId() != $code){
@@ -100,26 +106,32 @@ class MovieDAO implements IMovie{
 		
 
 		$this->movieList = $newList;
-		$this->saveData();
+		
 	}
 
 	public function search($id){
 
-		$newMovie = null;
-		$this->retrieveData();
-		foreach ($this->movieList as $movie) {
-			if($movie->getId() === $id){
-				 $newMovie = $movie; 
-			}
-		}
-		return $newMovie;
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (id_movie = :id_movie)";
+        $newMovie = null;
+        $parameters["id_movie"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+			$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
+			$newMovie->setId($parameters['idMovies']);
+           
+            }
+        }
+        return $newMovie;
+
 
 	}
 
 	public function searchMovieID($id){
 
-		$newMovie = null;
-		$this->retrieveData();
+		$newMovie = $this->getAll(0);
 		foreach ($this->movieList as $movie) {
 			if($movie->getId_Movie() == $id){
 				 $newMovie = $movie; 
@@ -129,34 +141,8 @@ class MovieDAO implements IMovie{
 
 	}
 
-	public function retrieveData(){///llena la lista con los datos dentro del json
-		$this->movieList = array();
+	
 
-		$jsonPath = $this->GetJsonFilePath();
-		if(file_exists($jsonPath))
-		{
-		$jsonContent = file_get_contents($jsonPath);
-		
-		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-		foreach ($arrayToDecode as $valueArray) {
-			$movie = new Movie($valueArray['id'],$valueArray['id_movie'],$valueArray['title'],$valueArray['genres_id'],$valueArray['overview'],$valueArray['poster_Path'],$valueArray['backdrop'],$valueArray['adult'],$valueArray['language'],$valueArray['original_language'],$valueArray['release_date']);
-			
-			array_push($this->movieList, $movie);
-		}
-	}
-	}
-
-    function GetJsonFilePath(){
-
-        $initialPath = ROOT."/Data/movies.json";
-        if(file_exists($initialPath)){
-            $jsonFilePath = $initialPath;
-        }else{
-            $jsonFilePath = "../".$initialPath;
-        }
-        return $jsonFilePath;
-	}
 	
 	public function retrieveDataFromAPI(){
 		$moviedb = file_get_contents(API_HOST.'/movie/now_playing?api_key='.API_KEY.'&language='.LANG.'&page=1');
@@ -173,13 +159,14 @@ class MovieDAO implements IMovie{
 			$language = "es-ar";
 			$original_language = $movie['original_language'];
 			$release_date = $movie['release_date'];
-			$g = new Movie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date);
+			$duration = 0;
+			$g = new Movie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
 			$this->add($g);
 		}
 	} 
 
 	public function getForGenre($Genre){
-		$listMovie = $this->retrieveData();
+		$listMovie = $this->getAll(0);
 		$movielistForGenre = array();
 		foreach($listMovie as $movieForGenre){
 			foreach($movieForGenre->getGenre_id() as $genre_Id){

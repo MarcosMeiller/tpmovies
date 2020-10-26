@@ -9,41 +9,41 @@ class GenreDao implements IGenre{
 
 	
     public function add(Genre $newGenre){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		$this->retrieveData();
-		array_push($this->genreList, $newGenre);
-		$this->saveData();
+		$sql = "INSERT INTO ".$this->tableCinema." (name,address) VALUES (:name,:address)";
+
+		$parameters['id_genre'] = $newGenre->getId();
+		$parameters['name'] = $newGenre->getName();
+
+		try{
+			$this->connection = Connection::getInstance();
+
+			return $this->connection->ExecuteNonQuery($sql,$parameters);
+
+		}catch(Exception $ex){
+			throw $ex;
+		}
 	}
 
 	public function getAll(){ ///obtiene todos los datos y en caso de que la lista este vacia la llena con la api
-		$this->retrieveData();
-		$size = 0;
-		if($this->genreList !== []){
-			$size = 1;
+		$query = "SELECT id_genre, name  FROM ".$this->tableName;
+
+		$this->connection = Connection::GetInstance();
+
+		$result = $this->connection->Execute($query);
+
+		foreach($result as $row)
+		{
+			$genre = new Genre($row["id_genre"],$row["name"]);
+			array_push($genreList, $genre);
 		}
-		if($size === 0 ){
-            $this->retrieveDataFromAPI();
-        }
+
 		return $this->genreList;
 	}
 
 
-	public function saveData(){///guarda la lista en el json
-		$arrayToEncode = array();
-		$jsonPath = $this->GetJsonFilePath();
-		$count = 0;
-		foreach ($this->genreList as $genre) {
-            $valueArray['id'] = $genre->getId();
-			$valueArray['name'] = $genre->getName();
-
-			array_push($arrayToEncode, $valueArray);
-
-		}
-		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-		file_put_contents($jsonPath, $jsonContent);
-	}
-
+	
 	public function delete($code){///elimina un dato dentro de la lista
-		$this->retrieveData();
+		/*$this->retrieveData();
 		$newList = array();
 		foreach ($this->genreList as $genre) {
 			if($genre->getId() != $code){
@@ -53,40 +53,31 @@ class GenreDao implements IGenre{
 		
 
 		$this->genreList = $newList;
-		$this->saveData();
+		$this->saveData();*/
 	}
 
 	public function search($id){
 
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (id_genre = :id_genre)";	
 		$newGenre = null;
-		$this->retrieveData();
-		foreach ($this->genreList as $genre) {
-			if($genre->getId() === $id){
-				 $newGenre = $genre; 
+		$parameters['id_genre'] = $id;
+
+		$this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		foreach($array as $newArray){
+			if($newArray !== null){ 
+				$newGenre = new Genre($newArray['id_genre'],$array['name']);
 			}
+			
 		}
+		
 		return $newGenre;
 
 	}
 
-	public function retrieveData(){///llena la lista con los datos dentro del json
-		$this->genreList = array();
 
-		$jsonPath = $this->GetJsonFilePath();
-
-		$jsonContent = file_get_contents($jsonPath);
-		
-		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-		foreach ($arrayToDecode as $valueArray) {
-			$genre = new Genre($valueArray['id'],$valueArray['name']);
-			
-			array_push($this->genreList, $genre);
-		}
-	}
 
 	public function retrieveDataFromAPI(){//llena el json con los datos de la api
-		$this->genreList = array();
 		$genresdb = file_get_contents(API_HOST.'/genre/movie/list?api_key='.API_KEY.'&language='.LANG);
 		$genres = json_decode($genresdb,true,)['genres'];
 		foreach($genres as $genre){
@@ -97,19 +88,8 @@ class GenreDao implements IGenre{
 		}
 	} 
 
-    function GetJsonFilePath(){///ruta del json
 
-        $initialPath = "Data/genres.json";
-        if(file_exists($initialPath)){
-            $jsonFilePath = $initialPath;
-        }else{
-            $jsonFilePath = "../".$initialPath;
-        }
-
-        return $jsonFilePath;
-	}
-	
-	public function getForGenre($arrayMovie,$Arraygenre){//recibe 2 arrays y filtra una lista de peliculas x generos.
+	/*public function getForGenre($arrayMovie,$Arraygenre){//recibe 2 arrays y filtra una lista de peliculas x generos.
 		$this->retrieveData();
 		$aux = $arrayMovie;
 		$searched = array();
@@ -124,7 +104,7 @@ class GenreDao implements IGenre{
 			}
 		
 		return $searched;
-	}
+	}*/
 }
 
 
