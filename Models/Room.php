@@ -9,8 +9,7 @@
         private $price;
 
 
-        public function __construct($Capacity,$id_Cinema,$name,$price){
-            $this->Capacity = $Capacity;
+        public function __construct($capacity,$id_Cinema,$name,$price){
             $this->name = $name;
             $this->capacity = $capacity;
             $this->price = $price;

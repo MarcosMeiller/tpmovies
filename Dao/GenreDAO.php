@@ -3,108 +3,84 @@ namespace Dao;
 
 use Dao\IGenre as IGenre;
 use Models\Genre as Genre;
+use Dao\Connection as Connection;
 
-class GenreDao implements IGenre{
-    private $genreList = array();
+class GenreDAO implements IGenre{
+    private $connection;
+    private $tableName = "genres";
 
 	
-    public function add(Genre $newGenre){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		$sql = "INSERT INTO ".$this->tableCinema." (name,address) VALUES (:name,:address)";
+    public function add(Genre $newGenre) {
+        $query = "INSERT INTO ".$this->tableName." (idgenres,name) VALUES (:idgenres,:name)";
 
-		$parameters['id_genre'] = $newGenre->getId();
+        $parameters['idgenres'] = $newGenre->getId();
 		$parameters['name'] = $newGenre->getName();
-
+		     
 		try{
-			$this->connection = Connection::getInstance();
+			$this->connection = Connection::GetInstance();
+			return $this->connection->ExecuteNonQuery($query, $parameters);
+		}catch(PDOException $ex){
+            throw $ex;
+        }
+        
+    }
 
-			return $this->connection->ExecuteNonQuery($sql,$parameters);
+	public function getAll(){
 
-		}catch(Exception $ex){
-			throw $ex;
-		}
+			$genreList = array();
+
+            $query = "SELECT idgenres, name FROM ".$this->tableName;
+
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query);
+
+
+			if(empty($result)){
+
+				$this->retrieveDataFromAPI();
+				$result = $this->connection->Execute($query);
+			}
+
+            foreach($result as $row)
+            {
+                $genre = new Genre($row['idgenres'],$row['name']);
+             
+         
+                array_push($genreList, $genre);
+            }
+
+		return $genreList;
 	}
 
-	public function getAll(){ ///obtiene todos los datos y en caso de que la lista este vacia la llena con la api
-		$query = "SELECT id_genre, name  FROM ".$this->tableName;
 
-		$this->connection = Connection::GetInstance();
+	public function retrieveDataFromAPI(){
+		//llena el json con los datos de la api		public function retrieveDataFromAPI(){//llena el json con los datos de la api
+		$this->genreList = array();	
+		$genresdb = file_get_contents(API_HOST.'/genre/movie/list?api_key='.API_KEY.'&language='.LANG);	
 
-		$result = $this->connection->Execute($query);
+		$genres = json_decode($genresdb,true,)['genres'];
 
-		foreach($result as $row)
-		{
-			$genre = new Genre($row["id_genre"],$row["name"]);
-			array_push($genreList, $genre);
+		foreach($genres as $genre){	
+			$gen = new Genre($genre['id'],$genre['name']);
+
+			$this->add($gen);
 		}
+	} 	
 
-		return $this->genreList;
+	public function delete($code){
+        $query = "DELETE FROM ".$this->tableName." WHERE (idgenres = :idgenres)";
+
+        $parameters["idgenres"] =  $code;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
 	}
 
 
 	
-	public function delete($code){///elimina un dato dentro de la lista
-		/*$this->retrieveData();
-		$newList = array();
-		foreach ($this->genreList as $genre) {
-			if($genre->getId() != $code){
-				array_push($newList, $genre);
-			}
-		}
-		
-
-		$this->genreList = $newList;
-		$this->saveData();*/
-	}
-
-	public function search($id){
-
-		$query = "SELECT *  FROM ".$this->tableName." WHERE (id_genre = :id_genre)";	
-		$newGenre = null;
-		$parameters['id_genre'] = $id;
-
-		$this->connection = Connection::GetInstance();
-		$array = $this->connection->Execute($query, $parameters);
-		foreach($array as $newArray){
-			if($newArray !== null){ 
-				$newGenre = new Genre($newArray['id_genre'],$array['name']);
-			}
-			
-		}
-		
-		return $newGenre;
-
-	}
-
-
-
-	public function retrieveDataFromAPI(){//llena el json con los datos de la api
-		$genresdb = file_get_contents(API_HOST.'/genre/movie/list?api_key='.API_KEY.'&language='.LANG);
-		$genres = json_decode($genresdb,true,)['genres'];
-		foreach($genres as $genre){
-			$id = $genre['id'];
-			$name = $genre['name'];
-			$g = new Genre($id,$name);
-			$this->add($g);
-		}
-	} 
-
-
-	/*public function getForGenre($arrayMovie,$Arraygenre){//recibe 2 arrays y filtra una lista de peliculas x generos.
-		$this->retrieveData();
-		$aux = $arrayMovie;
-		$searched = array();
-		$aux2;
-		foreach($arrayGenre as $genre){
-			foreach($this->aux as $movie){
-				$aux2 = search($genre,$movie->getGenre());
-					if($aux2 !== null && array_search($movie,$searched)){
-						$searched[] = $movie;
-					}
-				}
-			}
-		
-		return $searched;
-	}*/
+  
 }
 
 

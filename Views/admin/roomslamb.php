@@ -44,22 +44,22 @@ require 'Views/head.php';
             <main class="w-full flex-grow p-6 pt-2">
               <div class='flex items-center row pb-6'>
   
-                <h1 class="text-3xl text-black">ABM Cines</h1>
+                <h1 class="text-3xl text-black">ABM Salas</h1>
     
               </div>
 
                 <div class="w-full">
                     <div class='flex justify-between items-center mb-5'>
                     <p class="text-xl flex items-center">
-                        <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Cines
+                        <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Salas
                     </p> 
                         <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
-                            <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Cine</p><p class='flex lg:hidden'>Cine</p>
+                            <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Sala</p><p class='flex lg:hidden'>Sala</p>
                         </button>                    
                     </div>
 
 <div id="formCine"class='hidden items-center justify-center'>
-    <?php require 'forms/formCreateCine.php' ?>
+    <?php require 'forms/formCreateRoom.php' ?>
 </div>
 
                     <div class="bg-white overflow-auto">
@@ -67,7 +67,8 @@ require 'Views/head.php';
                             <thead class="bg-gray-800 text-white">
                                 <tr>
                                     <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
-                                    <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Dirección</th>
+                                    <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Capacidad</th>
+                                    <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Precio</th>
                                     <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Editar</th>
                                     <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Eliminar</th>
                                 </tr>
@@ -99,7 +100,7 @@ require 'Views/head.php';
                               <?php } ?>
                               <?php }else{ ?>
                                   <div class='flex flex-col justify-center mt-2 items-center'>
-                                    <p class='text-xs'>Todavia no hay cines cargados.</p>
+                                    <p class='text-xs'>Todavia no hay salas cargados.</p>
                                   </div>
                               <?php } ?>
                             </tbody>

@@ -30,7 +30,7 @@ class RolDAO implements IRol{
 
 	public function getAll(){
 	
-		$query = "SELECT id_type, name  FROM ".$this->tableName;
+		$query = "SELECT * FROM ".$this->tableName;
 
 		$this->connection = Connection::GetInstance();
 
@@ -38,7 +38,8 @@ class RolDAO implements IRol{
 
 		foreach($result as $row)
 		{
-			$rol = new Rol($row["id"],$row["type"]);
+			$rol = new Rol($row["id_type"],$row["type"]);
+			$rol->setId($newArray['idroles']);
 			array_push($rolList, $rol);
 		}
 
@@ -49,21 +50,22 @@ class RolDAO implements IRol{
 	public function search($id_type){
 
 		$query = "SELECT *  FROM ".$this->tableName." WHERE (id_type = :id_type)";	
-		$newRol = null;
+		$newRol = NULL;
 		$parameters['id_type'] = $id_type;
 
 		$this->connection = Connection::GetInstance();
 		$array = $this->connection->Execute($query, $parameters);
 		foreach($array as $newArray){
 			if($newArray !== null){ 
-				$newRol = new Rol($newArray['id_type'],$array['type']);
+				$newRol = new Rol($newArray['id_type'],$newArray['type']);
+				$newRol->setId($newArray['idroles']);
 			}
 			
 		}
-		if($newRol->getType() == null){
-			$newRol->setType("null");
-		}
 		return $newRol;
-}
+
+	}
+
+
 }
 ?>

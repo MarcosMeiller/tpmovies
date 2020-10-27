@@ -45,15 +45,18 @@ class CinemaController
             $name = $this->test_input($name);
             $address = $this->test_input($address);
             if($name && $address){
-            $cinema = $this->dao->search($id);
-            if($cinema == null){
-                $this->Cinemas("El Cine no existe.");
-            }
-            
+
             try{
                 $newCinema = new cinema($name,$address);
-                $this->dao->update($newCinema);
-                $this->Cinemas("Modificado con exito","success");
+                $newCinema->setId($id);
+                $countUpdate = $this->dao->update($newCinema);
+                if($countUpdate > 0){
+                    $this->Cinemas("Modificado con exito","success");
+                }else{
+                    $this->Cinemas("Error al intentar modificar","alert");
+                }
+                
+                
 
             }catch(Exception $e){
                 $this->Cinemas("Error al modificar cine.","danger");
@@ -68,13 +71,15 @@ class CinemaController
 
     // elimina cine por id
     public function deleteCinema($id){
-            $cinema = $this->dao->search($id);
-            if($cinema === null){
-                $this->Cinemas("El Cine no existe.","alert");
-            }  
+
             try{
-                $this->dao->delete($id);
-                $this->Cinemas("Eliminado con exito","success");
+                $countDelete = $this->dao->delete(2);
+                if($countDelete > 0){
+                    $this->Cinemas("Eliminado con exito","success");
+                }else{
+                    $this->Cinemas("Error al intentar eliminar","alert");
+                }
+                
             }catch(Exception $e){
            
                 $this->Cinemas("Error al eliminar cine.","danger");
@@ -94,7 +99,7 @@ class CinemaController
     // retorna todos los cines y carga la pantalla de amb cines
     public function Cinemas($message = "",$type= ""){
         if(isset($_SESSION['loggedUser'])){
-            //$cinemasList = $this->dao->getAll(); /// VER
+            $cinemasList = $this->dao->getAll();
             $cinamasList = array();
             if($message === '' && $type === ''){
                 //unset($_SESSION['msjCinemas']);

@@ -8,15 +8,12 @@ use Dao\Connection as Connection;
 class cinemaDAO implements ICinema{
 	private $cinemaList = array();
 	private $connection;
-	private $tableCinema = "cinemas";
+	private $tableName = "cinemas";
 
-	
-	///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
+
     public function add(Cinema $newCinema){ 
-		/*$this->retrieveData();
-		array_push($this->cinemaList, $newCinema);
-		$this->saveData();*/
-		$sql = "INSERT INTO ".$this->tableCinema." (name,address) VALUES (:name,:address)";
+
+		$sql = "INSERT INTO ".$this->tableName." (name,address) VALUES (:name,:address)";
 
 		$parameters['name'] = $newCinema->getName();
 		$parameters['address'] = $newCinema->getAddress();
@@ -32,101 +29,54 @@ class cinemaDAO implements ICinema{
 	}
 
 	public function getAll(){ ///obtiene todos los datos
-		$this->retrieveData();
-		return $this->cinemaList;
-	}
-    
-	public function search($id){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
+		$cinemasList = array();
 
-		$newCinema = null;
-		$this->retrieveData();
-		foreach ($this->cinemaList as $cinema) {
-			$ID = $cinema->getId();
-			if($ID === $id){
-				 $newCinema = $cinema; 
+		$query = "SELECT idcinemas, name, address FROM ".$this->tableName;
+            $this->connection = Connection::GetInstance();
+            $result = $this->connection->Execute($query);
+            foreach($result as $row){
+				$cinema = new Cinema($row["name"],$row["address"]);
+				$cinema->setId($row['idcinemas']);
+                array_push($cinemasList, $cinema);
 			}
-		}
+		return $cinemasList;
+	}
+ 
+	
+	public function search($id){ 
+
+
 		return $newCinema;
 
 	}
 
-	public function saveData(){ ///guarda la lista en el json
-		$arrayToEncode = array();
-		$jsonPath = $this->GetJsonFilePath();
-		$count = 0;
-		foreach ($this->cinemaList as $cinema) {
-			$valueArray['name'] = $cinema->getName();
-			$valueArray['address'] = $cinema->getAddress();
-			$count = $count + 1;
-			$valueArray['id'] = $count;
 
-			array_push($arrayToEncode, $valueArray);
-
-		}
-		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-		file_put_contents($jsonPath, $jsonContent);
-	}
-
-	public function retrieveData(){ ///llena la lista con los datos dentro del json
-		$this->cinemaList = array();
-
-		$jsonPath = $this->GetJsonFilePath();
-
-		$jsonContent = file_get_contents($jsonPath);
-		
-		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-		foreach ($arrayToDecode as $valueArray) {
-			$cinema = new Cinema($valueArray['name'],$valueArray['address']);
-			$cinema->setId($valueArray['id']);
-			
-			array_push($this->cinemaList, $cinema);
-		}
-    }
     
-    public function delete($code){///elimina un dato dentro de la lista
-		$this->retrieveData();
-		$newList = array();
-		foreach ($this->cinemaList as $cinema) {
-			if($cinema->getId() != $code){
-				array_push($newList, $cinema);
-			}
-		}
+    public function delete($id){///elimina un dato dentro de la lista
+		$query = "DELETE FROM ".$this->tableName." WHERE (idcinemas = :idcinemas)";
 
-		$this->cinemaList = $newList;
-		$this->saveData();
+        $parameters["idcinemas"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
 	}
 
-	public function update(Cinema $code){ ///reemplaza un objeto dentro de la lista
-		$this->retrieveData();
-		$newList = array();
-		foreach ($this->cinemaList as $cinema) {
-			if($cinema->getId() != $code->getId()){
-				array_push($newList, $cinema);
-			}
-			else{
-				array_push($newList,$code);
-			}
-		}
-		
+	public function update(Cinema $code){ ///reemplaza un objeto dentro de la 
 
-		$this->cinemaList = $newList;
-		$this->saveData();
+		$query = "UPDATE ".$this->tableName." SET name=:name, address=:address  WHERE (idcinemas = :idcinemas)";
+
+		$parameters['name'] = $code->getName();
+		$parameters['address'] = $code->getAddress();
+        $parameters["idcinemas"] =  $code->getId();
+
+        $this->connection = Connection::GetInstance();
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
 	}
 
 
 
-    function GetJsonFilePath(){ ///ruta del json
-
-        $initialPath = "Data/cinemas.json";
-        if(file_exists($initialPath)){
-            $jsonFilePath = $initialPath;
-        }else{
-            $jsonFilePath = "../".$initialPath;
-        }
-
-        return $jsonFilePath;
-    }
 }
 
 

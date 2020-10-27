@@ -87,11 +87,12 @@ class RoomController
 
 
     // retorna todos las salas y carga la pantalla de amb room
-    public function Room($message = "",$type= ""){
+    public function Rooms($message = "",$type= ""){
         if(isset($_SESSION['loggedUser'])){
-            $roomList = $this->dao->getAll();
+            //$roomList = $this->dao->getAll(); // MARCOS
+           
             if($message === '' && $type === ''){
-                require_once(VIEWS_PATH_ADMIN."/roomlamb.php");
+                require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }else{
                 $_SESSION['msjRoom'] = $message;
                 $_SESSION["bgMsgRoom"] = $type;

@@ -8,12 +8,12 @@
                 <i class="fas fa-video mr-3"></i>
                 Cines
             </a>
-            <!--<a href="tables.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
-                <i class="fas fa-ticket-alt mr-3"></i>
-                Consultas
+            <a href="<?php echo FRONT_ROOT ?>Room/Rooms" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
+                <i class="fas fa-person-booth mr-3"></i>
+                Salas
             </a>
-            <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
-                <i class="fas fa-calculator mr-3"></i>
+            <!--<a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
+                <i class="fas fa-ticket-alt mr-3"></i>
                 Totales
             </a>
             <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">

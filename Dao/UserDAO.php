@@ -44,6 +44,7 @@ class UserDAO implements IUser{
             {
                 $user = new User($row["id"],$row["username"],$row["name"],$row["lastname"],$row["email"],$row["password"]);
                 $user->setId_Type($row['id_type']);
+                $newUser->setId($newArray['idusers']);
                 array_push($userList, $user);
             }
 
@@ -63,6 +64,7 @@ class UserDAO implements IUser{
             if($newArray !== null){ 
             $newUser = new User($newArray['username'],$newArray['name'],$newArray['lastname'],$newArray['email'],$newArray['password']);
             $newUser->setId_Type($newArray['id_type']);
+            // id user  CHAR
             }
         }
         return $newUser;
