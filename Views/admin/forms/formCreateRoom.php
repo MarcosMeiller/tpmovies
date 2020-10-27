@@ -9,24 +9,22 @@
         Cine
       </label>
 
-<!--
-  <select requerid form ="idmovie" id="idmovie" name='idmovie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
-onchange="this.form.submit()"
+
+  <select requerid id="id_Cinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
 >
     <option value=''>Seleccione un cine</option>
-    <?php foreach($genresList as $genre){ ?>
-        <option value="<?php echo $genre->getId() ?>"
-        
-        <?php $idGenre = $genre->getId(); ?>
+    <?php foreach($cinemasList as $cinema){ ?>
+        <option value="<?php echo $cinema->getId() ?>"
+      
 
-        ><?php echo $genre->getName()?> </option>
+        ><?php echo $cinema->getName()?> </option>
     <?php } ?>
 </select>
-  -->
-
-  <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
-
-
+  
+    <!--
+  <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="id_Cinema" type="number" name='id_Cinema' placeholder="Ingrese nombre del cine" required maxlength='25'>
+    -->
+    
   </div>
   
 

@@ -10,13 +10,14 @@
 
 
         public function __construct($capacity,$id_Cinema,$name,$price){
+            $this->id_Cinema = $id_Cinema;
             $this->name = $name;
             $this->capacity = $capacity;
             $this->price = $price;
         }
 
         public function getCapacity(){
-            return $this->Capacity;
+            return $this->capacity;
         }
 
         public function getId(){

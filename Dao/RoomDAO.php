@@ -5,84 +5,101 @@ use Dao\IRoom as IRoom ;
 use Models\Room as Room;
 
 class roomDAO implements IRoom{
-    private $roomList = array();
-
+    private $connection;
+    private $tableName = "rooms";
 	
     public function add(Room $newRoom){ ///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		$this->retrieveData();
-		array_push($this->roomList, $newRoom);
-		$this->saveData();
+		$query = "INSERT INTO ".$this->tableName." (id_cinema,name,capacity,price) VALUES (:id_cinema, :name, :capacity, :price)";
+
+        $parameters['id_cinema'] = $newRoom->getId_Cinema();
+        $parameters['name'] = $newRoom->getName();
+        $parameters['capacity'] = $newRoom->getCapacity();
+        $parameters['price'] = $newRoom->getPrice();
+		
+		   
+
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+		
 	}
 
 	public function getAll(){ ///obtiene todos los datos
-		$this->retrieveData();
-		return $this->roomList;
+		$query = "SELECT idrooms, id_cinema,name,capacity,price FROM ".$this->tableName;
+			$roomsList = array();
+            $this->connection = Connection::GetInstance();
+
+            $result = $this->connection->Execute($query);
+
+            foreach($result as $row)
+            {
+                $room = new Room($row["capacity"],$row["id_cinema"],$row["name"],$row["price"]);
+				$room->setId($row['idrooms']);
+                array_push($roomsList, $room);
+            }
+		return $roomsList;
+	}
+
+	public function getAllByCinema($id){ ///obtiene todos los datos segun el id de cinema
+        
+            $query = "SELECT * From ".$this->tableName." WHERE id_cinema = :id_cinema";
+			$roomsList = array();
+
+			$parameters["id_cinema"] =  (int)$id;
+
+            $this->connection = Connection::GetInstance();
+			
+            $result = $this->connection->Execute($query);
+           
+            foreach($result as $row)
+            {
+                $room = new Room($row["capacity"],$row["id_cinema"],$row["name"],$row["price"]);
+				$room->setId($row['idrooms']);
+                array_push($roomsList, $room);
+            }
+		return $roomsList;
 	}
     
 	public function search($id){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
 
-		$newRoom = null;
-		$this->retrieveData();
-		foreach ($this->roomList as $room) {
-			$ID = $room->getId();
-			if($ID === $id){
-				 $newRoom = $room; 
-			}
-		}
-		return $newRoom;
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (idrooms = :idrooms)";
+        $newRoom = null;
+        $parameters["idrooms"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+            $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+            $newRoom->setId($newArray['idrooms']);
+            }
+        }
+        return $newRoom;
+
 
     }
 
-	public function saveData(){ ///guarda la lista en el json
-		$arrayToEncode = array();
-		$jsonPath = $this->GetJsonFilePath();
-		$count = 0;
-		foreach ($this->roomList as $room) {
-			$valueArray['name'] = $room->getName();
-			$valueArray['capacity'] = $room->getCapacity();
-			$count = $count + 1;
-			$valueArray['id'] = $count;
-            $valueArray['price'] = $room->getPrice();
-            $valueArray['id_Cinema'] = $room->getId_Cinema();
-
-			array_push($arrayToEncode, $valueArray);
-
-		}
-		$jsonContent = json_encode($arrayToEncode, JSON_PRETTY_PRINT);
-		file_put_contents($jsonPath, $jsonContent);
-	}
-
-	public function retrieveData(){ ///llena la lista con los datos dentro del json
-		$this->roomList = array();
-
-		$jsonPath = $this->GetJsonFilePath();
-
-		$jsonContent = file_get_contents($jsonPath);
-		
-		$arrayToDecode = ($jsonContent) ? json_decode($jsonContent, true) : array();
-
-		foreach ($arrayToDecode as $valueArray) {
-			$room = new Room($valueArray['capacity'],$valueArray['id_Cinema'],$valueArray['name'],$valueArray['price']);
-			
-			array_push($this->roomList, $room);
-		}
-    }
+	
+	
     
     public function delete($code){///elimina un dato dentro de la lista
-		$this->retrieveData();
-		$newList = array();
-		foreach ($this->roomList as $room) {
-			if($room->getId() != $code){
-				array_push($newList, $room);
-			}
-		}
+		$query = "DELETE FROM ".$this->tableName." WHERE (idrooms = :idrooms)";
 
-		$this->roomList = $newList;
-		$this->saveData();
+        $parameters["idrooms"] =  $code;
+
+        $this->connection = Connection::GetInstance();
+
+        $this->connection->ExecuteNonQuery($query, $parameters);
 	}
 
 	public function update(Room $code){ ///reemplaza un objeto dentro de la lista
-		$this->retrieveData();
+		//$this->retrieveData();
 		$newList = array();
 		foreach ($this->roomList as $room) {
 			if($room->getId() != $code->getId()){
@@ -95,23 +112,10 @@ class roomDAO implements IRoom{
 		
 
 		$this->roomList = $newList;
-		$this->saveData();
+		//$this->saveData();
 	}
 
-
-
-    function GetJsonFilePath(){ ///ruta del json
-
-        $initialPath = "Data/room.json";
-        if(file_exists($initialPath)){
-            $jsonFilePath = $initialPath;
-        }else{
-            $jsonFilePath = "../".$initialPath;
-        }
-
-        return $jsonFilePath;
-    }
 }
 
-
+    
 ?>

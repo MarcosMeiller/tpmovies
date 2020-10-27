@@ -1,20 +1,20 @@
 <?php namespace admin;
 
-if(empty($_SESSION["msjCinemas"])){
+if(empty($_SESSION["msjRoom"])){
  
   $message = "";
 }else{
  
-  $message = $_SESSION["msjCinemas"];
-  $type = $_SESSION["bgMsgCinemas"];
+  $message = $_SESSION["msjRoom"];
+  $type = $_SESSION["bgMsgRoom"];
     
 
 
   switch($type){
       case "success":     
         echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.success('".$message."', '', {timeOut: 2000});</script>";
-        unset($_SESSION['msjCinemas']);
-        unset($_SESSION["bgMsgCinemas"]);
+        unset($_SESSION['msjRoom']);
+        unset($_SESSION["bgMsgRoom"]);
       break;
       case "alert": 
         echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('".$message."', '', {timeOut: 2000});</script>";
@@ -49,10 +49,13 @@ require 'Views/head.php';
               </div>
 
                 <div class="w-full">
-                    <div class='flex justify-between items-center mb-5'>
+                    <div class='flex justify-between items-center mb-5 bg-red-500'>
                     <p class="text-xl flex items-center">
                         <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Salas
                     </p> 
+
+                        <?php require "forms/formRoomFilters.php" ?>
+
                         <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
                             <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Sala</p><p class='flex lg:hidden'>Sala</p>
                         </button>                    
@@ -66,7 +69,8 @@ require 'Views/head.php';
                         <table class="min-w-full bg-white">
                             <thead class="bg-gray-800 text-white">
                                 <tr>
-                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre</th>
+                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre Cine</th>
+                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Nombre Sala</th>
                                     <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Capacidad</th>
                                     <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Precio</th>
                                     <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Editar</th>
@@ -75,26 +79,41 @@ require 'Views/head.php';
                             </thead>
                             <tbody class="text-gray-700">
 
-                            <?php if($cinemasList){ ?>
+                            <?php if($roomsList){ ?>
 
-                              <?php foreach($cinemasList as $cinema){
+                              <?php foreach($roomsList as $rooms){
                                 ?>
-                                <tr>
-                                    <td class="w-1/5 text-left py-3 px-4"><?php echo $cinema->getName(); ?></td>
-                                    <td class="w-1/5 text-left py-3 px-4">
-                                    <?php echo $cinema->getAddress(); ?></td>
+                                <tr> 
+                                <?php foreach($cinemasList as $cinemas){ 
+                                    if($cinemas->getId() == $rooms->getId_Cinema()){
+                                  ?>
+                                    
+                                    <td class="w-1/5 text-left py-3 px-4"><?php echo $cinemas->getName(); ?></td>
+                                  <?php } 
+                                      }
+                                   ?>
 
+                                    <td class="w-1/5 text-left py-3 px-4"><?php echo $rooms->getName(); ?></td>
+                                    <td class="w-1/5 text-left py-3 px-4">
+
+                                    <?php echo $rooms->getCapacity(); ?></td>
+                                    <td class="w-1/5 text-left py-3 px-4">
+                                    <?php echo $rooms->getPrice(); ?></td>
+                                    
                                     <td class="text-center py-3 px-4">
-                                    <a 
-                                      data-id="<?php echo($cinema->getId()); ?>" 
-                                      data-name="<?php echo($cinema->getName()); ?>"
-                                      data-address="<?php echo($cinema->getAddress()); ?>"
+                                    
+                                    <a
+                                      data-id="<?php echo($rooms->getId()); ?>" 
+                                      data-name="<?php echo($rooms->getName()); ?>"
+                                      data-name="<?php echo($rooms->getId_Cinema()); ?>"
+                                      data-capacity="<?php echo($rooms->getCapacity()); ?>"
+                                      data-price="<?php echo($rooms->getPrice()); ?>"
                                       class="modal-open hover:text-blue-500" href="">
                                     <i class="fas fa-edit"></i>
                                     </a>
                                     </td>
 
-                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Cinema/deleteCinema/<?php echo $cinema->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
+                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Room/deleteRoom/<?php echo $rooms->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
                               <?php } ?>

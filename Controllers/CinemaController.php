@@ -73,7 +73,7 @@ class CinemaController
     public function deleteCinema($id){
 
             try{
-                $countDelete = $this->dao->delete(2);
+                $countDelete = $this->dao->delete($id);
                 if($countDelete > 0){
                     $this->Cinemas("Eliminado con exito","success");
                 }else{
@@ -100,7 +100,6 @@ class CinemaController
     public function Cinemas($message = "",$type= ""){
         if(isset($_SESSION['loggedUser'])){
             $cinemasList = $this->dao->getAll();
-            $cinamasList = array();
             if($message === '' && $type === ''){
                 //unset($_SESSION['msjCinemas']);
                 //unset($_SESSION["bgMsgCinemas"]);
