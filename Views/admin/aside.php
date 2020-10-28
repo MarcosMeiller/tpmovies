@@ -5,6 +5,10 @@
         </div>
         <nav class="text-white text-base font-semibold">
             <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
+                <i class="fas fa-film mr-3"></i>
+                Peliculas
+            </a>
+            <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
                 <i class="fas fa-video mr-3"></i>
                 Cines
             </a>

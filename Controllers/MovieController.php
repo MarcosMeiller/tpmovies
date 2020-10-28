@@ -100,6 +100,14 @@ class MovieController
         }
     }
 
+    public function MoviesAdmin(){
+        // MARCOS
+        // traer todas las movies de una tabla que sea MovieXadmin
+        // y traer todas las movies de la api parecido a retrieveDataFromAPI 
+        // que esta en el movieDAO
+        // guardar esas 2 lista y redirigir a la pantalla de movieadmin (que falta hacer)
+    }
+
     public function MoviesNowPByGenre($id){
         if(isset($_SESSION['loggedUser'])){  
             $_SESSION['id'] = $id;

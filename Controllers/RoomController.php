@@ -90,28 +90,37 @@ class RoomController
         $data = htmlspecialchars($data);
         return $data;
 }
-    public function getRoomByCinema($id){
-        $roomsList = $this->dao->getAllByCinema($id);
-        if($roomsList !== null){
-            return $roomsList;
+    
+        public function RoomsCinema($id = 0){
+        if($id !== 0){
+            $this->Rooms("","",$id);  
+        }else{
+            $this->Rooms();
         }
-        else{
-            $this->Rooms("Este Cine no tiene salas, seleccione otro","alert");
-        }
-       
+           
     }
 
 
     // retorna todos las salas y carga la pantalla de amb room
-    public function Rooms($message = "",$type= ""){
+    public function Rooms($message = "",$type= "",$id=0){
         if(isset($_SESSION['loggedUser'])){
-            $roomsList = $this->dao->getAll(); 
-            $cinemasList = $this->daoC->getAll();
-            if($message === '' && $type === ''){
+            if($id == 0){
+                $roomsList = $this->dao->getAll(); 
+            }else{
+                $roomsList = $this->dao->getAllByCinema($id);
+            }
+
+            $cinemasList = $this->daoC->getAll();  
+
+            if($message === '' && $type === '' && $id === 0){
+                unset($_SESSION['idCinema']);
                 require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }else{
+                $_SESSION['idCinema'] = $id;
                 $_SESSION['msjRoom'] = $message;
                 $_SESSION["bgMsgRoom"] = $type;
+                $_SESSION['roomsList'] = $roomsList;
+                //header("Location: /tpmovies/Room/Rooms");
                 require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }
         }else{

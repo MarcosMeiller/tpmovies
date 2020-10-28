@@ -7,8 +7,8 @@ if(empty($_SESSION["msjRoom"])){
  
   $message = $_SESSION["msjRoom"];
   $type = $_SESSION["bgMsgRoom"];
-    
 
+$roomsList = $_SESSION['roomsList'];
 
   switch($type){
       case "success":     

@@ -27,12 +27,16 @@
 
             <!-- Dropdown Nav -->
             <nav :class="isOpen ? 'flex': 'hidden'" class="flex flex-col pt-4">
-                <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center bg-blue-900 text-white py-2 pl-4 nav-item hover:bg-blue-900">
+                <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center  text-white py-2 pl-4 nav-item hover:bg-blue-900">
 					<i class="fas fa-film mr-3"></i>
+                	Peliculas
+                </a>
+                <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center text-white py-2 pl-4 nav-item hover:bg-blue-900">
+					<i class="fas fa-video mr-3"></i>
                 	Cines
                 </a>
-                <a href="<?php echo FRONT_ROOT ?>Room/Rooms" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
-                	<i class="fas fa-video mr-3"></i>
+                <a href="<?php echo FRONT_ROOT ?>Room/Rooms" class="flex items-center text-white py-2 pl-4 nav-item hover:bg-blue-900">
+                	<i class="fas fa-person-booth mr-3"></i>
                 	Salas
                 </a>
                 <!--<a href="" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">

@@ -48,21 +48,23 @@ class roomDAO implements IRoom{
 
 	public function getAllByCinema($id){ ///obtiene todos los datos segun el id de cinema
         
-            $query = "SELECT * From ".$this->tableName." WHERE id_cinema = :id_cinema";
-			$roomsList = array();
+            $query = "SELECT * FROM ".$this->tableName." WHERE id_cinema = :id_cinema";
+            
+            $roomsList = array();
 
 			$parameters["id_cinema"] =  (int)$id;
 
             $this->connection = Connection::GetInstance();
 			
-            $result = $this->connection->Execute($query);
+            $result = $this->connection->Execute($query,$parameters);
            
+
             foreach($result as $row)
             {
                 $room = new Room($row["capacity"],$row["id_cinema"],$row["name"],$row["price"]);
 				$room->setId($row['idrooms']);
                 array_push($roomsList, $room);
-            }
+            }        
 		return $roomsList;
 	}
     
