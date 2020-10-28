@@ -4,7 +4,7 @@
             <a href="<?php echo FRONT_ROOT ?>Admin" class="text-white md:text-md lg:text-xl font-bold hover:text-gray-300">MOVIEPASS Admin</a>
         </div>
         <nav class="text-white text-base font-semibold">
-            <a href="<?php echo FRONT_ROOT ?>Cinema/Cinemas" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
+            <a href="<?php echo FRONT_ROOT ?>Movie/MoviesNowPlaying" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
                 <i class="fas fa-film mr-3"></i>
                 Peliculas
             </a>

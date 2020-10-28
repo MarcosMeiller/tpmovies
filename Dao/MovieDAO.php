@@ -1,6 +1,7 @@
 <?php 
 namespace Dao;
 
+
 use Dao\IMovie as IMovie;
 use Models\Movie as Movie;
 
@@ -10,8 +11,7 @@ class MovieDAO implements IMovie{
 
 	
     public function add(Movie $newMovie){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
-		
-		/*$query = "INSERT INTO ".$this->tableName." (id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration) VALUES (:username, :name, :lastname, :email, :password,:id_type)";*/
+	
 
 		$query = "INSERT INTO ".$this->tableName." (id_movie, title) VALUES (:id_movie,:title)";
 
@@ -141,15 +141,99 @@ class MovieDAO implements IMovie{
 
 	}
 
+	public function retriveMoviexAdmin(){
+		$moviedb = file_get_contents(API_HOST.'/movie/now_playing?api_key='.API_KEY.'&language='.LANG.'&page=1');
+		$movies = json_decode($moviedb,true,)['results'];
+		$arraymovies = array();
+		foreach($movies as $movie){
+			$movieD= new Movie($movie["id"],$movie["title"]);
+			$movieD->setGenre_Id("genres_id");
+			$movieD->setOverview("overview");
+			$movieD->setPoster_Path("poster_path");
+			$movieD->setBackdrop("backdrop_path");
+			$movieD->setLanguage("es-ar");
+			$movieD->setOriginal_Language("original_language");
+			$movieD->setRelease_date("release_date");
+			$movieD->setAdult("adult");
+			array_push($arraymovies,$movieD);
+
+		}	
+		return $arraymovies;
+		
+	}
+
+	public function addMoviexAdmin($id_Admin,$id_movie){
+		$query = "INSERT INTO"."moviesxadmin"."VALUE(:id_admin,:id_movie)";
+		$parameters['id_admin'] = $id_Admin;
+		$parameters['id_movie'] = $id_movie;
+
+		try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+
+	}
+
+	public function getMoviexAdmin($id_admin){
+		$query = "SELECT id_movie 
+		from moviesxadmin AS ma
+		INNER JOIN movies AS m ON ma.idmovie = m.idmovies
+		WHERE ma.idadmin = :idadmin";
+		$parameters["idadmin"] = $id_admin;
+		
+		try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->Execute($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+
+
+
+	}
+	public function add2(Movie $newMovie){
+		$query = "INSERT INTO "."moviesxadmin". "VALUE(:id_movie, :title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:relase_date,:duration)";
+		$parameters['id_movie'] = $newMovie->getId_Movie();
+        $parameters['title'] = $newMovie->getTitle();
+        $parameters['genres_id'] = $newMovie->getGenre_Id();
+        $parameters['overview'] = $newMovie->getOverview();
+        $parameters['poster_path'] = $newMovie->getPoster_Path();
+		$parameters['backdrop'] = $newMovie->getBackdrop();  
+		$parameters['adult'] = $newMovie->getAdult();    
+		$parameters['language'] = $newMovie->getLanguage();    
+		$parameters['original_language'] = $newMovie->getOriginal_Language();
+		$parmaters['duration'] = $newMovie->getDuration();    
+		   
+
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+
+	}
+
 	public function searchMovieID($id){
 
-		$newMovie = $this->getAll(0);
+		/*$newMovie = $this->getAll(0);
 		foreach ($this->movieList as $movie) {
 			if($movie->getId_Movie() == $id){
 				 $newMovie = $movie; 
 			}
 		}
-		return $newMovie;
+		return $newMovie;*/
 
 	}
 

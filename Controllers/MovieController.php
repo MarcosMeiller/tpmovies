@@ -93,8 +93,10 @@ class MovieController
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);
             $genresList = $this->gDao->getAll();
-            $moviesList = $this->dao->getAll($id);
-            require_once(VIEWS_PATH."moviesnowp.php");             
+            $moviesList = $this->dao->retriveMoviexAdmin();
+            $adminmovies = $this->dao->getMoviexAdmin(3);
+          
+            require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
         }else{
             header("Location: /tpmovies/");
         }

@@ -1,6 +1,6 @@
 <?php 
 namespace Dao;
-
+use FFI\Exception;
 use Dao\ICinema as ICinema ;
 use Models\Cinema as Cinema;
 use Dao\Connection as Connection;
