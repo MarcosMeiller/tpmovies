@@ -1,6 +1,6 @@
 <?php namespace admin;
 require 'Views/head.php'; 
-$id = 0;
+$id = 0; 
     if($adminmovies){
         foreach($adminmovies as $movieAdmin){
             foreach($moviesList as $movie){

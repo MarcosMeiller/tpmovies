@@ -1,5 +1,6 @@
 <?php 
 namespace Dao;
+USE PDOException;
 use FFI\Exception;
 use Dao\ICinema as ICinema ;
 use Models\Cinema as Cinema;
@@ -46,7 +47,7 @@ class cinemaDAO implements ICinema{
 	public function search($id){ 
 
 
-		return $newCinema;
+		//return $newCinema;
 
 	}
 

@@ -33,7 +33,7 @@
         }
 
         public function getId_Movie(){
-            return $this->Id_Movie;
+            return $this->id_Movie;
         }
 
         public function setId($id){

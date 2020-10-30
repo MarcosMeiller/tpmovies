@@ -1,7 +1,7 @@
 <?php 
 namespace Dao;
 
-
+USE PDOException;
 use Dao\IMovie as IMovie;
 use Models\Movie as Movie;
 
@@ -144,7 +144,7 @@ class MovieDAO implements IMovie{
 	public function retriveMoviexAdmin(){
 		$moviedb = file_get_contents(API_HOST.'/movie/now_playing?api_key='.API_KEY.'&language='.LANG.'&page=1');
 		$movies = json_decode($moviedb,true,)['results'];
-		$arraymovies = array();
+		/*$arraymovies = array();
 		foreach($movies as $movie){
 			$movieD= new Movie($movie["id"],$movie["title"]);
 			$movieD->setGenre_Id("genres_id");
@@ -159,7 +159,8 @@ class MovieDAO implements IMovie{
 
 		}	
 		return $arraymovies;
-		
+		*/
+		return $movies;
 	}
 
 	public function addMoviexAdmin($id_Admin,$id_movie){

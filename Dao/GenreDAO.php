@@ -1,6 +1,6 @@
 <?php 
 namespace Dao;
-
+USE PDOException;
 use Dao\IGenre as IGenre;
 use Models\Genre as Genre;
 use Dao\Connection as Connection;
