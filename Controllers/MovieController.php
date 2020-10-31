@@ -78,9 +78,8 @@ class MovieController
 
    // agregar movie a la admin
    public function addMoviexAdmin($idmovie){
-
-       $idmoviedb = $this->dao->getMovieFromAPI($idmovie); // se fija si esta en la db cargado y sino lo buscar en la api y lo guarda en db
        
+       $idmoviedb = $this->dao->getMovieFromAPI($idmovie); // se fija si esta en la db cargado y sino lo buscar en la api y lo guarda en db
        $user = $_SESSION['loggedUser'];
        $id = $user->getId();
        $this->dao->addMoviexAdmin($id,$idmoviedb);

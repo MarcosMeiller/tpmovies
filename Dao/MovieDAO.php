@@ -13,19 +13,20 @@ class MovieDAO implements IMovie{
     public function add(Movie $newMovie){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
 	
 
-		$query = "INSERT INTO ".$this->tableName." (id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,duration) VALUES (:id_movie,:title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:duration)";
-
+		$query = "INSERT INTO ".$this->tableName." (id_movie, title,overview,poster_path,backdrop,adult,language,original_language,duration,release_date) VALUES (:id_movie,:title,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:duration,:release_date)";
+	
         $parameters['id_movie'] = $newMovie->getId_Movie();
         $parameters['title'] = $newMovie->getTitle();
-        $parameters['genres_id'] = $newMovie->getGenre_Id();
         $parameters['overview'] = $newMovie->getOverview();
         $parameters['poster_path'] = $newMovie->getPoster_Path();
 		$parameters['backdrop'] = $newMovie->getBackdrop();  
 		$parameters['adult'] = $newMovie->getAdult();    
 		$parameters['language'] = $newMovie->getLanguage();    
 		$parameters['original_language'] = $newMovie->getOriginal_Language();
-		$parmaters['duration'] = $newMovie->getDuration(); 
-		   
+		$parameters['release_date'] = $newMovie->getRelease_date();
+		$parameters['duration'] = $newMovie->getDuration(); 
+	
+	
 
         try{
             
@@ -41,7 +42,7 @@ class MovieDAO implements IMovie{
 
 	public function getAll($id){ ///obtiene todos los datos y en caso de que este vacio los rellena con los datos de la api, ademas si recibe un id retorna la lista solo con los generos de ese id.
 		//$movielist = 
-		$movieList = array();
+		/*$movieList = array();
 
 		//$query = "SELECT id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration FROM ".$this->tableName;
 		$query = "SELECT idmovies, id_movie, title FROM ".$this->tableName;
@@ -53,9 +54,9 @@ class MovieDAO implements IMovie{
 
             foreach($result as $row)
             {
-				/*$movie = new Movie($row["id_movie"],$row["title"],$row["genres_id"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);*/
+				$movie = new Movie($row["id_movie"],$row["title"],$row["genres_id"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
 
-				$movie = new Movie($row["id_movie"],$row["title"]);
+				//$movie = new Movie($row["id_movie"],$row["title"]);
 				
 
 				$movie->setId($row['idmovies']);
@@ -86,7 +87,7 @@ class MovieDAO implements IMovie{
 				
 			$movieList = $moviesFilter;	
 		}
-		return $movieList;
+		return $movieList;*/
 	}
 
 	public function update(Movie $code){///reemplaza un objeto dentro de la lista
@@ -140,10 +141,10 @@ class MovieDAO implements IMovie{
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
             if($newArray !== null){ 
-			/*$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
-			$newMovie->setId($parameters['idMovies']);*/
-			$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
-			
+			$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
+			$newMovie->setId($parameters['idMovies']);
+			/*$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
+			*/
             }
         }
         return $newMovie;
@@ -153,19 +154,20 @@ class MovieDAO implements IMovie{
 
 	public function searchMovieIdApi($id){
 
-		$query = "SELECT * FROM moviesxadmin  WHERE (idmovie = :idmovie)";
+		$query = "SELECT * FROM ".$this->tableName."  WHERE (id_movie = :id_movie)";
         $newMovie = null;
-        $parameters["idmovie"] =  $id;
+        $parameters["id_movie"] =  $id;
 
         $this->connection = Connection::GetInstance();
 		$array = $this->connection->Execute($query, $parameters);
 		
         foreach($array as $newArray){
             if($newArray !== null){ 
-				$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
-				$newMovie->setId($parameters['idMovies']);
+				$newMovie= new Movie($newArray["id_movie"],$newArray["title"],$newArray["overview"],$newArray["poster_path"],$newArray["backdrop"],$newArray["adult"],$newArray["language"],$newArray["original_language"],$newArray["release_date"],$newArray["duration"]);
+				$newMovie->setId($newArray['idmovies']);
 			}
-        }
+		}
+		
         return $newMovie;
 
 
@@ -196,9 +198,10 @@ class MovieDAO implements IMovie{
 	public function addMoviexAdmin($id_Admin,$id_movie){
 
 
-		$query = "INSERT INTO"."moviesxadmin"."VALUE(:id_admin,:id_movie)";
-		$parameters['id_admin'] = $id_Admin;
-		$parameters['id_movie'] = $id_movie;
+		$query = "INSERT INTO moviesxadmin (idadmin,idmovie) VALUES (:idadmin,:idmovie)";
+		$parameters['idadmin'] = $id_Admin;
+		$parameters['idmovie'] = $id_movie;
+	
 
 		try{
             
@@ -239,14 +242,14 @@ class MovieDAO implements IMovie{
 		$query = "INSERT INTO "."moviesxadmin". "VALUE(:id_movie, :title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:relase_date,:duration)";
 		$parameters['id_movie'] = $newMovie->getId_Movie();
         $parameters['title'] = $newMovie->getTitle();
-        $parameters['genres_id'] = $newMovie->getGenre_Id();
+       
         $parameters['overview'] = $newMovie->getOverview();
         $parameters['poster_path'] = $newMovie->getPoster_Path();
 		$parameters['backdrop'] = $newMovie->getBackdrop();  
 		$parameters['adult'] = $newMovie->getAdult();    
 		$parameters['language'] = $newMovie->getLanguage();    
 		$parameters['original_language'] = $newMovie->getOriginal_Language();
-		$parmaters['duration'] = $newMovie->getDuration();    
+		$parameters['duration'] = $newMovie->getDuration();    
 		   
 
         try{
@@ -289,31 +292,26 @@ class MovieDAO implements IMovie{
 			$original_language = $movie['original_language'];
 			$release_date = $movie['release_date'];
 			$duration = 0;
-			$g = new Movie($id,$id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
-			$this->add($g);
-		}*/
-
-		foreach($movies as $movie){	
-			$id_Movie = $movie['id'];
-			$title = $movie['title'];
-			$g = new Movie($id_Movie,$title);
+			$g = new Movie($id,$id_Movie,$title,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
 			$this->add($g);
 		}
+*/
+	
+		return $movies;
 
 	} 
 
 	// trae la movie completa de la api y retorna el id
 	public function getMovieFromAPI($id){
 
-		$movie = $this->searchMovieIdApi($movies['id']);
-
-		if($movie === null ){
+		$movie = $this->searchMovieIdApi($id);
+	
+		$genres_id = array();
+		if($movie == null ){
 			$moviedb = file_get_contents(API_HOST.'/movie/'.$id.'?api_key='.API_KEY.'&language='.LANG);
 			$movie = json_decode($moviedb,true,);
-
 			$id_Movie = $movie['id'];
 			$title = $movie['title'];
-			$genres_id = $movie['genre_ids'];
 			$overview = $movie['overview'];
 			$poster_Path = $movie['poster_path'];
 			$backdrop = $movie['backdrop_path'];
@@ -322,11 +320,15 @@ class MovieDAO implements IMovie{
 			$original_language = $movie['original_language'];
 			$release_date = $movie['release_date'];
 			$duration = $movie['runtime'];
-			$g = new Movie($id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
+			$g = new Movie($id_Movie,$title,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
 			$this->add($g);
-
-			$moviedb = $this->searchMovieIdApi($movie['id']);
-			return $moviedb->getId();
+			$movieCharged = $this->searchMovieIdApi($id);
+			foreach($movie['genres'] as $genres){
+				$this->addMoviesxGenres($movieCharged->getId(),$genres['id']);
+				
+			}
+		
+			return $movieCharged->getId();
 		}else{
 			return $movie->getId();
 		}
@@ -334,7 +336,7 @@ class MovieDAO implements IMovie{
 	} 
 
 	public function getForGenre($Genre){
-		$listMovie = $this->getAll(0);
+	/*	$listMovie = $this->getAll(0);
 		$movielistForGenre = array();
 		foreach($listMovie as $movieForGenre){
 			foreach($movieForGenre->getGenre_id() as $genre_Id){
@@ -344,7 +346,7 @@ class MovieDAO implements IMovie{
 				}
 			}
 		
-		return $movielistForGenre;
+		return $movielistForGenre;*/
 	}
 
 	public function getNamesGenres($genresList,$arrayIds){
@@ -360,6 +362,38 @@ class MovieDAO implements IMovie{
 		}
 		return $namesGenres;
 	}
+
+	public function addMoviesxGenres($idmovie,$idgenre){
+		$query = "INSERT INTO moviesxgenres (idmovie,idgenre) VALUES (:idmovie, :idgenre)";
+		$parameters['idmovie'] = $idmovie;
+        $parameters['idgenre'] = $idgenre;
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+
+	}
+
+	public function getGenresofMovie($idmovie){
+		$query = "SELECT *  FROM moviexgenres WHERE (idmovie = :idmovie)";
+		$parameters['idmovie'] = $idmovie;
+		try{
+			$this->connection = Connection::GetInstance();
+			$array = $this->connection->Execute($query, $parameters);
+			return $array;
+		}
+		catch(PDOException $ex){
+            throw $ex;
+        }
+
+	}
+
+
 }
 
 

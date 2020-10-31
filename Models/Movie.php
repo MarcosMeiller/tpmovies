@@ -6,7 +6,6 @@ class Movie{
     private $id;
     private $id_Movie;
     private $title;
-    private $genres_id;
     private $overview;
     private $poster_Path;
     private $backdrop;
@@ -16,11 +15,10 @@ class Movie{
     private $release_date;
     private $duration;
 
-    public function __construct($id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration){
+    public function __construct($id_Movie,$title,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration){
 
         $this->id_Movie = $id_Movie;
         $this->title = $title;
-        $this->genres_id = $genres_id;
         $this->overview = $overview;
         $this->poster_Path = $poster_Path;
         $this->backdrop = $backdrop;
@@ -41,10 +39,6 @@ class Movie{
     }
     public function getTitle() {
         return  $this->title;
-        }
-    public function getGenre_Id() {
-        return $this->genres_id;
-        
         }
 
     public function getOverview() {
@@ -91,10 +85,7 @@ class Movie{
     public function setTitle($title){
         $this->title = $title;
     }
-    public function setGenre_Id($genres_id){
-        $this->genres_id = $genres_id;
-    }
-
+  
     public function setOverview($overview){
         $this->overview = $overview;
     }
