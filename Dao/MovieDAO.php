@@ -13,18 +13,18 @@ class MovieDAO implements IMovie{
     public function add(Movie $newMovie){///Carga la lista guardada, ingresa un dato y lo guarda dentro de la lista.
 	
 
-		$query = "INSERT INTO ".$this->tableName." (id_movie, title) VALUES (:id_movie,:title)";
+		$query = "INSERT INTO ".$this->tableName." (id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,duration) VALUES (:id_movie,:title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:duration)";
 
         $parameters['id_movie'] = $newMovie->getId_Movie();
         $parameters['title'] = $newMovie->getTitle();
-        /*$parameters['genres_id'] = $newMovie->getGenre_Id();
+        $parameters['genres_id'] = $newMovie->getGenre_Id();
         $parameters['overview'] = $newMovie->getOverview();
         $parameters['poster_path'] = $newMovie->getPoster_Path();
 		$parameters['backdrop'] = $newMovie->getBackdrop();  
 		$parameters['adult'] = $newMovie->getAdult();    
 		$parameters['language'] = $newMovie->getLanguage();    
 		$parameters['original_language'] = $newMovie->getOriginal_Language();
-		$parmaters['duration'] = $newMovie->getDuration();    */
+		$parmaters['duration'] = $newMovie->getDuration(); 
 		   
 
         try{
@@ -107,18 +107,28 @@ class MovieDAO implements IMovie{
 
 
 	
-	public function delete($code){///elimina un dato dentro de la lista
-		$newList = array();
-		foreach ($this->movieList as $movie) {
-			if($movie->getId() != $code){
-				array_push($newList, $movie);
-			}
-		}
-		
+    public function deleteMovieforAdmin($id){///elimina un dato dentro de la lista
+		$query = "DELETE FROM moviesxadmin WHERE (idmoviesxadmin = :idmoviesxadmin)";
 
-		$this->movieList = $newList;
-		
+        $parameters["idmoviesxadmin"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
 	}
+
+	/*public function update(Cinema $code){ ///reemplaza un objeto dentro de la 
+
+		$query = "UPDATE ".$this->tableName." SET name=:name, address=:address  WHERE (idcinemas = :idcinemas)";
+
+		$parameters['name'] = $code->getName();
+		$parameters['address'] = $code->getAddress();
+        $parameters["idcinemas"] =  $code->getId();
+
+        $this->connection = Connection::GetInstance();
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
+	}*/
 
 	public function search($id){
 
@@ -135,6 +145,26 @@ class MovieDAO implements IMovie{
 			$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
 			
             }
+        }
+        return $newMovie;
+
+
+	}
+
+	public function searchMovieIdApi($id){
+
+		$query = "SELECT * FROM moviesxadmin  WHERE (idmovie = :idmovie)";
+        $newMovie = null;
+        $parameters["idmovie"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+				$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
+				$newMovie->setId($parameters['idMovies']);
+			}
         }
         return $newMovie;
 
@@ -164,6 +194,8 @@ class MovieDAO implements IMovie{
 	}
 
 	public function addMoviexAdmin($id_Admin,$id_movie){
+
+
 		$query = "INSERT INTO"."moviesxadmin"."VALUE(:id_admin,:id_movie)";
 		$parameters['id_admin'] = $id_Admin;
 		$parameters['id_movie'] = $id_movie;
@@ -181,7 +213,8 @@ class MovieDAO implements IMovie{
 	}
 
 	public function getMoviexAdmin($id_admin){
-		$query = "SELECT id_movie 
+
+		$query = "SELECT idmoviesxadmin, id_movie 
 		from moviesxadmin AS ma
 		INNER JOIN movies AS m ON ma.idmovie = m.idmovies
 		WHERE ma.idadmin = :idadmin";
@@ -200,6 +233,8 @@ class MovieDAO implements IMovie{
 
 
 	}
+
+
 	public function add2(Movie $newMovie){
 		$query = "INSERT INTO "."moviesxadmin". "VALUE(:id_movie, :title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:relase_date,:duration)";
 		$parameters['id_movie'] = $newMovie->getId_Movie();
@@ -237,9 +272,6 @@ class MovieDAO implements IMovie{
 		return $newMovie;*/
 
 	}
-
-	
-
 	
 	public function retrieveDataFromAPI(){
 		$moviedb = file_get_contents(API_HOST.'/movie/now_playing?api_key='.API_KEY.'&language='.LANG.'&page=1');
@@ -266,6 +298,37 @@ class MovieDAO implements IMovie{
 			$title = $movie['title'];
 			$g = new Movie($id_Movie,$title);
 			$this->add($g);
+		}
+
+	} 
+
+	// trae la movie completa de la api y retorna el id
+	public function getMovieFromAPI($id){
+
+		$movie = $this->searchMovieIdApi($movies['id']);
+
+		if($movie === null ){
+			$moviedb = file_get_contents(API_HOST.'/movie/'.$id.'?api_key='.API_KEY.'&language='.LANG);
+			$movie = json_decode($moviedb,true,);
+
+			$id_Movie = $movie['id'];
+			$title = $movie['title'];
+			$genres_id = $movie['genre_ids'];
+			$overview = $movie['overview'];
+			$poster_Path = $movie['poster_path'];
+			$backdrop = $movie['backdrop_path'];
+			$adult = $movie['adult'];
+			$language = "es-ar";
+			$original_language = $movie['original_language'];
+			$release_date = $movie['release_date'];
+			$duration = $movie['runtime'];
+			$g = new Movie($id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration);
+			$this->add($g);
+
+			$moviedb = $this->searchMovieIdApi($movie['id']);
+			return $moviedb->getId();
+		}else{
+			return $movie->getId();
 		}
 
 	} 

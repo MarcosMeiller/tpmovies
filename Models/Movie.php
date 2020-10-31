@@ -16,11 +16,11 @@ class Movie{
     private $release_date;
     private $duration;
 
-    //public function __construct($id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration){
-    public function __construct($id_Movie,$title){ 
+    public function __construct($id_Movie,$title,$genres_id,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date,$duration){
+
         $this->id_Movie = $id_Movie;
         $this->title = $title;
-        /*$this->genres_id = $genres_id;
+        $this->genres_id = $genres_id;
         $this->overview = $overview;
         $this->poster_Path = $poster_Path;
         $this->backdrop = $backdrop;
@@ -28,7 +28,7 @@ class Movie{
         $this->language = $language;
         $this->original_language = $original_language;
         $this->release_date = $release_date;
-        $this->duration = $duration;*/
+        $this->duration = $duration;
   
     }
 

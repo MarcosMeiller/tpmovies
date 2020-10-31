@@ -7,8 +7,8 @@ interface IMovie{
 	function add(Movie $newMovie);
 	function getAll($id);
 	function search($id);
-	function delete($code);
-	function update(Movie $code);
+	//function delete($code);
+	//function update(Movie $code);
 	//function getForGenre($arrayGenre);
 }
 ?>

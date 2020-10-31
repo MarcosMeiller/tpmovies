@@ -63,6 +63,7 @@ class UserDAO implements IUser{
         foreach($array as $newArray){
             if($newArray !== null){ 
             $newUser = new User($newArray['username'],$newArray['name'],$newArray['lastname'],$newArray['email'],$newArray['password']);
+            $newUser->setId($newArray['idusers']);
             $newUser->setId_Type($newArray['id_type']);
             // id user  CHAR
             }

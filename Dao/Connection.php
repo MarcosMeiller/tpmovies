@@ -32,6 +32,7 @@
             return self::$instance;
         }
 
+        // devuelve el o los registros
         public function Execute($query, $parameters = array())
 	    {
             try
@@ -55,6 +56,7 @@
             }
         }
         
+        // devuelve la cantidad de registro
         public function ExecuteNonQuery($query, $parameters = array())
 	    {            
             try

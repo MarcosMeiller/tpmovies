@@ -54,6 +54,12 @@ require 'Views/head.php';
                         <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Salas
                     </p> 
 
+
+<?php if($cinemasList === []) { ?> 
+            <div class=''>
+                <p class='text-xs'>Todavia no hay cines cargados.</p>
+            </div>
+<?php }else{ ?>
                         <?php require "forms/formRoomFilters.php" ?>
 
                         <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
@@ -61,9 +67,10 @@ require 'Views/head.php';
                         </button>                    
                     </div>
 
-<div id="formCine"class='hidden items-center justify-center'>
-    <?php require 'forms/formCreateRoom.php' ?>
-</div>
+
+              <div id="formCine"class='hidden items-center justify-center'>
+                  <?php require 'forms/formCreateRoom.php' ?>
+              </div>
 
                     <div class="bg-white overflow-auto">
                         <table class="min-w-full bg-white">
@@ -128,6 +135,8 @@ require 'Views/head.php';
                     <p class="pt-3 text-gray-600">
                       <!--<a class="underline" href="">ERROR:<?php echo $message ?></a>-->
                     </p>
+
+                              <?php } ?>
                 </div>
 
             </main>

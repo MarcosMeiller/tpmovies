@@ -74,7 +74,28 @@ class MovieController
             }
         }
     }
-    */
+   */ 
+
+   // agregar movie a la admin
+   public function addMoviexAdmin($idmovie){
+
+       $idmoviedb = $this->dao->getMovieFromAPI($idmovie); // se fija si esta en la db cargado y sino lo buscar en la api y lo guarda en db
+       
+       $user = $_SESSION['loggedUser'];
+       $id = $user->getId();
+       $this->dao->addMoviexAdmin($id,$idmoviedb);
+       $adminmovies = $this->dao->getMoviexAdmin($id);
+   }
+
+   public function deleteMoviexAdmin($idmoviesxadmin){
+
+        $this->dao->deleteMovieforAdmin($idmoviesxadmin);
+
+        $user = $_SESSION['loggedUser'];
+        $id = $user->getId();
+        $adminmovies = $this->dao->getMoviexAdmin($id);
+   }
+
 
     public function DetailsMovie($id){
         $genresList = $this->gDao->getAll();
@@ -90,12 +111,17 @@ class MovieController
     }
     
     public function MoviesNowPlaying($id = 0){
+
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);
+
+            $user = $_SESSION['loggedUser'];
+            $id = $user->getId();
+
             $genresList = $this->gDao->getAll();
             $moviesList = $this->dao->retriveMoviexAdmin();
-            $adminmovies = $this->dao->getMoviexAdmin(3);
-          
+            $adminmovies = $this->dao->getMoviexAdmin($id);
+
             require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
         }else{
             header("Location: /tpmovies/");

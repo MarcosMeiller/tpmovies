@@ -1,12 +1,3 @@
-<?php namespace views;
-
-ini_set('display_errors', 1);
-ini_set('display_startup_errors', 1);
-//error_reporting(E_ALL ^ E_WARNING);
-error_reporting(E_ALL);
-
-?>
-
 <!DOCTYPE html>
 <html lang="es">
 <head>
@@ -20,6 +11,14 @@ error_reporting(E_ALL);
 
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,600;1,500&display=swap" rel="stylesheet"/>    
 
+    <link href="https://fonts.googleapis.com/css2?family=Hind:wght@300;500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Yanone+Kaffeesatz:wght@300;500&display=swap" rel="stylesheet">
+
+    <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;500&display=swap" rel="stylesheet">
+
+
+
 <!-- toastr -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
@@ -28,6 +27,7 @@ error_reporting(E_ALL);
     <style>
         html,body{
             height: 100vh !important;
+            
         }
 
         .logoWelcome{font-size: 75px !important;}
@@ -57,6 +57,9 @@ error_reporting(E_ALL);
             background-attachment: fixed !important;   
         }
         .font-family-montSerrat { font-family: 'Montserrat', sans-serif; }
+        .font-family-hind { font-family: 'Hind'}
+        .font-family-yanone { font-family: 'Yanone Kaffeesatz'}
+        .font-family-Teko { font-family: 'Teko'}
 
         /*.modal {
             transition: opacity 0.25s ease !important;
@@ -70,7 +73,12 @@ error_reporting(E_ALL);
             min-height: 6rem !important;
             max-height: 9rem !important;
         }
+        
+            ::-webkit-scrollbar-track {
+      background-color: rgba(0, 0, 0, 0.2);
+}
+        
 
     </style>
 </head>
-<body class='w-screen h-screen font-family-montSerrat'>
+<body class='w-screen h-screen font-family-Teko text-md'>

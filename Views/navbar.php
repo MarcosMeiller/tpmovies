@@ -12,10 +12,7 @@
 
     }
 
-    if(isset($_SESSION["isAdmin"])){
-      echo $_SESSION["isAdmin"];
-    }
-  
+
     echo "<script type='text/javascript'>
       function soon() {
           toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('Proximamente', '', {timeOut: 2000});
