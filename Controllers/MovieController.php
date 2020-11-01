@@ -82,17 +82,20 @@ class MovieController
        $idmoviedb = $this->dao->getMovieFromAPI($idmovie); // se fija si esta en la db cargado y sino lo buscar en la api y lo guarda en db
        $user = $_SESSION['loggedUser'];
        $id = $user->getId();
-       $this->dao->addMoviexAdmin($id,$idmoviedb);
+       $this->dao->addMoviexAdmin($id,$idmoviedb); // agrega en moviexadmin
        $adminmovies = $this->dao->getMoviexAdmin($id);
+       $this->MoviesNowPlaying();
    }
 
    public function deleteMoviexAdmin($idmoviesxadmin){
+
 
         $this->dao->deleteMovieforAdmin($idmoviesxadmin);
 
         $user = $_SESSION['loggedUser'];
         $id = $user->getId();
         $adminmovies = $this->dao->getMoviexAdmin($id);
+        $this->MoviesNowPlaying();
    }
 
 
@@ -110,6 +113,8 @@ class MovieController
     }
     
     public function MoviesNowPlaying($id = 0){
+
+       // $this->gDao->retrieveDataFromAPI();        
 
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);

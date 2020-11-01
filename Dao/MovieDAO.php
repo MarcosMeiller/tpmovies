@@ -26,8 +26,6 @@ class MovieDAO implements IMovie{
 		$parameters['release_date'] = $newMovie->getRelease_date();
 		$parameters['duration'] = $newMovie->getDuration(); 
 	
-	
-
         try{
             
             $this->connection = Connection::GetInstance();
@@ -161,6 +159,7 @@ class MovieDAO implements IMovie{
         $this->connection = Connection::GetInstance();
 		$array = $this->connection->Execute($query, $parameters);
 		
+
         foreach($array as $newArray){
             if($newArray !== null){ 
 				$newMovie= new Movie($newArray["id_movie"],$newArray["title"],$newArray["overview"],$newArray["poster_path"],$newArray["backdrop"],$newArray["adult"],$newArray["language"],$newArray["original_language"],$newArray["release_date"],$newArray["duration"]);
@@ -365,8 +364,11 @@ class MovieDAO implements IMovie{
 
 	public function addMoviesxGenres($idmovie,$idgenre){
 		$query = "INSERT INTO moviesxgenres (idmovie,idgenre) VALUES (:idmovie, :idgenre)";
+		
 		$parameters['idmovie'] = $idmovie;
-        $parameters['idgenre'] = $idgenre;
+		$parameters['idgenre'] = $idgenre;
+
+
         try{
             
             $this->connection = Connection::GetInstance();

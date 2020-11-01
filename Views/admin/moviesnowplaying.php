@@ -50,7 +50,7 @@ $id = 0;
 
               <div class='flex justify-center my-2'>
                 <?php if($exists){ ?>
-              <a href='<?php echo FRONT_ROOT ?>Movie/deleteMoviexAdmin/<?php echo $movieAdmin['id_movie'] ?>' class="bg-red-500 hover:bg-white text-2xl md:text-sm text-white hover:text-red-500 font-bold py-2 px-4 rounded">
+              <a href='<?php echo FRONT_ROOT ?>Movie/deleteMoviexAdmin/<?php echo $movieAdmin['idmoviesxadmin'] ?>' class="bg-red-500 hover:bg-white text-2xl md:text-sm text-white hover:text-red-500 font-bold py-2 px-4 rounded">
               QUITAR
             </a>
             <?php }else{ ?>

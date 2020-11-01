@@ -40,7 +40,14 @@ class FunctionController{
 
 
 
+        /* funcionesview
 
+        todas la salas del cine
+        todas las peliculas de admin
+        redirigir a la vista
+    
+            funcionlamb.php - copiate el de cinemalamb
+        */
 
 
 }
