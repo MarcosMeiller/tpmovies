@@ -12,22 +12,26 @@ class FunctionCinemaDAO{
     private $tableName = "functioncinemas";
 
     public function add(FunctionCinema $newFunction) {
+        $exist = $this->controlDateMovie($newFunction);
+        if($exist == null){
         $query = "INSERT INTO ".$this->tableName." (id_room,id_movie,date,hour) VALUES (:id_room,:id_movie,:date,:hour)";
 
         $parameters['id_room'] = $newFunction->getId_Room();
         $parameters['id_movie'] = $newFunction->getId_Movie();
         $parameters['date'] = $newFunction->getDate();
         $parameters['hour'] = $newFunction->getHour();
-		     
+        
 		try{
 			$this->connection = Connection::GetInstance();
 			return $this->connection->ExecuteNonQuery($query, $parameters);
 		}catch(PDOException $ex){
             throw $ex;
         }
-        
     }
-
+    else{
+        return $exist;
+    }
+    }
     public function getAll(){
 
         $functionList = array();
@@ -55,9 +59,9 @@ class FunctionCinemaDAO{
 }
 
 public function Search($id){
-    $query = "SELECT *  FROM ".$this->tableName." WHERE (idfunctioncinemas = :idfunctioncinemas)";
+    $query = "SELECT *  FROM ".$this->tableName." WHERE (id_movie = :id_movie)";
         $newFunction = null;
-        $parameters["idfunctioncinemas"] =  $id;
+        $parameters["id_movie"] =  $id;
         try{
         $this->connection = Connection::GetInstance();
         $array = $this->connection->Execute($query, $parameters);
@@ -72,6 +76,43 @@ public function Search($id){
     catch(PDOException $ex){
         throw $ex;
     }  
+}
+
+   
+public function delete($id){///elimina un dato dentro de la lista
+    $query = "DELETE FROM ".$this->tableName." WHERE (idfunctions = :idfunctions)";
+
+    $parameters["idfunctions"] =  $id;
+
+    $this->connection = Connection::GetInstance();
+
+    return $this->connection->ExecuteNonQuery($query, $parameters);
+}
+
+public function update(FunctionCinema $code){ ///reemplaza un objeto dentro de la 
+
+    $query = "UPDATE ".$this->tableName." SET name=:name, address=:address  WHERE (idcinemas = :idcinemas)";
+
+    $parameters['name'] = $code->getDate();
+    $parameters['address'] = $code->getHour();
+    $parameters["id_room"] =  $code->getId_Room();
+    $parameters["id_movie"] =  $code->getId_Movie();
+    $this->connection = Connection::GetInstance();
+
+    return $this->connection->ExecuteNonQuery($query, $parameters);
+}
+
+
+public function controlDateMovie(FunctionCinema $newFunction){
+    $array = $this->getAll();
+    $validate = null;
+    foreach($array as $function){
+        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie())
+        {
+            $validate = "exist";
+        }
+    }
+    return $validate;
 }
 
 public function validFunction(FunctionCinema $function,FunctionCinema $newFunction){
