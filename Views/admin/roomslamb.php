@@ -49,18 +49,12 @@ require 'Views/head.php';
               </div>
 
                 <div class="w-full">
-                    <div class='flex justify-between items-center mb-5 bg-red-500'>
+                    <div class='flex justify-between items-center mb-5'>
                     <p class="text-xl flex items-center">
                         <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Salas
                     </p> 
 
-
-<?php if($cinemasList === []) { ?> 
-            <div class=''>
-                <p class='text-xs'>Todavia no hay cines cargados.</p>
-            </div>
-<?php }else{ ?>
-                        <?php require "forms/formRoomFilters.php" ?>
+                       
 
                         <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
                             <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Sala</p><p class='flex lg:hidden'>Sala</p>
@@ -126,7 +120,7 @@ require 'Views/head.php';
                               <?php } ?>
                               <?php }else{ ?>
                                   <div class='flex flex-col justify-center mt-2 items-center'>
-                                    <p class='text-xs'>Todavia no hay salas cargados.</p>
+                                    <p class='text-md uppercase text-red-500'>Todavia no hay salas cargadas.</p>
                                   </div>
                               <?php } ?>
                             </tbody>
@@ -136,7 +130,7 @@ require 'Views/head.php';
                       <!--<a class="underline" href="">ERROR:<?php echo $message ?></a>-->
                     </p>
 
-                              <?php } ?>
+
                 </div>
 
             </main>

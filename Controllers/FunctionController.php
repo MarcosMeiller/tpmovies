@@ -11,8 +11,8 @@ Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 
 class FunctionController{
     private $dao;
-    private $daoR = new RoomDao();
-    private $daoM = new movieDAO(); 
+    private $daoR;
+    private $daoM; 
 
     public function __construct(){
         $this->dao = new FunctionCinemaDAO();
@@ -54,20 +54,9 @@ class FunctionController{
         $roomList = $this->daoR->getAll();
         $adminmovies = $this->daoM->getMoviexAdmin($id);
         $functionList = $this->dao->getAll();
-        require_once(VIEWS_PATH."functionlamb.php");
+        //$functionList = []; la use porque no tenia creada la tabla
+        require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
     }
-
-
-    
-        /* funcionesview
-
-        todas la salas del cine
-        todas las peliculas de admin
-        redirigir a la vista
-    
-            funcionlamb.php - copiate el de cinemalamb
-        */
-
 
 }
 

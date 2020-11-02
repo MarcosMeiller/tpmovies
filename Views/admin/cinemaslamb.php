@@ -99,7 +99,7 @@ require 'Views/head.php';
                               <?php } ?>
                               <?php }else{ ?>
                                   <div class='flex flex-col justify-center mt-2 items-center'>
-                                    <p class='text-xs'>Todavia no hay cines cargados.</p>
+                                    <p class='text-md uppercase text-red-500'>Todavia no hay cines cargados.</p>
                                   </div>
                               <?php } ?>
                             </tbody>

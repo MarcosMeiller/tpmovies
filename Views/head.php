@@ -17,7 +17,7 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Teko:wght@300;500&display=swap" rel="stylesheet">
 
-
+    <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;600&display=swap" rel="stylesheet">
 
 <!-- toastr -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
@@ -60,6 +60,7 @@
         .font-family-hind { font-family: 'Hind'}
         .font-family-yanone { font-family: 'Yanone Kaffeesatz'}
         .font-family-Teko { font-family: 'Teko'}
+        .font-family-dosis { font-family: 'Dosis', sans-serif; }
 
         /*.modal {
             transition: opacity 0.25s ease !important;
@@ -81,4 +82,4 @@
 
     </style>
 </head>
-<body class='w-screen h-screen font-family-Teko text-md'>
+<body class='w-screen h-screen font-family-dosis text-md'>

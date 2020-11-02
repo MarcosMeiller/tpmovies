@@ -47,21 +47,21 @@ require 'Views/head.php';
             <main class="w-full flex-grow p-6 pt-2">
               <div class='flex items-center row pb-6'>
   
-                <h1 class="text-3xl text-black">ABM Salas</h1>
+                <h1 class="text-3xl text-black">ABM Funciones</h1>
     
               </div>
 
                 <div class="w-full">
                     <div class='flex justify-between items-center mb-5'>
                     <p class="text-xl flex items-center">
-                        <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Salas
+                        <i class="fas fa-video text-blue-900 mr-3"></i> Listado de Funciones
                     </p> 
                         <button onclick="viewForm()" class="bg-blue-800 cursor-pointer text-white py-2 px-4 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-600 flex  items-center justify-center">
-                            <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Sala</p><p class='flex lg:hidden'>Sala</p>
+                            <i class="fas fa-plus mr-3"></i><p class='hidden lg:flex'>Agregar Funcion</p><p class='flex lg:hidden'>Funcion</p>
                         </button>                    
                     </div>
 
-<div id="formSala"class='hidden items-center justify-center'>
+<div id="formFunction"class='hidden items-center justify-center'>
     <?php require 'forms/formCreateFunction.php' ?>
 </div>
 
@@ -101,8 +101,8 @@ require 'Views/head.php';
 
                               <?php } ?>
                               <?php }else{ ?>
-                                  <div class='flex flex-col justify-center mt-2 items-center'>
-                                    <p class='text-xs'>Todavia no hay Funciones cargadas.</p>
+                                  <div class='flex flex-col justify-center my-2 items-center'>
+                                    <p class='text-md uppercase text-red-500'>Todavia no hay Funciones cargadas.</p>
                                   </div>
                               <?php } ?>
                             </tbody>
@@ -156,68 +156,68 @@ require 'Views/head.php';
 
   </div>
 
-  <script>
+<script>
 
-var openmodal = document.querySelectorAll('.modal-open')
-for (var i = 0; i < openmodal.length; i++) {
-openmodal[i].addEventListener('click', function(event){
-    var id = $(this).data('id');
-    var date = $(this).data('date');
-    var hour = $(this).data('hour')
-    var idmovie = $(this).data('idmovie')
-    var idroom = $(this).data('idroom')
-    console.log(priceUnit,id,name);
-    event.preventDefault()
-    passingData(id,idroom,idmovie,date,hour)
-    toggleModal()
-})
-}
+  var openmodal = document.querySelectorAll('.modal-open')
+  for (var i = 0; i < openmodal.length; i++) {
+  openmodal[i].addEventListener('click', function(event){
+      var id = $(this).data('id');
+      var date = $(this).data('date');
+      var hour = $(this).data('hour')
+      var idmovie = $(this).data('idmovie')
+      var idroom = $(this).data('idroom')
+      console.log(priceUnit,id,name);
+      event.preventDefault()
+      passingData(id,idroom,idmovie,date,hour)
+      toggleModal()
+  })
+  }
 
-const overlay = document.querySelector('.modal-overlay')
-overlay.addEventListener('click', toggleModal)
+  const overlay = document.querySelector('.modal-overlay')
+  overlay.addEventListener('click', toggleModal)
 
-var closemodal = document.querySelectorAll('.modal-close')
-for (var i = 0; i < closemodal.length; i++) {
-closemodal[i].addEventListener('click', toggleModal)
-}
+  var closemodal = document.querySelectorAll('.modal-close')
+  for (var i = 0; i < closemodal.length; i++) {
+  closemodal[i].addEventListener('click', toggleModal)
+  }
 
-document.onkeydown = function(evt) {
-evt = evt || window.event
-var isEscape = false
-if ("key" in evt) {
-isEscape = (evt.key === "Escape" || evt.key === "Esc")
-} else {
-isEscape = (evt.keyCode === 27)
-}
-if (isEscape && document.body.classList.contains('modal-active')) {
-toggleModal()
-}
-};
+  document.onkeydown = function(evt) {
+  evt = evt || window.event
+  var isEscape = false
+  if ("key" in evt) {
+  isEscape = (evt.key === "Escape" || evt.key === "Esc")
+  } else {
+  isEscape = (evt.keyCode === 27)
+  }
+  if (isEscape && document.body.classList.contains('modal-active')) {
+  toggleModal()
+  }
+  };
 
-function toggleModal() {
-console.log("2");
-const body = document.querySelector('body')
-const modal = document.querySelector('.modal')
-modal.classList.toggle('opacity-0')
-modal.classList.toggle('pointer-events-none')
-body.classList.toggle('modal-active')
-}
+  function toggleModal() {
+  console.log("2");
+  const body = document.querySelector('body')
+  const modal = document.querySelector('.modal')
+  modal.classList.toggle('opacity-0')
+  modal.classList.toggle('pointer-events-none')
+  body.classList.toggle('modal-active')
+  }
 
-function passingData(id,idroom,idmovie,date,hour){
-    console.log("3");
-    $('#upd_id').val(id);
-    $('#upd_idroom').val(idroom);
-    $('#upd_idmovie').val(idmovie)
-    $('#upd_date').val(date);
-    $('#upd_hour').val(hour);
-}
+  function passingData(id,idroom,idmovie,date,hour){
+      console.log("3");
+      $('#upd_id').val(id);
+      $('#upd_idroom').val(idroom);
+      $('#upd_idmovie').val(idmovie)
+      $('#upd_date').val(date);
+      $('#upd_hour').val(hour);
+  }
 
-function viewForm(){
-    console.log("viewForm");
-    var form = document.getElementById('formFunction');
-    form.classList.toggle('flex');
-    form.classList.toggle('hidden');
-};     
+  function viewForm(){
+      console.log("viewForm");
+      var form = document.getElementById('formFunction');
+      form.classList.toggle('flex');
+      form.classList.toggle('hidden');
+  };     
 
 </script>
  
