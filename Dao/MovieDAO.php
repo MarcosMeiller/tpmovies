@@ -139,7 +139,7 @@ class MovieDAO implements IMovie{
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
             if($newArray !== null){ 
-			$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["genres_id"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
+			$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
 			$newMovie->setId($parameters['idMovies']);
 			/*$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
 			*/

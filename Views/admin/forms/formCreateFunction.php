@@ -4,21 +4,23 @@ $hoy = date('Y-m-d');
 
 
 ?>
-<form class="w-2/3 mb-5 " action='<?php echo FRONT_ROOT ?>Room/addRoom' method='POST'>
+
+<form class="w-2/3 mb-5 " action='<?php echo FRONT_ROOT ?>Function/addFunction' method='POST'>
+
 
   <div class="flex flex-wrap mt-2 justify-center">
   
   <div class="w-full md:w-3/6 px-3 mb-2 md:mb-0">
   
     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
-      Cine
+      Sala
     </label>
-
-    <select requerid id="id_Cinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-      <option value=''>Seleccione un cine</option>
-      <?php foreach($cinemasList as $cinema){ ?>
-          <option value="<?php echo $cinema->getId() ?>">
-          <?php echo $cinema->getName()?> 
+   
+    <select requerid id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+      <option value=''>Seleccione una sala</option>
+      <?php foreach($roomList as $room){ ?>
+          <option value="<?php echo $room->getId() ?>">
+          <?php echo $room->getName()?> 
           </option>
       <?php } ?>
     </select>
@@ -28,14 +30,14 @@ $hoy = date('Y-m-d');
 
   <div class="w-full md:w-3/6 px-3 mb-2 md:mb-0">
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
-        Sala
+        Pelicula
       </label>
       
-      <select requerid id="id_Cinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
-    <option value=''>Seleccione un cine</option>
-    <?php foreach($cinemasList as $cinema){ ?>
-        <option value="<?php echo $cinema->getId() ?>">
-        <?php echo $cinema->getName()?> 
+      <select requerid id="id_movie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <option value=''>Seleccione una pelicula</option>
+    <?php foreach($adminmovies as $movie){ ?>
+        <option value="<?php  echo $movie->getId_Movie() ?>">
+        <?php echo $movie->getTitle()?> 
         </option>
     <?php } ?>
     </select>

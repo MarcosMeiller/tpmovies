@@ -2,6 +2,7 @@
 
 Use Models\Cinema as Cinema;
 Use Dao\CinemaDAO as cinemaDAO;
+Use FFI\Exception;
 
 class CinemaController
 {
@@ -20,18 +21,19 @@ class CinemaController
             
             if($name && $address){
                 $cinema = NULL;
-                //$cinema = $this->dao->search($id); // VEEEER
+                $cinema = $this->dao->search($name); 
                 if($cinema !== null){
                     $this->Cinemas("El Cine ya existe.","alert");
                 }
-                
+                else{
                 try{
                     $newCinema = new cinema($name,$address);
                     $this->dao->add($newCinema);
                     $this->Cinemas("Agregado con exito","success");
                 }catch(Exception $e){
                     $this->Cinemas("Error al Registrar cine.","danger");
-                }
+                } 
+            }
             }
             else{
                 $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
@@ -91,6 +93,9 @@ class CinemaController
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
+        if(strlen($data) < 3){
+            $data = null;
+        }
         return $data;
 }
 

@@ -3,7 +3,7 @@
 Use Models\Room as Room;
 Use Dao\RoomDAO as RoomDao;
 Use Dao\CinemaDAO as CinemaDAO;
-
+Use FFI\Exception;
 
 class RoomController
 {
@@ -20,20 +20,30 @@ class RoomController
     public function addRoom($id_Cinema,$name,$capacity,$price){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
-            if($name){ 
-           //$room = $this->dao->search($name);
-            $room = null;
-            if($room !== null){
-                $this->Rooms("La Sala ya existe.","alert");
-            }
-            
-            try{
-                $newRoom = new Room($capacity,$id_Cinema,$name,$price);
-                $this->dao->add($newRoom);
-                $this->Rooms("Agregado con exito","success");
-            }catch(Exception $e){
-                $this->Rooms("Error al Registrar Sala.","danger");
-            }
+            $price = $this->controlValue($price);
+            $capacity = $this->controlValue($capacity);
+            if($name && $price && $capacity){ 
+                $room = $this->dao->searchName($name);
+                if($room == true){
+                    $room = $this->dao->searchIdCinema($id_Cinema);
+                        if($room == true){
+                            $this->Rooms("esta sala ya existe en el cine actual","alert");
+                        }
+                }
+               
+                if($capacity == null || $price == null ){
+                    $this->Rooms("numero negativo ingresado","alert");
+                }
+                if($room !== true){ //despues ver porque me agrega igual si saco este if y no anda el de arriba.
+                try{
+
+                    $newRoom = new Room($capacity,$id_Cinema,$name,$price);
+                    $this->dao->add($newRoom);
+                    $this->Rooms("Agregado con exito","success");
+                }catch(Exception $e){
+                    $this->Rooms("Error al Registrar Sala.","danger");
+                }
+                }
         }
         else{
             $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
@@ -46,7 +56,7 @@ class RoomController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
             if($name){
-            $room = $this->dao->search($data);
+            $room = $this->dao->search($name);
             if($room == null){
                 $this->Rooms("la Sala no existe.");
             }
@@ -88,8 +98,20 @@ class RoomController
         $data = trim($data);
         $data = stripslashes($data);
         $data = htmlspecialchars($data);
+        if(strlen($data) < 2){
+            $data = null;
+        }
         return $data;
 }
+    public function controlValue($number){
+        if($number <= 0){
+            return null;
+        }
+        else{
+            return $number;
+        }
+
+    }
     
         public function RoomsCinema($id = 0){
         if($id !== 0){

@@ -14,10 +14,10 @@ class FunctionCinemaDAO{
     public function add(FunctionCinema $newFunction) {
         $exist = $this->controlDateMovie($newFunction);
         if($exist == null){
-        $query = "INSERT INTO ".$this->tableName." (id_room,id_movie,date,hour) VALUES (:id_room,:id_movie,:date,:hour)";
+        $query = "INSERT INTO ".$this->tableName." (room_id,movie_id,date,hour) VALUES (:room_id,:movie_id,:date,:hour)";
 
-        $parameters['id_room'] = $newFunction->getId_Room();
-        $parameters['id_movie'] = $newFunction->getId_Movie();
+        $parameters['room_id'] = $newFunction->getId_Room();
+        $parameters['movie_id'] = $newFunction->getId_Movie();
         $parameters['date'] = $newFunction->getDate();
         $parameters['hour'] = $newFunction->getHour();
         
@@ -44,7 +44,7 @@ class FunctionCinemaDAO{
 
         foreach($result as $row)
         {
-            $functionCinema = new FunctionCinema($row['id_room'],$row['id_movie'],$row['date'],$row['hour']);
+            $functionCinema = new FunctionCinema($row['room_id'],$row['movie_id'],$row['date'],$row['hour']);
             $functionCinema->setId($row['idfunctioncinemas']);///cambiarle el nombre cuando haga la base de datos.
 
          
@@ -59,7 +59,7 @@ class FunctionCinemaDAO{
 }
 
 public function Search($id){
-    $query = "SELECT *  FROM ".$this->tableName." WHERE (id_movie = :id_movie)";
+    $query = "SELECT *  FROM ".$this->tableName." WHERE (movie_id = :movie_id)";
         $newFunction = null;
         $parameters["id_movie"] =  $id;
         try{
@@ -67,7 +67,7 @@ public function Search($id){
         $array = $this->connection->Execute($query, $parameters);
             foreach($array as $newArray){
                 if($newArray !== null){
-                    $newFunction = new FunctionCinema($parameters['id_room'],$parameters['id_movie'],$parameters['date'],$parameters['hour']);
+                    $newFunction = new FunctionCinema($parameters['room_id'],$parameters['movie_id'],$parameters['date'],$parameters['hour']);
                     $newFunction->setId($parameters['idfunctioncinemas']);
                 }
         }
@@ -80,9 +80,9 @@ public function Search($id){
 
    
 public function delete($id){///elimina un dato dentro de la lista
-    $query = "DELETE FROM ".$this->tableName." WHERE (idfunctions = :idfunctions)";
+    $query = "DELETE FROM ".$this->tableName." WHERE (idfunctioncinemas = :idfunctioncinemas)";
 
-    $parameters["idfunctions"] =  $id;
+    $parameters["idfunctioncinemas"] =  $id;
 
     $this->connection = Connection::GetInstance();
 
@@ -91,10 +91,10 @@ public function delete($id){///elimina un dato dentro de la lista
 
 public function update(FunctionCinema $code){ ///reemplaza un objeto dentro de la 
 
-    $query = "UPDATE ".$this->tableName." SET name=:name, address=:address  WHERE (idcinemas = :idcinemas)";
+    $query = "UPDATE ".$this->tableName." SET room_id=:room_id, movie_id=:movie_id, date:date,hour:hour  WHERE (idfunctioncinemas = :idfunctioncinemas)";
 
-    $parameters['name'] = $code->getDate();
-    $parameters['address'] = $code->getHour();
+    $parameters['date'] = $code->getDate();
+    $parameters['hour'] = $code->getHour();
     $parameters["id_room"] =  $code->getId_Room();
     $parameters["id_movie"] =  $code->getId_Movie();
     $this->connection = Connection::GetInstance();
@@ -125,7 +125,7 @@ public function validFunction(FunctionCinema $function,FunctionCinema $newFuncti
 
     if($date1 == $date2){
         $diff = $date3->diff($date4);
-        $resultado = ($diff->days * 24 ) * 60  + ( $diff->i ); 
+        $resultado = abs (($diff->days * 24 ) * 60  + ( $diff->i )); 
     
         if($resultado <= 15){
             $isValid = false;

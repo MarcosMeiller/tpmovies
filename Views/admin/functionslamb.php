@@ -42,7 +42,7 @@ require 'Views/head.php';
 
     <?php require 'header.php'; ?>
   
-
+  
         <div class="w-full h-screen overflow-x-hidden border-t flex flex-col">
             <main class="w-full flex-grow p-6 pt-2">
               <div class='flex items-center row pb-6'>
@@ -89,14 +89,14 @@ require 'Views/head.php';
                                     <td class="text-center py-3 px-4">
                                     <a 
                                       data-id="<?php echo($function->getId()); ?>" 
-                                      data-name="<?php echo($function->getIdMovie()); ?>"
-                                      data-address="<?php echo($function->getIdRoom()); ?>"
+                                      data-name="<?php echo($function->getId_Movie()); ?>"
+                                      data-address="<?php echo($function->getId_Room()); ?>"
                                       class="modal-open hover:text-blue-500" href="">
                                     <i class="fas fa-edit"></i>
                                     </a>
                                     </td>
 
-                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Cinema/deleteCinema/<?php echo $function->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
+                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Function/deleteFunction/<?php echo $function->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
                               <?php } ?>
@@ -166,7 +166,7 @@ require 'Views/head.php';
       var hour = $(this).data('hour')
       var idmovie = $(this).data('idmovie')
       var idroom = $(this).data('idroom')
-      console.log(priceUnit,id,name);
+      console.log(date,id,idmovie,idroom,hour);
       event.preventDefault()
       passingData(id,idroom,idmovie,date,hour)
       toggleModal()

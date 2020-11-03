@@ -3,7 +3,7 @@ namespace Dao;
 
 use Dao\IRoom as IRoom ;
 use Models\Room as Room;
-
+use PDOException;
 class roomDAO implements IRoom{
     private $connection;
     private $tableName = "rooms";
@@ -68,6 +68,43 @@ class roomDAO implements IRoom{
 		return $roomsList;
 	}
     
+    public function searchName($name){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
+
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (name = :name)";
+        $newRoom = null;
+        $parameters["name"] =  $name;
+        $validate = false;
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+          //  $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+            //$newRoom->setId($newArray['idrooms']);
+            $validate = true;
+        }
+        }
+        return $validate;
+
+
+    }
+
+    public function searchIdCinema($id_Cinema){
+        $query = "SELECT *  FROM ".$this->tableName." WHERE (id_cinema = :id_cinema)";
+        $newRoom = null;
+        $parameters["id_cinema"] =  $id_Cinema;
+        $validate = false;
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+          //  $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+            //$newRoom->setId($newArray['idrooms']);
+            $validate = true;
+        }
+        }
+        return $validate;
+    }
+
 	public function search($id){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
 
 		$query = "SELECT *  FROM ".$this->tableName." WHERE (idrooms = :idrooms)";

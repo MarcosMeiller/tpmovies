@@ -2,7 +2,7 @@
 
 Use Models\User as User;
 Use Dao\UserDAO as UserDAO;
-
+Use FFI\Exception;
 class RegisterController
 {
     private $dao;
@@ -55,10 +55,13 @@ class RegisterController
     
     
     public function test_input($data) {
-            $data = trim($data);
-            $data = stripslashes($data);
-            $data = htmlspecialchars($data);
-            return $data;
+        $data = trim($data);
+        $data = stripslashes($data);
+        $data = htmlspecialchars($data);
+        if(strlen($data) < 3){
+            $data = null;
+        }
+        return $data;
     }
 
 
