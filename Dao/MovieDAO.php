@@ -39,11 +39,10 @@ class MovieDAO implements IMovie{
 	}
 
 	public function getAll($id){ ///obtiene todos los datos y en caso de que este vacio los rellena con los datos de la api, ademas si recibe un id retorna la lista solo con los generos de ese id.
-		//$movielist = 
-		/*$movieList = array();
+	
+		$movieList = array();
 
-		//$query = "SELECT id_movie, title,genres_id,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration FROM ".$this->tableName;
-		$query = "SELECT idmovies, id_movie, title FROM ".$this->tableName;
+		$query = "SELECT id_movie, title,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration FROM ".$this->tableName;
 
             $this->connection = Connection::GetInstance();
 
@@ -52,7 +51,7 @@ class MovieDAO implements IMovie{
 
             foreach($result as $row)
             {
-				$movie = new Movie($row["id_movie"],$row["title"],$row["genres_id"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
+				$movie = new Movie($row["id_movie"],$row["title"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
 
 				//$movie = new Movie($row["id_movie"],$row["title"]);
 				
@@ -85,7 +84,7 @@ class MovieDAO implements IMovie{
 				
 			$movieList = $moviesFilter;	
 		}
-		return $movieList;*/
+		return $movieList;
 	}
 
 	public function update(Movie $code){///reemplaza un objeto dentro de la lista
