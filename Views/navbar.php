@@ -48,7 +48,7 @@
           <a href="<?php echo FRONT_ROOT?>Movie/MoviesNowPlaying" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Peliculas Actuales</span>
           </a>
-          <a onclick="soon()" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
+          <a href="<?php echo FRONT_ROOT?>Function/listFunction" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
             <span>Cartelara</span>
           </a>
 

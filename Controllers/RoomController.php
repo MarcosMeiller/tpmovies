@@ -19,10 +19,14 @@ class RoomController
     // agrega cine verificando previamente si existe
     public function addRoom($id_Cinema,$name,$capacity,$price){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
             $name = $this->test_input($name);
             $price = $this->controlValue($price);
             $capacity = $this->controlValue($capacity);
-            if($name && $price && $capacity){ 
+
+
+
+            if($name && $price && $capacity && $id_Cinema != ''){ 
                 $room = $this->dao->searchName($name);
                 if($room == true){
                     $room = $this->dao->searchIdCinema($id_Cinema);
@@ -44,26 +48,28 @@ class RoomController
                     $this->Rooms("Error al Registrar Sala.","danger");
                 }
                 }
+            }
+            else{
+                $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
+            }  
         }
-        else{
-            $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
-        }  
-    }
     }
 
     // actualiza cine verificando si existe previamente
-    public function updateRoom($Capacity,$id_Cinema,$name,$price){
+    public function updateRoom($id,$id_Cinema,$name,$Capacity,$price){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
             if($name){
-            $room = $this->dao->search($name);
-            if($room == null){
-                $this->Rooms("la Sala no existe.");
+            $room = $this->dao->searchName($name);
+            if($room !== null){
+                $this->Rooms("el nombre de la Sala ya existe.");
             }
             
             try{
                 $newRoom = new Room($Capacity,$id_Cinema,$name,$price);
-                $this->dao->add($newRoom);
+                $newRoom->setId($id);
+
+                $this->dao->update($newRoom);
                 $this->Rooms("Modificado con exito","success");
 
             }catch(Exception $e){
@@ -78,12 +84,7 @@ class RoomController
     }
 
     // elimina cine por id
-    public function deleteRoom($data){
-            $room = $this->dao->search($data);
-            $room = 0;
-            if($room === null){
-                $this->Rooms("La sala no existe.","alert");
-            }  
+    public function deleteRoom($data){ 
             try{
                 $this->dao->delete($data);
                 $this->Rooms("Eliminado con exito","success");
@@ -102,7 +103,8 @@ class RoomController
             $data = null;
         }
         return $data;
-}
+    }
+
     public function controlValue($number){
         if($number <= 0){
             return null;
@@ -126,8 +128,10 @@ class RoomController
     // retorna todos las salas y carga la pantalla de amb room
     public function Rooms($message = "",$type= "",$id=0){
         if(isset($_SESSION['loggedUser'])){
+
+        
             if($id == 0){
-                $roomsList = $this->dao->getAll(); 
+                $roomsList = $this->dao->getAll();
             }else{
                 $roomsList = $this->dao->getAllByCinema($id);
             }
@@ -142,8 +146,8 @@ class RoomController
                 $_SESSION['msjRoom'] = $message;
                 $_SESSION["bgMsgRoom"] = $type;
                 $_SESSION['roomsList'] = $roomsList;
-                //header("Location: /tpmovies/Room/Rooms");
-                require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
+                header("Location: /tpmovies/Room/Rooms");
+                //require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }
         }else{
             header("Location: /tpmovies/");

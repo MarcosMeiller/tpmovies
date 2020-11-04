@@ -115,7 +115,7 @@ class roomDAO implements IRoom{
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
             if($newArray !== null){ 
-            $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+            $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['price']);
             $newRoom->setId($newArray['idrooms']);
             }
         }
@@ -138,20 +138,18 @@ class roomDAO implements IRoom{
 	}
 
 	public function update(Room $code){ ///reemplaza un objeto dentro de la lista
-		//$this->retrieveData();
-		$newList = array();
-		foreach ($this->roomList as $room) {
-			if($room->getId() != $code->getId()){
-				array_push($newList, $room);
-			}
-			else{
-				array_push($newList,$code);
-			}
-		}
-		
+	
+		$query = "UPDATE ".$this->tableName." SET name=:name, id_cinema=:id_cinema, capacity = :capacity, price = :price  WHERE (idrooms = :idrooms)";
 
-		$this->roomList = $newList;
-		//$this->saveData();
+		$parameters['name'] = $code->getName();
+		$parameters['id_cinema'] = $code->getId_Cinema();
+        $parameters["capacity"] =  $code->getCapacity();
+        $parameters["price"] = $code->getPrice();
+        $parameters["idrooms"] = $code->getId();
+
+        $this->connection = Connection::GetInstance();
+
+        return $this->connection->ExecuteNonQuery($query, $parameters);
 	}
 
 }

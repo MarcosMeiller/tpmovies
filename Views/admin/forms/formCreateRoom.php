@@ -50,7 +50,7 @@ if($cinemasList != []){
     <!-- name -->
     <div class="w-full md:w-2/6 px-3 mb-2 md:mb-0">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
-          Nombre
+          Nombre Sala
         </label>
         <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
         

@@ -3,7 +3,6 @@ namespace Dao;
 
 //use Dao\IGenre as IGenre;
 USE PDOException;
-use FFI\Exception;
 use DateTime;
 use Models\FunctionCinema as FunctionCinema;
 use Dao\Connection as Connection;
@@ -21,17 +20,19 @@ class FunctionCinemaDAO{
         $parameters['date'] = $newFunction->getDate();
         $parameters['hour'] = $newFunction->getHour();
         
-		try{
-			$this->connection = Connection::GetInstance();
-			return $this->connection->ExecuteNonQuery($query, $parameters);
-		}catch(PDOException $ex){
-            throw $ex;
+            try{
+                $this->connection = Connection::GetInstance();
+                return $this->connection->ExecuteNonQuery($query, $parameters);
+            }catch(PDOException $ex){
+                throw $ex;
+            }
         }
+        else{
+            return $exist;
     }
-    else{
-        return $exist;
     }
-    }
+
+
     public function getAll(){
 
         $functionList = array();
@@ -91,15 +92,28 @@ public function delete($id){///elimina un dato dentro de la lista
 
 public function update(FunctionCinema $code){ ///reemplaza un objeto dentro de la 
 
-    $query = "UPDATE ".$this->tableName." SET room_id=:room_id, movie_id=:movie_id, date:date,hour:hour  WHERE (idfunctioncinemas = :idfunctioncinemas)";
+    $exist = $this->controlDateMovieWhenUpdate($code);
 
-    $parameters['date'] = $code->getDate();
-    $parameters['hour'] = $code->getHour();
-    $parameters["id_room"] =  $code->getId_Room();
-    $parameters["id_movie"] =  $code->getId_Movie();
-    $this->connection = Connection::GetInstance();
+    if($exist == null){
+        $query = "UPDATE ".$this->tableName." SET room_id=:room_id, movie_id=:movie_id, date=:date, hour=:hour WHERE (idfunctioncinemas = :idfunctioncinemas)";
 
-    return $this->connection->ExecuteNonQuery($query, $parameters);
+        $parameters["room_id"] =  $code->getId_Room();
+        $parameters["movie_id"] =  $code->getId_Movie();
+        $parameters['date'] = $code->getDate();
+        $parameters['hour'] = $code->getHour();
+        $parameters["idfunctioncinemas"]  = $code->getId();
+
+
+        try{
+            $this->connection = Connection::GetInstance();
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+        }catch(PDOEXception $e){
+            throw $e;
+        } 
+    }
+    else{
+        return $exist;
+    }
 }
 
 
@@ -108,6 +122,18 @@ public function controlDateMovie(FunctionCinema $newFunction){
     $validate = null;
     foreach($array as $function){
         if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie())
+        {
+            $validate = "exist";
+        }
+    }
+    return $validate;
+}
+
+public function controlDateMovieWhenUpdate(FunctionCinema $newFunction){
+    $array = $this->getAll();
+    $validate = null;
+    foreach($array as $function){
+        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie() && $newFunction->getId() != $function->getId() )
         {
             $validate = "exist";
         }
@@ -137,14 +163,22 @@ public function validFunction(FunctionCinema $function,FunctionCinema $newFuncti
 
 }
 
-
+public function getFunctionbyMovie($id_movie){
+    $query = "SELECT *  FROM ".$this->tableName." WHERE (movie_id = :movie_id)";
+        $parameters["id_movie"] =  $id_movie;
+        try{
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+    
+        return $array;
+    }    
+    catch(PDOException $ex){
+        throw $ex;
+    }  
 }
 
 
-
-
-
-
+}
 
 
 

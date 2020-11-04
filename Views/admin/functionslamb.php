@@ -69,8 +69,10 @@ require 'Views/head.php';
                         <table class="min-w-full bg-white">
                             <thead class="bg-gray-800 text-white">
                                 <tr>
-                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Sala</th>
-                                    <th class="w-3/5 text-left py-3 px-4 uppercase font-semibold text-sm">Pelicula</th>
+                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Sala</th>
+                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Pelicula</th>
+                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Fecha</th>
+                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Horario</th>
                                     <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Editar</th>
                                     <th class="text-center py-3 px-4 uppercase font-semibold text-sm">Eliminar</th>
                                 </tr>
@@ -82,6 +84,16 @@ require 'Views/head.php';
                               <?php foreach($functionList as $function){
                                 ?>
                                 <tr>
+                                  <?php foreach($roomList as $room){ 
+                                      if($room->getId() == $function->getId_Room()){ ?>
+                                      <td class="w-1/5 text-left py-3 px-4"><?php echo $room->getName(); ?></td>
+                                  <?php }} ?>
+
+                                  <?php foreach($adminmovies as $movie){ 
+                                      if($movie->getId() == $function->getId_Movie()){ ?>
+                                      <td class="w-2/5 text-left py-3 px-4"><?php echo $movie->getTitle(); ?></td>
+                                  <?php }} ?>
+                                   
                                     <td class="w-1/5 text-left py-3 px-4"><?php echo $function->getDate(); ?></td>
                                     <td class="w-1/5 text-left py-3 px-4">
                                     <?php echo $function->getHour(); ?></td>
@@ -89,8 +101,10 @@ require 'Views/head.php';
                                     <td class="text-center py-3 px-4">
                                     <a 
                                       data-id="<?php echo($function->getId()); ?>" 
-                                      data-name="<?php echo($function->getId_Movie()); ?>"
-                                      data-address="<?php echo($function->getId_Room()); ?>"
+                                      data-idmovie="<?php echo($function->getId_Movie()); ?>"
+                                      data-idroom="<?php echo($function->getId_Room()); ?>"
+                                      data-date="<?php echo($function->getDate()); ?>"
+                                      data-hour="<?php echo($function->getHour()); ?>"
                                       class="modal-open hover:text-blue-500" href="">
                                     <i class="fas fa-edit"></i>
                                     </a>
@@ -139,7 +153,7 @@ require 'Views/head.php';
 
         <!--Body-->
         
-        <?php   require 'forms/formUpdateCinema.php' ?>
+        <?php   require 'forms/formUpdateFunction.php' ?>
         
 
         <!--Footer-->
@@ -195,12 +209,11 @@ require 'Views/head.php';
   };
 
   function toggleModal() {
-  console.log("2");
-  const body = document.querySelector('body')
-  const modal = document.querySelector('.modal')
-  modal.classList.toggle('opacity-0')
-  modal.classList.toggle('pointer-events-none')
-  body.classList.toggle('modal-active')
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
   }
 
   function passingData(id,idroom,idmovie,date,hour){

@@ -4,6 +4,7 @@ namespace Dao;
 use Dao\IUser as IUser;
 use Models\User as User;
 use Dao\Connection as Connection;
+use PDOException;
 
 class UserDAO implements IUser{
     private $connection;
@@ -44,7 +45,7 @@ class UserDAO implements IUser{
             {
                 $user = new User($row["id"],$row["username"],$row["name"],$row["lastname"],$row["email"],$row["password"]);
                 $user->setId_Type($row['id_type']);
-                $newUser->setId($newArray['idusers']);
+                $user->setId($row['idusers']);
                 array_push($userList, $user);
             }
 

@@ -101,12 +101,11 @@ require 'Views/head.php';
                                     <td class="w-1/5 text-left py-3 px-4">
                                     <?php echo $rooms->getPrice(); ?></td>
                                     
-                                    <td class="text-center py-3 px-4">
-                                    
+                                    <td class="text-center py-3 px-4">                                  
                                     <a
                                       data-id="<?php echo($rooms->getId()); ?>" 
                                       data-name="<?php echo($rooms->getName()); ?>"
-                                      data-name="<?php echo($rooms->getId_Cinema()); ?>"
+                                      data-idcinema="<?php echo($rooms->getId_Cinema()); ?>"
                                       data-capacity="<?php echo($rooms->getCapacity()); ?>"
                                       data-price="<?php echo($rooms->getPrice()); ?>"
                                       class="modal-open hover:text-blue-500" href="">
@@ -149,7 +148,7 @@ require 'Views/head.php';
       <div class="modal-content py-4 text-left px-6">
         <!--Title-->
         <div class="flex justify-between items-center pb-3">
-          <p class="text-2xl font-bold">Actualizar Datos Cine</p>
+          <p class="text-2xl font-bold">Actualizar Datos Sala</p>
           <div class="modal-close cursor-pointer z-50">
             <svg class="fill-current text-black" xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 18 18">
               <path d="M14.53 4.53l-1.06-1.06L9 7.94 4.53 3.47 3.47 4.53 7.94 9l-4.47 4.47 1.06 1.06L9 10.06l4.47 4.47 1.06-1.06L10.06 9z"></path>
@@ -159,7 +158,7 @@ require 'Views/head.php';
 
         <!--Body-->
         
-        <?php   require 'forms/formUpdateCinema.php' ?>
+        <?php   require 'forms/formUpdateRoom.php' ?>
         
 
         <!--Footer-->
@@ -183,12 +182,12 @@ for (var i = 0; i < openmodal.length; i++) {
 openmodal[i].addEventListener('click', function(event){
     var id = $(this).data('id');
     var name = $(this).data('name');
+    var idcinema = $(this).data('idcinema')
     var capacity = $(this).data('capacity')
-    var address = $(this).data('address')
     var priceUnit = $(this).data('price')
-    console.log(priceUnit,id,name);
+
     event.preventDefault()
-    passingData(id,name,capacity,address,priceUnit)
+    passingData(id,name,idcinema,capacity,priceUnit)
     toggleModal()
 })
 }
@@ -201,35 +200,33 @@ for (var i = 0; i < closemodal.length; i++) {
 closemodal[i].addEventListener('click', toggleModal)
 }
 
-document.onkeydown = function(evt) {
-evt = evt || window.event
-var isEscape = false
-if ("key" in evt) {
-isEscape = (evt.key === "Escape" || evt.key === "Esc")
-} else {
-isEscape = (evt.keyCode === 27)
-}
-if (isEscape && document.body.classList.contains('modal-active')) {
-toggleModal()
-}
-};
+  document.onkeydown = function(evt) {
+    evt = evt || window.event
+    var isEscape = false
+    if ("key" in evt) {
+    isEscape = (evt.key === "Escape" || evt.key === "Esc")
+    } else {
+    isEscape = (evt.keyCode === 27)
+    }
+    if (isEscape && document.body.classList.contains('modal-active')) {
+    toggleModal()
+    }
+  };
 
-function toggleModal() {
-console.log("2");
-const body = document.querySelector('body')
-const modal = document.querySelector('.modal')
-modal.classList.toggle('opacity-0')
-modal.classList.toggle('pointer-events-none')
-body.classList.toggle('modal-active')
-}
+  function toggleModal() {
+    const body = document.querySelector('body')
+    const modal = document.querySelector('.modal')
+    modal.classList.toggle('opacity-0')
+    modal.classList.toggle('pointer-events-none')
+    body.classList.toggle('modal-active')
+  }
 
-function passingData(id,name,capacity,address,priceUnit){
-    console.log("3");
+function passingData(id,name,idcinema,capacity,priceUnit){
     $('#upd_id').val(id);
     $('#upd_name').val(name);
+    $('#upd_idcinema').val(idcinema);
     $('#upd_capacity').val(capacity)
-    $('#upd_address').val(address);
-    $('#upd_priceUnit').val(priceUnit);
+    $('#upd_price').val(priceUnit);
 }
 
 function viewForm(){

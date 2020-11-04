@@ -10,9 +10,10 @@
 - [x] Consulta de películas actuales (C- Item a - get de la api)
 
 ---
-arreglar cascada en salas y cines que no queden filas huerfanas.
 
 ### **Integrantes:**
 
 - Marcos Miller
 - Carlos Nuñez
+
+metodo listFunction
