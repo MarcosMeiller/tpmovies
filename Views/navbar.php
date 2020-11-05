@@ -45,7 +45,7 @@
           <a href="<?php echo FRONT_ROOT?>Main/Init" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
             <span>Inicio</span>
           </a>
-          <a href="<?php echo FRONT_ROOT?>Showtimes" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
+          <a href="<?php echo FRONT_ROOT?>Showtimes/Listing" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
             <span>Cartelara</span>
           </a>
 
@@ -89,9 +89,11 @@
 
         <div class='flex flex-row justify-center lg:hidden lg:justify-center lg:flex-row text-center items-center px-5 lg:px-0 border-0 border-t-2 lg:border-t-0 my-2 mx-8 lg:my-0 lg:mx-0 '>
         <p class='uppercase text-white pr-2 border-0 border-r-2'><?php echo $user->getUserName() ?></p>
+        <?php if($type == 'admin'){ ?>
         <a href="<?php echo FRONT_ROOT ?>Admin" class="ml-5 rounded-lg bg-transparent hover:text-gray-900">
           <i class="fas fa-user-tie text-white mr-1 hover:text-gray-400"></i>
         </a>
+        <?php } ?>
         <a href="<?php echo FRONT_ROOT ?>Login/Logout" class="px-3 py-2 lg:py-0 text-gray-400 items-center justify-center hover:text-white lg:border-r-2 lg:mr-2">
         <i class="fas fa-sign-out-alt text-white hover:text-gray-400"></i>
           </a>

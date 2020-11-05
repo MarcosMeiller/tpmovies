@@ -25,26 +25,16 @@ class ShowtimesController{
     }
 
 
-    public static function Index(){
-        if(isset($_SESSION['loggedUser'])){
-            require_once(VIEWS_PATH."/movieslistings.php");
-        }
-        else{
-            header("Location: /tpmovies/");
-        }
-
-    }
-
-    public function Listinings($message = "",$type= "",$id = 0){
+    public function Listing($message = "",$type= "",$id = 0){
         
         
         if(isset($_SESSION['loggedUser'])){          
-                $this->dao->getAll();
+                $functionsList = $this->dao->getAll();
                 $this->daoR->getAll();
                 $this->daoM->getAll($id);
                 $this->daoC->getAll();
-                //require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
-                header("Location: /tpmovies/Function/Functions");
+                require_once(VIEWS_PATH."/movieslisting.php");
+                //header("Location: /tpmovies/Showtimes/Listing");
         
         }
         else{

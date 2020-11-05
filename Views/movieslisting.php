@@ -3,7 +3,7 @@
 ?>
     <pre>
 <?php
-    echo json_encode($moviesList);
+    echo json_encode($functionsList);
     exit;
 ?>
 </pre>

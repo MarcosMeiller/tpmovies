@@ -42,21 +42,23 @@ class MovieDAO implements IMovie{
 	
 		$movieList = array();
 
-		$query = "SELECT id_movie, title,overview,poster_path,backdrop,adult,language,original_language,relase_date,duration FROM ".$this->tableName;
+		$query = "SELECT id_movie, title,overview,poster_path,backdrop,adult,language,original_language,release_date,duration FROM ".$this->tableName;
 
             $this->connection = Connection::GetInstance();
 
             $result = $this->connection->Execute($query);
 
+			/*var_dump($result);
+			die;*/
 
             foreach($result as $row)
             {
-				$movie = new Movie($row["id_movie"],$row["title"],$row["overview"],$row["poster_Path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
+				$movie = new Movie($row["id_movie"],$row["title"],$row["overview"],$row["poster_path"],$row["backdrop"],$row["adult"],$row["language"],$row["original_language"],$row["release_date"],$row["duration"]);
 
 				//$movie = new Movie($row["id_movie"],$row["title"]);
 				
 
-				$movie->setId($row['idmovies']);
+				$movie->setId($row['idmovies']); // che hizo un var_dump de $result y este idmovies no viene por ningun lado (MARCOS)
                 array_push($movieList, $movie);
             }
 		$size = 0;
@@ -237,7 +239,7 @@ class MovieDAO implements IMovie{
 
 
 	public function add2(Movie $newMovie){
-		$query = "INSERT INTO "."moviesxadmin". "VALUE(:id_movie, :title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:relase_date,:duration)";
+		$query = "INSERT INTO "."moviesxadmin". "VALUE(:id_movie, :title,:genres_id,:overview,:poster_path,:backdrop,:adult,:language,:original_language,:release_date,:duration)";
 		$parameters['id_movie'] = $newMovie->getId_Movie();
         $parameters['title'] = $newMovie->getTitle();
        
