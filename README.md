@@ -15,5 +15,3 @@
 
 - Marcos Miller
 - Carlos Nuñez
-
-metodo listFunction

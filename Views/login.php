@@ -97,7 +97,7 @@
                     INICIA SESION
                   </button>
                 </div>
-                <p class="text-sm text-red-600 italic text-center mt-2 text-bold"><?php echo $message ?></p>
+                <p class="text-sm text-red-600 italic text-center mt-2 font-bold"><?php echo $message ?></p>
               </form>
             </div>
           </div>

@@ -105,9 +105,12 @@
             </main>-->
     
             <div class='flex flex-col justify-center mt-8 items-center'>
-            <p>Bienvenido <?php echo $user->getUserName()?></p>
-            <p class='text-xs my-5'>Desde aqui podrás administrar gran parte del contenido de la pagina:</p>
+            <p class='font-bold'>Bienvenido <?php echo $user->getUserName()?></p>
+            <p class='text-md my-5 mx-5 text-center'>Desde aqui podrás administrar gran parte del contenido de la pagina:</p>
+            <p> - Peliculas para agregar a tu lista</p>
             <p> - Administrar Cines</p>
+            <p> - Administrar Salas</p>
+            <p> - Administrar Funciones</p>
             </div>
 
         </div>

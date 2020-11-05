@@ -12,7 +12,7 @@ Use Models\Cinema as Cinema;
 Use Dao\CinemaDAO as cinemaDAO;
 use Exception;
 
-class FunctionController{
+class ShowtimesController{
     private $dao;
     private $daoR;
     private $daoM; 
@@ -24,6 +24,16 @@ class FunctionController{
         $this->daoC = new cinemaDAO(); 
     }
 
+
+    public static function Index(){
+        if(isset($_SESSION['loggedUser'])){
+            require_once(VIEWS_PATH."/movieslistings.php");
+        }
+        else{
+            header("Location: /tpmovies/");
+        }
+
+    }
 
     public function Listinings($message = "",$type= "",$id = 0){
         

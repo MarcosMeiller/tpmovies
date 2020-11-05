@@ -4,14 +4,25 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 	
+	
+	require "vendor/autoload.php";
+
+	$dotenv = Dotenv\Dotenv::createImmutable(__DIR__);
+	$dotenv->load();	
+
 	require "Config/Autoload.php";
 	require "Config/Config.php";
 
 	use Config\Autoload as Autoload;
 	use Config\Router 	as Router;
 	use Config\Request 	as Request;
-		
+
+
+	
+
 	Autoload::start();
+
+
 
 	session_start();
 
