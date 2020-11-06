@@ -8,17 +8,21 @@ Use Models\Movie as Movie;
 Use Dao\MovieDAO as movieDAO;
 use Models\FunctionCinema as FunctionCinema;
 Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
+Use Dao\cinemaDAO as cinemaDAO;
+use Models\Cinema as Cinema;
 use Exception;
 
 class FunctionController{
     private $dao;
     private $daoR;
     private $daoM; 
+    private $daoC;
 
     public function __construct(){
         $this->dao = new FunctionCinemaDAO();
         $this->daoR = new RoomDao();
         $this->daoM = new movieDAO(); 
+        $this->daoC = new cinemaDAO();
     }
 
     public function addFunction($id_Room,$id_movie,$date,$hour){
@@ -96,6 +100,7 @@ class FunctionController{
             $roomList = $this->daoR->getAll();
             $adminmovies = $this->daoM->getMoviexAdmin($id);
             $functionList = $this->dao->getAll();
+            $cinemaList = $this->daoC->getAll();
             foreach($adminmovies as $admin){
                 $movieList[] = $this->daoM->searchMovieIdApi($admin['id_movie']);
             }

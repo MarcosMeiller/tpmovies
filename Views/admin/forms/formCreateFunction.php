@@ -19,8 +19,13 @@ $hoy = date('Y-m-d');
     <select requerid id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
       <option value=''>Seleccione una sala</option>
       <?php foreach($roomList as $room){ ?>
-          <option value="<?php echo $room->getId() ?>">
-          <?php echo $room->getName()?> 
+          <?php  foreach($cinemaList as $cinema){ 
+            if($cinema->getId() == $room->getId_Cinema()){ ?>
+                <option value="<?php echo $room->getId() ?>">
+                <?php echo $room->getName() ," Del Cine ", $cinema->getName();?>
+          <?php }}?>
+           
+          
           </option>
       <?php } ?>
     </select>

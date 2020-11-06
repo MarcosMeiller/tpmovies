@@ -85,9 +85,10 @@ require 'Views/head.php';
                                 ?>
                                 <tr>
                                   <?php foreach($roomList as $room){ 
-                                      if($room->getId() == $function->getId_Room()){ ?>
-                                      <td class="w-1/5 text-left py-3 px-4"><?php echo $room->getName(); ?></td>
-                                  <?php }} ?>
+                                      foreach($cinemaList as $cinema){ 
+                                      if($room->getId() == $function->getId_Room() && $cinema->getId() == $room->getId_Cinema()){ ?>
+                                      <td class="w-1/5 text-left py-3 px-4"><?php echo $room->getName()," del Cine ", $cinema->getName(); ?></td>
+                                  <?php }}} ?>
 
                                   <?php foreach($adminmovies as $movie){ 
                                       if($movie->getId() == $function->getId_Movie()){ ?>

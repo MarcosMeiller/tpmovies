@@ -79,6 +79,26 @@ public function Search($id){
     }  
 }
 
+public function FilterList($date){
+    $query = "SELECT *  FROM ".$this->tableName." WHERE (date = :date)";
+    $parameters["date"] =  $date;
+    $arrayFunction = array();
+    try{
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+            foreach($array as $newArray){
+                if($newArray !== null){
+                    $newFunction = new FunctionCinema($parameters['room_id'],$parameters['movie_id'],$parameters['date'],$parameters['hour']);
+                    $newFunction->setId($parameters['idfunctioncinemas']);
+                }
+                array_push($arrayFunction,$newFunction);
+        }
+        return $arrayFunction;
+    }    
+    catch(PDOException $ex){
+        throw $ex;
+    }  
+}
    
 public function delete($id){///elimina un dato dentro de la lista
     $query = "DELETE FROM ".$this->tableName." WHERE (idfunctioncinemas = :idfunctioncinemas)";

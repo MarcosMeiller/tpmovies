@@ -24,7 +24,8 @@ class ShowtimesController{
         $this->daoC = new cinemaDAO(); 
     }
 
-    public function dateFiltrer(DateTime $date){
+    public function dateFiltrer($date){
+        $functionsList = $this->dao->FilterList($date);
 
     }
 
