@@ -1,7 +1,7 @@
 <?php namespace Config;
 
 define("ROOT", dirname(__DIR__) . "/");
-define("FRONT_ROOT","/tpmovies/");
+define("FRONT_ROOT",$_ENV['FRONT_ROOT']);
 define("VIEWS_PATH","Views/");
 define("VIEWS_PATH_ADMIN","Views/admin");
 // Coneccion a configuracion base de datos.

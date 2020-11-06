@@ -4,82 +4,81 @@
 
 
 
-<div class='bgMovie' style="background-image: url('Views/img/bg-cinema3.jpg')">
+<div class='bgMovie' style="background-image: url('../Views/img/bg-cinema3.jpg')">
     <div class='flex flex-col min-h-full'>
 
     <?php require 'navbar.php' ?>
 
+    <?php if($functionsList) { ?>
+<div class='container max-w-full mx-auto mt-2'>
+  <div class='mx-5'>
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 sm:gap-1 md:gap-2 lg:gap-4 xl:mx-24">
+    <?php foreach($functionsList as $function){ ?>
+      
+      <a href='<?php FRONT_ROOT ?>DetailsMovie/<?php echo $function->getId()?>' class='cursor-pointer'> 
+        <?php foreach($adminmovies as $movie){
+            if($movie->getId() == $function->getId_Movie()){ ?>
+                  <div class="max-w-xs rounded overflow-hidden shadow-lg my-2 bg-white">
+                    <img class="w-full" src='https://image.tmdb.org/t/p/w300/<?= $movie->getBackdrop() ?>' alt="Sunset in the mountains" />
+                    <div class="px-6 py-4">
+
+                      <div class="font-bold text-xl mb-2">
+                        <p><?php echo $movie->getTitle(); ?></p>
+                      </div>
+
+                      <div class='h-64 overflow'> 
+                      <p class="text-grey-darker text-base">
+                      <?php echo $movie->getoverview(); ?></p>
+                      </p>
+                      </div>
+                     
+                    </div>
+                    <div class="px-6 py-4">
+
+                    <?php  
+                    
+                    $namesGenres = array();
+                    $arrayIds = $movie->getGenre_Id();
+                    foreach($arrayIds as $id){
+                      foreach($genresList as $genre){
+                        if($id === $genre->getId()){
+                          $namesGenres[] = $genre->getName();
+                        }
+                      }
+                    }
+                    ?>
+    
+                    <?php foreach($namesGenres as $genre){ ?>
+                      <p class='text-xs mr-2 text-blue-900'>
+                      <?php echo $genre; ?> 
+                      </p>
+                    <?php }?>
+
+                    <span class="bg-gray-300 inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">#photography</span>
+                    <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2">#travel</span>
+                    <span class="inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker">#winter</span>
+                    </div>
+                  </div>
+        <?php }} ?>
+      </a>
+    <?php } ?>
 
 
-        <div class="flex flex-grow container mx-auto px-4 w-full h-full items-center justify-center" >
+      
+     
+    </div>
+  </div>
+</div>
 
-       <div class="inline-block relative w-64">
-          <p>CARTELERA</p>
-        </div>
-        <tr>
-                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Cine</th>
-                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Sala</th>
-                                    <th class="w-2/5 text-left py-3 px-4 uppercase font-semibold text-sm">Pelicula</th>
-                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Fecha</th>
-                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Horario</th>
-                                    <th class="w-1/5 text-left py-3 px-4 uppercase font-semibold text-sm">Precio entrada</th>
-        </tr>
+<?php }else{ ?>
 
-        <tbody class="text-gray-700">
+<div class='
+text-center mt-8'>
+<p>No se encontraron funciones</p>
 
-                            <?php if($functionsList){ ?>
+</div>
+    
+<?php } ?>
 
-                              <?php foreach($functionsList as $function){
-                                ?>
-                                <tr>
-                                  <div>
-                                  <?php foreach($roomList as $room){ 
-                                      if($room->getId() == $function->getId_Room()){ ?>
-                                      <td class="w-1/5 text-left py-3 px-4"><?php echo $room->getName(); ?></td>
-                                      <?php foreach ($cinemasList as $cinema){ 
-                                          if($cinema->getId() == $room->getId_Cinema()){
-                                        ?>
-                                            <td class="w-1/5 text-left py-3 px-4"><?php echo $cinema->getName(); ?></td>
-                                          
-                                  <?php }}}} ?>
-                  
-                                      </div>
-                                  <div> 
-                                  <?php foreach($adminmovies as $movie){
-                                 
-                                      if($movie->getId() == $function->getId_Movie()){ ?>
-                                      <td class="w-2/5 text-left py-3 px-4"><?php echo $movie->getTitle(); ?></td>
-                                  <?php }} ?>
-                                      </div>
-                                    <td class="w-1/5 text-left py-3 px-4"><?php echo $function->getDate(); ?></td>
-                                    <td class="w-1/5 text-left py-3 px-4">
-                                    <?php echo $function->getHour(); ?></td>
-                                    <div>
-                                    <td class="text-center py-3 px-4">
-                                    <a 
-                                      data-id="<?php echo($function->getId()); ?>" 
-                                      data-idmovie="<?php echo($function->getId_Movie()); ?>"
-                                      data-idroom="<?php echo($function->getId_Room()); ?>"
-                                      data-date="<?php echo($function->getDate()); ?>"
-                                      data-hour="<?php echo($function->getHour()); ?>"
-                                      class="modal-open hover:text-blue-500" href="">
-                                    <i class="fas fa-edit"></i>
-                                    </a>
-                                    </td>
-                                      </div>
-
-                                    <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Function/deleteFunction/<?php echo $function->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
-                                </tr>
-
-                              
-                              <?php }}else{ ?>
-                                  <div class='flex flex-col justify-center my-2 items-center'>
-                                    <p class='text-md uppercase text-red-500'>Todavia no hay Funciones cargadas.</p>
-                                  </div>
-                              <?php } ?>
-                            </tbody>
-
-
-        </div>
     </div>
 </div>
