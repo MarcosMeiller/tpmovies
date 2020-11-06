@@ -1,12 +1,7 @@
 <?php namespace views;
+ 
+?>
 
-?>
-    <pre>
-<?php
-    echo json_encode($functionsList);
-    exit;
-?>
-</pre>
 
 
 <div class='bgMovie' style="background-image: url('Views/img/bg-cinema3.jpg')">
@@ -32,25 +27,34 @@
 
         <tbody class="text-gray-700">
 
-                            <?php if($functionList){ ?>
+                            <?php if($functionsList){ ?>
 
-                              <?php foreach($functionList as $function){
+                              <?php foreach($functionsList as $function){
                                 ?>
                                 <tr>
+                                  <div>
                                   <?php foreach($roomList as $room){ 
                                       if($room->getId() == $function->getId_Room()){ ?>
                                       <td class="w-1/5 text-left py-3 px-4"><?php echo $room->getName(); ?></td>
-                                  <?php }} ?>
-
-                                  <?php foreach($adminmovies as $movie){ 
+                                      <?php foreach ($cinemasList as $cinema){ 
+                                          if($cinema->getId() == $room->getId_Cinema()){
+                                        ?>
+                                            <td class="w-1/5 text-left py-3 px-4"><?php echo $cinema->getName(); ?></td>
+                                          
+                                  <?php }}}} ?>
+                  
+                                      </div>
+                                  <div> 
+                                  <?php foreach($adminmovies as $movie){
+                                 
                                       if($movie->getId() == $function->getId_Movie()){ ?>
                                       <td class="w-2/5 text-left py-3 px-4"><?php echo $movie->getTitle(); ?></td>
                                   <?php }} ?>
-                                   
+                                      </div>
                                     <td class="w-1/5 text-left py-3 px-4"><?php echo $function->getDate(); ?></td>
                                     <td class="w-1/5 text-left py-3 px-4">
                                     <?php echo $function->getHour(); ?></td>
-
+                                    <div>
                                     <td class="text-center py-3 px-4">
                                     <a 
                                       data-id="<?php echo($function->getId()); ?>" 
@@ -62,12 +66,13 @@
                                     <i class="fas fa-edit"></i>
                                     </a>
                                     </td>
+                                      </div>
 
                                     <td class="text-center py-3 px-4"><a class="hover:text-blue-500" href="<?php echo FRONT_ROOT?>Function/deleteFunction/<?php echo $function->getId()?>" name='id' type='submit'><i class="fas fa-trash-alt"></i></a></td>
                                 </tr>
 
-                              <?php } ?>
-                              <?php }else{ ?>
+                              
+                              <?php }}else{ ?>
                                   <div class='flex flex-col justify-center my-2 items-center'>
                                     <p class='text-md uppercase text-red-500'>Todavia no hay Funciones cargadas.</p>
                                   </div>

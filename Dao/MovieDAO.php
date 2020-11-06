@@ -42,14 +42,13 @@ class MovieDAO implements IMovie{
 	
 		$movieList = array();
 
-		$query = "SELECT id_movie, title,overview,poster_path,backdrop,adult,language,original_language,release_date,duration FROM ".$this->tableName;
+		$query = "SELECT idmovies, id_movie, title,overview,poster_path,backdrop,adult,language,original_language,release_date,duration FROM ".$this->tableName;
 
             $this->connection = Connection::GetInstance();
 
             $result = $this->connection->Execute($query);
 
-			/*var_dump($result);
-			die;*/
+		
 
             foreach($result as $row)
             {
@@ -58,7 +57,7 @@ class MovieDAO implements IMovie{
 				//$movie = new Movie($row["id_movie"],$row["title"]);
 				
 
-				$movie->setId($row['idmovies']); // che hizo un var_dump de $result y este idmovies no viene por ningun lado (MARCOS)
+				$movie->setId($row['idmovies']); 
                 array_push($movieList, $movie);
             }
 		$size = 0;

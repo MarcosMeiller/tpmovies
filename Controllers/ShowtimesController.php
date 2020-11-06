@@ -24,15 +24,18 @@ class ShowtimesController{
         $this->daoC = new cinemaDAO(); 
     }
 
+    public function dateFiltrer(DateTime $date){
+
+    }
 
     public function Listing($message = "",$type= "",$id = 0){
         
         
         if(isset($_SESSION['loggedUser'])){          
                 $functionsList = $this->dao->getAll();
-                $this->daoR->getAll();
-                $this->daoM->getAll($id);
-                $this->daoC->getAll();
+                $roomList = $this->daoR->getAll();
+                $adminmovies = $this->daoM->getAll($id);
+                $cinemasList = $this->daoC->getAll();
                 require_once(VIEWS_PATH."/movieslisting.php");
                 //header("Location: /tpmovies/Showtimes/Listing");
         
