@@ -43,7 +43,7 @@
                   </div>
 
 
-                  <div class="flex flex-wrap -mx-3 mb-6">
+                  <div class="flex flex-wrap -mx-3 md:mb-4">
                     <div class="relative w-full md:w-1/2 px-3 mb-6 md:mb-0">
                       <label
                         class="block uppercase text-gray-700 text-xs font-bold"

@@ -8,7 +8,7 @@ Use Models\Movie as Movie;
 Use Dao\MovieDAO as movieDAO;
 use Models\FunctionCinema as FunctionCinema;
 Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
-Use Dao\cinemaDAO as cinemaDAO;
+Use Dao\CinemaDAO as cinemaDAO;
 use Models\Cinema as Cinema;
 use Exception;
 
@@ -41,8 +41,9 @@ class FunctionController{
 
             }
 
-        }
+    }
 
+    
     public function deleteFunction($id){
         try{
             $this->dao->delete($id);
