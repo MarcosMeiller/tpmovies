@@ -41,7 +41,7 @@ class LoginController
                             $_SESSION["isAdmin"] = $type;
                         }
                     }
-                    header("Location: /tpmovies/");
+                    header("Location: ".FRONT_ROOT);
                 }
                 else{
                     $this->Index("Usuario o contraseña incorrecta.", 2); 
@@ -60,7 +60,7 @@ class LoginController
         if(empty($_SESSION["loggedUser"])){
             require_once(VIEWS_PATH."login.php");
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }       
     
@@ -69,7 +69,7 @@ class LoginController
         unset($_SESSION["isAdmin"]);
         unset($_SESSION['id']);
         session_destroy();
-        header("Location: /tpmovies/");
+        header("Location:".FRONT_ROOT);
     }
 
     public function test_input($data) {

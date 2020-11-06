@@ -128,7 +128,7 @@ class MovieController
 
             require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }
 
@@ -147,7 +147,7 @@ class MovieController
             $moviesList = $this->dao->getAll($id);
             require_once(VIEWS_PATH."moviesnowp.php");
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }
 

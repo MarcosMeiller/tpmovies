@@ -47,7 +47,7 @@ class ShowtimesController{
         
         }
         else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }
 

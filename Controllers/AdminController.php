@@ -10,10 +10,10 @@
                 if($_SESSION['isAdmin'] == 'admin'){
                     require_once(VIEWS_PATH_ADMIN."/index.php");
                 }else{
-                    header("Location: /tpmovies/");
+                    header("Location: ".FRONT_ROOT);
                 }
             }else{
-                header("Location: /tpmovies/");
+                header("Location: ".FRONT_ROOT);
             }
         } 
         

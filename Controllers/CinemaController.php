@@ -115,7 +115,7 @@ class CinemaController
                 header("Location: /tpmovies/Cinema/Cinemas/");
             }
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }        
 }

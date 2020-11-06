@@ -121,7 +121,7 @@ class FunctionController{
         
         }
         else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }
 

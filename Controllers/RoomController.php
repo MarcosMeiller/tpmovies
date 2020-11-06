@@ -150,7 +150,7 @@ class RoomController
                 //require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }
     }        
 }

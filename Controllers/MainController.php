@@ -9,7 +9,7 @@
         } 
         
         public function Init($message=''){
-            header("Location: /tpmovies/");
+            header("Location:".FRONT_ROOT);
         }
 
     }

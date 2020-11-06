@@ -38,7 +38,7 @@ class RegisterController
                         $user = $this->dao->add($newUser);
                         if($user == 1){
                             $_SESSION['loggedUser'] = $newUser;
-                            header("Location: /tpmovies/");
+                            header("Location: ".FRONT_ROOT);
                         }
                         $this->Index("Error al intentar registrar cuenta.",2);
                         }catch(Exception $e){
@@ -70,7 +70,7 @@ class RegisterController
         if(empty($_SESSION["loggedUser"])){
             require_once(VIEWS_PATH."register.php");
         }else{
-            header("Location: /tpmovies/");
+            header("Location: ".FRONT_ROOT);
         }      
     }        
 }
