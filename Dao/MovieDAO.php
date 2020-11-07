@@ -59,32 +59,9 @@ class MovieDAO implements IMovie{
 
 				$movie->setId($row['idmovies']); 
                 array_push($movieList, $movie);
-            }
-		$size = 0;
-		if($movieList !== []){
-			$size = 1;
-		}
-		if($size === 0){
-            $this->retrieveDataFromAPI();
-		}
-		
-		if($id !== 0 && $id !== "TODAS"){
-
-			$moviesFilter = array();
-			$array_ids = array();
+			}
 			
-			foreach($movieList as $movie){
-				$array_ids = $movie->getGenre_Id();
-				foreach($array_ids as $genId){
-					if($genId == $id){
-						
-						$moviesFilter[] = $movie;
-					}
-					}
-				}
-				
-			$movieList = $moviesFilter;	
-		}
+	
 		return $movieList;
 	}
 
@@ -334,19 +311,6 @@ class MovieDAO implements IMovie{
 
 	} 
 
-	public function getForGenre($Genre){
-	/*	$listMovie = $this->getAll(0);
-		$movielistForGenre = array();
-		foreach($listMovie as $movieForGenre){
-			foreach($movieForGenre->getGenre_id() as $genre_Id){
-				if($Genre == $genre_Id){
-					$movielistForGenre = $movieForGenre;
-				}
-				}
-			}
-		
-		return $movielistForGenre;*/
-	}
 
 	public function getNamesGenres($genresList,$arrayIds){
 		
@@ -381,8 +345,9 @@ class MovieDAO implements IMovie{
 
 	}
 
+	// buscar los generos de la pelicula
 	public function getGenresofMovie($idmovie){
-		$query = "SELECT *  FROM moviexgenres WHERE (idmovie = :idmovie)";
+		$query = "SELECT idmovie,idgenre  FROM moviesxgenres WHERE (idmovie = :idmovie)";
 		$parameters['idmovie'] = $idmovie;
 		try{
 			$this->connection = Connection::GetInstance();
@@ -392,9 +357,48 @@ class MovieDAO implements IMovie{
 		catch(PDOException $ex){
             throw $ex;
         }
-
 	}
 
+
+	public function getMoviesForGenre($id_Genre){
+	
+		$query = "SELECT * FROM moviesxgenres  WHERE (idgenre = :idgenre)";
+        $newMovie = [];
+        $parameters["idgenre"] =  $id_Genre;
+
+        $this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		
+
+        foreach($array as $newArray){
+            $newMovie[] = $this->search($newArray['idmovie']);
+		}
+		
+        return $newMovie;	
+	}
+
+	public function searchIdBdd($id){
+
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (idmovies = :idmovies)";
+        $newMovie = null;
+        $parameters["idmovies"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		
+
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+			$newMovie= new Movie($newArray["id_movie"],$newArray["title"],$newArray["overview"],$newArray["poster_path"],$newArray["backdrop"],$newArray["adult"],$newArray["language"],$newArray["original_language"],$newArray["release_date"],$newArray["duration"]);
+			$newMovie->setId($newArray['idmovies']);
+			/*$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
+			*/
+            }
+        }
+        return $newMovie;
+
+
+	}
 
 }
 

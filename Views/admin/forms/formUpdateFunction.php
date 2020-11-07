@@ -16,7 +16,7 @@
       Sala
     </label>
    
-    <select requerid id="upd_idroom" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <select required id="upd_idroom" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
       <option value=''>Seleccione una sala</option>
       <?php foreach($roomList as $room){ ?>
           <?php  foreach($cinemaList as $cinema){ 
@@ -39,7 +39,7 @@
         Pelicula
       </label>
       
-      <select requerid id="upd_idmovie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+      <select required id="upd_idmovie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
     <option value=''>Seleccione una pelicula</option>
     <?php foreach($adminmovies as $movie){ ?>
         <option value="<?php  echo $movie->getId() ?>">
@@ -61,7 +61,7 @@
           Dia
         </label>
         <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="upd_date" name='date' type="date" placeholder="" value="<?php echo $hoy ?>"
-       min="<?php echo $hoy ?>" max="2030-12-31" requerid>
+       min="<?php echo $hoy ?>" max="2030-12-31" required>
       </div>
 
       <div class="w-full px-3 md:w-3/6 mt-5">

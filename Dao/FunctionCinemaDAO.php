@@ -68,8 +68,8 @@ public function Search($id){
         $array = $this->connection->Execute($query, $parameters);
             foreach($array as $newArray){
                 if($newArray !== null){
-                    $newFunction = new FunctionCinema($parameters['room_id'],$parameters['movie_id'],$parameters['date'],$parameters['hour']);
-                    $newFunction->setId($parameters['idfunctioncinemas']);
+                    $newFunction = new FunctionCinema($newArray['room_id'],$newArray['movie_id'],$newArray['date'],$newArray['hour']);
+                    $newFunction->setId($newArray['idfunctioncinemas']);
                 }
         }
         return $newFunction;
@@ -79,7 +79,7 @@ public function Search($id){
     }  
 }
 
-public function FilterList($date){
+public function FilterListForDate($date){
     $query = "SELECT *  FROM ".$this->tableName." WHERE (date = :date)";
     $parameters["date"] =  $date;
     $arrayFunction = array();
@@ -88,8 +88,8 @@ public function FilterList($date){
         $array = $this->connection->Execute($query, $parameters);
             foreach($array as $newArray){
                 if($newArray !== null){
-                    $newFunction = new FunctionCinema($parameters['room_id'],$parameters['movie_id'],$parameters['date'],$parameters['hour']);
-                    $newFunction->setId($parameters['idfunctioncinemas']);
+                    $newFunction = new FunctionCinema($newArray['room_id'],$newArray['movie_id'],$newArray['date'],$newArray['hour']);
+                    $newFunction->setId($newArray['idfunctioncinemas']);
                 }
                 array_push($arrayFunction,$newFunction);
         }

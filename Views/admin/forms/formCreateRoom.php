@@ -28,7 +28,7 @@ if($cinemasList != []){
         </label>
 
 
-    <select requerid id="id_Cinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+    <select required id="id_Cinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
   >
       <option value=''>Seleccione un cine</option>
       <?php foreach($cinemasList as $cinema){ ?>

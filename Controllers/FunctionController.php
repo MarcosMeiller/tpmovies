@@ -32,6 +32,7 @@ class FunctionController{
                 
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
                 $valid = $this->dao->add($function);
+
                 if($valid == "exist"){
                     $this->Functions('Ese dia ya se esta reproduciendo esa pelicula en otro cine/sala','alert');
                 }
@@ -124,6 +125,16 @@ class FunctionController{
         else{
             header("Location: ".FRONT_ROOT);
         }
+    }
+
+
+    public function DetailsFunction($id){
+
+        $functionsList = $this->dao->getAll();
+        $roomList = $this->daoR->getAll();
+        $movie = $this->daoM->searchIdBdd($id);
+        $cinemasList = $this->daoC->getAll();
+        require_once(VIEWS_PATH."detailsFunction.php");
     }
 
 }

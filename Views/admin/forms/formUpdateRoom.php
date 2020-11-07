@@ -14,7 +14,7 @@
     
     <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">Cine</label>
 
-        <select requerid id="upd_idcinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
+        <select required id="upd_idcinema" name='id_Cinema' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline"
       >
           <option value=''>Seleccione un cine</option>
           <?php foreach($cinemasList as $cinema){ ?>
