@@ -1,5 +1,5 @@
 <?php namespace views;
- 
+
 ?>
 
 <div class='bgMovie flex flex-col min-h-full' style="background-image: url('../Views/img/bg-cinema3.jpg')">
@@ -35,7 +35,7 @@
                         <p><?php echo $movie->getTitle(); ?></p>
                       </div>
 
-                      <div class='h-64 overflow'> 
+                      <div class='h-56 overflow'> 
                       <p class="text-grey-darker text-base">
                       <?php echo $movie->getoverview(); ?></p>
                       </p>
@@ -44,46 +44,23 @@
                     </div>
                     <div class="px-6 py-4">
 
-              <!-- Genero  
-                    <?php  
-                     
-                      foreach($genresList as $genre){
-                        for($i=0;$i < $count ;$i++){
-                        foreach($arraygenres[$i] as $idgenre){
-                            if($idgenre['idmovie'] == $movie->getId() && $genre->getId() == $idgenre['idgenre']){
-                              ?>
-                              <span class="bg-gray-300 inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2"><?php echo $genre->getName(); ?></span>
-                              <?php
-                          }
-                        }
-                      }
-                      }
-                    
-                    ?>
-   -->
-
-
-   <?php  
-                     
-                     foreach($arraygenres as $gsxms){
+                    <?php  foreach($arraygenres as $gsxms){
                        foreach($gsxms as $gxm){
                         if($gxm['idmovie'] == $movie->getId()){
                           foreach($genresList as $genre){
                             if($genre->getId() === $gxm['idgenre']){
-                            ?>
-                               <span class="bg-gray-300 inline-block bg-grey-lighter rounded-full px-3 py-1 text-sm font-semibold text-grey-darker mr-2"><?php echo $genre->getName(); ?></span>
+                      ?>
+                          <span class="bg-gray-400 inline-block bg-grey-lighter rounded-full px-2 py-1 text-sm font-semibold text-grey-darker mr-2 mt-2">
+                          <?php echo $genre->getName(); ?>
+                          </span>
                       <?php
-                            }
+                          }
                         }
                       }
-
-                       
-                     }
-                     }
+                    }
+                    }
                    
                    ?>
-
-
 
                     </div>
                   </div>
@@ -101,7 +78,15 @@
   </div>
 </div>
 
-<?php }else{} ?>
+<?php }else{ ?>
+
+<div class='text-center mt-8'>
+<p class='text-white md:text-xl font-bold uppercase'> :/ No se encontraron funciones.</p>
+<p class='text-white md:text-xl font-bold uppercase'>Prueba con otra fecha</p>
+
+</div>
+  
+<?php } ?>
 
 <?php }else{ ?>
 

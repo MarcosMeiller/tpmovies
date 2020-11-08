@@ -39,7 +39,8 @@ class FunctionController{
                     foreach($functionList as $lfunction){
                         $isValid = $this->validFunction($function,$lfunction,$movie);
                     }
-                 
+                
+                // ver lo del valid que me dijiste
                 
                 if($isValid == true){ 
                     $isValid = $this->dao->add($function);
@@ -106,8 +107,9 @@ class FunctionController{
 }
 
 
-    public function Functions($message = '',$type= '',$id = 0){
+    public function Functions($message = "",$type= "",$id = 0){
         
+
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);
             $movieList = array();
@@ -123,8 +125,8 @@ class FunctionController{
             $adminmovies = $movieList;
        
             if($message == '' && $type == ''){
-                unset($_SESSION['msjFunction']);
-                unset($_SESSION["bgMsgFunction"]);
+                //unset($_SESSION['msjFunction']);
+                //unset($_SESSION["bgMsgFunction"]);
                 
                 require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
                 
