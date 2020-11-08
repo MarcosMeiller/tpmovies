@@ -4,14 +4,26 @@ namespace Dao;
 //use Dao\IGenre as IGenre;
 USE PDOException;
 use DateTime;
+use Dao\IMovie as IMovie;
+use Models\Movie as Movie;
 use Models\FunctionCinema as FunctionCinema;
 use Dao\Connection as Connection;
+Use Dao\MovieDAO as movieDAO;
+
 class FunctionCinemaDAO{
     private $connection;
     private $tableName = "functioncinemas";
+    private $daoM;
+
+    public function __construct()
+    {
+        $daoM = new movieDAO();
+    }
+
+
 
     public function add(FunctionCinema $newFunction) {
-        $exist = $this->controlDateMovie($newFunction);
+        $exist = $this->validateNewFunction($newFunction);
         if($exist == null){
         $query = "INSERT INTO ".$this->tableName." (room_id,movie_id,date,hour) VALUES (:room_id,:movie_id,:date,:hour)";
 
@@ -112,7 +124,7 @@ public function delete($id){///elimina un dato dentro de la lista
 
 public function update(FunctionCinema $code){ ///reemplaza un objeto dentro de la 
 
-    $exist = $this->controlDateMovieWhenUpdate($code);
+    $exist = $this->validateNewFunctionWhenUpdate($code);
 
     if($exist == null){
         $query = "UPDATE ".$this->tableName." SET room_id=:room_id, movie_id=:movie_id, date=:date, hour=:hour WHERE (idfunctioncinemas = :idfunctioncinemas)";
@@ -137,11 +149,11 @@ public function update(FunctionCinema $code){ ///reemplaza un objeto dentro de l
 }
 
 
-public function controlDateMovie(FunctionCinema $newFunction){
+public function validateNewFunction(FunctionCinema $newFunction){
     $array = $this->getAll();
     $validate = null;
     foreach($array as $function){
-        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie())
+        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie() && $newFunction->getId_Room() !== $function->getId_Room())
         {
             $validate = "exist";
         }
@@ -149,11 +161,12 @@ public function controlDateMovie(FunctionCinema $newFunction){
     return $validate;
 }
 
-public function controlDateMovieWhenUpdate(FunctionCinema $newFunction){
+
+public function validateNewFunctionWhenUpdate(FunctionCinema $newFunction){
     $array = $this->getAll();
     $validate = null;
     foreach($array as $function){
-        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie() && $newFunction->getId() != $function->getId() )
+        if($function->getDate() == $newFunction->getDate() && $function->getId_Movie() == $newFunction->getId_Movie() && $newFunction->getId() !== $function->getId() && $function->getId_Room() == $newFunction->getId_Room())
         {
             $validate = "exist";
         }
@@ -161,27 +174,7 @@ public function controlDateMovieWhenUpdate(FunctionCinema $newFunction){
     return $validate;
 }
 
-public function validFunction(FunctionCinema $function,FunctionCinema $newFunction){
-    $isValid = true;
-    $date1 = new DateTime($function->getDate());//serian las fechas actuales
-    $date2 = new DateTime($newFunction->getDate());// irian las fechas nueva
-    $date3 = new DateTime($function->getHour());//irian las horas //deberia compararlo asi y sumandole el get duration.
-    $date4 = new DateTime($newFunction->getHour());// irian la hora nueva
 
-
-    if($date1 == $date2){
-        $diff = $date3->diff($date4);
-        $resultado = abs (($diff->days * 24 ) * 60  + ( $diff->i )); 
-    
-        if($resultado <= 15){
-            $isValid = false;
-        }
-
-    }
-    return $isValid;
-
-
-}
 
 public function getFunctionbyMovie($id_movie){
     $query = "SELECT *  FROM ".$this->tableName." WHERE (movie_id = :movie_id)";
@@ -195,6 +188,18 @@ public function getFunctionbyMovie($id_movie){
     catch(PDOException $ex){
         throw $ex;
     }  
+}
+
+
+
+function hoursandmins($time, $format = '%02d:%02d')
+{
+    if ($time < 1) {
+        return;
+    }
+    $hours = floor($time / 60);
+    $minutes = ($time % 60);
+    return sprintf($format, $hours, $minutes);
 }
 
 

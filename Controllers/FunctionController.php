@@ -11,6 +11,7 @@ Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 Use Dao\CinemaDAO as cinemaDAO;
 use Models\Cinema as Cinema;
 use Exception;
+use DateTime;
 
 class FunctionController{
     private $dao;
@@ -31,9 +32,22 @@ class FunctionController{
              //$hour = $this->test_input($hour);
                 
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
-                $valid = $this->dao->add($function);
-
-                if($valid == "exist"){
+                $movie = $this->daoM->searchIdBdd($id_movie);
+                $functionList = $this->dao->getAll();
+                $isValid = true;
+                
+                    foreach($functionList as $lfunction){
+                        $isValid = $this->validFunction($function,$lfunction,$movie);
+                    }
+                 
+                
+                if($isValid == true){ 
+                    $isValid = $this->dao->add($function);
+                }
+                else{
+                    $this->Functions('La hora es invalida, se superpone con otra funcion.','alert');
+                }
+                if($isValid == "exist"){
                     $this->Functions('Ese dia ya se esta reproduciendo esa pelicula en otro cine/sala','alert');
                 }
                 else{
@@ -78,6 +92,7 @@ class FunctionController{
               
     }
 
+
     
 
     public function test_input($data) { 
@@ -91,8 +106,7 @@ class FunctionController{
 }
 
 
-    public function Functions($message = "",$type= "",$id = 0){
-        
+    public function Functions($message = '',$type= '',$id = 0){
         
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);
@@ -108,14 +122,16 @@ class FunctionController{
             }
             $adminmovies = $movieList;
        
-            if($message === '' && $type === ''){
+            if($message == '' && $type == ''){
                 unset($_SESSION['msjFunction']);
                 unset($_SESSION["bgMsgFunction"]);
+                
                 require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
                 
             }else{
                 $_SESSION['msjFunction'] = $message;
                 $_SESSION["bgMsgFunction"] = $type;
+                echo "no";
 
                 //require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
                 header("Location: /tpmovies/Function/Functions");
@@ -126,7 +142,36 @@ class FunctionController{
             header("Location: ".FRONT_ROOT);
         }
     }
-
+    public function validFunction(FunctionCinema $function,FunctionCinema $newFunction, Movie $movie){
+        $isValid = true;
+        $fechaVieja = new DateTime($function->getDate());//serian las fechas actuales
+        $fechaNueva = new DateTime($newFunction->getDate());// irian las fechas nueva
+        $horaVieja = new DateTime($function->getHour());//irian las horas //deberia compararlo asi y sumandole el get duration.
+        $horaNueva = new DateTime($newFunction->getHour());// irian la hora nueva
+    
+        //$convertHour = new DateTime($this->hoursandmins($movie->getDuration()));
+    
+        //$horaViejaFinal = $horaVieja + $convertHour;
+        //$horaNuevaFinal = $horaNueva + $convertHour;
+        //diferencia entre 2 dias es 1 y una de las peliculas termina despues
+        
+        if($fechaVieja == $fechaNueva && $function->getId_Movie() == $newFunction->getId_Movie()){
+            
+            $diff = $horaVieja->diff($horaNueva);   // 14:00 15:00.
+            $resultado = ($diff->days * 24 * 60) +
+            ($diff->h * 60) + $diff->i;
+            //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15  
+            if($resultado <= $movie->getDuration() + 15){
+                $isValid = false;
+            }
+          
+             
+        }
+     
+        return $isValid;
+    
+    
+    }
 
     public function DetailsFunction($id){
 

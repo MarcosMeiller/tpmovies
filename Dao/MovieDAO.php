@@ -116,8 +116,8 @@ class MovieDAO implements IMovie{
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
             if($newArray !== null){ 
-			$newMovie= new Movie($parameters["id_movie"],$parameters["title"],$parameters["overview"],$parameters["poster_Path"],$parameters["backdrop"],$parameters["adult"],$parameters["language"],$parameters["original_language"],$parameters["release_date"],$parameters["duration"]);
-			$newMovie->setId($parameters['idMovies']);
+			$newMovie= new Movie($newArray["id_movie"],$newArray["title"],$newArray["overview"],$newArray["poster_path"],$newArray["backdrop"],$newArray["adult"],$newArray["language"],$newArray["original_language"],$newArray["release_date"],$newArray["duration"]);
+			$newMovie->setId($newArray['idmovies']);
 			/*$newMovie= new Movie($parameters["id_movie"],$parameters["title"]);
 			*/
             }
@@ -363,7 +363,7 @@ class MovieDAO implements IMovie{
 	public function getMoviesForGenre($id_Genre){
 	
 		$query = "SELECT * FROM moviesxgenres  WHERE (idgenre = :idgenre)";
-        $newMovie = [];
+        $newMovie = array();
         $parameters["idgenre"] =  $id_Genre;
 
         $this->connection = Connection::GetInstance();
@@ -371,7 +371,7 @@ class MovieDAO implements IMovie{
 		
 
         foreach($array as $newArray){
-            $newMovie[] = $this->search($newArray['idmovie']);
+			$newMovie[] = $this->searchIdBdd($newArray['idmovie']);
 		}
 		
         return $newMovie;	

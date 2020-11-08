@@ -11,7 +11,7 @@ if(isset($_SESSION['date'])){
 
 ?>
 
-<form name="idmovie" method="GET" action="<?php echo FRONT_ROOT ?>Showtimes/dateFilter" id="idmovie" >
+<form name="date" method="GET" action="<?php echo FRONT_ROOT ?>Showtimes/dateFilter" id="date" >
 
 <div class="flex ">
         <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="date" name='date' type="date" value="<?php echo $date; ?>"

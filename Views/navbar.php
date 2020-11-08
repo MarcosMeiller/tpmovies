@@ -49,7 +49,7 @@
                   <span>Inicio</span>
                 </a>
                 <a href="<?php echo FRONT_ROOT?>Showtimes/Listing" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white cursor-pointer">
-                  <span>Cartelara</span>
+                  <span>Cartelera</span>
                 </a>
               </div>
 
@@ -66,7 +66,7 @@
 
                   <div class="w-40 px-2 py-2 bg-blue-900 rounded-md">
                       <a href="<?php echo FRONT_ROOT ?>Login/Logout" class="flex flex row items-center rounded-lg bg-transparent hover:text-gray-900 justify-between" href="#">
-                          <p class="text-sm text-white hover:text-gray-400">Cerrar Session</p>
+                          <p class="text-sm text-white hover:text-gray-400">Cerrar Sesion</p>
                           <i class="fas fa-sign-out-alt text-white hover:text-gray-400"></i>
                       </a>
                       <?php if($type == 'admin'){ ?>

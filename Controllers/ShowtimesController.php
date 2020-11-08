@@ -68,10 +68,8 @@ class ShowtimesController{
 
     public function genreFilter($idgenre){
         
-        $functionsList = $this->daoM->getMoviesForGenre($idgenre);
-
-        var_dump($functionsList);
-        die;
+        $functionsList = $this->dao->getAll();
+       
         
         $idmovies = array();
         foreach($functionsList as $function){
@@ -79,28 +77,33 @@ class ShowtimesController{
         }
 
         $idsmovies = array_unique($idmovies);
-
+        $moviesList = array();
+        $moviesFilter = $this->daoM->getMoviesForGenre($idgenre);
+        foreach($idsmovies as $ids){
+            foreach($moviesFilter as $filter){
+                if($ids == $filter->getId()){ 
+                $moviesList[] = $this->daoM->searchIdBdd($ids);
+            }
+            }
+        }
+      
+    
         $arrayGenresandMovie= array();
         foreach($idmovies as $id){
             $arrayGenresandMovie[] = $this->daoM->getGenresofMovie($id);  
         }   
-
+       
         $genresandmovies = [];
         foreach($arrayGenresandMovie as $genrexmovie){
             array_push($genresandmovies,$genrexmovie); 
         }
-
+        
 
         $arraygenres = array_unique($arrayGenresandMovie,SORT_REGULAR);
-
-
-
-        $_SESSION['date'] = $date;
-
-
+       
+        $_SESSION['idgenre'] = $idgenre;
         //header("Location: /tpmovies/Showtimes/Listing");
         $roomList = $this->daoR->getAll();
-        $moviesList = $this->daoM->getAll(0);
         $cinemasList = $this->daoC->getAll();
         $genresList = $this->daoG->getAll();
         require_once(VIEWS_PATH."/movieslisting.php");
@@ -151,6 +154,9 @@ class ShowtimesController{
             header("Location: ".FRONT_ROOT);
         }
     }
+    
+       
+            
 
 }
 

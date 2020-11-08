@@ -1,5 +1,5 @@
 <?php namespace views;
-
+ 
 ?>
 
 <div class='bgMovie flex flex-col min-h-full' style="background-image: url('../Views/img/bg-cinema3.jpg')">
