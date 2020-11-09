@@ -85,14 +85,14 @@ require 'Views/head.php';
                               <?php foreach($roomsList as $rooms){
                                 ?>
                                 <tr> 
-                                <?php
+                                <?php if($cinemasList){
                                  foreach($cinemasList as $cinemas){ 
                                     if($cinemas->getId() == $rooms->getId_Cinema()){
                                   ?>
                                     
                                     <td class="w-1/5 text-left py-3 px-4"><?php echo $cinemas->getName(); ?></td>
                                   <?php } 
-                                      }
+                                      }}
                                    ?>
 
                                     <td class="w-1/5 text-left py-3 px-4"><?php echo $rooms->getName(); ?></td>

@@ -11,7 +11,15 @@
 
 ---
 
+### **Segunda Revision:**
+
+- [x] Ingresar películas a la cartelera del cine junto con los dias y horarios de exhibición (A - item a)
+- [x] Agregar a 1.2 los filtros por categoría (temas) y fechas de la función. De aquí en más, las
+      películas que el cliente visualiza en la consulta serán aquellas que estén en cartelera (en funciones
+      de cines, a partir del día de la consulta -now-)
+- [x] Los daos deben implementarse contra la BD.
+
 ### **Integrantes:**
 
-- Marcos Miller
+- Marcos Meiller
 - Carlos Nuñez
