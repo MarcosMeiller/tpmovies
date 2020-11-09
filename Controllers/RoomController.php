@@ -29,12 +29,12 @@ class RoomController
             if($name && $price && $capacity && $id_Cinema != ''){ 
                 $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
                     if($room == true){
-                         $this->Rooms("esta sala ya existe en el cine actual","alert");
+                         $this->Rooms("Esta sala ya existe en el cine actual","alert");
                     }
                 }
                
                 if($capacity == null || $price == null ){
-                    $this->Rooms("numero negativo ingresado","alert");
+                    $this->Rooms("Numero negativo ingresado","alert");
                 }
                 if($room !== true){ //despues ver porque me agrega igual si saco este if y no anda el de arriba.
                 try{
@@ -63,7 +63,7 @@ class RoomController
                 $room = $this->dao->searchName($name);
                 $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
                     if($room == true){
-                         $this->Rooms("esta sala ya existe en el cine actual","alert");
+                         $this->Rooms("Esta sala ya existe en el cine actual","alert");
                     }
                 
                 else{ 
@@ -141,6 +141,7 @@ class RoomController
 
             if($message === '' && $type === '' && $id === 0){
                 unset($_SESSION['idCinema']);
+                $_SESSION['roomsList'] = $roomsList;
                 require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }else{
                 $_SESSION['idCinema'] = $id;
