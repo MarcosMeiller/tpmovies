@@ -55,9 +55,9 @@ class RoomController
 
     // actualiza cine verificando si existe previamente
     public function updateRoom($id,$id_Cinema,$name,$Capacity,$price){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
             $name = $this->test_input($name);
-            if($name){
+            if($name && $id && $id_Cinema && $Capacity && $price){
 
             try{
                 $room = $this->dao->searchName($name);
@@ -76,10 +76,10 @@ class RoomController
             }catch(Exception $e){
                 $this->Rooms("Error al modificar Sala.","danger");
             }
-        }
-        else{
-            $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
-        }
+    
+    }
+    else{
+        $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
     }
 
     }

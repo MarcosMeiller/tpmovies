@@ -16,7 +16,7 @@ $hoy = date('Y-m-d');
       Sala
     </label>
    
-    <select required id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <select  id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
       <option value=''>Seleccione una sala</option>
       <?php foreach($roomList as $room){ ?>
           <?php  foreach($cinemaList as $cinema){ 
@@ -38,7 +38,7 @@ $hoy = date('Y-m-d');
         Pelicula
       </label>
       
-      <select required id="id_movie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+      <select  id="id_movie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
     <option value=''>Seleccione una pelicula</option>
     <?php foreach($adminmovies as $movie){ ?>
         <option value="<?php  echo $movie->getId() ?>">
@@ -64,7 +64,7 @@ $hoy = date('Y-m-d');
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="hour">
           Hora
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="hour" name='hour' type="time" placeholder="Ingrese una hora">
+        <input  class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="hour" name='hour' type="time" placeholder="Ingrese una hora">
       </div>
 
     <div class="w-full px-3 md:w-full mb-6 md:mb-0 md:mt-6">

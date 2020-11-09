@@ -2,6 +2,7 @@
 
 Use Models\User as User;
 Use Dao\userDAO as userDAO;
+Use Exception;
 
 class UserController
 {
@@ -29,7 +30,7 @@ class UserController
     }
     */
     public function deleteUsers($email){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
             $user = $this->dao->search($email);
             if($user == null){
                 $this->ViewUser("El usuario no existe");
@@ -41,7 +42,7 @@ class UserController
             }catch(Exception $e){
                 $this->ViewUser("Error al eliminar Usuario.");
             }
-        }
+        
     }
 
     public function ViewUser($message = "")

@@ -31,7 +31,7 @@ class ShowtimesController{
     public function dateFilter($date){
         
         $functionsList = $this->dao->FilterListForDate($date);
-
+        if($date){ 
         $idmovies = array();
         foreach($functionsList as $function){
             $idmovies[] = $function->getId_Movie();
@@ -64,7 +64,10 @@ class ShowtimesController{
         $genresList = $this->daoG->getAll();
         require_once(VIEWS_PATH."/movieslisting.php");
     }
-
+    else{
+        $this->listing("error ingresado no valido","danger");
+    }
+    }
 
     public function genreFilter($idgenre){
         
@@ -117,7 +120,7 @@ class ShowtimesController{
     public function Listing($message = "",$type= "",$id = 0){
         
         
-        if(isset($_SESSION['loggedUser'])){          
+                
                 $functionsList = $this->dao->getAll();
 
                 $idmovies = array();
@@ -154,10 +157,7 @@ class ShowtimesController{
                 require_once(VIEWS_PATH."/movieslisting.php");
                 //header("Location: /tpmovies/Showtimes/Listing");
         
-        }
-        else{
-            header("Location: ".FRONT_ROOT);
-        }
+     
     }
     
        

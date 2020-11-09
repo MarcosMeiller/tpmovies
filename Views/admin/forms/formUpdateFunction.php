@@ -16,7 +16,7 @@
       Sala
     </label>
    
-    <select required id="upd_idroom" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <select  id="upd_idroom" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
       <option value=''>Seleccione una sala</option>
       <?php foreach($roomList as $room){ ?>
           <?php  foreach($cinemaList as $cinema){ 
@@ -39,7 +39,7 @@
         Pelicula
       </label>
       
-      <select required id="upd_idmovie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+      <select  id="upd_idmovie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
     <option value=''>Seleccione una pelicula</option>
     <?php foreach($adminmovies as $movie){ ?>
         <option value="<?php  echo $movie->getId() ?>">

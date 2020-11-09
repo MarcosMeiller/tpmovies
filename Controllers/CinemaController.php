@@ -14,7 +14,7 @@ class CinemaController
   
     // agrega cine verificando previamente si existe
     public function addCinema($name,$address){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+      
 
             $name = $this->test_input($name);
             $address = $this->test_input($address);
@@ -38,15 +38,15 @@ class CinemaController
             else{
                 $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
             }   
-        }
+        
     }
 
     // actualiza cine verificando si existe previamente
     public function updateCinema($id,$name,$address){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
             $name = $this->test_input($name);
             $address = $this->test_input($address);
-            if($name && $address){
+            if($name && $address && $id){
 
             try{
                 $newCinema = new cinema($name,$address);
@@ -75,13 +75,13 @@ class CinemaController
         else{
             $this->Cinemas("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
         }
-    }
+    
 
     }
 
     // elimina cine por id
     public function deleteCinema($id){
-
+        if($id){ 
             try{
                 $countDelete = $this->dao->delete($id);
                 if($countDelete > 0){
@@ -94,7 +94,11 @@ class CinemaController
            
                 $this->Cinemas("Error al eliminar cine.","danger");
             }
-    }
+        }
+        else{ 
+        $this->Cinemas("Valor a eliminar no valido");
+        }   
+    } 
 
     //comprueba que los datos cargados sean validos.
     public function test_input($data) { 

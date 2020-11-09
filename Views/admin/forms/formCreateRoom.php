@@ -52,7 +52,7 @@ if($cinemasList != []){
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="name">
           Nombre Sala
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
+        <input required class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="name" type="text" name='name' placeholder="Ingrese nombre del cine" required maxlength='25'>
         
       </div>
     <!-- capacity -->
@@ -60,14 +60,14 @@ if($cinemasList != []){
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="capacity">
           Capacity
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="capacity" name='capacity' type="number" placeholder="Ingrese la capacidad de la sala">
+        <input required class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="capacity" name='capacity' type="number" placeholder="Ingrese la capacidad de la sala">
       </div>
 
       <div class="w-full px-3 md:w-2/6">
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="price">
           Price
         </label>
-        <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="price" name='price' type="number" placeholder="Ingrese la precio">
+        <input required class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="price" name='price' type="number" placeholder="Ingrese la precio">
       </div>
 
     <div class="w-full px-3 md:w-1/6 mb-6 md:mb-0 md:mt-6">

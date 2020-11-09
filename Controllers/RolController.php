@@ -2,6 +2,7 @@
 
 Use Models\Rol as Rol ;
 Use Dao\RolDAO as RolDAO;
+use Exception;
 
 class RolController
 {
@@ -12,7 +13,7 @@ class RolController
     }
 
     public function addRol($id,$Type){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
             $rol = $this->dao->search($id);
             if($rol !== null){
                 $this->ViewRol("el Rol ya existe.");
@@ -25,7 +26,7 @@ class RolController
             }catch(Exception $e){
                 $this->ViewRol("Error al Registrar Rol.");
             }
-        }
+        
     }
 
     public function searchRol($id){

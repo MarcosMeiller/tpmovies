@@ -24,6 +24,7 @@ if(empty($_SESSION["msjMovie"])){
         echo "<script type='text/javascript'>toastr.error('".$message."', '', {timeOut: 2000});</script>";
         $bgColor = "bg-red-500";
       break;
+  
     }
   
 }

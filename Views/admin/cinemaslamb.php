@@ -24,6 +24,7 @@ if(empty($_SESSION["msjCinemas"])){
         echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.error('".$message."', '', {timeOut: 2000});</script>";
         $bgColor = "bg-red-500";
       break;
+     
     }
   
 }

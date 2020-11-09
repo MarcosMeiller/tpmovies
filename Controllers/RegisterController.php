@@ -13,7 +13,7 @@ class RegisterController
   
 
     public function RegisterUser($userName,$name,$lastname,$email,$password,$passwordRepeat){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+
 
             $userName = $this->test_input($userName);
             $name = $this->test_input($name);
@@ -46,9 +46,7 @@ class RegisterController
                         }
                     }
                 }
-            }else{
-                $this->Index("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo",2);
-            }
+   
         }
     
     }          

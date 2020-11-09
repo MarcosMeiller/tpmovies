@@ -27,10 +27,10 @@ class FunctionController{
     }
 
     public function addFunction($id_Room,$id_movie,$date,$hour){
-        if ($_SERVER["REQUEST_METHOD"] == "POST"){
+       
              //$date = $this->test_input($date);
              //$hour = $this->test_input($hour);
-                
+                if($id_Room && $id_movie && $date && $hour){ 
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
                 $movie = $this->daoM->searchIdBdd($id_movie);
                 $functionList = $this->dao->getAll();
@@ -55,8 +55,12 @@ class FunctionController{
                 else if ($isValid !== "exist" && $isValid !== false){
                     $this->Functions('La funcion se agrego exitosamente','success');
                 }
-
             }
+            else{
+                $this->Functions('los campos estan incompletos.','alert');
+            }
+
+            
 
     }
 
@@ -74,7 +78,7 @@ class FunctionController{
     }
 
     public function updateFunction ($id,$id_Room,$id_movie,$date,$hour){   
-        if($_SERVER["REQUEST_METHOD"] == "POST"){
+        
             try{
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
 
@@ -99,10 +103,7 @@ class FunctionController{
             catch(Exception $e){
                 $this->Functions("Error al modificar Funcion.","danger");
             }
-        }  
-        else{
-            $this->Functions("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
-        } 
+       
                 
               
     }
@@ -205,6 +206,7 @@ class FunctionController{
     
     }
 
+  
     public function DetailsFunction($id){
 
         $functionsList = $this->dao->getAll();

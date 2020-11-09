@@ -15,14 +15,14 @@ class MovieController
   
 
     public function addArrayMovie($array){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+       
             foreach($array as $movie){
                 $this->dao->add($movie);
             }
             if($movie == null){
                 $this->ViewMovies("error al buscar la pelicula.");
             }
-        }
+        
     }
 
     /*public function addMovie($id,$id_Movie,$title,$genres_id,$duration,$overview,$poster_Path,$backdrop,$adult,$language,$original_language,$release_date){
@@ -121,12 +121,7 @@ class MovieController
         require_once(VIEWS_PATH."detailsMovie.php");
     }
 
-    public function getForGenre($genre){
-            if ($_SERVER["REQUEST_METHOD"] == "POST") {
-                $genreList = $this->dao->getForGenre($genre);
-        }
 
-    }
     
     public function MoviesNowPlaying($id = 0){
 

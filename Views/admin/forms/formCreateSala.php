@@ -8,7 +8,7 @@
       <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="time">
         hora
       </label>
-      <input class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="time" type="time" name='time' placeholder="Ingrese hora de la funcion" required maxlength='25'>
+      <input  class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white" id="time" type="time" name='time' placeholder="Ingrese hora de la funcion" required maxlength='25'>
       
     </div>
   <!-- address -->

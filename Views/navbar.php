@@ -42,9 +42,8 @@
       
          
         <nav :class="open ? 'flex' : 'hidden'" class="text-center flex flex-col flex-grow lg:items-center lg:pb-0 lg:flex lg:flex-row">
-          <?php if($user){ ?>  
-              <!-- opciones menu -->
-              <div class='flex-col flex lg:flex-row lg:flex-grow'>
+          <!-- opciones menu -->
+          <div class='flex-col flex lg:flex-row lg:flex-grow'>
                 <a href="<?php echo FRONT_ROOT?>Main/Init" class="px-3 py-2 text-gray-400 items-center justify-center hover:text-white">
                   <span>Inicio</span>
                 </a>
@@ -54,6 +53,8 @@
               </div>
 
               <div @click.away="open = false" class="hidden lg:flex lg:relative focus:outline-none" x-data="{ open: false }">
+          <?php if($user){ ?>  
+              
 
                 <button @click="open = !open" class="flex flex-row text-gray-900 bg-gray-200 items-center px-4 py-2 mt-2 text-sm font-semibold text-left bg-transparent rounded-lg md:mt-0 md:ml-4  focus:text-gray-900 hover:bg-gray-200 focus:outline-none">
                   <span class='uppercase'><?php echo $user->getUserName() ?></span>
