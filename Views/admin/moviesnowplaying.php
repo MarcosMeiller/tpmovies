@@ -1,9 +1,10 @@
 <?php 
 namespace admin;
 
+
 require 'Views/head.php'; 
 $id = 0;
-    
+
 ?>
 
 
@@ -49,7 +50,8 @@ $id = 0;
             
 
               <div class='flex justify-center my-2'>
-                <?php if($exists){ ?>
+                <?php if($exists){
+                   echo $movieAdmin['idmoviesxadmin'];?>
               <a href='<?php echo FRONT_ROOT ?>Movie/deleteMoviexAdmin/<?php echo $movieAdmin['idmoviesxadmin'] ?>' class="bg-red-500 hover:bg-white text-2xl md:text-sm text-white hover:text-red-500 font-bold py-2 px-4 rounded">
               QUITAR
             </a>

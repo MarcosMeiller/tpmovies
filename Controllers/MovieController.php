@@ -87,16 +87,32 @@ class MovieController
        $this->MoviesNowPlaying();
    }
 
-   public function deleteMoviexAdmin($idmoviesxadmin){
+   /*public function deleteMoviexAdmin($idmovie){
 
-
+        $movieaux = $this->dao->search($idmovie);
+      
+        $idmoviesxadmin = $this->dao->searchIdMoviexAdmin($movieaux->getId_Movie());
+    
+        if($idmoviesxadmin !== null){ 
         $this->dao->deleteMovieforAdmin($idmoviesxadmin);
-
         $user = $_SESSION['loggedUser'];
         $id = $user->getId();
         $adminmovies = $this->dao->getMoviexAdmin($id);
+        }
+        
         $this->MoviesNowPlaying();
-   }
+   }*/
+
+   public function deleteMoviexAdmin($idmoviesxadmin){
+
+
+    $this->dao->deleteMovieforAdmin($idmoviesxadmin);
+
+    $user = $_SESSION['loggedUser'];
+    $id = $user->getId();
+    $adminmovies = $this->dao->getMoviexAdmin($id);
+    $this->MoviesNowPlaying();
+}
 
 
     public function DetailsMovie($id){
@@ -125,7 +141,7 @@ class MovieController
             $genresList = $this->gDao->getAll();
             $moviesList = $this->dao->retriveMoviexAdmin();
             $adminmovies = $this->dao->getMoviexAdmin($id);
-
+          
             require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
         }else{
             header("Location: ".FRONT_ROOT);

@@ -51,12 +51,20 @@ class CinemaController
             try{
                 $newCinema = new cinema($name,$address);
                 $newCinema->setId($id);
+                $cinema = null;
+                $cinema = $this->dao->search($name);
+                if($cinema == null){ 
                 $countUpdate = $this->dao->update($newCinema);
+                }
+                else{
+                    $this->Cinemas("El nombre ya existe intente con otro","alert");
+                }
                 if($countUpdate > 0){
                     $this->Cinemas("Modificado con exito","success");
                 }else{
                     $this->Cinemas("Error al intentar modificar","alert");
                 }
+                
                 
                 
 

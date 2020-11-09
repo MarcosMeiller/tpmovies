@@ -27,12 +27,10 @@ class RoomController
 
 
             if($name && $price && $capacity && $id_Cinema != ''){ 
-                $room = $this->dao->searchName($name);
-                if($room == true){
-                    $room = $this->dao->searchIdCinema($id_Cinema);
-                        if($room == true){
-                            $this->Rooms("esta sala ya existe en el cine actual","alert");
-                        }
+                $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
+                    if($room == true){
+                         $this->Rooms("esta sala ya existe en el cine actual","alert");
+                    }
                 }
                
                 if($capacity == null || $price == null ){
@@ -53,25 +51,28 @@ class RoomController
                 $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
             }  
         }
-    }
+    
 
     // actualiza cine verificando si existe previamente
     public function updateRoom($id,$id_Cinema,$name,$Capacity,$price){
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $name = $this->test_input($name);
             if($name){
-            $room = $this->dao->searchName($name);
-            if($room !== null){
-                $this->Rooms("el nombre de la Sala ya existe.");
-            }
-            
+
             try{
+                $room = $this->dao->searchName($name);
+                $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
+                    if($room == true){
+                         $this->Rooms("esta sala ya existe en el cine actual","alert");
+                    }
+                
+                else{ 
                 $newRoom = new Room($Capacity,$id_Cinema,$name,$price);
                 $newRoom->setId($id);
 
                 $this->dao->update($newRoom);
                 $this->Rooms("Modificado con exito","success");
-
+                }
             }catch(Exception $e){
                 $this->Rooms("Error al modificar Sala.","danger");
             }

@@ -400,6 +400,25 @@ class MovieDAO implements IMovie{
 
 	}
 
+	public function searchIdMoviexAdmin($idmovie){
+		$query = "SELECT *  FROM moviesxadmin WHERE (idmovie = :idmovie)";
+        $newMovie = null;
+        $parameters["idmovie"] =  $idmovie;
+		
+        $this->connection = Connection::GetInstance();
+		$array = $this->connection->Execute($query, $parameters);
+		
+
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+				$idmovie = $newArray['idmoviesxadmin'];
+            }
+		}
+		var_dump($array);
+        die;
+        return $idmovie;
+	}
+
 }
 
 

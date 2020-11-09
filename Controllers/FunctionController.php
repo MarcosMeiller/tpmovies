@@ -37,10 +37,11 @@ class FunctionController{
                 $isValid = true;
                 
                     foreach($functionList as $lfunction){
+                        if($isValid == true){
                         $isValid = $this->validFunction($function,$lfunction,$movie);
+                        }
                     }
                 
-                // ver lo del valid que me dijiste
                 
                 if($isValid == true){ 
                     $isValid = $this->dao->add($function);
@@ -51,7 +52,7 @@ class FunctionController{
                 if($isValid == "exist"){
                     $this->Functions('Ese dia ya se esta reproduciendo esa pelicula en otro cine/sala','alert');
                 }
-                else{
+                else if ($isValid !== "exist" && $isValid !== false){
                     $this->Functions('La funcion se agrego exitosamente','success');
                 }
 
@@ -75,12 +76,25 @@ class FunctionController{
     public function updateFunction ($id,$id_Room,$id_movie,$date,$hour){   
         if($_SERVER["REQUEST_METHOD"] == "POST"){
             try{
-                $newCinema = new FunctionCinema($id_Room,$id_movie,$date,$hour);
+                $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
 
-                $newCinema->setId($id);
-                $countUpdate = $this->dao->update($newCinema);
-
+                $function->setId($id);
+                $movie = $this->daoM->searchIdBdd($id_movie);
+                $functionList = $this->dao->getAll();
+                $isValid = true;
+                
+                foreach($functionList as $lfunction){
+                    if($isValid == true){
+                        $isValid = $this->validFunction($function,$lfunction,$movie);
+                     } 
+                    }
+                if($isValid == true){ 
+                $countUpdate = $this->dao->update($function);
                 $this->Functions("Funcion modificada exitosamente","success");
+                }
+                else{
+                    $this->Functions("la hora se interpone con otro horario, ingrese otro horario","alert");
+                }
             }
             catch(Exception $e){
                 $this->Functions("Error al modificar Funcion.","danger");
@@ -156,15 +170,27 @@ class FunctionController{
         //$horaViejaFinal = $horaVieja + $convertHour;
         //$horaNuevaFinal = $horaNueva + $convertHour;
         //diferencia entre 2 dias es 1 y una de las peliculas termina despues
+        $diff = $fechaNueva->diff($fechaVieja);
+        $diferenciaDias =  $diff->days; 
+  
+        if($diferenciaDias <= 1 && $function->getId_Movie() == $newFunction->getId_Movie()){
         
-        if($fechaVieja == $fechaNueva && $function->getId_Movie() == $newFunction->getId_Movie()){
-            
             $diff = $horaVieja->diff($horaNueva);   // 14:00 15:00.
             $resultado = ($diff->days * 24 * 60) +
             ($diff->h * 60) + $diff->i;
-            //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15  
-            if($resultado <= $movie->getDuration() + 15){
+            //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15
+            
+             
+            if($resultado <= $movie->getDuration() + 15 && $diferenciaDias == 0){
                 $isValid = false;
+            }
+        
+          
+            if($resultado >= 1425 - $movie->getDuration() && $diferenciaDias == 1){
+                //if($fechaVieja < $fechaNueva && $horaVieja > $horaNueva){///fecha vieja 09/11 fecha nueva 10/11.
+                  //  $isValid = false;                                    /// hora vieja 23:55 hora vieja 00:05.
+               // }
+              
             }
           
              

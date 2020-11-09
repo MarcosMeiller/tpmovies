@@ -150,7 +150,27 @@ class roomDAO implements IRoom{
         $this->connection = Connection::GetInstance();
 
         return $this->connection->ExecuteNonQuery($query, $parameters);
-	}
+    }
+    
+    public function searchNameAndIdCinema($id_Cinema,$name){
+        $query = "SELECT *  FROM ".$this->tableName." WHERE id_cinema = :id_cinema AND name = :name";
+        $newRoom = null;
+        $parameters["id_cinema"] =  $id_Cinema;
+        $parameters["name"] =  $name;
+        $validate = false;
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+          //  $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+            //$newRoom->setId($newArray['idrooms']);
+            $validate = true;
+        }
+        }
+        return $validate;
+    }
+
+    
 
 }
 
