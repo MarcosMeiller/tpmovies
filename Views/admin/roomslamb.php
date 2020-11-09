@@ -85,7 +85,8 @@ require 'Views/head.php';
                               <?php foreach($roomsList as $rooms){
                                 ?>
                                 <tr> 
-                                <?php foreach($cinemasList as $cinemas){ 
+                                <?php
+                                 foreach($cinemasList as $cinemas){ 
                                     if($cinemas->getId() == $rooms->getId_Cinema()){
                                   ?>
                                     

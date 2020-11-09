@@ -68,6 +68,11 @@ class ShowtimesController{
 
     public function genreFilter($idgenre){
         
+        if($idgenre == 0){
+            $_SESSION['idgenre'] = $idgenre;
+            $this->Listing();   
+        }
+
         $functionsList = $this->dao->getAll();
        
         

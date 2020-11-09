@@ -147,7 +147,7 @@ class RoomController
                 $_SESSION['msjRoom'] = $message;
                 $_SESSION["bgMsgRoom"] = $type;
                 $_SESSION['roomsList'] = $roomsList;
-                header("Location: /tpmovies/Room/Rooms");
+                header("Location: ".FRONT_ROOT."Room/Rooms");
                 //require_once(VIEWS_PATH_ADMIN."/roomslamb.php");
             }
         }else{

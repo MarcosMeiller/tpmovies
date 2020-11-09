@@ -120,7 +120,7 @@ class CinemaController
             }else{
                 $_SESSION['msjCinemas'] = $message;
                 $_SESSION["bgMsgCinemas"] = $type;
-                header("Location: /tpmovies/Cinema/Cinemas/");
+                header("Location:".FRONT_ROOT."/Cinema/Cinemas/");
             }
         }else{
             header("Location: ".FRONT_ROOT);

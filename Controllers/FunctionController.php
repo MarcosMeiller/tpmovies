@@ -150,7 +150,7 @@ class FunctionController{
                 echo "no";
 
                 //require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
-                header("Location: /tpmovies/Function/Functions");
+                header("Location: ".FRONT_ROOT."Function/Functions");
             }
         
         }
@@ -187,9 +187,13 @@ class FunctionController{
         
           
             if($resultado >= 1425 - $movie->getDuration() && $diferenciaDias == 1){
-                //if($fechaVieja < $fechaNueva && $horaVieja > $horaNueva){///fecha vieja 09/11 fecha nueva 10/11.
-                  //  $isValid = false;                                    /// hora vieja 23:55 hora vieja 00:05.
-               // }
+                if($fechaVieja < $fechaNueva && $horaVieja < $horaNueva){   //fecha vieja 09/11 < fecha nueva 10/11. y hora vieja 00:05 < hora nueva 22:55.
+                  $isValid = true;    // no se deje                               
+               }else if($fechaVieja > $fechaNueva && $horaVieja > $horaNueva){
+                    $isValid = true; 
+               }else{
+                $isValid = false;
+               }
               
             }
           

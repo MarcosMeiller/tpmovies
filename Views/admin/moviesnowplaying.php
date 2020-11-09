@@ -27,7 +27,7 @@ $id = 0;
   <div class='min-w-full min-h-full w-full '>
     <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-y-2 sm:gap-1 md:gap-2 xl:mx-24 mx-5">
    
-    <?php foreach($moviesList as $movie){ ?>
+    <?php   foreach($moviesList as $movie){ ?>
       <div class='card rounded-lg bg-pink-500 relative'>
          <div class="info opacity-0 absolute text-center flex flex-col h-full">
             
@@ -39,65 +39,36 @@ $id = 0;
               <p class='text-white text-xl md:text-sm'><?php echo $movie['overview'] ?></p>
               </div>  
 
-            <?php $exists=false;  foreach($adminmovies as $movieAdmin){ 
-            if($movie['id'] == $movieAdmin['id_movie']){ $exists=true ?> 
-                <div class='flex justify-center py-2'>
-                <i class="fas fa-check text-green-400"></i>
-                <span class='text-2xl md:text-sm text-white ml-2'>YA ESTA AGREGADA  </span>       
+            <?php $exists="no"; foreach($adminmovies as $movieAdmin){ 
+             
+              if($movie['id'] == $movieAdmin['id_movie']){ $exists='si'; $id=$movieAdmin['idmoviesxadmin']; ?> 
+                  <div class='flex justify-center py-2'>
+                  <i class="fas fa-check text-green-400"></i>
+                  <span class='text-2xl md:text-sm text-white ml-2'>YA ESTA AGREGADA  </span>       
+                  </div>
+    
+
+              <?php } }?>
+              
+                <div class='flex justify-center my-2'>
+                <?php if($exists == 'si'){ ?>
+                    
+                    <a href='<?php echo FRONT_ROOT ?>Movie/deleteMoviexAdmin/<?php echo $id; ?>' class="bg-red-500 hover:bg-white text-2xl md:text-sm text-white hover:text-red-500 font-bold py-2 px-4 rounded">
+                    <p>QUITAR</p>
+                  </a>
+              <?php }else{ ?>
+                    <a href='<?php echo FRONT_ROOT ?>Movie/addMoviexAdmin/<?php echo $movie['id'] ?>' class="bg-green-500 hover:bg-white text-2xl md:text-sm text-white hover:text-green-500 font-bold py-2 px-4 rounded">
+                    AGREGAR
+                  </a>
+              <?php }?>
                 </div>
-   
-          <?php } } ?>   
-            
-
-              <div class='flex justify-center my-2'>
-                <?php if($exists){
-                   echo $movieAdmin['idmoviesxadmin'];?>
-              <a href='<?php echo FRONT_ROOT ?>Movie/deleteMoviexAdmin/<?php echo $movieAdmin['idmoviesxadmin'] ?>' class="bg-red-500 hover:bg-white text-2xl md:text-sm text-white hover:text-red-500 font-bold py-2 px-4 rounded">
-              QUITAR
-            </a>
-            <?php }else{ ?>
-              <a href='<?php echo FRONT_ROOT ?>Movie/addMoviexAdmin/<?php echo $movie['id'] ?>' class="bg-green-500 hover:bg-white text-2xl md:text-sm text-white hover:text-green-500 font-bold py-2 px-4 rounded">
-              AGREGAR
-            </a>
-            <?php }?>
-              </div>
           
-
-         </div>
+             </div>
+         
            <div class='object-fill'>
             <img class="rounded-lg contain " src='https://image.tmdb.org/t/p/w780/<?= $movie['poster_path'] ?>' alt="POSTER <?php echo $movie['title'] ?>" />
            </div>
           
-              
-
-          <!--
-          <div class='flex flex-wrap my-2 pb-2'>
-
-                  <?php  
-                  /*    
-                  $namesGenres = array();
-                  $arrayIds = $movie->getGenre_Id();
-                  foreach($arrayIds as $id){
-                    foreach($genresList as $genre){
-                      if($id === $genre->getId()){
-                        $namesGenres[] = $genre->getName();
-                      }
-                    }
-                  }*/
-                  ?>
-
-                  <?php /*foreach($namesGenres as $genre){ ?>
-                    <p class='text-xs mr-2 text-blue-900'>
-                    <?php echo $genre; ?> 
-                    </p>
-                  <?php }*/?>
-      
-          </div>
-
-            
-
-         
--->
         </div>
  
     <?php } ?> 
@@ -107,11 +78,10 @@ $id = 0;
 
 <?php }else{ ?>
 
-<div class='text-center mt-8'>
-  <p>No se encontraron peliculas con este genero.</p>
-  <p>Prueba filtrando con otro genero.</p>
-</div>
-
+  <div class='text-center mt-8'>
+    <p>No se encontraron peliculas con este genero.</p>
+    <p>Prueba filtrando con otro genero.</p>
+  </div>
 
 </div>
  
