@@ -12,7 +12,7 @@ function soon() {
 ?>
 
 
-<div class='bgMovie flex flex-col min-h-full' style="background-image: url('../../Views/img/bg-cinema3.jpg')">
+<div class='bgMovie flex flex-col min-h-full' style="background-image: url('https://image.tmdb.org/t/p/w780/<?= $movie->getBackdrop() ?>')">
 
     <?php require 'navbar.php' ?>
 
