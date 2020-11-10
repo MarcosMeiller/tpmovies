@@ -148,7 +148,7 @@ class FunctionController{
             }else{
                 $_SESSION['msjFunction'] = $message;
                 $_SESSION["bgMsgFunction"] = $type;
-                echo "no";
+          
 
                 //require_once(VIEWS_PATH_ADMIN."/functionslamb.php");
                 header("Location: ".FRONT_ROOT."Function/Functions");

@@ -1,6 +1,14 @@
 <?php namespace views;
 
 $i = 0 ;
+
+echo "<script type='text/javascript'>
+function soon() {
+    toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('Proximamente', '', {timeOut: 2000});
+}
+
+</script>";
+
 ?>
 
 
@@ -28,7 +36,7 @@ $i = 0 ;
             <thead class="text-white">
               <tr class="bg-blue-900 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                 <th class="p-3 text-left">Fecha</th>
-                <th class="p-3 text-left">Hora</th>
+                <th class="p-3 text-left">Hora Inicio -- Hora Final</th>
                 <th class="p-3 text-left">Sala</th>
                 <th class="p-3 text-left">Precio</th>
                 <th class="p-3 text-left" width="110px">Entrada</th>
@@ -36,12 +44,23 @@ $i = 0 ;
             </thead>
             <tbody class="flex-1 sm:flex-none">
               <tr class="flex flex-col flex-no wrap sm:table-row mb-2 sm:mb-0">
-
+                <?php 
+               
+                  $horafinal = 0;
+                      $parts = explode(":", $function->getHour());
+                      $horafinal += $parts[2] + ($parts[1]*60 + $movie->getDuration() * 60 )+ $parts[0]*3600;
+                      $horafinal = gmdate("H:i:s", $horafinal);
+                
+                
+                
+                
+                ?>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3"><?php echo $function->getDate(); ?></td>
-                <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 truncate"><?php echo $function->getHour(); ?></td>
+                <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 truncate"><?php echo $function->getHour(); echo "--",$horafinal; ?></td>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3"><?php echo $room->getName(); ?></td>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 truncate"><?php echo "$",$room->getPrice(); ?></td>
-                <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg">Adquirir</td>
+                
+                <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg"><a onclick = "soon()">Adquirir </a></td>
               </tr>
 
             </tbody>
