@@ -18,7 +18,8 @@ class RoomController
   
     // agrega cine verificando previamente si existe
     public function addRoom($id_Cinema,$name,$capacity,$price){
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        if(isset($_SESSION["isAdmin"])){
+            if($_SESSION['isAdmin'] == 'admin'){
 
             $name = $this->test_input($name);
             $price = $this->controlValue($price);
@@ -46,16 +47,18 @@ class RoomController
                     $this->Rooms("Error al Registrar Sala.","danger");
                 }
                 }
-            }
             else{
                 $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
             }  
+        }
+        }
         }
     
 
     // actualiza cine verificando si existe previamente
     public function updateRoom($id,$id_Cinema,$name,$Capacity,$price){
-        
+        if(isset($_SESSION["isAdmin"])){
+            if($_SESSION['isAdmin'] == 'admin'){
             $name = $this->test_input($name);
             if($name && $id && $id_Cinema && $Capacity && $price){
 
@@ -76,16 +79,20 @@ class RoomController
             }catch(Exception $e){
                 $this->Rooms("Error al modificar Sala.","danger");
             }
-    
-    }
+        }
+  
     else{
         $this->Rooms("Error al registrar, verifique si no tiene campos vacios o ingresó mal algún campo","danger");
     }
-
+}
+    
+}
     }
 
     // elimina cine por id
     public function deleteRoom($data){ 
+        if(isset($_SESSION["isAdmin"])){
+            if($_SESSION['isAdmin'] == 'admin'){
             try{
                 $this->dao->delete($data);
                 $this->Rooms("Eliminado con exito","success");
@@ -93,6 +100,8 @@ class RoomController
            
                 $this->Rooms("Error al eliminar Sala.","danger");
             }
+        }
+    }
     }
 
     //comprueba que los datos cargados sean validos.

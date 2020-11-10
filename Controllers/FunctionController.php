@@ -30,7 +30,9 @@ class FunctionController{
        
              //$date = $this->test_input($date);
              //$hour = $this->test_input($hour);
-                if($id_Room && $id_movie && $date && $hour){ 
+             if(isset($_SESSION["isAdmin"])){
+                if($_SESSION['isAdmin'] == 'admin'){
+                 if($id_Room && $id_movie && $date && $hour){ 
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
                 $movie = $this->daoM->searchIdBdd($id_movie);
                 $functionList = $this->dao->getAll();
@@ -59,26 +61,32 @@ class FunctionController{
             else{
                 $this->Functions('los campos estan incompletos.','alert');
             }
-
+            }
+        } 
             
 
     }
 
     
     public function deleteFunction($id){
+        if(isset($_SESSION["isAdmin"])){
+            if($_SESSION['isAdmin'] == 'admin'){
         try{
+            
             $this->dao->delete($id);
             $this->Functions("Eliminado con exito","success");
         }
         catch(Exception $e){
             $this->Functions("Error al eliminar Sala","danger");
         }
-        
+        } 
+    }
 
     }
 
     public function updateFunction ($id,$id_Room,$id_movie,$date,$hour){   
-        
+        if(isset($_SESSION["isAdmin"])){
+            if($_SESSION['isAdmin'] == 'admin'){
             try{
                 $function = new FunctionCinema($id_Room,$id_movie,$date,$hour);
 
@@ -103,6 +111,8 @@ class FunctionController{
             catch(Exception $e){
                 $this->Functions("Error al modificar Funcion.","danger");
             }
+        }
+    }
        
                 
               
@@ -124,7 +134,7 @@ class FunctionController{
 
     public function Functions($message = "",$type= "",$id = 0){
         
-
+        
         if(isset($_SESSION['loggedUser'])){          
             unset($_SESSION['id']);
             $movieList = array();

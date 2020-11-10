@@ -78,13 +78,16 @@ class MovieController
 
    // agregar movie a la admin
    public function addMoviexAdmin($idmovie){
-       
+    if(isset($_SESSION["isAdmin"])){
+        if($_SESSION['isAdmin'] == 'admin'){
        $idmoviedb = $this->dao->getMovieFromAPI($idmovie); // se fija si esta en la db cargado y sino lo buscar en la api y lo guarda en db
        $user = $_SESSION['loggedUser'];
        $id = $user->getId();
        $this->dao->addMoviexAdmin($id,$idmoviedb); // agrega en moviexadmin
        $adminmovies = $this->dao->getMoviexAdmin($id);
        $this->MoviesNowPlaying();
+        }
+    }
    }
 
    /*public function deleteMoviexAdmin($idmovie){
@@ -105,13 +108,16 @@ class MovieController
 
    public function deleteMoviexAdmin($idmoviesxadmin){
 
-
+    if(isset($_SESSION["isAdmin"])){
+        if($_SESSION['isAdmin'] == 'admin'){
     $this->dao->deleteMovieforAdmin($idmoviesxadmin);
 
     $user = $_SESSION['loggedUser'];
     $id = $user->getId();
     $adminmovies = $this->dao->getMoviexAdmin($id);
     $this->MoviesNowPlaying();
+        }
+    }
 }
 
 
