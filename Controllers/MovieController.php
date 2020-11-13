@@ -143,6 +143,7 @@ class MovieController
             $moviesList = $this->dao->retriveMoviexAdmin();
             $adminmovies = $this->dao->getMoviexAdmin($id);
           
+            $_SESSION['idgenre'] = 0;
             require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
         }else{
             header("Location: ".FRONT_ROOT);
@@ -157,16 +158,48 @@ class MovieController
         // guardar esas 2 lista y redirigir a la pantalla de movieadmin (que falta hacer)
     }
 
-    public function MoviesNowPByGenre($id){
-        if(isset($_SESSION['loggedUser'])){  
-            $_SESSION['id'] = $id;
-            $genresList = $this->gDao->getAll();
-            $moviesList = $this->dao->getAll($id);
-            require_once(VIEWS_PATH."moviesnowp.php");
-        }else{
-            header("Location: ".FRONT_ROOT);
-        }
-    }
+
+    public function MoviesNPGenres($idgenre = 0){
+
+
+        // $this->gDao->retrieveDataFromAPI();        
+ 
+         if(isset($_SESSION['loggedUser'])){          
+             unset($_SESSION['id']);
+ 
+             $_SESSION['idgenre'] = $idgenre;
+
+             $user = $_SESSION['loggedUser'];
+             $id = $user->getId();
+
+
+             if($idgenre == 0){
+                 $this->MoviesNowPlaying($id);
+             }
+ 
+             $genresList = $this->gDao->getAll();
+             $moviesList = $this->dao->retriveMoviexAdmin();
+ 
+             $moviesfilters = array();
+             foreach($moviesList as $movie){
+                 foreach($movie['genre_ids'] as $genreid){
+                    if($genreid == $idgenre){
+                        $moviesfilters[] = $movie;
+                       
+                    }        
+                 }
+             }
+
+
+            $moviesList = $moviesfilters;
+
+             $adminmovies = $this->dao->getMoviexAdmin($id);
+           
+             require_once(VIEWS_PATH_ADMIN."/moviesnowplaying.php");             
+         }else{
+             header("Location: ".FRONT_ROOT);
+         }
+     }
 
 
  

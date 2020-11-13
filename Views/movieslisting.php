@@ -35,14 +35,25 @@
                         <p><?php echo $movie->getTitle(); ?></p>
                       </div>
 
-                      <div class='h-56 overflow'> 
-                      <p class="text-grey-darker text-base">
+                      <div class='h-32 overflow-auto'> 
+                      <p class="text-grey-darker text-xs">
                       <?php echo $movie->getoverview(); ?></p>
+                      </p>
+                      </div>
+
+                      <div class='mt-2'> 
+                      <p class="">
+                      Duración: <span class="text-blue-800"><?php echo $movie->getDuration(); ?> Min</span></p>
+                      </p>
+                      </div>
+                      <div class=''> 
+                      <p class="text-xs">
+                      Fecha de Lanzamiento: <?php echo $movie->getRelease_date(); ?></p>
                       </p>
                       </div>
                      
                     </div>
-                    <div class="px-6 py-4">
+                    <div class="px-2 py-2 text-center">
 
                     <?php  foreach($arraygenres as $gsxms){
                        foreach($gsxms as $gxm){
@@ -50,7 +61,7 @@
                           foreach($genresList as $genre){
                             if($genre->getId() === $gxm['idgenre']){
                       ?>
-                          <span class="bg-gray-400 inline-block bg-grey-lighter rounded-full px-2 py-1 text-sm font-semibold text-grey-darker mr-2 mt-2">
+                          <span class="bg-gray-400 inline-block bg-grey-lighter rounded-lg py-1 px-1 text-xs font-semibold text-grey-darker mr-2 mt-2">
                           <?php echo $genre->getName(); ?>
                           </span>
                       <?php
