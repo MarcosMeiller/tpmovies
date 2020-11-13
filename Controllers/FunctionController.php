@@ -175,23 +175,18 @@ class FunctionController{
         $fechaNueva = new DateTime($newFunction->getDate());// irian las fechas nueva
         $horaVieja = new DateTime($function->getHour());//irian las horas //deberia compararlo asi y sumandole el get duration.
         $horaNueva = new DateTime($newFunction->getHour());// irian la hora nueva
-    
-        //$convertHour = new DateTime($this->hoursandmins($movie->getDuration()));
-    
-        //$horaViejaFinal = $horaVieja + $convertHour;
-        //$horaNuevaFinal = $horaNueva + $convertHour;
-        //diferencia entre 2 dias es 1 y una de las peliculas termina despues
+      
+     
         $diff = $fechaNueva->diff($fechaVieja);
         $diferenciaDias =  $diff->days; 
-  
-        if($diferenciaDias <= 1 && $function->getId_Movie() == $newFunction->getId_Movie()){
         
+        if($diferenciaDias <= 1 && $function->getId_Movie() == $newFunction->getId_Movie()){
+            $runtime = 0;
             $diff = $horaVieja->diff($horaNueva);   // 14:00 15:00.
             $resultado = ($diff->days * 24 * 60) +
             ($diff->h * 60) + $diff->i;
             //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15
-            
-             
+    
             if($resultado <= $movie->getDuration() + 15 && $diferenciaDias == 0){
                 $isValid = false;
             }

@@ -2,58 +2,50 @@
 
 class Ticket{
     private $id_ticket;
-    private $precio;
-    private $id_cine;
-    private $id_movie;
-    private $date;
+    private $id_Function;
+    private $id_User;
+    private $seat;
 
-    public function __construct($id_ticket,$price,$id_cine,$id_movie,$date){
-        $this->id_ticket = $id_ticket;
-        $this->price = $price;
-        $this->id_cine = $id_cine;
-        $this->id_movie = $id_movie;
-        $this->date = $date;
+    public function __construct($id_Function,$id_User,$seat){
+        $this->id_Function = $id_Function;
+        $this->id_User = $id_User;
+        $this->seat = $seat;
+        
+    }
+
+    public function getSeat(){
+        return $this->seat;
     }
 
     public function getId_ticket(){
         return  $this->id_ticket;
     }
-    
-    public function getPrice(){
-        return $this->price;
+
+    public function getid_Function(){
+        return $this->id_Function;  
     }
 
-    public function getId_cine(){
-        return $this->id_cine;  
-    }
-
-    public function getId_movie(){
-        return $this->id_movie;
+    public function getid_User(){
+        return $this->id_User;
     } 
 
-    public function getDate(){
-        return $this->date;
-    } 
-    
-    public function Id_ticket($id_ticket){
+   
+    public function setId_Ticket($id_ticket){
         $this->id_ticket = $id_ticket;
     }
-
-    public function setPrice($price){
-        $this->price = $price;
-    }
     
-    public function setId_cine($id_cine){
-        $this->id_cine = $id_cine;
+    public function setId_Function($id_Function){
+        $this->id_Function = $id_Function;
     }
 
-    public function setId_movie($id_movie){
-        $this->id_movie = $id_movie;
+    public function setId_User($id_User){
+        $this->id_User = $id_User;
     }
 
-    public function setDate($date){
-        $this->date = $date;
+    public function setSeat($seat){
+        $this->seat = $seat;
     }
+
 
 }
 
