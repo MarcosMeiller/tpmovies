@@ -179,8 +179,7 @@ class FunctionController{
         $fechaNueva = new DateTime($newFunction->getDate());// irian las fechas nueva
         $horaVieja = new DateTime($function->getHour());//irian las horas //deberia compararlo asi y sumandole el get duration.
         $horaNueva = new DateTime($newFunction->getHour());// irian la hora nueva
-      
-     
+    
         $diff = $fechaNueva->diff($fechaVieja);
         $diferenciaDias =  $diff->days; 
         

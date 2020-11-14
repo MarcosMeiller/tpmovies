@@ -4,6 +4,7 @@ namespace Dao;
 
 use Models\CreditCard as CreditCard;
 use Dao\Connection as Connection;
+use Exception;
 use PDOException;
 
 class TicketDAO{
@@ -51,6 +52,29 @@ class TicketDAO{
 		return $CreditCardList;
 	}
 
+    public function getAllByUser($usercard){
+        $query = "SELECT * FROM ".$this->tableName."WHERE (usercard = :usercard)";
+        try{ 
+            $this->connection = Connection::GetInstance();
+
+            $parameters['usercard'] = $usercard;
+
+            $result = $this->connection->Execute($query,$parameters);
+
+            foreach($result as $row)
+            {
+                $CreditCard = new CreditCard($row["dni"],$row["userCard"],$row['numberCard']);
+                $CreditCard->setId($row['idcreditcards']);
+                array_push($CreditCardList, $CreditCard);
+            }
+
+            return $CreditCardList;
+    }
+        catch(PDOException $ex){
+            return $ex;
+        }
+
+    }
 
 	
 	/*public function search($){

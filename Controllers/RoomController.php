@@ -63,19 +63,28 @@ class RoomController
             if($name && $id && $id_Cinema && $Capacity && $price){
 
             try{
-                $room = $this->dao->searchName($name);
-                $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
-                    if($room == true){
-                         $this->Rooms("Esta sala ya existe en el cine actual","alert");
-                    }
-                
-                else{ 
+                $comparative = $this->dao->search($id);
+                if($name == $comparative->getName() && $id_Cinema == $comparative->getId_Cinema()){
                 $newRoom = new Room($Capacity,$id_Cinema,$name,$price);
                 $newRoom->setId($id);
 
                 $this->dao->update($newRoom);
                 $this->Rooms("Modificado con exito","success");
                 }
+                else{  
+                $room = $this->dao->searchName($name);
+                $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
+                    if($room == true){
+                         $this->Rooms("Esta sala ya existe en el cine actual","alert");
+                    }
+                else{ 
+                    $newRoom = new Room($Capacity,$id_Cinema,$name,$price);
+                    $newRoom->setId($id);
+                    $this->dao->update($newRoom);
+                    $this->Rooms("Modificado con exito","success");
+                    }
+                }
+               
             }catch(Exception $e){
                 $this->Rooms("Error al modificar Sala.","danger");
             }

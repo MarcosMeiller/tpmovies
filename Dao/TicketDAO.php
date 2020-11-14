@@ -95,7 +95,7 @@ class TicketDAO{
     }
 
     public function getAllInPesos(){
-        $query = "SELECT idtickets, id_Function, id_User FROM ".$this->tableName;
+        $query = "SELECT idtickets, id_movie, id_cinema,price,date FROM ticketxmovies";
 
         $this->connection = Connection::GetInstance();
 
@@ -103,14 +103,43 @@ class TicketDAO{
         $total = 0;
         foreach($result as $row)
         {
-            $ticket = new Ticket($row["id_Function"],$row["id_User"],$row['seat']);
-            $ticket->setId_Ticket($row['idtickets']);
-            //$total += 
+           $total += $row['price'];
         }
 
     return $total;
     }
 
+    public function getAllInPesosForMovie($idmovie){
+        $query = "SELECT * FROM ticketxmovies WHERE (id_movie = :id_movie)";
+
+        $this->connection = Connection::GetInstance();
+        $parameters['id_movie'] = $idmovie;
+        $result = $this->connection->Execute($query,$parameters);
+        $total = 0;
+        foreach($result as $row)
+        {
+           $total += $row['price'];
+        }
+
+    return $total;
+    }
+
+    public function getAllInPesosForCinema($id_cinema){
+        $query = "SELECT * FROM ticketxmovies WHERE (id_cinema = :id_cinema)";
+
+        $this->connection = Connection::GetInstance();
+        $parameters['id_cinema'] = $id_cinema;
+        $result = $this->connection->Execute($query,$parameters);
+        $total = 0;
+        foreach($result as $row)
+        {
+           $total += $row['price'];
+        }
+
+    return $total;
+    }
+
+    
 
 	
   

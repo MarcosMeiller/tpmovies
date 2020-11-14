@@ -10,6 +10,7 @@ Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 //Use Dao\CinemaDAO as cinemaDAO;
 //use Models\Cinema as Cinema;
 use Dao\TicketDAO as ticketDAO;
+use DateTime;
 
 class PayFunctionController
 {
@@ -35,7 +36,7 @@ class PayFunctionController
         }else{
             $this->SelectSeat();            
         }    
-    }      
+    }
     
     public function SelectSeat($idFunction){
         $function = $this->daoF->searchFunction($idFunction);
@@ -49,6 +50,30 @@ class PayFunctionController
         //$cardList = $this->daoCard->getCardsUser($iduser);
 
         require_once(VIEWS_PATH."getTicket.php");
+    }
+
+    function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta
+
+        $number = str_replace("-", "", $number);
+    
+        if( is_numeric($number) AND is_numeric($lenght) AND (strlen($number)==$lenght)){
+            return true;
+        }else{
+            return false;
+        }
+    
+    }
+
+    function validate_Date_CreditCard($date){
+        $date = new DateTime($date);
+        $actualDate = date('Y-m-d');
+        if($date > $actualDate){
+            return false;
+        }
+        else{
+            return true;
+        }
+
     }
 }
 
