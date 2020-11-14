@@ -52,7 +52,11 @@ class PayFunctionController
         require_once(VIEWS_PATH."getTicket.php");
     }
 
-    function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta
+    public function Checkout(){
+        require_once(VIEWS_PATH."checkout.php");
+    }
+
+    public function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta
 
         $number = str_replace("-", "", $number);
     
@@ -64,7 +68,7 @@ class PayFunctionController
     
     }
 
-    function validate_Date_CreditCard($date){
+    public function validate_Date_CreditCard($date){
         $date = new DateTime($date);
         $actualDate = date('Y-m-d');
         if($date > $actualDate){

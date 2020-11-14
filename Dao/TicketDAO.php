@@ -139,6 +139,22 @@ class TicketDAO{
     return $total;
     }
 
+    public function getAllInPesosForCinemaOrMovie($id_movie, $id_cinema){
+        $query = "SELECT * FROM ticketxmovies WHERE (id_cinema = :id_cinema) AND (id_movie = :id_movie)";
+
+        $this->connection = Connection::GetInstance();
+        $parameters['id_cinema'] = $id_cinema;
+        $parameters['id_movie'] = $id_movie;
+        $result = $this->connection->Execute($query,$parameters);
+        $total = 0;
+        foreach($result as $row)
+        {
+           $total += $row['price'];
+        }
+
+    return $total;
+    }
+
     
 
 	
