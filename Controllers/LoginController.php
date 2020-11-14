@@ -41,7 +41,14 @@ class LoginController
                             $_SESSION["isAdmin"] = $type;
                         }
                     }
-                    header("Location: ".FRONT_ROOT);
+                    
+                    if(isset($_SESSION['url'])){
+                        $url = $_SESSION['url'];
+                        unset($_SESSION['url']);
+                        header('Location: '.$url);
+                    }else{
+                        header("Location: ".FRONT_ROOT);
+                    }
                 }
                 else{
                     $this->Index("Usuario o contraseña incorrecta.", 2); 
@@ -57,6 +64,8 @@ class LoginController
 
     public function Index($message = "", $bg=1)
     {
+        $_SESSION['bg'] = $bg;
+        unset($_SESSION['url']);
         if(empty($_SESSION["loggedUser"])){
             require_once(VIEWS_PATH."login.php");
         }else{

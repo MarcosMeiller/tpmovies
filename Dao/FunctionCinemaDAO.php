@@ -91,6 +91,27 @@ public function Search($id){
     }  
 }
 
+public function searchFunction($idfunction){
+    $query = "SELECT *  FROM ".$this->tableName." WHERE (idfunctioncinemas = :idfunctioncinemas)";
+        $newFunction = null;
+        $parameters["idfunctioncinemas"] =  $idfunction;
+        try{
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+            foreach($array as $newArray){
+                if($newArray !== null){
+                    $newFunction = new FunctionCinema($newArray['room_id'],$newArray['movie_id'],$newArray['date'],$newArray['hour']);
+                    $newFunction->setId($newArray['idfunctioncinemas']);
+                }
+        }
+        return $newFunction;
+    }    
+    catch(PDOException $ex){
+        throw $ex;
+    }  
+}
+
+
 public function FilterListForDate($date){
     $query = "SELECT *  FROM ".$this->tableName." WHERE (date = :date)";
     $parameters["date"] =  $date;

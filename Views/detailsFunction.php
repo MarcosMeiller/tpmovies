@@ -2,9 +2,19 @@
 
 $i = 0 ;
 
+if(empty($_SESSION["loggedUser"])){
+  $_SESSION['url'] = FRONT_ROOT.'Function/DetailsFunction/'.$movie->getId();
+}else{
+  unset($_SESSION['url']);
+}
+
 echo "<script type='text/javascript'>
 function soon() {
     toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('Proximamente', '', {timeOut: 2000});
+}
+
+function noticket() {
+  toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('No hay ticket disponible', '', {timeOut: 2000});
 }
 
 </script>";
@@ -50,18 +60,42 @@ function soon() {
                       $parts = explode(":", $function->getHour());
                       $horafinal += $parts[2] + ($parts[1]*60 + $movie->getDuration() * 60 )+ $parts[0]*3600;
                       $horafinal = gmdate("H:i:s", $horafinal);
-                
-                
-                
-                
                 ?>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3"><?php echo $function->getDate(); ?></td>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 truncate"><?php echo $function->getHour(); echo "--",$horafinal; ?></td>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3"><?php echo $room->getName(); ?></td>
                 <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 truncate"><?php echo "$",$room->getPrice(); ?></td>
                 
-                <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg"><a onclick = "soon()">Adquirir </a></td>
-              </tr>
+                <?php if($ticketsList == []){ 
+
+                    $capacity = $room->getCapacity();
+                    $count = 0;
+                    foreach($ticketsList as $ticket){
+                      if($ticket->getid_Function() == $function->getId()){
+                          $count++;
+                      }
+                     }
+
+                     if($count == $capacity){
+                       
+                  ?>
+                        <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-red-500 hover:text-red-700 hover:font-bold cursor-pointer rounded-br-lg">
+                        <a onclick = "noticket()">Agotado</a></td>
+                      </tr>
+                  <?php  }else{ ?>
+                   <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg">
+                   <a href="<?php echo FRONT_ROOT ?>PayFunction/Checkout/<?php echo $function->getId() ?>">Adquirir</a>
+                   </td>
+                   </tr>
+                   <?php  }
+                  ?>
+
+              <?php }else{ ?>
+                  <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg">
+                  <a href="<?php echo FRONT_ROOT ?>PayFunction/Checkout/<?php echo $function->getId() ?>">Adquirir</a>
+                  </td>
+                </tr>
+              <?php  } ?>
 
             </tbody>
           </table>

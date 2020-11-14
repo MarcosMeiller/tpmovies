@@ -10,6 +10,7 @@ use Models\FunctionCinema as FunctionCinema;
 Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 Use Dao\CinemaDAO as cinemaDAO;
 use Models\Cinema as Cinema;
+use Dao\TicketDAO as ticketDAO;
 use Exception;
 use DateTime;
 
@@ -18,12 +19,15 @@ class FunctionController{
     private $daoR;
     private $daoM; 
     private $daoC;
+    private $daoT;
 
     public function __construct(){
         $this->dao = new FunctionCinemaDAO();
         $this->daoR = new RoomDao();
         $this->daoM = new movieDAO(); 
         $this->daoC = new cinemaDAO();
+        $this->daoT = new ticketDAO();
+
     }
 
     public function addFunction($id_Room,$id_movie,$date,$hour){
@@ -215,6 +219,8 @@ class FunctionController{
     public function DetailsFunction($id){
 
         $functionsList = $this->dao->getAll();
+        $ticketsList = $this->daoT->getAll();
+
         $roomList = $this->daoR->getAll();
         $movie = $this->daoM->searchIdBdd($id);
         $cinemasList = $this->daoC->getAll();

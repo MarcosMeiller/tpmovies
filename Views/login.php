@@ -1,11 +1,14 @@
 <?php namespace views;
     require 'head.php';
     
+  $bg = $_SESSION['bg'];
     if($bg == 1){
       $bgImg = "background-image: url('Views/img/bg-cinema3.jpg')";
-    }else{
-      $bgImg = "background-image: url('../Views/img/bg-cinema3.jpg')";
-    }
+      }else{
+        $bgImg = "background-image: url('../Views/img/bg-cinema3.jpg')";
+      }
+
+
 ?>
 
 <div class='bgMovie flex flex-col mx-auto min-h-full' style="<?php echo $bgImg ?>">
