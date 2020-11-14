@@ -33,11 +33,11 @@ class PayFunctionController
             require_once(VIEWS_PATH."login.php");
             //header("Location:".FRONT_ROOT."Login");
         }else{
-            $this->Checkout();            
+            $this->SelectSeat();            
         }    
     }      
     
-    public function Checkout($idFunction){
+    public function SelectSeat($idFunction){
         $function = $this->daoF->searchFunction($idFunction);
 
         $ticketsList = $this->daoT->getAll();

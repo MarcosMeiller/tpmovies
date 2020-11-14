@@ -84,7 +84,7 @@ function noticket() {
                       </tr>
                   <?php  }else{ ?>
                    <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg">
-                   <a href="<?php echo FRONT_ROOT ?>PayFunction/Checkout/<?php echo $function->getId() ?>">Adquirir</a>
+                   <a href="<?php echo FRONT_ROOT ?>PayFunction/SelectSeat/<?php echo $function->getId() ?>">Adquirir</a>
                    </td>
                    </tr>
                    <?php  }
@@ -92,7 +92,7 @@ function noticket() {
 
               <?php }else{ ?>
                   <td class="bg-white border-grey-light border hover:bg-gray-100 p-3 text-green-500 hover:text-green-700 hover:font-bold cursor-pointer rounded-br-lg">
-                  <a href="<?php echo FRONT_ROOT ?>PayFunction/Checkout/<?php echo $function->getId() ?>">Adquirir</a>
+                  <a href="<?php echo FRONT_ROOT ?>PayFunction/SelectSeat/<?php echo $function->getId() ?>">Adquirir</a>
                   </td>
                 </tr>
               <?php  } ?>

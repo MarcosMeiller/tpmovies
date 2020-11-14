@@ -1,5 +1,12 @@
 <?php namespace views;
 
+$countSeat = 0;
+$totalprice = 0;
+
+echo "
+
+"
+
 ?>
 
 <div class='bgMovie flex flex-col min-h-full' style="background-image: url('Views/img/bg-cinema3.jpg')">
@@ -21,7 +28,6 @@
               $available =  $cap - $count;
               $rows = round($cap / 12);
               $rest = fmod($cap,12);
-              echo $rest
               ?>
     
   <div class=''>
@@ -29,21 +35,35 @@
       <p>TICKET DISPONIBLE: <?php echo $available ?> </p>
 
       <?php }} ?>
-<!--
+
     <div>
       <div class='text-center'>
 
+            <div class='flex flex-row justify-center'>
           <?php for($i=0;$i< $rest ;$i++){ ?>
-          <i class="material-icons text-green-400 cursor-pointer">event_seat</i>
+            <div class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
+                <div class='h-6 w-6 absolute'>
+                <input type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value=''/>
+                </div>
+                 
+                <i class="material-icons">event_seat</i>
+
+                </div>    
           <?php } ?>   
+            </div>
 
           <?php for($i=0;$i< $rows ;$i++){ ?>
             <div class=' flex flex-row justify-center'>
               <?php   for($j=0; $j < 13 ;$j++){ if($j == 6){?> 
                 <div class='mx-5'> </div>
               <?php }else{?>
-                <div class='text-green-400'>
-                <i class="material-icons cursor-pointer">event_seat</i>
+                <div onclick="check()">
+                <div class='h-6 w-6 absolute'>
+                <input id='inputSeat' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(true){ echo 'disabled'; } ?> value='<?php echo $i ?>'/>
+                </div>
+                 
+                <i id='seat' class="material-icons">event_seat</i>
+
                 </div>     
               <?php }} ?>
             </div>
@@ -58,9 +78,24 @@
 
       </div>
 
+    </div> <!-- END SEATS -->
+
+    <div>
+    <p>Cant Asientos seleccionados: <?php echo $countSeat ?></p>
+    <p>Total: $<?php echo $totalprice ?></p>
     </div>
--->
-  </div>
+
+  </div> 
 
 </div>
 
+
+<script>
+function check(){
+var seatInput = document.getElementById('inputSeat');
+var seat = document.getElementById('seat');
+seat.classList.toggle('text-blue-500')
+console.log(seatInput.value);
+}
+
+</script>
