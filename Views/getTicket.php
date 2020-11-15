@@ -5,7 +5,9 @@ $totalprice = 0;
 
 echo "
 
-"
+";
+$letters = range('A', 'Z');
+
 
 ?>
 
@@ -35,16 +37,43 @@ echo "
         <p class='font-bold mr-2'>Tickets disponibles: </p><p><?php echo $available ?></p><p class='font-bold mx-2'>  -  Valor del ticket para esta sala: </p><p>$<?php echo $room->getPrice() ?></p>
       </div>
 
-      <?php }} ?>
+     
+     <?php }} ?>
+       
+     <div class=' flex flex-row  justify-center mb-5'>
+        <p class='uppercase text-white bg-gray-500 px-32 text-xs'>Pantalla</p>
+      </div>
 
       <form action='<?php echo FRONT_ROOT ?>PayFunction/Checkout' method='POST'>
       <div class='text-center'>
 
-            <div class='flex flex-row justify-center'>
+
+
+          <?php $last = 0; for($i=0;$i< $rows ;$i++){ ?>
+            <div class=' flex flex-row justify-center'>
+              <?php   for($j=0; $j < 13 ;$j++){ if($j == 6){?> 
+                <div class='mx-5'> </div>
+              <?php }else{?>
+                <div onclick="check()" class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
+                <div class='h-6 w-6 absolute'>
+                <input name='seats[]' id='inputSeat' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value='<?php echo $letters[$i] ?>-<?php echo $j ?>'/>
+                </div>
+                 
+                <i id='seat' class="material-icons">event_seat</i>
+
+                </div>     
+              <?php } $last = $i; } ?>
+            </div>
+
+          <?php } ?>            
+          
+          
+          
+          <div class='flex flex-row justify-center'>
           <?php for($i=0;$i< $rest ;$i++){ ?>
             <div class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
                 <div class='h-6 w-6 absolute'>
-                <input type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value=''/>
+                <input name='seats[]' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value='<?php echo $letters[$last+1]?>-<?php echo $i ?> '/>
                 </div>
                  
                 <i class="material-icons">event_seat</i>
@@ -53,29 +82,6 @@ echo "
           <?php } ?>   
             </div>
 
-          <?php for($i=0;$i< $rows ;$i++){ ?>
-            <div class=' flex flex-row justify-center'>
-              <?php   for($j=0; $j < 13 ;$j++){ if($j == 6){?> 
-                <div class='mx-5'> </div>
-              <?php }else{?>
-                <div onclick="check()" class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
-                <div class='h-6 w-6 absolute'>
-                <input id='inputSeat' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value='<?php echo $i ?>'/>
-                </div>
-                 
-                <i id='seat' class="material-icons">event_seat</i>
-
-                </div>     
-              <?php }} ?>
-            </div>
-
-          <?php } ?>
-
-
-          
-          <div class=' flex flex-row  justify-center mt-5'>
-          <p class='uppercase text-sm text-white bg-blue-400 px-32'>Pantalla</p>
-          </div>
 
       </div>
 

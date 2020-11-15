@@ -19,14 +19,17 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Dosis:wght@200;400;600&display=swap" rel="stylesheet">
 
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-  <link href="https://fonts.googleapis.com/icon?family=Material+Icons"
-      rel="stylesheet">
+    <!--<link href='<?php echo FRONT_ROOT.VIEWS_PATH ?>css/card.css' rel='stylesheet'>-->
+
 
 <!-- toastr -->
     <script src="http://code.jquery.com/jquery-1.9.1.min.js"></script>
 <link href="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/css/toastr.css" rel="stylesheet"/>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/toastr.js/2.0.1/js/toastr.js"></script>
+<script src='https://cdnjs.cloudflare.com/ajax/libs/imask/3.4.0/imask.min.js'></script>
+<script type="text/javascript" src='<?php echo FRONT_ROOT.VIEWS_PATH ?>js/card.js'></script>
 
     <style>
         html,body{

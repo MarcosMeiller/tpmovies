@@ -53,7 +53,15 @@ class PayFunctionController
     }
 
     public function Checkout(){
-        require_once(VIEWS_PATH."checkout.php");
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $seats = array();
+
+            $seats =$_POST['seats'];
+            $cantseats = (count($seats));
+            //var_dump($cantseats);
+            //die;
+            require_once(VIEWS_PATH."checkout.php");
+        }
     }
 
     public function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta
