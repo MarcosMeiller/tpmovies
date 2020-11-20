@@ -13,13 +13,14 @@ class TicketDAO{
 
 	
     public function add(CreditCard $newCreditCard) {
-        $query = "INSERT INTO ".$this->tableName." (dni, userCard,numberCard) VALUES ( :dni, :userCard ,:numberCard)";
+        $query = "INSERT INTO ".$this->tableName." (dni, usercard,numbercard,dateexpired,codesecurity) VALUES ( :dni, :usercard ,:numbercard,:dateexpired,:codesecurity)";
 
      
         $parameters['dni'] = $newCreditCard->getDni();
-        $parameters['userCard'] = $newCreditCard->getid_User();
-        $parameters['numberCard'] = $newCreditCard->getNumberCard();
-   
+        $parameters['usercard'] = $newCreditCard->getid_User();
+        $parameters['numbercard'] = $newCreditCard->getNumberCard();
+        $parameters['dateexpired'] = $newCreditCard->getDateExpired();
+        $parameters['codesecurity'] = $newCreditCard->getCodeSecurity();
          
 
         try{
@@ -44,8 +45,8 @@ class TicketDAO{
 
             foreach($result as $row)
             {
-                $CreditCard = new CreditCard($row["dni"],$row["userCard"],$row['numberCard']);
-                $CreditCard->setId($row['idcreditcards']);
+                $CreditCard = new CreditCard($row["dni"],$row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired']);
+                $CreditCard->setId($row['codesecurity']);
                 array_push($CreditCardList, $CreditCard);
             }
 
@@ -63,8 +64,8 @@ class TicketDAO{
 
             foreach($result as $row)
             {
-                $CreditCard = new CreditCard($row["dni"],$row["userCard"],$row['numberCard']);
-                $CreditCard->setId($row['idcreditcards']);
+                $CreditCard = new CreditCard($row["dni"],$row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired']);
+                $CreditCard->setId($row['codesecurity']);
                 array_push($CreditCardList, $CreditCard);
             }
 
