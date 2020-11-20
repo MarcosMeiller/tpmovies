@@ -179,7 +179,19 @@ class FunctionController{
         $fechaNueva = new DateTime($newFunction->getDate());// irian las fechas nueva
         $horaVieja = new DateTime($function->getHour());//irian las horas //deberia compararlo asi y sumandole el get duration.
         $horaNueva = new DateTime($newFunction->getHour());// irian la hora nueva
-    
+       
+        $aux = date('H:i');
+
+        $horaactual = new DateTime($aux);
+        $aux = date('Y-m-d');
+        $hoy = new DateTime($aux);
+        $diff = $horaNueva->diff($horaactual); 
+        $resultado = ($diff->days * 24 * 60) +
+        ($diff->h * 60) + $diff->i;
+        if($fechaNueva <= $hoy && $resultado <= 300 && $horaactual < $horaNueva){
+            $isValid = false;
+        }
+        else{ 
         $diff = $fechaNueva->diff($fechaVieja);
         $diferenciaDias =  $diff->days; 
         
@@ -208,6 +220,7 @@ class FunctionController{
           
              
         }
+    }
      
         return $isValid;
     

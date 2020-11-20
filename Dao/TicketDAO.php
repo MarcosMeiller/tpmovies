@@ -155,6 +155,22 @@ class TicketDAO{
     return $total;
     }
 
+    public function getAllInPesosForDates($date1, $date2){//mandar las fechas con tipo datetime();
+        $query = "SELECT * FROM ticketxmovies WHERE (date >= :date1) AND (date <= :date2)";
+
+        $this->connection = Connection::GetInstance();
+        $parameters['date1'] = $date1;
+        $parameters['date2'] = $date2;
+        $result = $this->connection->Execute($query,$parameters);
+        $total = 0;
+        foreach($result as $row)
+        {
+           $total += $row['price'];
+        }
+
+    return $total;
+    }
+
     
 
 	
