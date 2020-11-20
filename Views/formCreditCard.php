@@ -1,16 +1,10 @@
 <?php namespace forms ?>
-<!--<form class="w-full mb-5 " action='<?php echo FRONT_ROOT ?>Cinema/addCinema' method='POST'>
 
-  <div class="flex flex-row justify-center bg-red-500">
+<div class="grid grid-col md:grid-cols-2 bg-red-500 mx-12 mt-8 justify-around">
 
-  </div>
-</form>-->
-
-<div class="payment-title">
-        <h1>Forma de Pago</h1>
-    </div>
-    <div class="container preload">
-        <div class="creditcard">
+    <div class="preload flex justify-center pt-5">
+<!--
+        <div class="creditcard absolute ">
             <div class="front">
                 <div id="ccsingle"></div>
                 <svg version="1.1" id="cardfront" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
@@ -106,9 +100,9 @@
                 </svg>
             </div>
         </div>
+-->
     </div>
-
-    <div class="form-container">
+     <div class="form-container flex justify-center mt-48 md:mt-0">
         <div class="field-container">
             <label for="name">Nombre Completo</label>
             <input id="name" maxlength="20" type="text">
@@ -122,11 +116,21 @@
             </svg>
         </div>
         <div class="field-container">
-            <label for="expirationdate">Fecha vencimiento (mm/yy)</label>
+            <label for="expirationdate">Fecha venc (mm/yy)</label>
             <input id="expirationdate" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
         <div class="field-container">
             <label for="securitycode">Codigo de seguridad</label>
             <input id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
-    </div>
+    </div>       
+ 
+
+
+</div>    
+
+<div class='flex text-center my-5 justify-center'>
+    <button type='submit' class='bg-blue-900 w-2/5 rounded-lg my-2 cursor-pointer hover:bg-blue-700'>
+        <p class='text-white py-2 uppercase font-bold'>Pagar</p>
+    </button> 
+</div>

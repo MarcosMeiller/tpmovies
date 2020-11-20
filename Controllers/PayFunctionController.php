@@ -57,11 +57,31 @@ class PayFunctionController
             $seats = array();
 
             $seats =$_POST['seats'];
+            $idFunction = $_POST['idFunction'];
+            $idRoom = $_POST['idRoom'];
             $cantseats = (count($seats));
-            //var_dump($cantseats);
-            //die;
+
+            $function = $this->daoF->searchFunction($idFunction);
+            $room = $this->daoR->search($idRoom);
+            $price = $room->getPrice();
+
+
+            $total = $cantseats * $price;
+
+
             require_once(VIEWS_PATH."checkout.php");
         }
+    }
+
+    public function validateDate($date){
+        $fechaExpiracion = date($date); 
+        $fechaActual = date("Y-m-d");
+        if($fechaExpiracion <= $fechaActual){
+            return false;
+        }
+        else{
+            return true;
+        }   
     }
 
     public function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta

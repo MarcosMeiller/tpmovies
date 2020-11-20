@@ -16,7 +16,7 @@ $hoy = date('Y-m-d');
       Sala
     </label>
    
-    <select  id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+    <select  id="id_room" name='id_room' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
       <option value=''>Seleccione una sala</option>
       <?php foreach($roomList as $room){ ?>
           <?php  foreach($cinemaList as $cinema){ 
@@ -38,7 +38,7 @@ $hoy = date('Y-m-d');
         Pelicula
       </label>
       
-      <select  id="id_movie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+      <select  id="id_movie" name='id_movie' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 py-2 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline" required>
     <option value=''>Seleccione una pelicula</option>
     <?php foreach($adminmovies as $movie){ ?>
         <option value="<?php  echo $movie->getId() ?>">

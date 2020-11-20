@@ -52,8 +52,13 @@ $letters = range('A', 'Z');
    
     
   <div class=''>
-      <div class='flex text-center my-5 justify-center'>
-        <p class='font-bold mr-2'>Tickets disponibles: </p><p><?php echo $available ?></p><p class='font-bold mx-2'>  -  Valor del ticket para esta sala: </p><p>$<?php echo $room->getPrice() ?></p>
+      <div class='flex text-center my-5 justify-center flex-col items-center'>
+        <div class='flex flex-row'>
+           <p class='font-bold mr-2'>Tickets disponibles: </p><p><?php echo $available ?></p>
+        </div>
+        <div class='flex flex-row'>
+          <p class='font-bold mx-2'>Valor del ticket para esta sala: </p><p>$<?php echo $room->getPrice() ?></p>
+        </div>
       </div>
 
      

@@ -188,10 +188,14 @@ class FunctionController{
         $diff = $horaNueva->diff($horaactual); 
         $resultado = ($diff->days * 24 * 60) +
         ($diff->h * 60) + $diff->i;
-        if($fechaNueva <= $hoy && $resultado <= 300 && $horaactual < $horaNueva){
+
+
+ 
+        if($fechaVieja <= $hoy && $resultado <= 300 && $horaactual < $horaVieja){
             $isValid = false;
         }
         else{ 
+            
         $diff = $fechaNueva->diff($fechaVieja);
         $diferenciaDias =  $diff->days; 
         
