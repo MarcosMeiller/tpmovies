@@ -60,7 +60,7 @@ if($cinemasList != []){
         <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold mb-2" for="capacity">
           Capacity
         </label>
-        <input required class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="capacity" name='capacity' type="number" placeholder="Ingrese la capacidad de la sala">
+        <input required class="appearance-none block w-full bg-white text-gray-700 border border-gray-500 rounded py-2 px-4 mb-3 leading-tight focus:outline-none focus:bg-white focus:border-gray-500" id="capacity" name='capacity' type="number" min='50' max='500' placeholder="Ingrese la capacidad de la sala">
       </div>
 
       <div class="w-full px-3 md:w-2/6">

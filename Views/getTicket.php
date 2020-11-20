@@ -28,9 +28,28 @@ $letters = range('A', 'Z');
               }  
               $cap = $room->getCapacity();
               $available =  $cap - $count;
-              $rows = round($cap / 12);
-              $rest = fmod($cap,12);
-              ?>
+
+              switch ($cap) {
+                case ($cap <= 80):
+                  $rows = round($cap / 10);
+                  $rest = fmod($cap,10);
+                    break;
+                case ($cap > 80 && $cap <= 150):
+                  $rows = round($cap / 12);
+                  $rest = fmod($cap,12);
+                    break;
+                case ($cap > 150 && $cap <= 300):
+                  $rows = round($cap / 16);
+                  $rest = fmod($cap,16);
+                    break;
+                case ($cap > 300 && $cap <= 500):
+                  $rows = round($cap / 20);
+                  $rest = fmod($cap,20);
+                    break;
+              }
+            ?>
+             
+   
     
   <div class=''>
       <div class='flex text-center my-5 justify-center'>
@@ -44,58 +63,27 @@ $letters = range('A', 'Z');
         <p class='uppercase text-white bg-gray-500 px-32 text-xs'>Pantalla</p>
       </div>
 
-      <form action='<?php echo FRONT_ROOT ?>PayFunction/Checkout' method='POST'>
-      <div class='text-center'>
 
-
-
-          <?php $last = 0; for($i=0;$i< $rows ;$i++){ ?>
-            <div class=' flex flex-row justify-center'>
-              <?php   for($j=0; $j < 13 ;$j++){ if($j == 6){?> 
-                <div class='mx-5'> </div>
-              <?php }else{?>
-                <div onclick="check()" class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
-                <div class='h-6 w-6 absolute'>
-                <input name='seats[]' id='inputSeat' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value='<?php echo $letters[$i] ?>-<?php echo $j ?>'/>
-                </div>
-                 
-                <i id='seat' class="material-icons">event_seat</i>
-
-                </div>     
-              <?php } $last = $i; } ?>
-            </div>
-
-          <?php } ?>            
-          
-          
-          
-          <div class='flex flex-row justify-center'>
-          <?php for($i=0;$i< $rest ;$i++){ ?>
-            <div class='<?php if(true){ echo 'text-green-500'; }else{ echo 'text-red-500'; } ?>'>
-                <div class='h-6 w-6 absolute'>
-                <input name='seats[]' type='checkbox'class='border-2 absolute h-2 w-2 cursor-pointer ' <?php if(false){ echo 'disabled'; } ?> value='<?php echo $letters[$last+1]?>-<?php echo $i ?> '/>
-                </div>
-                 
-                <i class="material-icons">event_seat</i>
-
-                </div>    
-          <?php } ?>   
-            </div>
-
-
-      </div>
-
-<div class='flex text-center my-5 justify-center'>
-    <button type='submit' class='bg-blue-900 w-2/5 rounded-lg my-2 cursor-pointer hover:bg-blue-700'>
-        <p class='text-white py-2 uppercase font-bold'>Ver total y pagar</p>
-    </button> 
-</div>
-
-    </div> <!-- END SEATS -->
-    </form>
-
-
-
+    <?php 
+    
+    switch ($cap) {
+      case ($cap <= 80):
+        require 'rooms/lessthan80.php';
+          break;
+      case ($cap > 80 && $cap <= 150):
+        require 'rooms/between81and150.php';
+          break;
+      case ($cap > 150 && $cap <= 300):
+          break;
+      case ($cap > 300 && $cap <= 500):
+          break;
+    }
+    
+    
+    
+    
+    
+    ?>
 
   </div> 
 
