@@ -21,7 +21,7 @@
 
     <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 
-    <!--<link href='<?php echo FRONT_ROOT.VIEWS_PATH ?>css/card.css' rel='stylesheet'>-->
+    <link href='<?php echo FRONT_ROOT.VIEWS_PATH ?>css/card.css' rel='stylesheet'>
 
 
 <!-- toastr -->
