@@ -77,7 +77,7 @@ class PayFunctionController
             }
             $_SESSION['seats'] = $seats;
             $_SESSION['idFunction'] = $idFunction;
-         
+            $_SESSION['idRoom'] = $idRoom;
             $function = $this->daoF->searchFunction($idFunction);
             $room = $this->daoR->search($idRoom);
             $price = $room->getPrice();
@@ -121,7 +121,7 @@ class PayFunctionController
             if($val1 && $val2 && $val3){
                 
            
-            
+                
                 $idUser = $_SESSION['loggedUser'];
                 $creditCard = new CreditCard($idUser->getId(),$card,$dateexp,$code,$name);
                 $seats = $_SESSION['seats'];
@@ -130,9 +130,13 @@ class PayFunctionController
                     $this->daoT->add($ticket);
                 }
                 $this->daoC->add($creditCard);
-
-                $this->sendMail();
-
+                $idFunction = $_SESSION['idFunction'];
+                $function = $this->daoF->searchFunction($idFunction);
+                $idRoom = $_SESSION['idRoom'];
+                $room = $this->daoR->search($idRoom);
+              
+                $this->sendMail($creditCard,$seats,$idUser,$function,$room);
+              
             }else{
                echo 'no joya';
                require_once(VIEWS_PATH."checkout.php");
@@ -157,18 +161,29 @@ class PayFunctionController
     public function validate_Date_CreditCard($date){
         $date = date($date);
         $actualDate = date('m/y');
-
-        if($date > $actualDate){
-            return true;
+        $fechaActual = explode("/", $actualDate);
+        $fechaNueva = explode("/", $date);
+        if($fechaActual[1] == $fechaNueva[1]){
+            if((int)$fechaActual[0] < (int)$fechaNueva[0]){
+                return true;
+            }
+            else{
+                return false;
+            }
         }
-        else{
+        if((int)$fechaActual[1] > (int)$fechaNueva[1]){
             return false;
         }
+        else{
+            return true;
+        }
+
+     
 
     }
 
 
-    public function sendMail(){
+    public function sendMail($creditCard,$seats,$User,$function,$room){
         $mail = new PHPMailer(true);
 
         try {
@@ -184,7 +199,7 @@ class PayFunctionController
 
             //Recipients
             $mail->setFrom('from@gmail.com', 'TPMovies');
-            $mail->addAddress('2014thekan@gmail.com', 'Joe User');     // Add a recipient Destino
+            $mail->addAddress($User->getEmail(), $User->getName());     // Add a recipient Destino
             /*$mail->addAddress('ellen@example.com');               // Name is optional
             $mail->addReplyTo('info@example.com', 'Information');
             $mail->addCC('cc@example.com');
@@ -194,16 +209,15 @@ class PayFunctionController
             // Attachments ENVIOS ARCHIVOS
             //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
             //$mail->addAttachment('/tmp/image.jpg', 'new.jpg');    // Optional name
-
+            $separado_por_comas = implode(",", $seats);
 
             // Content
             $mail->isHTML(true);                                  // Set email format to HTML
             $mail->Subject = 'COMPRA TICKET';
-            $mail->Body    = 'che <b>comprado!</b>';
+            $mail->Body    = 'Usted ha <b>comprado</b> '.count($seats)."Tickets "." Con la cuenta de ".$creditCard->getName()." En la sala: ".$room->getName()."  al precio de : ".$room->getPrice()." c/u  sus asientos son: ".$separado_por_comas.".";
             //$mail->AltBody = 'This is the body in plain text for non-HTML mail clients';
 
             $mail->send();
-            echo 'Joya mail';
         } catch (Exception $e) {
             echo "Message could not be sent. Mailer Error: {$mail->ErrorInfo}";
         }
