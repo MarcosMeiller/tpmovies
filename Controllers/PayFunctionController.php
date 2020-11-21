@@ -84,10 +84,35 @@ class PayFunctionController
         }   
     }
 
+    public function payTicket(){
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+        
+            $name =$_POST['name'];
+            $card = $_POST['cardnumber'];
+            $dateexp = $_POST['expirationdate'];
+            $code = $_POST['securitycode'];
+
+
+
+            $val1 = $this->validate_Date_CreditCard($dateexp);
+            $val2 = $this->validate_number_lenght($card,16);
+            $val3 = $this->validate_number_lenght($code,3);
+
+            if($val1 && $val2 && $val3){
+                echo 'joya';
+            }else{
+               echo 'no joya';
+            }
+        
+        } 
+    }
+
     public function validate_number_lenght($number=0, $lenght=0){// es para validar que la tarjeta tiene una cantidad valida de numeros de tarjeta
 
-        $number = str_replace("-", "", $number);
+        $number = str_replace(" ","", $number);
     
+        var_dump($number);
+
         if( is_numeric($number) AND is_numeric($lenght) AND (strlen($number)==$lenght)){
             return true;
         }else{
@@ -97,13 +122,14 @@ class PayFunctionController
     }
 
     public function validate_Date_CreditCard($date){
-        $date = new DateTime($date);
-        $actualDate = date('Y-m-d');
+        $date = date($date);
+        $actualDate = date('m/y');
+
         if($date > $actualDate){
-            return false;
+            return true;
         }
         else{
-            return true;
+            return false;
         }
 
     }
