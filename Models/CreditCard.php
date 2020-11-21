@@ -2,17 +2,15 @@
 
 class CreditCard{
     private $id;
-    private $dni;
     private $id_User;
     private $numberCard;
     private $dateExpired;
     private $codeSecurity;
     private $name;
 
-    public function __construct($dni,$id_User,$numberCard, $dateExpired,$codeSecurity,$name){
+    public function __construct($id_User,$numberCard, $dateExpired,$codeSecurity,$name){
         $this->id_User = $id_User;
         $this->numberCard = $numberCard;
-        $this->dni = $dni;
         $this->dateExpired = $dateExpired;
         $this->codeSecurity = $codeSecurity;
         $this->name = $name;
@@ -24,9 +22,7 @@ class CreditCard{
         return $this->id;
     }
     
-    public function getDni(){
-        return  $this->dni;
-    }
+    
 
     public function getNumberCard(){
         return $this->numberCard;  
@@ -61,10 +57,7 @@ class CreditCard{
         $this->id_User = $id_User;
     }
 
-    public function setDni($dni){
-        $this->dni = $dni;
-    }
-
+    
     public function setDateExpired($dateExpired){
         $this->dateExpired = $dateExpired;
     }
