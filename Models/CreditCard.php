@@ -70,7 +70,7 @@ class CreditCard{
     }
 
     public function setCodeSecurity($codeSecurity){
-        $this->codeSecurity = $codeSecurity
+        $this->codeSecurity = $codeSecurity;
     }
     
     public function setName($name){
