@@ -3,11 +3,7 @@
 $countSeat = 0;
 $totalprice = 0;
 
-echo "
-
-";
 $letters = range('A', 'Z');
-
 
 ?>
 
@@ -27,6 +23,7 @@ $letters = range('A', 'Z');
                 }
               }  
               $cap = $room->getCapacity();
+              //$cap = 175;
               $available =  $cap - $count;
 
               switch ($cap) {
@@ -79,6 +76,7 @@ $letters = range('A', 'Z');
         require 'rooms/between81and150.php';
           break;
       case ($cap > 150 && $cap <= 300):
+        require 'rooms/between151and300.php';
           break;
       case ($cap > 300 && $cap <= 500):
           break;

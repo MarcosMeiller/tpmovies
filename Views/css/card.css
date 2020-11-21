@@ -31,7 +31,13 @@
   grid-template-areas: "name name" "number number" "expiration security";
   max-width: 400px;
   padding: 10px;
-  color: #707070;
+  /*color: #707070;*/
+  color: black;
+}
+
+.btnpay {
+  display: grid;
+  width: 210%;
 }
 
 label {

@@ -1,9 +1,9 @@
 <?php namespace forms ?>
 
-<div class="grid grid-col md:grid-cols-2 bg-red-500 mx-12 mt-8 justify-around">
+<div class="grid grid-col md:grid-cols-2 mx-12 mt-8 justify-around mb-5">
 
-    <div class="preload flex justify-center pt-5">
-<!--
+    <div class="preload flex justify-center md:pt-16">
+
         <div class="creditcard absolute ">
             <div class="front">
                 <div id="ccsingle"></div>
@@ -100,7 +100,7 @@
                 </svg>
             </div>
         </div>
--->
+
     </div>
      <form action='<?php echo FRONT_ROOT ?>PayFunction/payTicket' method='POST' class="form-container flex justify-center mt-48 md:mt-0">
         <div class="field-container">
@@ -110,10 +110,10 @@
         <div class="field-container">
             <label for="cardnumber">Numero de Tarjeta</label><span id="generatecard">generar aleatorio</span>
             <input name='cardnumber' id="cardnumber" type="text" inputmode="numeric">
-            <!--<svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
+            <svg id="ccicon" class="ccicon" width="750" height="471" viewBox="0 0 750 471" version="1.1" xmlns="http://www.w3.org/2000/svg"
                 xmlns:xlink="http://www.w3.org/1999/xlink">
 
-            </svg>-->
+            </svg>
         </div>
         <div class="field-container">
             <label for="expirationdate">Fecha venc (mm/yy)</label>
@@ -124,16 +124,14 @@
             <input name='securitycode' id="securitycode" type="text" pattern="[0-9]*" inputmode="numeric">
         </div>
 
-        <div class='field-container'>
-            <button type='submit' class='bg-blue-900 rounded-lg my-2 cursor-pointer hover:bg-blue-700'>
+        <div class='btnpay'>
+            <button name='pay' type='submit' class='bg-blue-900 rounded-lg my-2 cursor-pointer hover:bg-blue-700'>
                 <p class='text-white py-2 uppercase font-bold'>Pagar</p>
             </button> 
         </div>
-
-
-
     </form>       
  
+
 
 
 </div>    

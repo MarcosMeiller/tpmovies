@@ -4,6 +4,10 @@
 	ini_set('display_startup_errors', 1);
 	error_reporting(E_ALL);
 	
+	// phpMailer
+	use PHPMailer\PHPMailer\PHPMailer;
+	use PHPMailer\PHPMailer\SMTP;
+	use PHPMailer\PHPMailer\Exception;
 	
 	require "vendor/autoload.php";
 
