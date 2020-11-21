@@ -35,7 +35,7 @@ class TicketDAO{
 
 	public function getAll(){
 
-            $query = "SELECT idtickets, id_function, id_user FROM ".$this->tableName;
+            $query = "SELECT idtickets, id_function, id_user, seat FROM ".$this->tableName;
 
             $ticketList = array();
             $this->connection = Connection::GetInstance();

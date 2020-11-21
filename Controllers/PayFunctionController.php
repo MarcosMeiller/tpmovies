@@ -119,6 +119,7 @@ class PayFunctionController
                 $this->daoC->add($creditCard);
             }else{
                echo 'no joya';
+               require_once(VIEWS_PATH."checkout.php");
             }
         
         } 
