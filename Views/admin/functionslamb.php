@@ -15,16 +15,16 @@ if(empty($_SESSION["msjFunction"])){
 
   switch($type){
       case "success":     
-        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.success('".$message."', '', {timeOut: 2000});</script>";
+        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.success('".$message."', '', {timeOut: 2500});</script>";
         unset($_SESSION['msjFunction']);
         unset($_SESSION["bgMsgFunction"]);
       break;
       case "alert": 
-        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('".$message."', '', {timeOut: 2000});</script>";
+        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('".$message."', '', {timeOut: 2500});</script>";
         $bgColor = "bg-organ-200";
       break;
       case "danger": 
-        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.error('".$message."', '', {timeOut: 2000});</script>";
+        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.error('".$message."', '', {timeOut: 2500});</script>";
         $bgColor = "bg-red-500";
       break;
 

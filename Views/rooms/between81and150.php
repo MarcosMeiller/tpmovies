@@ -3,7 +3,11 @@
 <form action='<?php echo FRONT_ROOT ?>PayFunction/Checkout' method='POST'>
       <div class='text-center'>
 
+      <input type="number" hidden name="idFunction" id="idFunction" value='<?php echo $function->getId() ?>' />
 
+      <input type="number" hidden name="idRoom" id="idRoom" value='<?php echo $function->getId_Room() ?>' />
+
+      
 
           <?php $last = 0; for($i=0;$i< $rows ;$i++){ ?>
             <div class=' flex flex-row justify-center'>
