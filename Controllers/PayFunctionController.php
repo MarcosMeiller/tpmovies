@@ -9,20 +9,25 @@ Use Dao\RoomDAO as RoomDao;
 Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 //Use Dao\CinemaDAO as cinemaDAO;
 //use Models\Cinema as Cinema;
+Use Models\CreditCard as CreditCard;
 use Dao\TicketDAO as ticketDAO;
+use Dao\CreditCardDAO as CreditCardDAO;
 use DateTime;
+use models\Ticket;
 
 class PayFunctionController
 {
     private $daoF;
     private $daoR;
     private $daoT;
+    private $daoC;
   
 
     public function __construct(){
         $this->daoF = new FunctionCinemaDAO();
         $this->daoR = new RoomDao();
         $this->daoT = new ticketDAO();
+        $this->daoC = new CreditCardDAO();
 
     }
     
@@ -56,11 +61,13 @@ class PayFunctionController
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $seats = array();
 
-            $seats =$_POST['seats'];
+            $seats = $_POST['seats'];
             $idFunction = $_POST['idFunction'];
             $idRoom = $_POST['idRoom'];
             $cantseats = (count($seats));
-
+            $_SESSION['seats'] = $seats;
+            $_SESSION['idFunction'] = $idFunction;
+         
             $function = $this->daoF->searchFunction($idFunction);
             $room = $this->daoR->search($idRoom);
             $price = $room->getPrice();
@@ -99,7 +106,17 @@ class PayFunctionController
             $val3 = $this->validate_number_lenght($code,3);
 
             if($val1 && $val2 && $val3){
-                echo 'joya';
+                
+           
+            
+                $idUser = $_SESSION['loggedUser'];
+                $creditCard = new CreditCard($idUser->getId(),$card,$dateexp,$code,$name);
+                $seats = $_SESSION['seats'];
+                foreach($seats as $seat){
+                    $ticket = new Ticket($_SESSION['idFunction'],$idUser->getId(),$seat);
+                    $this->daoT->add($ticket);
+                }
+                $this->daoC->add($creditCard);
             }else{
                echo 'no joya';
             }
@@ -111,7 +128,6 @@ class PayFunctionController
 
         $number = str_replace(" ","", $number);
     
-        var_dump($number);
 
         if( is_numeric($number) AND is_numeric($lenght) AND (strlen($number)==$lenght)){
             return true;

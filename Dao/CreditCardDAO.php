@@ -7,23 +7,22 @@ use Dao\Connection as Connection;
 use Exception;
 use PDOException;
 
-class TicketDAO{
+class CreditCardDAO{
     private $connection;
     private $tableName = "creditcard";
 
 	
     public function add(CreditCard $newCreditCard) {
-        $query = "INSERT INTO ".$this->tableName." (dni, usercard,numbercard,dateexpired,codesecurity,holdername) VALUES ( :dni, :usercard ,:numbercard,:dateexpired,:codesecurity,holdername)";
+        $query = "INSERT INTO ".$this->tableName."(usercard,numbercard,dateexpired,codesecurity,holdername) VALUES (:usercard ,:numbercard,:dateexpired,:codesecurity,:holdername)";
 
      
-        $parameters['dni'] = $newCreditCard->getDni();
+      
         $parameters['usercard'] = $newCreditCard->getid_User();
         $parameters['numbercard'] = $newCreditCard->getNumberCard();
         $parameters['dateexpired'] = $newCreditCard->getDateExpired();
         $parameters['codesecurity'] = $newCreditCard->getCodeSecurity();
         $parameters['holdername'] = $newCreditCard->getName();
          
-
         try{
             
             $this->connection = Connection::GetInstance();
@@ -46,7 +45,7 @@ class TicketDAO{
 
             foreach($result as $row)
             {
-                $CreditCard = new CreditCard($row["dni"],$row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired'],,$row['holdername']);
+                $CreditCard = new CreditCard($row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired'],$row['holdername']);
                 $CreditCard->setId($row['codesecurity']);
                 array_push($CreditCardList, $CreditCard);
             }
@@ -65,7 +64,7 @@ class TicketDAO{
 
             foreach($result as $row)
             {
-                $CreditCard = new CreditCard($row["dni"],$row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired'],$row['holdername']);
+                $CreditCard = new CreditCard($row["usercard"],$row['numbercard'],$row["usercard"],$row['dateexpired'],$row['holdername']);
                 $CreditCard->setId($row['codesecurity']);
                 array_push($CreditCardList, $CreditCard);
             }
