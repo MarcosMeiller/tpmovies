@@ -25,7 +25,7 @@ class TicketDAO{
             
             $this->connection = Connection::GetInstance();
 
-            return $this->connection->ExecuteNonQuery($query, $parameters);
+            return $this->connection->ExecuteNonQuery($query, $parameters); // PROBAR CON EXECUTE
 
         }catch(PDOException $ex){
             throw $ex;

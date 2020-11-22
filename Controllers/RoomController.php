@@ -37,7 +37,7 @@ class RoomController
                 }
                
                 if($capacity == null || $price == null ){
-                    $this->Rooms("Numero negativo ingresado o capacidad imposible para un cine","alert");
+                    $this->Rooms("La capacidad ingresada, esta fuera del rango pasa la sala","alert");
                 }
                 if($room !== true){ //despues ver porque me agrega igual si saco este if y no anda el de arriba.
                 try{

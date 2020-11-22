@@ -118,12 +118,9 @@ class FunctionController{
         }
     }
        
-                
-              
+                     
     }
 
-
-    
 
     public function test_input($data) { 
         $data = trim($data);
@@ -227,8 +224,7 @@ class FunctionController{
     }
      
         return $isValid;
-    
-    
+
     }
 
   
