@@ -11,7 +11,7 @@ class TicketDAO{
     private $tableName = "tickets";
 
 	
-    public function add(Ticket $newTicket) {
+    public function add(Ticket $newTicket){
         $query = "INSERT INTO ".$this->tableName." (id_function, id_user,seat) VALUES ( :id_function, :id_user, :seat)";
 
      
@@ -75,6 +75,28 @@ class TicketDAO{
 		
     }
     
+    public function addTicketXmovie($idticket,$idmovie,$idcinema,$date,$price){
+        $query = "INSERT INTO ticketxmovie (idtickets, id_movie, id_cinema,price,date )VALUES(:idtickets,:id_movie,:id_cinema,:price,:date) ";
+
+        $parameters['idtickets'] = $idticket;
+        $parameters['id_movie'] = $idmovie;
+        $parameters['id_cinema'] = $idcinema;
+        $parameters['price'] = $price;
+        $parameters['$date'] = $date;
+   
+         
+
+        try{
+            
+            $this->connection = Connection::GetInstance();
+
+            return $this->connection->ExecuteNonQuery($query, $parameters);
+
+        }catch(PDOException $ex){
+            throw $ex;
+        }
+
+    }
     public function getAllTicketForShow($id_Function){
         $query = "SELECT *  FROM ".$this->tableName." WHERE (id_function = :id_function)";
         $newUser = null;
