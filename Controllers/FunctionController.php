@@ -243,6 +243,10 @@ class FunctionController{
         require_once(VIEWS_PATH."detailsFunction.php");
     }
 
+    public function Balance(){
+        require_once(VIEWS_PATH_ADMIN."/balance.php");
+    }
+
 }
 
 

@@ -119,6 +119,15 @@ class ShowtimesController{
 
     public function Listing($message = "",$type= "",$id = 0){
         
+        if(isset($_SESSION['cantseats'])){
+            $_SESSION['cantseats'] = -1;
+        }
+
+        if(isset($_SESSION['msjError'])){
+            $_SESSION["msjError"] = '';
+        }
+
+
         
                 
                 $functionsList = $this->dao->getAll();

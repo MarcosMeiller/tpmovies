@@ -1,21 +1,13 @@
 <?php namespace rooms; 
 
-/*
-if($ticketsList){
-  foreach($ticketsList as $ticket){
-    if($ticket->getid_Function() == $function->getId()){
-      var_dump($ticket->getSeat());
-  }
-  }
-}
-*/
 $error = false;
 
-/*
-if($msjerror){
-  $error = true;
+if(isset($_SESSION['cantseats'])){
+  if($_SESSION['cantseats'] == 0){
+    $error = true;
+  }
 }
-*/
+
 
 ?>
 
@@ -30,7 +22,7 @@ if($msjerror){
 
           <?php $last = 0; for($i=0;$i< $rows ;$i++){ ?>
             <div class=' flex flex-row justify-center'>
-              <?php   for($j=0; $j < 19 ;$j++){ if($j == 6 || $j == 15){?> 
+              <?php   for($j=0; $j < 20 ;$j++){ if($j == 4 || $j == 15){?> 
                 <div class='mx-5'> </div>
               <?php }else{
                 $occupied = false;
@@ -97,7 +89,7 @@ if($msjerror){
 
       </div>
 
-<?php if(!$error){ ?>
+<?php if($error){ ?>
       <div class='flex text-center flex-col my-5 justify-center'>
       <p class='text-xs font-bold text-center text-red-500'>* Debes seleccionar al menos un asiento *</p>
         <p class='text-xs italic text-center text-red-500'>Seleccione al menos uno y vuelva a intentarlo.</p>
