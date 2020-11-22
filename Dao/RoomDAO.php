@@ -105,6 +105,24 @@ class roomDAO implements IRoom{
         return $validate;
     }
 
+    public function searchRoomsbyIdCinema($id_Cinema){
+        $query = "SELECT *  FROM ".$this->tableName." WHERE (id_cinema = :id_cinema)";
+        $newRoom = null;
+        $arrayRoom= array();
+        $parameters["id_cinema"] =  $id_Cinema;
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+                 $newRoom = new Room($newArray['capacity'],$newArray['id_cinema'],$newArray['name'],$newArray['capacity']);
+                $newRoom->setId($newArray['idrooms']);
+                array_push($arrayRoom,$newRoom);
+            }
+        }
+        return $arrayRoom;
+    }
+
+
 	public function search($id){ ///busca un elemento dentro de la lista y retorna el objeto encontrado o null
 
 		$query = "SELECT *  FROM ".$this->tableName." WHERE (idrooms = :idrooms)";
