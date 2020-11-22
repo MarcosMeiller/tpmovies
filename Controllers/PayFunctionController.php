@@ -215,10 +215,7 @@ class PayFunctionController
 
         $price = $room->getPrice();
 
-        $pdf = $this->ticketPDF($price);
-
-        //var_dump($pdf);
-        //die;
+        $pdf = $this->ticketPDF($seats,$room,$function);
 
         try {
             //Server settings
@@ -243,6 +240,7 @@ class PayFunctionController
 
             // Attachments ENVIOS ARCHIVOS
             //$mail->addAttachment('/var/tmp/file.tar.gz');         // Add attachments
+            
             $mail->addStringAttachment($pdf, 'ComprobanteTPMOVIES.pdf', 'base64', 'application/pdf');    // Optional name
 
             //$separado_por_comas = implode(",", $seats);
@@ -269,84 +267,79 @@ class PayFunctionController
         }
     }
 
-    public function ticketPDF($price){
+    public function ticketPDF($seats,$room,$function){
         $hoy = date('Y-m-d');
+        $price = $room->getPrice();
+        $theroom = $room->getName();
+        $cantSeats = count($seats);
+        $total = $price * $cantSeats;
+        $seatsSeparados = implode(",", $seats);
+
         define('EURO',chr(128));
         ob_start();
         $pdf = new FPDF('P','mm',array(80,150));   
         $pdf->AliasNbPages();
         $pdf->AddPage();
 
-        /*$pdf->Image('Views/img/qrcode.jpeg',10,8,33);
-        // Arial bold 15
-        $pdf->SetFont('Arial','B',15);
-        // Movernos a la derecha
-        $pdf->Cell(80);
-        // Título
-        $pdf->Cell(30,10,'TPMOVIES',1,0,'C');
-        // Salto de línea
-        $pdf->Ln(20);*/
-
         // CABECERA
         $pdf->SetFont('Helvetica','',12);
         $pdf->Cell(60,4,'TPMovies',0,1,'C');
         
+        $pdf->Ln(2);
         $pdf->SetFont('Helvetica','',8);
         $pdf->Cell(60,4,'Comprobante de Entrada Moviepass',0,1,'C');
-        $pdf->Cell(60,4,'Gracias por su compra',0,1,'C');
+        $pdf->Cell(60,4,'TODO ESTO ES DE MENTIRA, PURA FICCION xD',0,1,'C');
+        
         
         $pdf->Ln(5);
-        $pdf->Cell(60,4,'Factura Simpl.: F2019-000001',0,1,'');
+        $pdf->Cell(60,4,'Factura Simpl.: xxx-xxxx-000',0,1,'');
         $pdf->Cell(60,4,'Fecha: '.$hoy,0,1,'');
         $pdf->Cell(60,4,'Metodo de pago: Tarjeta',0,1,'');
+
         
-        // COLUMNAS
+        // DETALLE FUNCION
+        $pdf->Ln(5);
         $pdf->SetFont('Helvetica', 'B', 7);
-        $pdf->Cell(30, 10, 'Entrada', 0);
-        $pdf->Cell(5, 10, 'Cant',0,0,'R');
-        $pdf->Cell(10, 10, 'Precio',0,0,'R');
-        $pdf->Ln(8);
+        $pdf->Cell(60,4,'Datos de la funcion',0,1,'');
+        $pdf->Ln(2);
         $pdf->Cell(60,0,'','T');
-        $pdf->Ln(0);
-        
-        // PRODUCTOS
+        $pdf->Ln(2);
+
         $pdf->SetFont('Helvetica', '', 7);
-        $pdf->MultiCell(30,4,'Manzana golden 1Kg',0,'L'); 
-        $pdf->Cell(35, -5, '2',0,0,'R');
-        $pdf->Cell(10, -5, number_format(round(3,2), 2, ',', ' ').EURO,0,0,'R');
-        $pdf->Cell(15, -5, number_format(round(2*3,2), 2, ',', ' ').EURO,0,0,'R');
+        $pdf->Cell(60,4,'SALA: '.$theroom,0,1,'');
+        $pdf->Cell(60,4,'BUTACAS: '.$seatsSeparados,0,1,'');
+        $pdf->Cell(60,4,'FECHA: '.$function->getDate(),0,1,'');
+        $pdf->Cell(60,4,'HORA: '.$function->getHour(),0,1,'');
+
+      
+        // TOTAL
         $pdf->Ln(3);
-        $pdf->MultiCell(30,4,'Uvas',0,'L'); 
-        $pdf->Cell(35, -5, '5',0,0,'R');
-        $pdf->Cell(10, -5, number_format(round(1,2), 2, ',', ' ').EURO,0,0,'R');
-        $pdf->Cell(15, -5, number_format(round(1*5,2), 2, ',', ' ').EURO,0,0,'R');
-        $pdf->Ln(3);
-        
-        // SUMATORIO DE LOS PRODUCTOS Y EL IVA
-        $pdf->Ln(6);
         $pdf->Cell(60,0,'','T');
         $pdf->Ln(2);    
-        $pdf->Cell(25, 10, 'TOTAL SIN I.V.A.', 0);    
+        $pdf->Cell(25, 10, 'Precio por entrada', 0);    
         $pdf->Cell(20, 10, '', 0);
-        $pdf->Cell(15, 10, number_format(round((round(12.25,2)/1.21),2), 2, ',', ' ').EURO,0,0,'R');
+        $pdf->Cell(15, 10, '$'.$room->getPrice(),0,0,'R');
         $pdf->Ln(3);    
   
-        $pdf->Cell(25, 10, 'TOTAL', 0);    
+        $pdf->Cell(25, 10, 'Total pagado por '.$cantSeats.' entrada/s', 0);    
         $pdf->Cell(20, 10, '', 0);
-        $pdf->Cell(15, 10, number_format(round(12.25,2), 2, ',', ' ').EURO,0,0,'R');
+        $pdf->Cell(15, 10, '$'.$total ,0,0,'R');
         
         // PIE DE PAGINA
 
         $pdf->Ln(10);
         $pdf->Cell(60,0,'ESTE QR DEBERA PRESENTAR EN EL CINE',0,1,'C');
-        $pdf->Ln(10);
-        $pdf->Image('Views/img/qrcode.jpeg',20,90,35);
+        $pdf->Ln(15);
+        $pdf->Image('Views/img/qrcode.jpeg',25,90,33);
+        $pdf->Ln(22);
+        $pdf->Cell(60,4,'Gracias por su compra',0,1,'C');
         
         ob_end_clean();
         $thepdf = $pdf->Output('S');
 
         return $thepdf;
     }
+
 
 }
 

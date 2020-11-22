@@ -24,7 +24,7 @@
                 <i class="fas fa-balance-scale mr-3"></i>
                 <p class='text-xs'>Balance</p>
             </a>
-            <a href="<?php echo FRONT_ROOT ?>Function/Functions" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
+            <a href="<?php echo FRONT_ROOT ?>Function/Gain" class="flex items-center text-white opacity-75 hover:opacity-100 py-4 pl-6 nav-item hover:bg-blue-900">
                 <i class="fas fa-hand-holding-usd mr-3"></i>
                 <p class='text-xs'>Ganancias</p>
             </a>
