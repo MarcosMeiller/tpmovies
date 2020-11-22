@@ -105,10 +105,23 @@ class TicketDAO{
         }
 
     }
+
+    public function getAllTicketxMovie(){
+        $query = "SELECT * FROM ticketxmovie";
+
+        $this->connection = Connection::GetInstance();
+
+        $result = $this->connection->Execute($query);
+
+         
+
+        return $result;
+    }
+
     public function getAllTicketForShow($id_Function){
         $query = "SELECT *  FROM ".$this->tableName." WHERE (id_function = :id_function)";
         $newUser = null;
-        $array = array();
+        $arrayTickets = array();
         $parameters["id_function"] =  $id_Function;
 
         $this->connection = Connection::GetInstance();
@@ -117,15 +130,15 @@ class TicketDAO{
             if($newArray !== null){ 
                 $ticket = new Ticket($newArray["id_function"],$newArray["id_user"],$newArray['seat']);
                 $ticket->setId_Ticket($newArray['idtickets']);
-                array_push($array,$ticket);
+                array_push($arrayTickets,$ticket);
             // id user  CHAR
             }
         }
-        return $array;
+        return $arrayTickets;
     }
 
     public function getAllInPesos(){
-        $query = "SELECT idtickets, id_movie, id_cinema,price,date FROM ticketxmovies";
+        $query = "SELECT * FROM ticketxmovie";
 
         $this->connection = Connection::GetInstance();
 
@@ -140,7 +153,7 @@ class TicketDAO{
     }
 
     public function getAllInPesosForMovie($idmovie){
-        $query = "SELECT * FROM ticketxmovies WHERE (id_movie = :id_movie)";
+        $query = "SELECT * FROM ticketxmovie WHERE (id_movie = :id_movie)";
 
         $this->connection = Connection::GetInstance();
         $parameters['id_movie'] = $idmovie;
@@ -155,7 +168,7 @@ class TicketDAO{
     }
 
     public function getAllInPesosForCinema($id_cinema){
-        $query = "SELECT * FROM ticketxmovies WHERE (id_cinema = :id_cinema)";
+        $query = "SELECT * FROM ticketxmovie WHERE (id_cinema = :id_cinema)";
 
         $this->connection = Connection::GetInstance();
         $parameters['id_cinema'] = $id_cinema;
@@ -170,7 +183,7 @@ class TicketDAO{
     }
 
     public function getAllInPesosForCinemaOrMovie($id_movie, $id_cinema){
-        $query = "SELECT * FROM ticketxmovies WHERE (id_cinema = :id_cinema) AND (id_movie = :id_movie)";
+        $query = "SELECT * FROM ticketxmovie WHERE (id_cinema = :id_cinema) AND (id_movie = :id_movie)";
 
         $this->connection = Connection::GetInstance();
         $parameters['id_cinema'] = $id_cinema;
@@ -186,7 +199,7 @@ class TicketDAO{
     }
 
     public function getAllInPesosForDates($date1, $date2){//mandar las fechas con tipo datetime();
-        $query = "SELECT * FROM ticketxmovies WHERE (date >= :date1) AND (date <= :date2)";
+        $query = "SELECT * FROM ticketxmovie WHERE (date >= :date1) AND (date <= :date2)";
 
         $this->connection = Connection::GetInstance();
         $parameters['date1'] = $date1;

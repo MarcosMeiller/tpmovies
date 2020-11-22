@@ -243,21 +243,71 @@ class FunctionController{
         $functionsList = $this->dao->getAll();
         $ticketsList = $this->daoT->getAll();
         $roomList = $this->daoR->getAll();
+        $cinemaList = $this->daoC->getAll();
+        $movieList = $this->daoM->getAll(0);
         $i = 0;
         $quantity = 0;
-        foreach($functionsList as $function){ 
-        $quantity = $this->daoT->getAllTicketForShow($function->getId());
-        $quantity = count($quantity);
-            if($quantity > 0)
-            { 
-            $VentasxRoom = [];
-            $NovendidasxRoom = [];
-            $VentasxRoom[$i] = $quantity;
-            $room = $this->daoR->Search($function->getId_Room());
-            $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+        $VentasxRoom = [];
+        $NovendidasxRoom = [];
+        /*foreach($functionsList as $function){ x sala.
+            $quantity = $this->daoT->getAllTicketForShow($function->getId());
+            $quantity = count($quantity);
+                if($quantity > 0){ 
+                    $VentasxRoom[$i] = $quantity;
+                    $room = $this->daoR->Search($function->getId_Room());
+                    $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+                    $i ++;
+                }   
+        }*/
+        foreach($cinemaList as $cinema){ //hecho x cine.
+            $roomList = $this->daoR->searchRoomsbyIdCinema($cinema->getId());
+            foreach($roomList as $room){ 
+                foreach($functionsList as $function){
+                    if($room->getId() == $function->getId_Room()){ 
+                        $quantity = $this->daoT->getAllTicketForShow($function->getId());
+                        $quantity = count($quantity);
+                        if($quantity > 0){ 
+                            if($VentasxRoom[$i]){ 
+                                $VentasxRoom[$i] += $quantity;
+                            }
+                            else{
+                                $VentasxRoom[$i] = $quantity;
+                            }
+                            $room = $this->daoR->Search($function->getId_Room());
+                            if($NovendidasxRoom){
+                                $NovendidasxRoom[$i] += $room->getCapacity() - $VentasxRoom[$i];
+                            }
+                            else{
+                                $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+                            }
+                            
+                        }
+                    }   
+                }
+            }
+            
             $i ++;
-            }   
         }
+        /*foreach($movieList as $movie){ 
+        foreach($functionsList as $function){
+            if($movie->getId() == $function->getId_Movie()){
+                foreach($roomList as $room){
+                    $quantity = $this->daoT->getAllTicketForShow($function->getId());
+                    $quantity = count($quantity);
+                        if($quantity > 0 && $function->getId_Room() == $room->getId()){ 
+                            $VentasxRoom[$i] = $quantity;
+                            $room = $this->daoR->Search($function->getId_Room());
+                            $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+                            $i ++;
+                        }   
+
+
+                 }
+            }
+
+        }
+    }*/
+
         var_dump($NovendidasxRoom);
         var_dump($VentasxRoom);
 
