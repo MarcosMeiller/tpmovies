@@ -42,7 +42,7 @@ function noticket() {
             <p class="text-left pt-3 pb-2 text-white uppercase font-bold"><?php echo $cinema->getName(); ?></p> <!-- Nombre del cine -->
         </div>
         <div class='flex flex-col mx-2 md:mx-10 items-center'>
-          <table class="w-4/5 flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
+          <table class="w-full md:w-4/5 flex flex-row flex-no-wrap sm:bg-white rounded-lg overflow-hidden sm:shadow-lg my-5">
             <thead class="text-white">
               <tr class="bg-blue-900 flex flex-col flex-no wrap sm:table-row rounded-l-lg sm:rounded-none mb-2 sm:mb-0">
                 <th class="p-3 text-left">Fecha</th>

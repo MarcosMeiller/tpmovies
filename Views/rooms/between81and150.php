@@ -1,25 +1,13 @@
 <?php namespace rooms; 
 
-/*
-if($ticketsList){
-  foreach($ticketsList as $ticket){
-    if($ticket->getid_Function() == $function->getId()){
-      var_dump($ticket->getSeat());
-  }
-  }
-}
-*/
 $error = false;
 
-if(isset($_SESSION['err'])){
-  $error = true;
+if(isset($_SESSION['cantseats'])){
+  if($_SESSION['cantseats'] == 0){
+    $error = true;
+  }
 }
 
-/*
-if($msjerror){
-  $error = true;
-}
-*/
 
 ?>
 

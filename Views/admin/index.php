@@ -111,6 +111,8 @@
             <p> - Administrar Cines</p>
             <p> - Administrar Salas</p>
             <p> - Administrar Funciones</p>
+            <p> - Balance: Ventas y remanentes </p>
+            <p> - Ganancias: Totales ventas en pesos</p>
             </div>
 
         </div>

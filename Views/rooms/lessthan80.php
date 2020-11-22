@@ -2,8 +2,10 @@
 
 $error = false;
 
-if(isset($_SESSION['err'])){
-  $error = true;
+if(isset($_SESSION['cantseats'])){
+  if($_SESSION['cantseats'] == 0){
+    $error = true;
+  }
 }
 
 ?>
@@ -78,7 +80,7 @@ if(isset($_SESSION['err'])){
       </div>
 
 
-    <?php if(!$error){ ?>
+    <?php if($error){ ?>
       <div class='flex text-center flex-col my-5 justify-center'>
       <p class='text-xs font-bold text-center text-red-500'>* Debes seleccionar al menos un asiento *</p>
         <p class='text-xs italic text-center text-red-500'>Seleccione al menos uno y vuelva a intentarlo.</p>
