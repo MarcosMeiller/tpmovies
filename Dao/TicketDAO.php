@@ -33,6 +33,16 @@ class TicketDAO{
         
     }
 
+    public function obtainLastId(){
+      $query = " select *
+      from ".$this->tableName." order by idtickets desc
+      limit 1;";
+      $this->connection = Connection::GetInstance();
+
+      $result = $this->connection->Execute($query);
+      return $result[0]["idtickets"];
+    }
+
 	public function getAll(){
 
             $query = "SELECT idtickets, id_function, id_user, seat FROM ".$this->tableName;
@@ -59,7 +69,6 @@ class TicketDAO{
         $newUser = null;
         $parameters["id_user"] =  $id_User;
         $parameters["id_function"] =  $id_Function;
-
         $this->connection = Connection::GetInstance();
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
@@ -75,16 +84,15 @@ class TicketDAO{
 		
     }
     
-    public function addTicketXmovie($idticket,$idmovie,$idcinema,$date,$price){
-        $query = "INSERT INTO ticketxmovie (idtickets, id_movie, id_cinema,price,date )VALUES(:idtickets,:id_movie,:id_cinema,:price,:date) ";
-
-        $parameters['idtickets'] = $idticket;
+    public function addTicketXmovie($idticket,$idmovie,$idcinema,$date,$price,$idfunction){
+        $query = "INSERT INTO ticketxmovie (id_tickets,id_function,id_movie, id_cinema,price,date) VALUES (:id_tickets,:id_function,:id_movie,:id_cinema,:price,:date)";
+        $parameters['id_function'] = $idfunction;
+        $parameters['id_tickets'] = $idticket;
         $parameters['id_movie'] = $idmovie;
         $parameters['id_cinema'] = $idcinema;
         $parameters['price'] = $price;
-        $parameters['$date'] = $date;
-   
-         
+        $parameters['date'] = $date;
+        
 
         try{
             

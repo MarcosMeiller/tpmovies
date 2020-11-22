@@ -127,16 +127,27 @@ class PayFunctionController
                 $val1 = $this->validate_Date_CreditCard($dateexp);
                 $val2 = $this->validate_number_lenght($card,16);
                 $val3 = $this->validate_number_lenght($code,3);
-
+                       //$idticket,$idmovie,$idcinema,$date,$price
+           
                 if($val1 && $val2 && $val3){
-                                    
+                    $function = $this->daoF->searchFunction($_SESSION['idFunction']);
+                    $idmovie = $function->getId_Movie();
+                    $room = $this->daoR->search($function->getId_Room());
+                    $price = $room->getPrice();
+                    $idcinema = $room->getId_Cinema();
+                    $date = date('Y-m-d');
+                    $idticket = 0;                
                     $idUser = $_SESSION['loggedUser'];
                     $creditCard = new CreditCard($idUser->getId(),$card,$dateexp,$code,$name);
                     $seats = $_SESSION['seats'];
                     foreach($seats as $seat){
                         $ticket = new Ticket($_SESSION['idFunction'],$idUser->getId(),$seat);
-                        //$this->daoT->add($ticket);
+                        $this->daoT->add($ticket);
+                        $idticket = $this->daoT->obtainLastId();
+                        $this->daoT->addTicketXmovie($idticket,$idmovie,$idcinema,$date,$price,$_SESSION['idFunction']);
+                        
                     }
+                    
                     //$this->daoC->add($creditCard);
                     $idFunction = $_SESSION['idFunction'];
                     $function = $this->daoF->searchFunction($idFunction);
