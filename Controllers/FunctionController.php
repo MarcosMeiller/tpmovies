@@ -314,6 +314,19 @@ class FunctionController{
         require_once(VIEWS_PATH_ADMIN."/balance.php");
     }
 
+    public function Gain(){
+        $user = $_SESSION['loggedUser'];
+        $id = $user->getId();
+        $adminmovies = $this->daoM->getMoviexAdmin($id);
+        foreach($adminmovies as $admin){
+            $movieList[] = $this->daoM->searchMovieIdApi($admin['id_movie']);
+        }
+        $adminmovies = $movieList;
+
+        $cinemasList = $this->daoC->getAll();
+        require_once(VIEWS_PATH_ADMIN.'/gain.php');
+    }
+
 }
 
 
