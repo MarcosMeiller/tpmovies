@@ -244,6 +244,27 @@ class FunctionController{
     }
 
     public function Balance(){
+        $functionsList = $this->dao->getAll();
+        $ticketsList = $this->daoT->getAll();
+        $roomList = $this->daoR->getAll();
+        $i = 0;
+        $quantity = 0;
+        foreach($functionsList as $function){ 
+        $quantity = $this->daoT->getAllTicketForShow($function->getId());
+        $quantity = count($quantity);
+            if($quantity > 0)
+            { 
+            $VentasxRoom = [];
+            $NovendidasxRoom = [];
+            $VentasxRoom[$i] = $quantity;
+            $room = $this->daoR->Search($function->getId_Room());
+            $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+            $i ++;
+            }   
+        }
+        var_dump($NovendidasxRoom);
+        var_dump($VentasxRoom);
+
         require_once(VIEWS_PATH_ADMIN."/balance.php");
     }
 

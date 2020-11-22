@@ -24,8 +24,10 @@ class RoomController
             $name = $this->test_input($name);
             $price = $this->controlValue($price);
             $capacity = $this->controlValue($capacity);
-
-
+            if($capacity < 50 || $capacity > 300 && $capacity){
+                $capacity = null;
+            }
+            
 
             if($name && $price && $capacity && $id_Cinema != ''){ 
                 $room = $this->dao->searchNameAndIdCinema($id_Cinema,$name);
@@ -35,7 +37,7 @@ class RoomController
                 }
                
                 if($capacity == null || $price == null ){
-                    $this->Rooms("Numero negativo ingresado","alert");
+                    $this->Rooms("Numero negativo ingresado o capacidad imposible para un cine","alert");
                 }
                 if($room !== true){ //despues ver porque me agrega igual si saco este if y no anda el de arriba.
                 try{

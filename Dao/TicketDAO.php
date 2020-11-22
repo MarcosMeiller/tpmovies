@@ -107,7 +107,7 @@ class TicketDAO{
         $array = $this->connection->Execute($query, $parameters);
         foreach($array as $newArray){
             if($newArray !== null){ 
-                $ticket = new Ticket($newArray["id_Function"],$newArray["id_User"],$newArray['seat']);
+                $ticket = new Ticket($newArray["id_function"],$newArray["id_user"],$newArray['seat']);
                 $ticket->setId_Ticket($newArray['idtickets']);
                 array_push($array,$ticket);
             // id user  CHAR
@@ -192,12 +192,31 @@ class TicketDAO{
 
     return $total;
     }
+    
+    public function SearchFunctionIfTicket($id_Function){
+        $query = "SELECT * FROM ".$this->tableName."WHERE (id_function = :id_function)";
+        $quantity = 0;
+        $this->connection = Connection::GetInstance();
+        $parameters['id_function'] = $id_Function;
+        $result = $this->connection->Execute($query,$parameters);
+        $total = 0;
+        if($result){
+            $quantity = count($result);     
+        }
+
+        return  $quantity;
+    }
+
+   
+
+
+}
 
     
 
 	
   
-}
+
 
 
 ?>
