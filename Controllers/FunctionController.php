@@ -324,6 +324,60 @@ class FunctionController{
         $adminmovies = $movieList;
 
         $cinemasList = $this->daoC->getAll();
+
+        $_SESSION['idCinema-Gain'] = 0;
+        $_SESSION['idMovie-Gain'] = 0;
+        $_SESSION['date1'] = '';
+        $_SESSION['date2'] = '';
+
+        $totalpesos = $this->daoT->getAllInPesos();
+        require_once(VIEWS_PATH_ADMIN.'/gain.php');
+    }
+
+    public function GainFilter(){
+
+        if(isset($_GET['idmovie'])){
+            $idmovie =$_GET['idmovie']; 
+            $_SESSION['idMovie-Gain'] = $idmovie;
+            $_SESSION['idCinema-Gain'] = 0;
+            $_SESSION['date1'] = '';
+            $_SESSION['date2'] = '';
+
+            $totalpesos = $this->daoT->getAllInPesosForMovie($idmovie);
+            
+        };
+
+        if(isset($_GET['idcinema'])){
+            $idcinema = $_GET['idcinema'];
+            $_SESSION['idCinema-Gain'] = $idcinema;
+            $_SESSION['idMovie-Gain'] = 0;
+            $_SESSION['date1'] = '';
+            $_SESSION['date2'] = '';
+            $totalpesos = $this->daoT->getAllInPesosForCinema($idcinema);
+        };
+
+        if(isset($_GET['date1'])){
+            $date1 = $_GET['date1'];
+            $date2 = $_GET['date2'];
+            $_SESSION['date1'] = $date1;
+            $_SESSION['date2'] = $date2;
+            $_SESSION['idCinema-Gain'] = 0;
+            $_SESSION['idMovie-Gain'] = 0;
+
+            $totalpesos = $this->daoT->getAllInPesosForDates($date1,$date2);
+
+        }
+        
+        $user = $_SESSION['loggedUser'];
+        $id = $user->getId();
+        $adminmovies = $this->daoM->getMoviexAdmin($id);
+        foreach($adminmovies as $admin){
+            $movieList[] = $this->daoM->searchMovieIdApi($admin['id_movie']);
+        }
+        $adminmovies = $movieList;
+
+        $cinemasList = $this->daoC->getAll();
+
         require_once(VIEWS_PATH_ADMIN.'/gain.php');
     }
 
