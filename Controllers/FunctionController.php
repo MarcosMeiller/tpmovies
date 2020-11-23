@@ -11,6 +11,7 @@ Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
 Use Dao\CinemaDAO as cinemaDAO;
 use Models\Cinema as Cinema;
 use Dao\TicketDAO as ticketDAO;
+use Models\Ticket as Ticket;
 use Exception;
 use DateTime;
 
@@ -247,8 +248,11 @@ class FunctionController{
         $movieList = $this->daoM->getAll(0);
         $i = 0;
         $quantity = 0;
-        $VentasxRoom = [];
-        $NovendidasxRoom = [];
+        $VentasxRoom = array();
+        $NovendidasxRoom = array();
+
+        //$VentasxRoom[1] = 1;
+        //$NovendidasxRoom[1] = 1;
         /*foreach($functionsList as $function){ x sala.
             $quantity = $this->daoT->getAllTicketForShow($function->getId());
             $quantity = count($quantity);
@@ -260,18 +264,19 @@ class FunctionController{
                 }   
         }*/
         foreach($cinemaList as $cinema){ //hecho x cine.
+            $VentasxRoom[$i] = 0;
             $roomList = $this->daoR->searchRoomsbyIdCinema($cinema->getId());
             foreach($roomList as $room){ 
                 foreach($functionsList as $function){
                     if($room->getId() == $function->getId_Room()){ 
                         $quantity = $this->daoT->getAllTicketForShow($function->getId());
-                        $quantity = count($quantity);
-                        if($quantity > 0){ 
+                        $total = count($quantity);
+                        if($total > 0){ 
                             if($VentasxRoom[$i]){ 
-                                $VentasxRoom[$i] += $quantity;
+                                $VentasxRoom[$i] += $total;
                             }
                             else{
-                                $VentasxRoom[$i] = $quantity;
+                                $VentasxRoom[$i] = $total;
                             }
                             $room = $this->daoR->Search($function->getId_Room());
                             if($NovendidasxRoom){
