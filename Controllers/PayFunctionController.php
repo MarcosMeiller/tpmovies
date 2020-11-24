@@ -3,12 +3,12 @@
 
 //Use Models\Room as Room;
 Use Dao\RoomDAO as RoomDao;
-//Use Models\Movie as Movie;
-//Use Dao\MovieDAO as movieDAO;
+Use Models\Movie as Movie;
+Use Dao\MovieDAO as MovieDAO;
 //use Models\FunctionCinema as FunctionCinema;
 Use Dao\FunctionCinemaDAO as FunctionCinemaDAO;
-//Use Dao\CinemaDAO as cinemaDAO;
-//use Models\Cinema as Cinema;
+Use Dao\CinemaDAO as CinemaDAO;
+use Models\Cinema as Cinema;
 Use Models\CreditCard as CreditCard;
 use Dao\TicketDAO as ticketDAO;
 use Dao\CreditCardDAO as CreditCardDAO;
@@ -30,6 +30,8 @@ class PayFunctionController
     private $daoR;
     private $daoT;
     private $daoC;
+    private $daoM;
+    private $daoCi;
     //private $pdf;
   
 
@@ -38,6 +40,8 @@ class PayFunctionController
         $this->daoR = new RoomDao();
         $this->daoT = new ticketDAO();
         $this->daoC = new CreditCardDAO(); 
+        $this->daoM = new MovieDAO();
+        $this->daoCi = new CinemaDAO();
         //$this->pdf = new FPDF('P','mm',array(80,150));
 
     }
@@ -148,7 +152,7 @@ class PayFunctionController
                         
                     }
                     
-                    //$this->daoC->add($creditCard);
+                    $this->daoC->add($creditCard);
                     $idFunction = $_SESSION['idFunction'];
                     $function = $this->daoF->searchFunction($idFunction);
                     $idRoom = $_SESSION['idRoom'];
@@ -214,8 +218,10 @@ class PayFunctionController
         $mail = new PHPMailer(true);
 
         $price = $room->getPrice();
+        $movie = $this->daoM->searchIdBdd($function->getId_Movie());
+        $cinema = $this->daoCi->searchInBdd($room->getId_Cinema());
 
-        $pdf = $this->ticketPDF($seats,$room,$function);
+        $pdf = $this->ticketPDF($seats,$room,$function,$movie,$cinema);
 
         try {
             //Server settings
@@ -267,7 +273,7 @@ class PayFunctionController
         }
     }
 
-    public function ticketPDF($seats,$room,$function){
+    public function ticketPDF($seats,$room,$function,$movie,$cinema){
         $hoy = date('Y-m-d');
         $price = $room->getPrice();
         $theroom = $room->getName();
@@ -306,6 +312,8 @@ class PayFunctionController
         $pdf->Ln(2);
 
         $pdf->SetFont('Helvetica', '', 7);
+        $pdf->Cell(60,4,'CINE: '.$cinema->getName(),0,1,'');
+        $pdf->Cell(60,4,'PELICULA: '.$movie->getTitle(),0,1,'');
         $pdf->Cell(60,4,'SALA: '.$theroom,0,1,'');
         $pdf->Cell(60,4,'BUTACAS: '.$seatsSeparados,0,1,'');
         $pdf->Cell(60,4,'FECHA: '.$function->getDate(),0,1,'');
@@ -330,8 +338,8 @@ class PayFunctionController
         $pdf->Ln(10);
         $pdf->Cell(60,0,'ESTE QR DEBERA PRESENTAR EN EL CINE',0,1,'C');
         $pdf->Ln(15);
-        $pdf->Image('Views/img/qrcode.jpeg',25,90,33);
-        $pdf->Ln(22);
+        $pdf->Image('Views/img/qrcode.jpeg',28,100,25);
+        $pdf->Ln(14);
         $pdf->Cell(60,4,'Gracias por su compra',0,1,'C');
         
         ob_end_clean();

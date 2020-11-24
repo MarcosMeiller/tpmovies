@@ -114,7 +114,32 @@
             </form>
         </div>
 
-        </div>
+    </div>
+
+    <div class='flex flex-row justify-center mt-5'>
+
+     <!--<div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+            <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="id_movie">
+                Turno
+            </label>
+            <form action='<?php echo FRONT_ROOT ?>Function/BalanceTurn' method='GET'>           
+            <div class='flex'> 
+                <select required id="turn" name='turn' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
+                    <option value=''>Seleccione un turno</option>
+                    <option value="M">Mañana</option>
+                    <option value="T">Tarde</option>
+                    <option value="N">Noche</option>
+                </select>  
+
+                <button class="ml-2 text-blue-700 font-semibold px-3 border bg-blue-700  rounded-lg flex items-center justify-center" type="submit">
+                    <p class="text-sm text-white ">Filtrar</p>
+                </button>
+            </div>
+            </form>
+        </div>-->
+
+    </div>
+   
             <?php if($show){ ?>
                 <div class="flex flex-wrap mt-6 justify-center">
                     <div class="w-full lg:w-1/2 pr-0 lg:pr-2 ">
