@@ -251,6 +251,21 @@ class FunctionController{
         $VentasxRoom = array();
         $NovendidasxRoom = array();
 
+        $_SESSION['idMovie-Balance'] = 0;
+        $_SESSION['idCinema-Balance'] = 0;
+
+
+        $movielistid = array();
+        foreach($functionsList as $function){
+            $movielistid[] = $function->getId_Movie();
+        }
+
+        $movielistid = array_unique($movielistid);
+
+        foreach($movielistid as $id){
+            $movielist[] = $this->daoM->searchIdBdd($id);
+        }
+
         //$VentasxRoom[1] = 1;
         //$NovendidasxRoom[1] = 1;
         /*foreach($functionsList as $function){ x sala.
@@ -263,8 +278,100 @@ class FunctionController{
                     $i ++;
                 }   
         }*/
-        foreach($cinemaList as $cinema){ //hecho x cine.
-            $VentasxRoom[$i] = 0;
+        
+        require_once(VIEWS_PATH_ADMIN."/balance.php");
+    }
+
+    public function BalanceMovies(){
+
+        $functionsList = $this->dao->getAll();
+        $ticketsList = $this->daoT->getAll();
+        $roomList = $this->daoR->getAll();
+        $cinemaList = $this->daoC->getAll();
+        $movieList = $this->daoM->getAll(0);
+        $i = 0;
+        $quantity = 0;
+        $VentasxRoom = array();
+        $NovendidasxRoom = array();
+
+        $idmovie =$_GET['idmovie']; 
+        $_SESSION['idMovie-Balance'] = $idmovie;
+        $_SESSION['idCinema-Balance'] = 0;
+
+        $movielistid = array();
+        foreach($functionsList as $function){
+            $movielistid[] = $function->getId_Movie();
+        }
+
+        $movielistid = array_unique($movielistid);
+
+        foreach($movielistid as $id){
+            $movielist[] = $this->daoM->searchIdBdd($id);
+        }
+
+        $movie = $this->daoM->searchIdBdd($idmovie);
+        
+        $VentasxRoom['nombre'][$i] = 0;
+        $VentasxRoom['cantidad'][$i] = 0;
+        $NovendidasxRoom[$i] =0;
+        foreach($functionsList as $function){
+            if($movie->getId() == $function->getId_Movie()){
+                foreach($roomList as $room){
+                    $quantity = $this->daoT->getAllTicketForShow($function->getId());
+                    $quantity = count($quantity);
+
+                        if($quantity > 0 && $function->getId_Room() == $room->getId()){ 
+                            $VentasxRoom['nombre'][$i] = $movie->getTitle();
+                            $VentasxRoom['cantidad'][$i] = $quantity;
+                            $room = $this->daoR->Search($function->getId_Room());
+                            $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom['cantidad'][$i];
+                            $i ++;
+                        }   
+                }
+            }
+        }    
+        require_once(VIEWS_PATH_ADMIN."/balance.php");
+    }
+
+
+    public function BalanceCinemas(){
+
+        $functionsList = $this->dao->getAll();
+        $ticketsList = $this->daoT->getAll();
+        $roomList = $this->daoR->getAll();
+        $cinemaList = $this->daoC->getAll();
+        $movieList = $this->daoM->getAll(0);
+        $i = 0;
+        $quantity = 0;
+        $VentasxRoom = array();
+        $NovendidasxRoom = array();
+
+
+        $idcinema =$_GET['idcinema']; 
+        $_SESSION['idCinema-Balance'] = $idcinema;
+        $_SESSION['idMovie-Balance'] = 0;
+
+
+        $movielistid = array();
+        foreach($functionsList as $function){
+            $movielistid[] = $function->getId_Movie();
+        }
+
+        $movielistid = array_unique($movielistid);
+
+        foreach($movielistid as $id){
+            $movielist[] = $this->daoM->searchIdBdd($id);
+        }
+
+        $cinema = $this->daoC->searchInBdd($idcinema);
+
+        $i=0;
+        $total = 0;
+
+        $VentasxRoom['nombre'][$i] = 0;
+        $VentasxRoom['cantidad'][$i] = 0;
+        $NovendidasxRoom[$i] =0;
+
             $roomList = $this->daoR->searchRoomsbyIdCinema($cinema->getId());
             foreach($roomList as $room){ 
                 foreach($functionsList as $function){
@@ -273,48 +380,25 @@ class FunctionController{
                         $total = count($quantity);
                         if($total > 0){ 
                             if($VentasxRoom[$i]){ 
-                                $VentasxRoom[$i] += $total;
+                                $VentasxRoom['nombre'][$i] = $cinema->getName();
+                                $VentasxRoom['cantidad'][$i] += $total;
                             }
                             else{
-                                $VentasxRoom[$i] = $total;
+                                $VentasxRoom['nombre'][$i] = $cinema->getName();
+                                $VentasxRoom['cantidad'][$i] = $total;
                             }
                             $room = $this->daoR->Search($function->getId_Room());
                             if($NovendidasxRoom){
-                                $NovendidasxRoom[$i] += $room->getCapacity() - $VentasxRoom[$i];
+                                $NovendidasxRoom[$i] += $room->getCapacity() - $VentasxRoom['cantidad'][$i];
                             }
                             else{
-                                $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
+                                $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom['cantidad'][$i];
                             }
                             
                         }
                     }   
                 }
             }
-            
-            $i ++;
-        }
-        /*foreach($movieList as $movie){ 
-        foreach($functionsList as $function){
-            if($movie->getId() == $function->getId_Movie()){
-                foreach($roomList as $room){
-                    $quantity = $this->daoT->getAllTicketForShow($function->getId());
-                    $quantity = count($quantity);
-                        if($quantity > 0 && $function->getId_Room() == $room->getId()){ 
-                            $VentasxRoom[$i] = $quantity;
-                            $room = $this->daoR->Search($function->getId_Room());
-                            $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom[$i];
-                            $i ++;
-                        }   
-
-
-                 }
-            }
-
-        }
-    }*/
-
-        var_dump($NovendidasxRoom);
-        var_dump($VentasxRoom);
 
         require_once(VIEWS_PATH_ADMIN."/balance.php");
     }

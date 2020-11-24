@@ -90,6 +90,25 @@ class cinemaDAO implements ICinema{
 	}
 
 
+	public function searchInBdd($id){ 
+		
+		$query = "SELECT *  FROM ".$this->tableName." WHERE (idcinemas = :idcinemas)";
+        $newCinema = null;
+        $parameters["idcinemas"] =  $id;
+
+        $this->connection = Connection::GetInstance();
+        $array = $this->connection->Execute($query, $parameters);
+        foreach($array as $newArray){
+            if($newArray !== null){ 
+            $newCinema = new Cinema($newArray['name'],$newArray['address']);
+            $newCinema->setId($newArray['idcinemas']);
+            }
+        }
+        return $newCinema;
+
+		
+		}
+
 
 }
 
