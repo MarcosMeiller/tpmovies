@@ -18,8 +18,6 @@
       }
     </script>";
 
-    echo $user;
-
 ?>
 
 
