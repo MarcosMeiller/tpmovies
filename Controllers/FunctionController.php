@@ -379,7 +379,7 @@ class FunctionController{
                         $quantity = $this->daoT->getAllTicketForShow($function->getId());
                         $total = count($quantity);
                         if($total > 0){ 
-                            if($VentasxRoom[$i]){ 
+                            if($VentasxRoom['cantidad'][$i]){ 
                                 $VentasxRoom['nombre'][$i] = $cinema->getName();
                                 $VentasxRoom['cantidad'][$i] += $total;
                             }
@@ -410,9 +410,7 @@ class FunctionController{
         foreach($adminmovies as $admin){
             $movieList[] = $this->daoM->searchMovieIdApi($admin['id_movie']);
         }
-        if($movieList){
-            $adminmovies = $movieList;
-        }
+        $adminmovies = $movieList;
 
         $cinemasList = $this->daoC->getAll();
 
@@ -454,9 +452,12 @@ class FunctionController{
             $_SESSION['date2'] = $date2;
             $_SESSION['idCinema-Gain'] = 0;
             $_SESSION['idMovie-Gain'] = 0;
-
+            if($date1 < $date2){ 
             $totalpesos = $this->daoT->getAllInPesosForDates($date1,$date2);
-
+            }
+            else{
+                echo "fechas invalidas pruebe ingresar la primera menor y la segunda mayor";
+            }
         }
         
         $user = $_SESSION['loggedUser'];
