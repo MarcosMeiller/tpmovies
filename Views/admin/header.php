@@ -42,30 +42,23 @@
                 <a href="<?php echo FRONT_ROOT ?>Function/Functions" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
 				<i class="fas fa-ticket-alt mr-3"></i>
                     Funciones
-                <!--</a>
-                <a href="forms.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
-				<i class="fas fa-calculator mr-3"></i>
-                Totales
                 </a>
-                <a href="tabs.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
-                    <i class="fas fa-tablet-alt mr-3"></i>
+                <a href="<?php echo FRONT_ROOT ?>Function/Balance" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
+				<i class="fas fa-balance-scale mr-3"></i>
+                    Balance
                 </a>
-                <a href="calendar.html" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
-                    <i class="fas fa-calendar mr-3"></i>
-                    
-                </a>-->
+                <a href="<?php echo FRONT_ROOT ?>Function/Gain" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item hover:bg-blue-900">
+                    <i class="fas fa-hand-holding-usd mr-3"></i>
+                    Ganacias
+                </a>
 
-                <a href="#" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
-                    <i class="fas fa-user mr-3"></i>
-                    Mi Cuenta
-                </a>
                 <a href="<?php echo FRONT_ROOT?>Main/Init" class="flex items-center text-white opacity-75 hover:opacity-100 py-2 pl-4 nav-item">
                     <i class="fas fa-sign-out-alt mr-3"></i>
                     Cerrar Sesion
                 </a>
-				    <button class="w-full bg-white text-blue-700 font-semibold py-2 mt-5 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
+				<!--<button class="w-full bg-white text-blue-700 font-semibold py-2 mt-5 rounded-lg shadow-lg hover:shadow-xl hover:bg-gray-300 flex items-center justify-center">
                         <i class="fas fa-plus mr-3"></i> Admin
-                    </button>
+                </button>-->
             </nav>
          
         </header>

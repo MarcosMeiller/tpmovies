@@ -39,7 +39,7 @@
     
 
 
-        <div class='flex flex-col md:flex-row mx-8'>
+        <div class='flex flex-col md:flex-row md:mx-8'>
 
             <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
                 <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="id_movie">
