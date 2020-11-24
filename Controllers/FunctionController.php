@@ -410,7 +410,9 @@ class FunctionController{
         foreach($adminmovies as $admin){
             $movieList[] = $this->daoM->searchMovieIdApi($admin['id_movie']);
         }
-        $adminmovies = $movieList;
+        if($movieList){
+            $adminmovies = $movieList;
+        }
 
         $cinemasList = $this->daoC->getAll();
 

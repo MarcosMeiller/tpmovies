@@ -18,6 +18,8 @@
       }
     </script>";
 
+    echo $user;
+
 ?>
 
 
@@ -52,7 +54,7 @@
                 </a>
               </div>
 
-              <div @click.away="open = false" class="hidden lg:flex lg:relative focus:outline-none" x-data="{ open: false }">
+              <div @click.away="open = false" class="lg:flex lg:relative focus:outline-none" x-data="{ open: false }">
           <?php if($user){ ?>  
               
 
