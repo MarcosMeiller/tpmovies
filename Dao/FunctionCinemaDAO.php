@@ -55,21 +55,52 @@ class FunctionCinemaDAO{
 
         $result = $this->connection->Execute($query);
 
-        foreach($result as $row)
-        {
-            $functionCinema = new FunctionCinema($row['room_id'],$row['movie_id'],$row['date'],$row['hour']);
-            $functionCinema->setId($row['idfunctioncinemas']);///cambiarle el nombre cuando haga la base de datos.
+            foreach($result as $row)
+            {
+                $functionCinema = new FunctionCinema($row['room_id'],$row['movie_id'],$row['date'],$row['hour']);
+                $functionCinema->setId($row['idfunctioncinemas']);///cambiarle el nombre cuando haga la base de datos.
 
-         
-     
-            array_push($functionList, $functionCinema);
+            
+        
+                array_push($functionList, $functionCinema);
+            }
         }
+        catch(PDOException $ex){
+            throw $ex;
+        }
+        return $functionList;
     }
-    catch(PDOException $ex){
-        throw $ex;
+
+    public function getAllActive(){
+
+        $functionList = array();
+
+        $hoy = date('Y-m-d');
+
+        $query = "SELECT * FROM ".$this->tableName." where (date >= :date)";
+
+        $parameters["date"] =  $hoy;
+
+        try{
+        $this->connection = Connection::GetInstance();
+
+        $result = $this->connection->Execute($query,$parameters);
+
+            foreach($result as $row)
+            {
+                $functionCinema = new FunctionCinema($row['room_id'],$row['movie_id'],$row['date'],$row['hour']);
+                $functionCinema->setId($row['idfunctioncinemas']);///cambiarle el nombre cuando haga la base de datos.
+
+            
+        
+                array_push($functionList, $functionCinema);
+            }
+        }
+        catch(PDOException $ex){
+            throw $ex;
+        }
+        return $functionList;
     }
-    return $functionList;
-}
 
 public function Search($id){
     $query = "SELECT *  FROM ".$this->tableName." WHERE (movie_id = :movie_id)";

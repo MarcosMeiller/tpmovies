@@ -26,6 +26,18 @@
     }
 
 
+
+    if(empty($_SESSION["msjGain"])){
+ 
+        $message = "";
+    }else{     
+        $message = $_SESSION["msjGain"];
+
+        echo "<script type='text/javascript'>toastr.options = {positionClass: 'toast-bottom-right'};toastr.warning('".$message."', '', {timeOut: 2500});</script>";
+        $bgColor = "bg-organ-200";
+    }
+
+
 ?>
 <div class='flex'>
     <?php require 'aside.php'; ?>
@@ -140,7 +152,7 @@
             </p>
 
             <p class='font-bold text-center mt-2'>TOTAL VENDIDO EN PESOS:</p>
-            <p class='font-bold text-center text-4xl'>$<?php echo $totalpesos ?></p>
+            <p class='font-bold text-center text-4xl'>$<?php  echo $totalpesos; ?></p>
         </div>
 
     

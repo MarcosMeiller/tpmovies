@@ -14,6 +14,7 @@ use Dao\TicketDAO as ticketDAO;
 use Models\Ticket as Ticket;
 use Exception;
 use DateTime;
+use Time;
 
 class FunctionController{
     private $dao;
@@ -171,6 +172,7 @@ class FunctionController{
             header("Location: ".FRONT_ROOT);
         }
     }
+
     public function validFunction(FunctionCinema $function,FunctionCinema $newFunction, Movie $movie){
         $isValid = true;
         $fechaVieja = new DateTime($function->getDate());//serian las fechas actuales
@@ -183,46 +185,49 @@ class FunctionController{
         $horaactual = new DateTime($aux);
         $aux = date('Y-m-d');
         $hoy = new DateTime($aux);
-        $diff = $horaNueva->diff($horaactual); 
+        $diff = $horaVieja->diff($horaactual); 
         $resultado = ($diff->days * 24 * 60) +
         ($diff->h * 60) + $diff->i;
+        $diff = $fechaVieja->diff($hoy);
+        $diferenciaDias =  $diff->days; 
 
-
- 
-        if($fechaVieja <= $hoy && $resultado <= 300 && $horaactual < $horaVieja){
+        //echo $diferenciaDias.'</br>'.$resultado.'</br>'.$fechaVieja->format('Y-m-d').'</br>'.$hoy->format('Y-m-d').'</br>'.$horaactual->format('H:i');
+        //die;
+        if($diferenciaDias == 1 && $resultado <= 1140 && $fechaVieja < $hoy){
             $isValid = false;
         }
-        else{ 
+
+        if($fechaVieja <= $hoy && $resultado <= 300 && $horaactual < $horaVieja){    
+            $isValid = false;         
+        }else{ 
+                
+            $diff = $fechaNueva->diff($fechaVieja);
             
-        $diff = $fechaNueva->diff($fechaVieja);
-        $diferenciaDias =  $diff->days; 
+            
+            if($diferenciaDias <= 1 && $function->getId_Movie() == $newFunction->getId_Movie()){
+                $runtime = 0;
+                $diff = $horaVieja->diff($horaNueva);   // 14:00 15:00.
+                $resultado = ($diff->days * 24 * 60) +
+                ($diff->h * 60) + $diff->i;
+                //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15
         
-        if($diferenciaDias <= 1 && $function->getId_Movie() == $newFunction->getId_Movie()){
-            $runtime = 0;
-            $diff = $horaVieja->diff($horaNueva);   // 14:00 15:00.
-            $resultado = ($diff->days * 24 * 60) +
-            ($diff->h * 60) + $diff->i;
-            //18:00 16:00 pelicula es 60 min. diferencia es igual a 60 min < a 60 + 15
-    
-            if($resultado <= $movie->getDuration() + 15 && $diferenciaDias == 0){
-                $isValid = false;
+                if($resultado <= $movie->getDuration() + 15 && $diferenciaDias == 0){
+                    $isValid = false;
+                }
+            
+            
+                if($resultado >= 1425 - $movie->getDuration() && $diferenciaDias == 1){
+                    if($fechaVieja < $fechaNueva && $horaVieja < $horaNueva){   //fecha vieja 09/11 < fecha nueva 10/11. y hora vieja 00:05 < hora nueva 22:55.
+                    $isValid = true;    // no se deje                               
+                }else if($fechaVieja > $fechaNueva && $horaVieja > $horaNueva){
+                        $isValid = true; 
+                }else{
+                    $isValid = false;
+                }
+                
+                }              
             }
-        
-          
-            if($resultado >= 1425 - $movie->getDuration() && $diferenciaDias == 1){
-                if($fechaVieja < $fechaNueva && $horaVieja < $horaNueva){   //fecha vieja 09/11 < fecha nueva 10/11. y hora vieja 00:05 < hora nueva 22:55.
-                  $isValid = true;    // no se deje                               
-               }else if($fechaVieja > $fechaNueva && $horaVieja > $horaNueva){
-                    $isValid = true; 
-               }else{
-                $isValid = false;
-               }
-              
-            }
-          
-             
         }
-    }
      
         return $isValid;
 
@@ -241,6 +246,7 @@ class FunctionController{
     }
 
     public function Balance(){
+        
         $functionsList = $this->dao->getAll();
         $ticketsList = $this->daoT->getAll();
         $roomList = $this->daoR->getAll();
@@ -253,6 +259,7 @@ class FunctionController{
 
         $_SESSION['idMovie-Balance'] = 0;
         $_SESSION['idCinema-Balance'] = 0;
+        $turn = '';
 
 
         $movielistid = array();
@@ -297,6 +304,7 @@ class FunctionController{
         $idmovie =$_GET['idmovie']; 
         $_SESSION['idMovie-Balance'] = $idmovie;
         $_SESSION['idCinema-Balance'] = 0;
+        $turn = '';
 
         $movielistid = array();
         foreach($functionsList as $function){
@@ -350,7 +358,7 @@ class FunctionController{
         $idcinema =$_GET['idcinema']; 
         $_SESSION['idCinema-Balance'] = $idcinema;
         $_SESSION['idMovie-Balance'] = 0;
-
+        $turn = '';
 
         $movielistid = array();
         foreach($functionsList as $function){
@@ -403,7 +411,95 @@ class FunctionController{
         require_once(VIEWS_PATH_ADMIN."/balance.php");
     }
 
+
+    public function BalanceTurn(){
+
+        $compare = 0; 
+
+        $functionsList = $this->dao->getAll();
+        $ticketsList = $this->daoT->getAll();
+        $roomList = $this->daoR->getAll();
+        $cinemaList = $this->daoC->getAll();
+        $movieList = $this->daoM->getAll(0);
+        $i = 0;
+        $quantity = 0;
+        $VentasxRoom = array();
+        $NovendidasxRoom = array();
+
+
+        $turn =$_GET['turn']; 
+        $_SESSION['idCinema-Balance'] = 0;
+        $_SESSION['idMovie-Balance'] = 0;
+
+
+        $movielistid = array();
+        foreach($functionsList as $function){
+            $movielistid[] = $function->getId_Movie();
+        }
+
+        $movielistid = array_unique($movielistid);
+
+        foreach($movielistid as $id){
+            $movielist[] = $this->daoM->searchIdBdd($id);
+        }
+        $maximo = 0;
+        $minimo = 0;
+        if($turn == 'M'){
+            $turn = 'Turno Mañana';
+            $minimo = new DateTime('06:01:00');
+            $maximo = new DateTime('12:00:00');
+        }
+        else if($turn == 'T'){
+            $turn = 'Turno Tarde';
+            $minimo = new DateTime('12:01:00');
+            $maximo = new DateTime('20:00:00');
+        }
+        else if($turn == 'N'){
+            $turn = 'Turno Noche';
+            $minimo = new DateTime('20:01:00');
+            $maximo = new DateTime('23:59:00');
+        }
+
+            $VentasxRoom['nombre'][$i] = 0;
+            $VentasxRoom['cantidad'][$i] = 0;
+            $NovendidasxRoom[$i] =0;
+
+           
+            foreach($roomList as $room){ 
+                foreach($functionsList as $function){
+                   
+                    $compare = New DateTime($function->getHour());
+                    if($room->getId() == $function->getId_Room() && $compare < $maximo && $compare > $minimo){ 
+                        $quantity = $this->daoT->getAllTicketForShow($function->getId());
+                        $total = count($quantity);
+                        if($total > 0){ 
+                            if($VentasxRoom['cantidad'][$i]){ 
+                                $VentasxRoom['nombre'][$i] = $turn;
+                                $VentasxRoom['cantidad'][$i] += $total;
+                            }
+                            else{
+                                $VentasxRoom['nombre'][$i] = $turn;
+                                $VentasxRoom['cantidad'][$i] = $total;
+                            }
+                            $room = $this->daoR->Search($function->getId_Room());
+                            if($NovendidasxRoom){
+                                $NovendidasxRoom[$i] += $room->getCapacity() - $VentasxRoom['cantidad'][$i];
+                            }
+                            else{
+                                $NovendidasxRoom[$i] = $room->getCapacity() - $VentasxRoom['cantidad'][$i];
+                            }
+                            
+                        }
+                    }   
+                }
+            }
+        require_once(VIEWS_PATH_ADMIN."/balance.php");   
+    }
+
+
+
     public function Gain(){
+        $_SESSION["msjGain"] = '';
         $user = $_SESSION['loggedUser'];
         $id = $user->getId();
         $adminmovies = $this->daoM->getMoviexAdmin($id);
@@ -424,6 +520,9 @@ class FunctionController{
     }
 
     public function GainFilter(){
+
+        $_SESSION["msjGain"] = '';
+        $totalpesos = " - ";
 
         if(isset($_GET['idmovie'])){
             $idmovie =$_GET['idmovie']; 
@@ -456,9 +555,10 @@ class FunctionController{
             $totalpesos = $this->daoT->getAllInPesosForDates($date1,$date2);
             }
             else{
-                echo "fechas invalidas pruebe ingresar la primera menor y la segunda mayor";
+                $_SESSION["msjGain"] = "fechas invalidas pruebe ingresar la primera menor y la segunda mayor";
             }
         }
+
         
         $user = $_SESSION['loggedUser'];
         $id = $user->getId();

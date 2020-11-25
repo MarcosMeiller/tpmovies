@@ -34,15 +34,15 @@
         }
     }
 
-
-    //echo $show;
-
-    /*for($i=0;$i< count($VentasxRoom);$i++){
-        echo "Titulo".$VentasxRoom['nombre'][$i];
-        echo "Cantidad Vendidad".$VentasxRoom['cantidad'][$i];
-        echo "No vendidas".$NovendidasxRoom[$i];
-    
-    }*/
+    if($turn == 'Turno Mañana'){
+        $turn = 'M';
+    }
+    else if($turn == 'Turno Tarde'){
+        $turn = 'T';
+    }
+    else if($turn == 'Turno Noche'){
+        $turn = 'N';
+    }
 
 
 ?>
@@ -55,7 +55,7 @@
                 <h1 class="text-3xl text-black pb-2">Balance</h1>
     
 
-                <div class='flex flex-col md:flex-row mx-8'>
+                <div class='flex flex-col md:flex-row md:mx-8'>
 
         <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="id_movie">
@@ -116,9 +116,9 @@
 
     </div>
 
-    <div class='flex flex-row justify-center mt-5'>
+    <div class='flex flex-row justify-center mt-2 md:mt-5'>
 
-     <!--<div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
+     <div class="w-full md:w-1/2 px-3 mb-2 md:mb-0">
             <label class="block uppercase tracking-wide text-gray-700 text-xs font-bold" for="id_movie">
                 Turno
             </label>
@@ -126,9 +126,9 @@
             <div class='flex'> 
                 <select required id="turn" name='turn' class="block appearance-none w-full bg-white border border-gray-400 hover:border-gray-500 px-4 pr-8 rounded shadow leading-tight focus:outline-none focus:shadow-outline">
                     <option value=''>Seleccione un turno</option>
-                    <option value="M">Mañana</option>
-                    <option value="T">Tarde</option>
-                    <option value="N">Noche</option>
+                    <option value="M" <?php echo ($turn == 'M' ) ? 'selected': ''; ?> >Mañana</option>
+                    <option value="T" <?php echo ($turn == 'T' ) ? 'selected': ''; ?> >Tarde</option>
+                    <option value="N" <?php echo ($turn == 'N' ) ? 'selected': ''; ?> >Noche</option>
                 </select>  
 
                 <button class="ml-2 text-blue-700 font-semibold px-3 border bg-blue-700  rounded-lg flex items-center justify-center" type="submit">
@@ -136,7 +136,7 @@
                 </button>
             </div>
             </form>
-        </div>-->
+        </div>
 
     </div>
    

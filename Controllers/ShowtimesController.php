@@ -76,8 +76,8 @@ class ShowtimesController{
             $this->Listing();   
         }
 
-        $functionsList = $this->dao->getAll();
-       
+        //$functionsList = $this->dao->getAll();
+        $functionsList = $this->dao->getAllActive();
         
         $idmovies = array();
         foreach($functionsList as $function){
@@ -130,7 +130,8 @@ class ShowtimesController{
 
         
                 
-                $functionsList = $this->dao->getAll();
+                //$functionsList = $this->dao->getAll();
+                $functionsList = $this->dao->getAllActive();
 
                 $idmovies = array();
                 foreach($functionsList as $function){
